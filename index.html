@@ -146,6 +146,11 @@
       accept-charset="UTF-8" 
       autocomplete="on">
 
+  <!-- Настройки скрытые -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="Новая заявка с сайта Retainly">
+  <input type="hidden" name="_next" value="https://твой-домен.com/thanks.html">
+
   <!-- Поля формы -->
   <div class="row two">
     <div>
@@ -213,6 +218,8 @@
 
   <div class="actions">
     <button class="btn" type="submit">Отправить</button>
+    <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
+    <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
   </div>
 
   <p id="form-hint" class="muted" style="margin-top:8px"></p>
@@ -304,28 +311,6 @@
 
   // ===== FORM & UTMs =====
   const form = document.getElementById('lead');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const fd = new FormData(form);
-
-  try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: fd
-    });
-
-    if (res.ok) {
-      toast('✅ Заявка отправлена! Мы скоро свяжемся.');
-      form.reset();
-    } else {
-      toast('⚠️ Ошибка при отправке. Попробуйте ещё раз.');
-    }
-  } catch (err) {
-    toast('⚠️ Ошибка сети. Попробуйте позже.');
-  }
-});
   const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
 
   // helper: добавляет скрытые поля webinar_date и UTM в форму (если их нет)
@@ -375,26 +360,21 @@ form.addEventListener('submit', async (e) => {
 
   // ===== SUBMIT HANDLER =====
   form.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-
-  const fd = new FormData(form);
-  if(fd.get('_hp')) return; // honeypot защита
-
-  try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: fd
-    });
-
-    if (res.ok) {
-      toast('✅ Заявка отправлена! Мы скоро свяжемся.');
-      form.reset();
-    } else {
-      toast('⚠️ Ошибка при отправке. Попробуйте ещё раз.');
-    }
-  } catch(err) {
-    toast('⚠️ Ошибка сети. Попробуйте позже.');
-  }
+    // если используется бекенд (REG_ENDPOINT) — отправляем fetch
+    if(REG_ENDPOINT){
+      e.preventDefault();
+      const fd = new FormData(form);
+      if(fd.get('_hp')) return; // honeypot
+      fd.append('webinar_date', window.targetDate.toISOString());
+      Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
+      try{
+        await fetch(REG_ENDPOINT, { method:'POST', body: fd });
+        toast('Готово — вышлем план на почту');
+        form.reset();
+      }catch(err){
+        console.error(err);
+        toast('Ошибка отправки. Попробуйте позже.');
+      }
       return;
     }
 
