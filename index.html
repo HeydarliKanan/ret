@@ -311,37 +311,6 @@
 
     // ===== ОТПРАВКА ФОРМЫ =====
     const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const fd=new FormData(form);
-      if(fd.get('_hp')) return;
-      fd.append('webinar_date', window.targetDate.toISOString());
-      Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
-      try{
-        if(REG_ENDPOINT){ await fetch(REG_ENDPOINT,{method:'POST',body:fd}); }
-        toast('Готово — вышлем план на почту');
-        form.reset();
-      }catch(err){ toast('Заявка принята. Письмо может прийти с задержкой.'); }
-    });
-
-  try {
-    const resp = await fetch(REG_ENDPOINT, {
-      method: 'POST',
-      body: fd,
-    });
-
-    if (resp.ok) {
-      toast('Готово — вышлем план на почту');
-      form.reset();
-    } else {
-      toast('Заявка принята. Но проверьте почту вручную.');
-      console.warn('Ответ сервера:', resp);
-    }
-  } catch (err) {
-    console.error('Ошибка отправки:', err);
-    toast('Не удалось отправить заявку');
-  }
-});
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
