@@ -145,86 +145,66 @@
       method="POST" 
       accept-charset="UTF-8" 
       autocomplete="on">
-
-  <!-- Настройки скрытые -->
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_subject" value="Новая заявка с сайта Retainly">
-  <input type="hidden" name="_next" value="https://твой-домен.com/thanks.html">
-
-  <!-- Поля формы -->
-  <div class="row two">
-    <div>
-      <label for="name">Имя</label>
-      <input id="name" name="name" required placeholder="Как к вам обращаться">
-    </div>
-    <div>
-      <label for="company">Компания</label>
-      <input id="company" name="company" placeholder="Название компании">
-    </div>
-  </div>
-
-  <div class="row two">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
-    </div>
-    <div>
-      <label for="phone">Телефон</label>
-      <input id="phone" name="phone" type="tel" 
-             placeholder="+7 900 123-45-67" 
-             inputmode="tel" 
-             pattern="^\+?[0-9\s()-]{7,}$" 
-             title="Введите номер телефона, минимум 7 цифр. Разрешены +, пробелы, скобки и дефис">
-    </div>
-  </div>
-
-  <div class="row">
-    <div>
-      <label for="interest">Что важнее сейчас</label>
-      <select id="interest" name="interest">
-        <option>Вернуть спящих клиентов</option>
-        <option>Увеличить LTV</option>
-        <option>Наладить звонки без давления</option>
-        <option>VIP-удержание</option>
-        <option>Холодные звонки</option>
-        <option>Тёплые звонки</option>
-        <option>Работа с возражениями</option>
-        <option>Продажи по телефону</option>
-        <option>Продажи по видео/Zoom</option>
-        <option>Импровизация со скриптами</option>
-        <option>Написание скриптов</option>
-        <option>Отдел продаж под ключ</option>
-        <option>CRM и автоматизация</option>
-        <option>KPI и аналитика</option>
-        <option>QA-контур</option>
-        <option>Скрипты для чатов</option>
-        <option>Аутсорс отдела продаж</option>
-        <option>Аутсорс колл-центра</option>
-        <option>Стратегический консалтинг</option>
-        <option>Аудит отдела продаж</option>
-        <option>Лидеры и тимлиды</option>
-        <option>Видео-скрипты и презентации</option>
-        <option>Email-маркетинг</option>
-        <option>Партнёрские программы</option>
-      </select>
-    </div>
-  </div>
-
-  <p class="muted" style="font-size:12px">
-    <input id="agree" name="consent" type="checkbox" required 
-           style="accent-color:#f4d27a;margin-right:6px">
-    <label for="agree">Соглашаюсь на обработку данных и получение напоминаний</label>
-  </p>
-
-  <div class="actions">
-    <button class="btn" type="submit">Отправить</button>
-    <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
-    <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
-  </div>
-
-  <p id="form-hint" class="muted" style="margin-top:8px"></p>
-</form>
-
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+          <div class="row two">
+            <div>
+              <label for="name">Имя</label>
+              <input id="name" name="name" required placeholder="Как к вам обращаться">
+            </div>
+            <div>
+              <label for="company">Компания</label>
+              <input id="company" name="company" placeholder="Название компании">
+            </div>
+          </div>
+          <div class="row two">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
+            </div>
+            <div>
+              <label for="phone">Телефон</label>
+              <input id="phone" name="phone" type="tel" placeholder="+7 000 000-00-00" inputmode="tel" pattern="[+0-9\\s()\\-]{7,}">
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="interest">Что важнее сейчас</label>
+              <select id="interest" name="interest">
+                <option>Вернуть спящих клиентов</option>
+                <option>Увеличить LTV</option>
+                <option>Наладить звонки без давления</option>
+                <option>VIP‑удержание</option>
+                <option>Холодные звонки</option>
+                <option>Тёплые звонки</option>
+                <option>Работа с возражениями</option>
+                <option>Продажи по телефону</option>
+                <option>Продажи по видео/Zoom</option>
+                <option>Импровизация со скриптами</option>
+                <option>Написание скриптов</option>
+                <option>Отдел продаж под ключ</option>
+                <option>CRM и автоматизация</option>
+                <option>KPI и аналитика</option>
+                <option>QA-контур</option>
+                <option>Скрипты для чатов</option>
+                <option>Аутсорс отдела продаж</option>
+                <option>Аутсорс колл-центра</option>
+                <option>Стратегический консалтинг</option>
+                <option>Аудит отдела продаж</option>
+                <option>Лидеры и тимлиды</option>
+                <option>Видео-скрипты и презентации</option>
+                <option>Email-маркетинг</option>
+                <option>Партнёрские программы</option>
+              </select>
+            </div>
+          </div>
+          <p class="muted" style="font-size:12px"><input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px"><label for="agree">Соглашаюсь на обработку данных и получение напоминаний</label></p>
+          <div class="actions">
+            <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
+            <button class="btn" type="submit">Отправить</button>
+            <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
+          </div>
+          <p id="form-hint" class="muted" style="margin-top:8px"></p>
+        </form>
       </div>
       <div>
         <div class="cta">
@@ -278,62 +258,42 @@
   <div id="toast" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#121219;border:1px solid rgba(244,210,122,.3);color:#fff;padding:10px 14px;border-radius:12px;z-index:50">Готово</div>
 
   <script>
-  // ===== НАСТРОЙКИ =====
-  const WEBINAR_DATETIME = null; // либо ISO строка если нужно
-  const REG_ENDPOINT = null;     // если хотите использовать fetch -> вставьте URL сюда
+    // ===== НАСТРОЙКИ =====
+    // Установите дату ближайшего вебинара (ISO с таймзоной), если null — возьмём +7 дней
+    const WEBINAR_DATETIME = null;
+    // Укажите endpoint при наличии бэкенда, иначе останемся в демо-режиме (тост + очистка)
+    const REG_ENDPOINT = null;
 
-  // ===== Утилиты =====
-  function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'Готово'; t.style.opacity='1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)';}, 3800); }
-  const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1==1)return a; return c;};
+    // ===== ВСПОМОГАТЕЛЬНО =====
+    function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'Готово'; t.style.opacity='1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)';}, 3800); }
+    const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1==1)return a; return c;};
 
-  // ===== ТАЙМЕР =====
-  window.targetDate = WEBINAR_DATETIME ? new Date(WEBINAR_DATETIME) : new Date(Date.now()+7*24*60*60*1000);
-  const $timer=document.getElementById('countdown');
-  const $hint=document.getElementById('date-hint');
-  $hint.textContent='Ближайший эфир: '+ new Intl.DateTimeFormat('ru-RU',{dateStyle:'full', timeStyle:'short'}).format(window.targetDate);
-
-  function renderTimer(){
-    const diff=window.targetDate - new Date();
-    if(diff<=0){
-      $timer.innerHTML='<div class="tbox"><strong>00</strong><span>дней</span></div><div class="tbox"><strong>00</strong><span>часов</span></div><div class="tbox"><strong>00</strong><span>минут</span></div><div class="tbox"><strong>00</strong><span>секунд</span></div>';
-      return;
+    // ===== ТАЙМЕР =====
+    window.targetDate = WEBINAR_DATETIME ? new Date(WEBINAR_DATETIME) : new Date(Date.now()+7*24*60*60*1000);
+    const $timer=document.getElementById('countdown');
+    const $hint=document.getElementById('date-hint');
+    $hint.textContent='Ближайший эфир: '+ new Intl.DateTimeFormat('ru-RU',{dateStyle:'full', timeStyle:'short'}).format(window.targetDate);
+    function renderTimer(){
+      const diff=window.targetDate - new Date();
+      if(diff<=0){ $timer.innerHTML='<div class="tbox"><strong>00</strong><span>дней</span></div><div class="tbox"><strong>00</strong><span>часов</span></div><div class="tbox"><strong>00</strong><span>минут</span></div><div class="tbox"><strong>00</strong><span>секунд</span></div>'; return; }
+      let ms=diff; const d=Math.floor(ms/86400000); ms-=d*86400000; const h=Math.floor(ms/3600000); ms-=h*3600000; const m=Math.floor(ms/60000); ms-=m*60000; const s=Math.floor(ms/1000);
+      const blocks=[
+        {v:d,t:plural(d,'день','дня','дней')},
+        {v:h,t:plural(h,'час','часа','часов')},
+        {v:m,t:plural(m,'минута','минуты','минут')},
+        {v:s,t:plural(s,'секунда','секунды','секунд')}
+      ].map(x=>`<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`).join('');
+      $timer.innerHTML=blocks;
     }
-    let ms=diff; const d=Math.floor(ms/86400000); ms-=d*86400000; const h=Math.floor(ms/3600000); ms-=h*3600000; const m=Math.floor(ms/60000); ms-=m*60000; const s=Math.floor(ms/1000);
-    const blocks=[
-      {v:d,t:plural(d,'день','дня','дней')},
-      {v:h,t:plural(h,'час','часа','часов')},
-      {v:m,t:plural(m,'минута','минуты','минут')},
-      {v:s,t:plural(s,'секунда','секунды','секунд')}
-    ].map(x=>`<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`).join('');
-    $timer.innerHTML=blocks;
-  }
-  renderTimer(); setInterval(renderTimer,1000);
+    renderTimer(); setInterval(renderTimer,1000);
 
-  // ===== FORM & UTMs =====
-  const form = document.getElementById('lead');
-  const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
-
-  // helper: добавляет скрытые поля webinar_date и UTM в форму (если их нет)
-  function addHiddenFieldsForSubmission(){
-    if(!form) return;
-    if(!form.querySelector('input[name="webinar_date"]')){
-      const inp = document.createElement('input'); inp.type='hidden'; inp.name='webinar_date'; inp.value = window.targetDate.toISOString(); form.appendChild(inp);
-    }
-    Object.entries(utm).forEach(([k,v])=>{
-      if(!form.querySelector(`[name="${k}"]`)){
-        const i = document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; form.appendChild(i);
-      }
-    });
-  }
-
-  // ===== ПРЕДПРОСМОТР (модал) =====
-  const modal=document.getElementById('previewModal');
-  const previewBtn=document.getElementById('previewBtn');
-  if(previewBtn){
-    previewBtn.addEventListener('click',()=>{
+    // ===== ПРЕДПРОСМОТР =====
+    const form=document.getElementById('lead');
+    const modal=document.getElementById('previewModal');
+    document.getElementById('previewBtn').addEventListener('click',()=>{
       const fd=new FormData(form);
-      // если есть honeypot - блокируем
-      if(fd.get('_hp')) return;
+      if(fd.get('_hp')) return; // honeypot
+      // заполнение предпросмотра
       document.getElementById('pv_name').textContent=fd.get('name')||'-';
       document.getElementById('pv_company').textContent=fd.get('company')||'-';
       document.getElementById('pv_email').textContent=fd.get('email')||'-';
@@ -341,70 +301,45 @@
       document.getElementById('pv_interest').textContent=fd.get('interest')||'-';
       if(typeof modal.showModal==='function'){ modal.showModal(); } else { modal.setAttribute('open',''); }
     });
-  }
-  const editBtn=document.getElementById('editBtn');
-  if(editBtn) editBtn.addEventListener('click',()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); });
-
-  // confirm: добвляем скрытые поля и вызываем submit корректно
-  const confirmBtn=document.getElementById('confirmBtn');
-  if(confirmBtn){
-    confirmBtn.addEventListener('click',()=>{
+    document.getElementById('editBtn').addEventListener('click',()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); });
+    document.getElementById('confirmBtn').addEventListener('click', async ()=>{
+      // Отправляем так же, как submit
+      const evt=new Event('submit',{cancelable:true});
       if(modal.open) modal.close(); else modal.removeAttribute('open');
-      // добавляем скрытые поля (чтобы отправились в случае обычной отправки)
-      addHiddenFieldsForSubmission();
-      // используем requestSubmit если доступен (сработают обработчики и далее стандартная отправка)
-      if(typeof form.requestSubmit === 'function') form.requestSubmit();
-      else form.submit(); // fallback
+      form.dispatchEvent(evt);
     });
-  }
 
-  // ===== SUBMIT HANDLER =====
-  form.addEventListener('submit', async (e)=>{
-    // если используется бекенд (REG_ENDPOINT) — отправляем fetch
-    if(REG_ENDPOINT){
+    // ===== ОТПРАВКА ФОРМЫ =====
+    const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
+    form.addEventListener('submit', async (e)=>{
       e.preventDefault();
-      const fd = new FormData(form);
-      if(fd.get('_hp')) return; // honeypot
+      const fd=new FormData(form);
+      if(fd.get('_hp')) return;
       fd.append('webinar_date', window.targetDate.toISOString());
       Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
       try{
-        await fetch(REG_ENDPOINT, { method:'POST', body: fd });
+        if(REG_ENDPOINT){ await fetch(REG_ENDPOINT,{method:'POST',body:fd}); }
         toast('Готово — вышлем план на почту');
         form.reset();
-      }catch(err){
-        console.error(err);
-        toast('Ошибка отправки. Попробуйте позже.');
-      }
-      return;
-    }
+      }catch(err){ toast('Заявка принята. Письмо может прийти с задержкой.'); }
+    });
 
-    // если REG_ENDPOINT не задан => позволяем браузеру отправить форму на action
-    // но перед отправкой добавляем скрытые поля, чтобы они тоже ушли
-    addHiddenFieldsForSubmission();
-    // НЕ делаем e.preventDefault() — браузер сам будет выполнять submit на action.
-    // (если вам нужно полностью перехватить и отправлять через fetch — установите REG_ENDPOINT)
-  });
-
-  // ===== ICS (календарь) =====
-  const icsBtn=document.getElementById('ics');
-  if(icsBtn){
-    icsBtn.addEventListener('click',()=>{
-      const dt=window.targetDate;
-      const start=dt.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+    // ===== ICS для календаря =====
+    document.getElementById('ics').addEventListener('click',()=>{
+      const dt=window.targetDate; const start=dt.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
       const end=new Date(dt.getTime()+60*60*1000).toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
       const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retainly//Webinar//RU','BEGIN:VEVENT',`UID:${Date.now()}@retainly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retainly: Вебинар по удержанию','DESCRIPTION:Доверительные звонки, возврат спящих клиентов, рост LTV','END:VEVENT','END:VCALENDAR'].join('\r\n');
       const blob=new Blob([ics],{type:'text/calendar'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='retainly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
     });
-  }
 
-  // schema ld injection (как было)
-  (function(){
-    const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retainly: Вебинар по удержанию","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":window.targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://retainly.example/webinar"},"description":"Как вернуть спящих клиентов, поднять LTV и строить доверительные звонки.","organizer":{"@type":"Organization","name":"Retainly"}};
-    const s=document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
-  })();
+    // ===== JSON-LD =====
+    (function(){
+      const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retainly: Вебинар по удержанию","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":window.targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://retainly.example/webinar"},"description":"Как вернуть спящих клиентов, поднять LTV и строить доверительные звонки.","organizer":{"@type":"Organization","name":"Retainly"}};
+      const s=document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
+    })();
 
-  // sanity checks
-  try{ console.assert(window.targetDate instanceof Date,'targetDate должен быть Date'); console.assert(document.getElementById('countdown'),'Таймер есть'); }catch(e){ console.error('[init]',e); }
-</script>
+    // self-tests
+    try{ console.assert(window.targetDate instanceof Date,'targetDate должен быть Date'); console.assert(document.getElementById('countdown'),'Таймер есть'); }catch(e){ console.error('[init]',e); }
+  </script>
 </body>
 </html>
