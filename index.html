@@ -140,73 +140,91 @@
       <div class="card form" style="padding:20px">
         <h2 id="reg-title" style="margin-bottom:4px">Получить бесплатный план удержания</h2>
         <p class="muted" style="margin-bottom:12px">Пришлём PDF на 30 дней с шагами внедрения и KPI. Ни спама, ни «продаж в лоб».</p>
-        <form id="lead" class="form" action="https://formspree.io/f/xgvnedqn" method="POST" autocomplete="on">
-          <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
-          <div class="row two">
-            <div>
-              <label for="name">Имя</label>
-              <input id="name" name="name" required placeholder="Как к вам обращаться">
-            </div>
-            <div>
-              <label for="company">Компания</label>
-              <input id="company" name="company" placeholder="Название компании">
-            </div>
-          </div>
-          <div class="row two">
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
-            </div>
-            <div>
-              <label for="phone">Телефон</label>
-              <input id="phone" 
-       name="phone" 
-       type="tel" 
-       placeholder="+7 900 123-45-67" 
-       inputmode="tel" 
-       pattern="^\+?[0-9\s()-]{7,}$" 
-       title="Введите номер телефона, минимум 7 цифр. Разрешены +, пробелы, скобки и дефис">
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label for="interest">Что важнее сейчас</label>
-              <select id="interest" name="interest">
-                <option>Вернуть спящих клиентов</option>
-                <option>Увеличить LTV</option>
-                <option>Наладить звонки без давления</option>
-                <option>VIP‑удержание</option>
-                <option>Холодные звонки</option>
-                <option>Тёплые звонки</option>
-                <option>Работа с возражениями</option>
-                <option>Продажи по телефону</option>
-                <option>Продажи по видео/Zoom</option>
-                <option>Импровизация со скриптами</option>
-                <option>Написание скриптов</option>
-                <option>Отдел продаж под ключ</option>
-                <option>CRM и автоматизация</option>
-                <option>KPI и аналитика</option>
-                <option>QA-контур</option>
-                <option>Скрипты для чатов</option>
-                <option>Аутсорс отдела продаж</option>
-                <option>Аутсорс колл-центра</option>
-                <option>Стратегический консалтинг</option>
-                <option>Аудит отдела продаж</option>
-                <option>Лидеры и тимлиды</option>
-                <option>Видео-скрипты и презентации</option>
-                <option>Email-маркетинг</option>
-                <option>Партнёрские программы</option>
-              </select>
-            </div>
-          </div>
-          <p class="muted" style="font-size:12px"><input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px"><label for="agree">Соглашаюсь на обработку данных и получение напоминаний</label></p>
-          <div class="actions">
-            <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
-            <button class="btn" type="submit">Отправить</button>
-            <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
-          </div>
-          <p id="form-hint" class="muted" style="margin-top:8px"></p>
-        </form>
+        <form id="lead" class="form" 
+      action="https://formsubmit.co/retainlyoutsourcing@gmail.com" 
+      method="POST" 
+      accept-charset="UTF-8" 
+      autocomplete="on">
+
+  <!-- Настройки скрытые -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="Новая заявка с сайта Retainly">
+  <input type="hidden" name="_next" value="https://твой-домен.com/thanks.html">
+
+  <!-- Поля формы -->
+  <div class="row two">
+    <div>
+      <label for="name">Имя</label>
+      <input id="name" name="name" required placeholder="Как к вам обращаться">
+    </div>
+    <div>
+      <label for="company">Компания</label>
+      <input id="company" name="company" placeholder="Название компании">
+    </div>
+  </div>
+
+  <div class="row two">
+    <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
+    </div>
+    <div>
+      <label for="phone">Телефон</label>
+      <input id="phone" name="phone" type="tel" 
+             placeholder="+7 900 123-45-67" 
+             inputmode="tel" 
+             pattern="^\+?[0-9\s()-]{7,}$" 
+             title="Введите номер телефона, минимум 7 цифр. Разрешены +, пробелы, скобки и дефис">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="interest">Что важнее сейчас</label>
+      <select id="interest" name="interest">
+        <option>Вернуть спящих клиентов</option>
+        <option>Увеличить LTV</option>
+        <option>Наладить звонки без давления</option>
+        <option>VIP-удержание</option>
+        <option>Холодные звонки</option>
+        <option>Тёплые звонки</option>
+        <option>Работа с возражениями</option>
+        <option>Продажи по телефону</option>
+        <option>Продажи по видео/Zoom</option>
+        <option>Импровизация со скриптами</option>
+        <option>Написание скриптов</option>
+        <option>Отдел продаж под ключ</option>
+        <option>CRM и автоматизация</option>
+        <option>KPI и аналитика</option>
+        <option>QA-контур</option>
+        <option>Скрипты для чатов</option>
+        <option>Аутсорс отдела продаж</option>
+        <option>Аутсорс колл-центра</option>
+        <option>Стратегический консалтинг</option>
+        <option>Аудит отдела продаж</option>
+        <option>Лидеры и тимлиды</option>
+        <option>Видео-скрипты и презентации</option>
+        <option>Email-маркетинг</option>
+        <option>Партнёрские программы</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="muted" style="font-size:12px">
+    <input id="agree" name="consent" type="checkbox" required 
+           style="accent-color:#f4d27a;margin-right:6px">
+    <label for="agree">Соглашаюсь на обработку данных и получение напоминаний</label>
+  </p>
+
+  <div class="actions">
+    <button class="btn" type="submit">Отправить</button>
+    <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
+    <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
+  </div>
+
+  <p id="form-hint" class="muted" style="margin-top:8px"></p>
+</form>
+
       </div>
       <div>
         <div class="cta">
