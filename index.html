@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Retainly — перестаньте терять клиентов</title>
-  <meta name="description" content="Retainly помогает вернуть спящих клиентов, поднять LTV и превратить звонки в доверительные диалоги. Бесплатный план удержания за 30 дней." />
+  <title>Retenly — перестаньте терять клиентов</title>
+  <meta name="description" content="Retenly помогает вернуть спящих клиентов, поднять LTV и превратить звонки в доверительные диалоги. Бесплатный план удержания за 30 дней." />
   <meta name="theme-color" content="#0d0d0f" />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
@@ -69,7 +69,7 @@
 
     <!-- РЕШЕНИЕ -->
     <section>
-      <h2>Решение от Retainly</h2>
+      <h2>Решение от Retenly</h2>
       <div class="grid grid-3">
         <div class="tile"><h3>Нулевой контакт</h3><p>Начало разговора, который хочется продолжить. Без барьеров и заученных фраз.</p></div>
         <div class="tile"><h3>Слышать боль</h3><p>Диагностика вместо борьбы с «возражениями». Клиент чувствует заботу, а не давление.</p></div>
@@ -84,7 +84,7 @@
 
     <!-- УСЛУГИ -->
     <section id="services">
-      <h2>Услуги Retainly для роста продаж</h2>
+      <h2>Услуги Retenly для роста продаж</h2>
       <p class="muted" style="margin-bottom:14px">Выбирайте точечно или заходите комплексно — закроем как обучение, так и процессы и аутсорс.</p>
 
       <!-- Обучение и развитие -->
@@ -240,7 +240,7 @@
   </main>
 
   <footer class="wrap">
-    <small class="muted">© 2025 Retainly. <a href="#" style="color:var(--accent);text-decoration:none">Политика конфиденциальности</a></small>
+    <small class="muted">© 2025 Retenly. <a href="#" style="color:var(--accent);text-decoration:none">Политика конфиденциальности</a></small>
   </footer>
 
   <!-- Модал предпросмотра -->
@@ -390,13 +390,13 @@ form.addEventListener('submit', async (e) => {
     document.getElementById('ics').addEventListener('click',()=>{
       const dt=window.targetDate; const start=dt.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
       const end=new Date(dt.getTime()+60*60*1000).toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
-      const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retainly//Webinar//RU','BEGIN:VEVENT',`UID:${Date.now()}@retainly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retainly: Вебинар по удержанию','DESCRIPTION:Доверительные звонки, возврат спящих клиентов, рост LTV','END:VEVENT','END:VCALENDAR'].join('\r\n');
-      const blob=new Blob([ics],{type:'text/calendar'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='retainly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
+      const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retenly//Webinar//RU','BEGIN:VEVENT',`UID:${Date.now()}@Retenly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retenly: Вебинар по удержанию','DESCRIPTION:Доверительные звонки, возврат спящих клиентов, рост LTV','END:VEVENT','END:VCALENDAR'].join('\r\n');
+      const blob=new Blob([ics],{type:'text/calendar'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Retenly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
     });
 
     // ===== JSON-LD =====
     (function(){
-      const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retainly: Вебинар по удержанию","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":window.targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://retainly.example/webinar"},"description":"Как вернуть спящих клиентов, поднять LTV и строить доверительные звонки.","organizer":{"@type":"Organization","name":"Retainly"}};
+      const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retenly: Вебинар по удержанию","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":window.targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://Retenly.example/webinar"},"description":"Как вернуть спящих клиентов, поднять LTV и строить доверительные звонки.","organizer":{"@type":"Organization","name":"Retenly"}};
       const s=document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
     })();
 
