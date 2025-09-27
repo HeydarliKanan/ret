@@ -146,11 +146,6 @@
       accept-charset="UTF-8" 
       autocomplete="on">
 
-  <!-- Настройки скрытые -->
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_subject" value="Новая заявка с сайта Retainly">
-  <input type="hidden" name="_next" value="https://твой-домен.com/thanks.html">
-
   <!-- Поля формы -->
   <div class="row two">
     <div>
@@ -218,8 +213,6 @@
 
   <div class="actions">
     <button class="btn" type="submit">Отправить</button>
-    <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
-    <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
   </div>
 
   <p id="form-hint" class="muted" style="margin-top:8px"></p>
@@ -311,6 +304,28 @@
 
   // ===== FORM & UTMs =====
   const form = document.getElementById('lead');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const fd = new FormData(form);
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: fd
+    });
+
+    if (res.ok) {
+      toast('✅ Заявка отправлена! Мы скоро свяжемся.');
+      form.reset();
+    } else {
+      toast('⚠️ Ошибка при отправке. Попробуйте ещё раз.');
+    }
+  } catch (err) {
+    toast('⚠️ Ошибка сети. Попробуйте позже.');
+  }
+});
   const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
 
   // helper: добавляет скрытые поля webinar_date и UTM в форму (если их нет)
