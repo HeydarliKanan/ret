@@ -141,7 +141,7 @@
         <h2 id="reg-title" style="margin-bottom:4px">Получить бесплатный план удержания</h2>
         <p class="muted" style="margin-bottom:12px">Пришлём PDF на 30 дней с шагами внедрения и KPI. Ни спама, ни «продаж в лоб».</p>
         <form id="lead" class="form" 
-      action="https://script.google.com/macros/s/AKfycbxcjAtOLuN2ho1Az2Y2PwOABQPIBaMZKkWkU5PTBw0tA6S_MncVFc2-F2kInXNKzxun/exec" 
+      action="https://formsubmit.co/retainlyoutsourcing@gmail.com" 
       method="POST" 
       accept-charset="UTF-8" 
       autocomplete="on">
@@ -314,12 +314,12 @@
     form.addEventListener('submit', async (e)=>{
       e.preventDefault();
       const fd=new FormData(form);
-      if(fd.get('_hp'));
+      if(fd.get('_hp')) return;
       fd.append('webinar_date', window.targetDate.toISOString());
       Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
       try{
         if(REG_ENDPOINT){ await fetch(REG_ENDPOINT,{method:'POST',body:fd}); }
-        toast('Заявка отправлена! Мы скоро свяжемся');
+        toast('Готово — вышлем план на почту');
         form.reset();
       }catch(err){ toast('Заявка принята. Письмо может прийти с задержкой.'); }
     });
