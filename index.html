@@ -159,7 +159,13 @@
             </div>
             <div>
               <label for="phone">Телефон</label>
-              <input id="phone" name="phone" type="tel" placeholder="+7 000 000-00-00" inputmode="tel" pattern="[+0-9\\s()\\-]{7,}">
+              <input id="phone" 
+       name="phone" 
+       type="tel" 
+       placeholder="+7 900 123-45-67" 
+       inputmode="tel" 
+       pattern="^\+?[0-9\s()-]{7,}$" 
+       title="Введите номер телефона, минимум 7 цифр. Разрешены +, пробелы, скобки и дефис">
             </div>
           </div>
           <div class="row">
