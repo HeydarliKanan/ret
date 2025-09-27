@@ -317,8 +317,11 @@
       if(fd.get('_hp')) return;
       fd.append('webinar_date', window.targetDate.toISOString());
       Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
-      try{
-        if(REG_ENDPOINT){ await fetch(REG_ENDPOINT,{method:'POST',body:fd}); }
+       try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: fd
+    })
         toast('Готово — вышлем план на почту');
         form.reset();
       }catch(err){ toast('Заявка принята. Письмо может прийти с задержкой.'); }
