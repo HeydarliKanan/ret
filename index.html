@@ -360,21 +360,26 @@
 
   // ===== SUBMIT HANDLER =====
   form.addEventListener('submit', async (e)=>{
-    // если используется бекенд (REG_ENDPOINT) — отправляем fetch
-    if(REG_ENDPOINT){
-      e.preventDefault();
-      const fd = new FormData(form);
-      if(fd.get('_hp')) return; // honeypot
-      fd.append('webinar_date', window.targetDate.toISOString());
-      Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
-      try{
-        await fetch(REG_ENDPOINT, { method:'POST', body: fd });
-        toast('Готово — вышлем план на почту');
-        form.reset();
-      }catch(err){
-        console.error(err);
-        toast('Ошибка отправки. Попробуйте позже.');
-      }
+  e.preventDefault();
+
+  const fd = new FormData(form);
+  if(fd.get('_hp')) return; // honeypot защита
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: fd
+    });
+
+    if (res.ok) {
+      toast('✅ Заявка отправлена! Мы скоро свяжемся.');
+      form.reset();
+    } else {
+      toast('⚠️ Ошибка при отправке. Попробуйте ещё раз.');
+    }
+  } catch(err) {
+    toast('⚠️ Ошибка сети. Попробуйте позже.');
+  }
       return;
     }
 
