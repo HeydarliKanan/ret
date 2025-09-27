@@ -270,24 +270,46 @@
     function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'Готово'; t.style.opacity='1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)';}, 3800); }
     const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1==1)return a; return c;};
 
-    // ===== ТАЙМЕР =====
-    window.targetDate = WEBINAR_DATETIME ? new Date(WEBINAR_DATETIME) : new Date(Date.now()+7*24*60*60*1000);
-    const $timer=document.getElementById('countdown');
-    const $hint=document.getElementById('date-hint');
-    $hint.textContent='Ближайший эфир: '+ new Intl.DateTimeFormat('ru-RU',{dateStyle:'full', timeStyle:'short'}).format(window.targetDate);
-    function renderTimer(){
-      const diff=window.targetDate - new Date();
-      if(diff<=0){ $timer.innerHTML='<div class="tbox"><strong>00</strong><span>дней</span></div><div class="tbox"><strong>00</strong><span>часов</span></div><div class="tbox"><strong>00</strong><span>минут</span></div><div class="tbox"><strong>00</strong><span>секунд</span></div>'; return; }
-      let ms=diff; const d=Math.floor(ms/86400000); ms-=d*86400000; const h=Math.floor(ms/3600000); ms-=h*3600000; const m=Math.floor(ms/60000); ms-=m*60000; const s=Math.floor(ms/1000);
-      const blocks=[
-        {v:d,t:plural(d,'день','дня','дней')},
-        {v:h,t:plural(h,'час','часа','часов')},
-        {v:m,t:plural(m,'минута','минуты','минут')},
-        {v:s,t:plural(s,'секунда','секунды','секунд')}
-      ].map(x=>`<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`).join('');
-      $timer.innerHTML=blocks;
-    }
-    renderTimer(); setInterval(renderTimer,1000);
+   // ===== ТАЙМЕР =====
+// Фиксированная дата: 6 октября 2025, 15:00 GMT+3 (Мск)
+window.targetDate = new Date("2025-10-06T15:00:00+03:00");
+
+const $timer = document.getElementById('countdown');
+const $hint = document.getElementById('date-hint');
+
+// Текст под таймером
+$hint.textContent = "Ближайший эфир: Понедельник, 6 октября 2025 г. в 15:00 GMT+3";
+
+function renderTimer() {
+  const diff = window.targetDate - new Date();
+  if (diff <= 0) {
+    $timer.innerHTML =
+      '<div class="tbox"><strong>00</strong><span>дней</span></div>' +
+      '<div class="tbox"><strong>00</strong><span>часов</span></div>' +
+      '<div class="tbox"><strong>00</strong><span>минут</span></div>' +
+      '<div class="tbox"><strong>00</strong><span>секунд</span></div>';
+    return;
+  }
+  let ms = diff;
+  const d = Math.floor(ms / 86400000); ms -= d * 86400000;
+  const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
+  const m = Math.floor(ms / 60000);    ms -= m * 60000;
+  const s = Math.floor(ms / 1000);
+
+  const blocks = [
+    { v: d, t: plural(d, 'день', 'дня', 'дней') },
+    { v: h, t: plural(h, 'час', 'часа', 'часов') },
+    { v: m, t: plural(m, 'минута', 'минуты', 'минут') },
+    { v: s, t: plural(s, 'секунда', 'секунды', 'секунд') }
+  ].map(x =>
+    `<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`
+  ).join('');
+
+  $timer.innerHTML = blocks;
+}
+
+renderTimer();
+setInterval(renderTimer, 1000);
 
     // ===== ПРЕДПРОСМОТР =====
     const form=document.getElementById('lead');
