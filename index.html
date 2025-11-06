@@ -141,6 +141,8 @@
     <div id="countdown" class="timer" aria-label="Countdown"></div>
     <p id="date-hint" class="muted" data-i18n="date_hint">Next broadcast: Saturday, 06 December 2025 at 18:00 GMT+3</p>
     <a id="regBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank" data-i18n="register_btn">Register for webinar</a>
+    <div id="countdown" class="timer" aria-label="Счётчик до начала"></div>
+<p id="date-hint" class="muted"></p>
   </header>
 
   <main class="wrap">
@@ -195,7 +197,7 @@
         <h2 id="reg-title" style="margin-bottom:4px" data-i18n="form_title">Get a free retention plan</h2>
         <p class="muted" style="margin-bottom:12px" data-i18n="form_sub">We will send a 30-day PDF with implementation steps and KPIs. No spam, no hard-selling.</p>
         <form id="lead" class="form" 
-      action="https://script.google.com/macros/s/AKfycbxcjAtOLuN2ho1Az2Y2PwOABQPIBaMZKkWkU5PTBw0tA6S_MncVFc2-F2kInXNKzxun/exec" 
+      action="https://script.google.com/macros/s/AKfycbx1Z6dAhkTyoD6si1FRT0p6aDgZZljrUd6jNmtvP1Y8yVLTOjJrWNcA39g6mizYDuCg/exec" 
       method="POST" 
       accept-charset="UTF-8" 
       autocomplete="on">
@@ -669,7 +671,55 @@
 
     // update labels on initial load
     updateTimerLabels(currentLang);
+<script>
+  // === ТАЙМЕР НА 06.12.2025 ===
+  const targetDate = new Date("2025-12-06T18:00:00+03:00");
+  const $timer = document.getElementById('countdown');
+  const $hint = document.getElementById('date-hint');
 
+  // Подпись под таймером
+  $hint.textContent = "Ближайший эфир: Суббота, 06 декабря 2025 г. в 18:00 GMT+3";
+
+  function plural(n, a, b, c) {
+    n = Math.abs(n) % 100; const n1 = n % 10;
+    if (n > 10 && n < 20) return c;
+    if (n1 > 1 && n1 < 5) return b;
+    if (n1 == 1) return a;
+    return c;
+  }
+
+  function renderTimer() {
+    const diff = targetDate - new Date();
+    if (diff <= 0) {
+      $timer.innerHTML = `
+        <div class="tbox"><strong>00</strong><span>дней</span></div>
+        <div class="tbox"><strong>00</strong><span>часов</span></div>
+        <div class="tbox"><strong>00</strong><span>минут</span></div>
+        <div class="tbox"><strong>00</strong><span>секунд</span></div>`;
+      return;
+    }
+
+    let ms = diff;
+    const d = Math.floor(ms / 86400000); ms -= d * 86400000;
+    const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
+    const m = Math.floor(ms / 60000);    ms -= m * 60000;
+    const s = Math.floor(ms / 1000);
+
+    const blocks = [
+      { v: d, t: plural(d, 'день', 'дня', 'дней') },
+      { v: h, t: plural(h, 'час', 'часа', 'часов') },
+      { v: m, t: plural(m, 'минута', 'минуты', 'минут') },
+      { v: s, t: plural(s, 'секунда', 'секунды', 'секунд') }
+    ].map(x =>
+      `<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`
+    ).join('');
+
+    $timer.innerHTML = blocks;
+  }
+
+  renderTimer();
+  setInterval(renderTimer, 1000);
+</script>
   </script>
 </body>
 </html>
