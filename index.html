@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
@@ -12,8 +12,8 @@
 </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Retenly — перестаньте терять клиентов</title>
-  <meta name="description" content="Retenly помогает вернуть спящих клиентов, поднять LTV и превратить звонки в доверительные диалоги. Бесплатный план удержания за 30 дней." />
+  <title data-i18n="meta_title">Retenly — stop losing customers</title>
+  <meta name="description" content="Retenly helps bring back sleeping customers, raise LTV and turn calls into trusted conversations. Free 30-day retention plan." data-i18n-meta="meta_description" />
   <meta name="theme-color" content="#0d0d0f" />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
@@ -21,7 +21,23 @@
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:#fff;font-family:Manrope,system-ui,Segoe UI,Roboto,Arial,sans-serif}
     .wrap{max-width:1120px;margin:0 auto;padding:40px 20px}
-    header.hero{text-align:center;padding:56px 20px}
+    header.hero{text-align:center;padding:56px 20px;position:relative}
+    /* Language selector top-left */
+    .lang-select {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 8px 10px;
+      border-radius: 10px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      z-index:40;
+    }
+    .lang-select label{font-size:12px;color:var(--muted);margin-right:6px}
+    .lang-select select{background:transparent;border:none;color:#fff;outline:none;padding:4px 6px;font-weight:600;border-radius:6px}
     h1{margin:0 0 14px;font:800 44px/1.1 Manrope;color:var(--accent)}
     h2{margin:0 0 14px;font:800 32px/1.15 Manrope;color:var(--accent)}
     h3{margin:0 0 10px;font:800 22px/1.2 Manrope}
@@ -51,366 +67,40 @@
     .modal-body{padding:18px}
     .modal-actions{display:flex;gap:10px;justify-content:flex-end;padding:16px 18px;border-top:1px solid rgba(244,210,122,.2)}
     html {
-  scroll-behavior: smooth;
-}
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body>
   <!-- HERO -->
   <header class="hero wrap">
-    <h1>Перестаёте терять клиентов — начинаете расти</h1>
-    <p class="muted" style="max-width:760px;margin:0 auto 14px">Приглашаем вас на бесплатный вебинар. 
-    Поговорим честно и без заученных скриптов: как сделать так, чтобы клиенты доверяли, рекомендовали и возвращались.</p>
-    <div id="countdown" class="timer" aria-label="Счётчик до начала"></div>
-    <p id="date-hint" class="muted"></p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank"> 
-  Регистрация на вебинар
-</a>
+    <!-- Language selector -->
+    <div class="lang-select" aria-hidden="false">
+      <label for="langPicker" data-i18n="lang_label">Language</label>
+      <select id="langPicker" aria-label="Language switcher">
+        <!-- options will be populated by JS -->
+      </select>
+    </div>
+
+    <h1 data-i18n="hero_h1">Stop losing customers — start growing</h1>
+    <p class="muted" style="max-width:760px;margin:0 auto 14px" data-i18n="hero_p">Join our free webinar. We'll speak honestly — how to make customers trust, recommend and return.</p>
+    <div id="countdown" class="timer" aria-label="Countdown to webinar"></div>
+    <p id="date-hint" class="muted" data-i18n="date_hint"></p>
+    <a id="webinarBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank" data-i18n="register_btn">Register for webinar</a>
   </header>
 
   <main class="wrap">
     <!-- СИТУАЦИЯ / ПРОБЛЕМА / ПОСЛЕДСТВИЯ -->
     <section class="grid grid-3">
-      <div class="tile"><h3>Ситуация</h3><p>Каждый месяц бизнес теряет до 30% клиентов. Игроки засыпают, повторные сделки падают.</p></div>
-      <div class="tile"><h3>Проблема</h3><p>Звонки звучат как допрос. Холодные не конвертят, тёплые не закрывают. Скрипты устарели.</p></div>
-      <div class="tile"><h3>Последствия</h3><p>Ежедневные потери депозитов и LTV. Фактически вы спонсируете рекламу конкурентов.</p></div>
+      <div class="tile"><h3 data-i18n="situation_title">Situation</h3><p data-i18n="situation_p">Every month businesses lose up to 30% of customers. Players go dormant, repeat purchases fall.</p></div>
+      <div class="tile"><h3 data-i18n="problem_title">Problem</h3><p data-i18n="problem_p">Calls sound like interrogations. Cold leads don't convert, warm ones don't close. Scripts are outdated.</p></div>
+      <div class="tile"><h3 data-i18n="consequence_title">Consequences</h3><p data-i18n="consequence_p">Daily loss of deposits and LTV. Essentially you fund competitors' ads.</p></div>
     </section>
 
     <!-- РЕШЕНИЕ -->
     <section>
-      <h2>Решение от Retenly</h2>
+      <h2 data-i18n="solution_h2">Retenly solution</h2>
       <div class="grid grid-3">
-        <div class="tile"><h3>Нулевой контакт</h3><p>Начало разговора, который хочется продолжить. Без барьеров и заученных фраз.</p></div>
-        <div class="tile"><h3>Слышать боль</h3><p>Диагностика вместо борьбы с «возражениями». Клиент чувствует заботу, а не давление.</p></div>
-        <div class="tile"><h3>Потребности</h3><p>Не «что продать», а «какую задачу решить» и «какой результат важен».</p></div>
-        <div class="tile"><h3>Финансы без стеснения</h3><p>Бюджет, выгоды и окупаемость — спокойно и прозрачно, чтобы ценность была очевидна.</p></div>
-        <div class="tile"><h3>VIP‑удержание</h3><p>Долгие отношения вместо разовых сделок. Персональные касания и SLA.</p></div>
-        <div class="tile"><h3>Аналитика KPI</h3><p>NGGR, LTV, Retention в понятных дашбордах. Контроль эффекта каждый день.</p></div>
-      </div>
-    </section>
-
-    <!-- ФОРМА + ПРЕДПРОСМОТР -->
-
-    <!-- УСЛУГИ -->
-    <section id="services">
-      <h2>Услуги Retenly для роста продаж</h2>
-      <p class="muted" style="margin-bottom:14px">Выбирайте точечно или заходите комплексно — закроем как обучение, так и процессы и аутсорс.</p>
-
-      <!-- Обучение и развитие -->
-      <div class="tile" style="margin-bottom:14px">
-        <h3>Обучение и развитие команды</h3>
-        <div class="grid grid-3">
-          <div class="tile"><strong>Холодные звонки</strong><p class="muted">Структура, крючки, проход секретаря, 20 секунд внимания.</p></div>
-          <div class="tile"><strong>Тёплые звонки</strong><p class="muted">Диалог без давления, soft close, возврат и дожим.</p></div>
-          <div class="tile"><strong>Работа с возражениями</strong><p class="muted">Метод диагностики вместо спора, превращаем «нет» в «да».</p></div>
-          <div class="tile"><strong>Продажи по телефону</strong><p class="muted">Call-центр: темп, тон, контроль качества (QA).</p></div>
-          <div class="tile"><strong>Продажи по видео/Zoom</strong><p class="muted">Структура видеозвонка, визуальные опоры, закрытие.</p></div>
-          <div class="tile"><strong>Импровизация со скриптами</strong><p class="muted">Гибрид: сценарий + живой разговор, чтобы звучать естественно.</p></div>
-        </div>
-      </div>
-
-      <!-- Процессы и системы -->
-      <div class="tile" style="margin-bottom:14px">
-        <h3>Создание и настройка процессов</h3>
-        <div class="grid grid-3">
-          <div class="tile"><strong>Написание скриптов</strong><p class="muted">Под вашу нишу и ГЕО: холодные/тёплые, VIP, апсейл/кросс-сейл.</p></div>
-          <div class="tile"><strong>Отдел продаж под ключ</strong><p class="muted">Роли, мотивация, регламенты, найм и онбординг.</p></div>
-          <div class="tile"><strong>CRM и автоматизация</strong><p class="muted">Воронки, триггеры, интеграции с мессенджерами.</p></div>
-          <div class="tile"><strong>KPI и аналитика</strong><p class="muted">Конверсия, LTV, CAC, Retention, NGGR в дашбордах.</p></div>
-          <div class="tile"><strong>QA-контур</strong><p class="muted">Сквозной контроль качества: чек-листы, разборы звонков.</p></div>
-          <div class="tile"><strong>Скрипты для чатов</strong><p class="muted">WhatsApp, Telegram, LINE, Zalo — единый голос бренда.</p></div>
-        </div>
-      </div>
-
-      <!-- Аутсорс и консалтинг -->
-      <div class="tile" style="margin-bottom:14px">
-        <h3>Аутсорс и консалтинг</h3>
-        <div class="grid grid-3">
-          <div class="tile"><strong>Аутсорс отдела продаж</strong><p class="muted">Быстрый старт без расширения штата, платёж за результат.</p></div>
-          <div class="tile"><strong>Аутсорс колл-центра</strong><p class="muted">Входящие/исходящие, SLA, отчёты ежедневно.</p></div>
-          <div class="tile"><strong>VIP-удержание</strong><p class="muted">Персональные стратегии возврата и развития клиентов.</p></div>
-          <div class="tile"><strong>Стратегический консалтинг</strong><p class="muted">Диагностика воронки, план роста на 30/90 дней.</p></div>
-          <div class="tile"><strong>Аудит отдела продаж</strong><p class="muted">Проблемы, потери, рекомендации и Roadmap внедрения.</p></div>
-          <div class="tile"><strong>Лидеры и тимлиды</strong><p class="muted">Подготовка руководителей, управление темпом и качеством.</p></div>
-        </div>
-      </div>
-
-      <!-- Дополнительно -->
-      <div class="tile">
-        <h3>Дополнительно</h3>
-        <div class="grid grid-3">
-          <div class="tile"><strong>Видео-скрипты и презентации</strong><p class="muted">Сценарии под демо/питчи и самопродажи.</p></div>
-          <div class="tile"><strong>Email-маркетинг</strong><p class="muted">Серии писем под реактивацию и апсейл.</p></div>
-          <div class="tile"><strong>Партнёрские программы</strong><p class="muted">Рефералки, апсейл/кросс-сейл, промо-скрипты.</p></div>
-        </div>
-      </div>
-
-      <div class="cta" style="margin-top:16px">
-        <strong>Нужен быстрый старт? Оставьте заявку — подберём набор услуг под ваши цели.</strong>
-        <a href="#lead" class="btn">Обсудить проект</a>
-      </div>
-    </section>
-
-    <section id="register" class="grid grid-2" aria-labelledby="reg-title">
-      <div class="card form" style="padding:20px">
-        <h2 id="reg-title" style="margin-bottom:4px">Получить бесплатный план удержания</h2>
-        <p class="muted" style="margin-bottom:12px">Пришлём PDF на 30 дней с шагами внедрения и KPI. Ни спама, ни «продаж в лоб».</p>
-        <form id="lead" class="form" 
-      action="https://script.google.com/macros/s/AKfycbxcjAtOLuN2ho1Az2Y2PwOABQPIBaMZKkWkU5PTBw0tA6S_MncVFc2-F2kInXNKzxun/exec" 
-      method="POST" 
-      accept-charset="UTF-8" 
-      autocomplete="on">
-          <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
-          <div class="row two">
-            <div>
-              <label for="name">Имя</label>
-              <input id="name" name="name" required placeholder="Как к вам обращаться">
-            </div>
-            <div>
-              <label for="company">Компания</label>
-              <input id="company" name="company" placeholder="Название компании">
-            </div>
-          </div>
-          <div class="row two">
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
-            </div>
-            <div>
-              <label for="phone">Телефон</label>
-              <input id="phone" name="phone" type="tel" placeholder="+7 000 000-00-00" inputmode="tel" pattern="[+0-9\\s()\\-]{7,}">
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label for="interest">Что важнее сейчас</label>
-              <select id="interest" name="interest">
-                <option>Вернуть спящих клиентов</option>
-                <option>Увеличить LTV</option>
-                <option>Наладить звонки без давления</option>
-                <option>VIP‑удержание</option>
-                <option>Холодные звонки</option>
-                <option>Тёплые звонки</option>
-                <option>Работа с возражениями</option>
-                <option>Продажи по телефону</option>
-                <option>Продажи по видео/Zoom</option>
-                <option>Импровизация со скриптами</option>
-                <option>Написание скриптов</option>
-                <option>Отдел продаж под ключ</option>
-                <option>CRM и автоматизация</option>
-                <option>KPI и аналитика</option>
-                <option>QA-контур</option>
-                <option>Скрипты для чатов</option>
-                <option>Аутсорс отдела продаж</option>
-                <option>Аутсорс колл-центра</option>
-                <option>Стратегический консалтинг</option>
-                <option>Аудит отдела продаж</option>
-                <option>Лидеры и тимлиды</option>
-                <option>Видео-скрипты и презентации</option>
-                <option>Email-маркетинг</option>
-                <option>Партнёрские программы</option>
-              </select>
-            </div>
-          </div>
-          <p class="muted" style="font-size:12px"><input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px"><label for="agree">Соглашаюсь на обработку данных и получение напоминаний</label></p>
-          <div class="actions">
-            <button class="btn" type="button" id="previewBtn">Предпросмотр заявки</button>
-            <button class="btn" type="submit">Отправить</button>
-            <button class="btn" type="button" id="ics">Добавить в календарь вебинар</button>
-          </div>
-          <p id="form-hint" class="muted" style="margin-top:8px"></p>
-        </form>
-      </div>
-      <div>
-        <div class="cta">
-          <div>
-            <h3 style="margin:0 0 6px">Хотите увидеть, сколько клиентов можно вернуть в этом месяце?</h3>
-            <p class="muted" style="margin:0">Запросите бесплатный аудит. Получите цифры потерь и точки роста за 24 часа.</p>
-          </div>
-          <a href="#lead" class="btn">Запросить аудит</a>
-        </div>
-        <div class="tile" style="margin-top:14px">
-          <h3 style="margin-bottom:6px">Что получаете</h3>
-          <ul class="muted" style="margin:0 0 0 18px;padding:0">
-            <li>PDF‑план на 30 дней</li>
-            <li>Скрипты доверительных звонков</li>
-            <li>Дашборд KPI: Retention, LTV, NGGR</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="cta">
-        <strong>Готовы перестать терять клиентов?</strong>
-        <a href="#lead" class="btn">Получить план удержания</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    <small class="muted">© 2025 Retenly. <a href="#" style="color:var(--accent);text-decoration:none">Политика конфиденциальности</a></small>
-  </footer>
-
-  <!-- Модал предпросмотра -->
-  <dialog id="previewModal">
-    <div class="modal-head"><strong>Предпросмотр заявки</strong></div>
-    <div class="modal-body">
-      <div class="tile" style="margin:0">
-        <p><strong>Имя:</strong> <span id="pv_name"></span></p>
-        <p><strong>Компания:</strong> <span id="pv_company"></span></p>
-        <p><strong>Email:</strong> <span id="pv_email"></span></p>
-        <p><strong>Телефон:</strong> <span id="pv_phone"></span></p>
-        <p><strong>Интерес:</strong> <span id="pv_interest"></span></p>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn" id="editBtn" type="button">Изменить</button>
-      <button class="btn" id="confirmBtn" type="button">Подтвердить и отправить</button>
-    </div>
-  </dialog>
-
-  <div id="toast" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#121219;border:1px solid rgba(244,210,122,.3);color:#fff;padding:10px 14px;border-radius:12px;z-index:50">Готово</div>
-
-  <script>
-    // ===== НАСТРОЙКИ =====
-    // Установите дату ближайшего вебинара (ISO с таймзоной), если null — возьмём +7 дней
-    const WEBINAR_DATETIME = null;
-    // Укажите endpoint при наличии бэкенда, иначе останемся в демо-режиме (тост + очистка)
-    const REG_ENDPOINT = null;
-
-    // ===== ВСПОМОГАТЕЛЬНО =====
-    function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg||'Готово'; t.style.opacity='1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)';}, 3800); }
-    const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1==1)return a; return c;};
-
-   // ===== ТАЙМЕР =====
-// Фиксированная дата: 6 октября 2025, 15:00 GMT+3 (Мск)
-window.targetDate = new Date("2025-12-05T18:00:00+03:00");
-
-const $timer = document.getElementById('countdown');
-const $hint = document.getElementById('date-hint');
-
-// Текст под таймером
-$hint.textContent = "Ближайший эфир: Пятница, 05 декабря 2025 г. в 18:00 GMT+3";
-
-function renderTimer() {
-  const diff = window.targetDate - new Date();
-  if (diff <= 0) {
-    $timer.innerHTML =
-      '<div class="tbox"><strong>00</strong><span>дней</span></div>' +
-      '<div class="tbox"><strong>00</strong><span>часов</span></div>' +
-      '<div class="tbox"><strong>00</strong><span>минут</span></div>' +
-      '<div class="tbox"><strong>00</strong><span>секунд</span></div>';
-    return;
-  }
-  let ms = diff;
-  const d = Math.floor(ms / 86400000); ms -= d * 86400000;
-  const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
-  const m = Math.floor(ms / 60000);    ms -= m * 60000;
-  const s = Math.floor(ms / 1000);
-
-  const blocks = [
-    { v: d, t: plural(d, 'день', 'дня', 'дней') },
-    { v: h, t: plural(h, 'час', 'часа', 'часов') },
-    { v: m, t: plural(m, 'минута', 'минуты', 'минут') },
-    { v: s, t: plural(s, 'секунда', 'секунды', 'секунд') }
-  ].map(x =>
-    `<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`
-  ).join('');
-
-  $timer.innerHTML = blocks;
-}
-
-renderTimer();
-setInterval(renderTimer, 1000);
-
-    // ===== ПРЕДПРОСМОТР =====
-    const form=document.getElementById('lead');
-    const modal=document.getElementById('previewModal');
-    document.getElementById('previewBtn').addEventListener('click',()=>{
-      const fd=new FormData(form);
-      if(fd.get('_hp')) return; // honeypot
-      // заполнение предпросмотра
-      document.getElementById('pv_name').textContent=fd.get('name')||'-';
-      document.getElementById('pv_company').textContent=fd.get('company')||'-';
-      document.getElementById('pv_email').textContent=fd.get('email')||'-';
-      document.getElementById('pv_phone').textContent=fd.get('phone')||'-';
-      document.getElementById('pv_interest').textContent=fd.get('interest')||'-';
-      if(typeof modal.showModal==='function'){ modal.showModal(); } else { modal.setAttribute('open',''); }
-    });
-    document.getElementById('editBtn').addEventListener('click',()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); });
-    document.getElementById('confirmBtn').addEventListener('click', async ()=>{
-      // Отправляем так же, как submit
-      const evt=new Event('submit',{cancelable:true});
-      if(modal.open) modal.close(); else modal.removeAttribute('open');
-      form.dispatchEvent(evt);
-    });
-
-    // ===== ОТПРАВКА ФОРМЫ =====
-    const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const fd = new FormData(form);
-  if (fd.get('_hp')) return; // honeypot
-
-  fd.append('webinar_date', window.targetDate.toISOString());
-  Object.entries(utm).forEach(([k, v]) => fd.append(k, v));
-
-  // Куда отправляем: либо REG_ENDPOINT, либо action формы
-  const targetUrl = REG_ENDPOINT || form.action;
-
-  try {
-    // Отправим через fetch — FormData корректно уходит как multipart/form-data
-    const resp = await fetch(targetUrl, {
-      method: 'POST',
-      body: fd,
-      // не устанавливаем заголовок Content-Type вручную при отправке FormData
-    });
-
-    // Если используем Google Apps Script и он настроен без CORS, может понадобиться mode:'no-cors'
-    // Но в режиме no-cors вы не получите статус/тело ответа, поэтому используйте его только как fallback.
-    // Пример fallback:
-    // if (!resp.ok && REG_ENDPOINT === null) { // optional fallback logic }
-
-    if (resp && resp.ok) {
-      toast('Готово — вышлем план на почту');
-      form.reset();
-    } else {
-      // Если ответ не OK (или недоступен из-за no-cors), всё равно показываем подтверждение,
-      // но советуем проверить Network/Console.
-      toast('Заявка принята. Если не получили письмо — проверьте спам и настройки сервиса.');
-      form.reset();
-      console.warn('Ответ сервера при отправке формы:', resp);
-    }
-  } catch (err) {
-    // В случае CORS/сети/и т.д.
-    console.error('Ошибка отправки формы:', err);
-    // fallback: выполняем классическую отправку формы (чтобы по крайней мере браузер сделал обычный POST)
-    try {
-      form.removeEventListener('submit', arguments.callee); // не всегда сработает в стрелке
-    } catch(e){}
-    // обычная навигационная отправка (без AJAX)
-    form.submit();
-  }
-});
-
-    // ===== ICS для календаря =====
-    document.getElementById('ics').addEventListener('click',()=>{
-      const dt=window.targetDate; const start=dt.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
-      const end=new Date(dt.getTime()+60*60*1000).toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
-      const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retenly//Webinar//RU','BEGIN:VEVENT',`UID:${Date.now()}@Retenly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retenly: Вебинар по удержанию','DESCRIPTION:Доверительные звонки, возврат спящих клиентов, рост LTV','END:VEVENT','END:VCALENDAR'].join('\r\n');
-      const blob=new Blob([ics],{type:'text/calendar'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Retenly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    // ===== JSON-LD =====
-    (function(){
-      const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retenly: Вебинар по удержанию","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":window.targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://Retenly.example/webinar"},"description":"Как вернуть спящих клиентов, поднять LTV и строить доверительные звонки.","organizer":{"@type":"Organization","name":"Retenly"}};
-      const s=document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
-    })();
-
-    // self-tests
-    try{ console.assert(window.targetDate instanceof Date,'targetDate должен быть Date'); console.assert(document.getElementById('countdown'),'Таймер есть'); }catch(e){ console.error('[init]',e); }
-  </script>
-</body>
-</html>
+        <div class="tile"><h3 data-i18n="sol1_title">Zero contact</h3><p data-i18n="sol1_p">Start conversations people want to continue. No barriers, no canned phrases.</p></div>
+        <div class="tile"><h3 data-i18n="sol2_title">Hear the pain</h3><p data-i18n="sol2_p">Diagnosis instead of arguing with objections. Client feels cared for, not pressured.</p></div>
+        <div clas
