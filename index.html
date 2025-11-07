@@ -1,18 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-62WNJKY2MC');
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Retenly — stop losing customers</title>
-  <meta name="description" content="Retenly helps bring back sleeping customers, raise LTV and turn calls into trusted conversations. Free 30-day retention plan." />
+  <title>Retenly — перестаньте терять клиентов</title>
+  <meta name="description" content="Retenly помогает вернуть спящих клиентов, поднять LTV и превратить звонки в доверительные диалоги. Бесплатный план удержания за 30 дней." />
   <meta name="theme-color" content="#0d0d0f" />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{ --bg:#0d0d0f; --card:#141419; --accent:#f4d27a; --muted:#a9a9b2 }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#fff;font-family:Manrope,system-ui,Segoe UI,Roboto,Arial,sans-serif;position:relative;min-height:100vh;overflow-x:hidden}
+    body{margin:0;background:var(--bg);color:#fff;font-family:Manrope,system-ui,Segoe UI,Roboto,Arial,sans-serif}
     .wrap{max-width:1120px;margin:0 auto;padding:40px 20px}
-    header.hero{text-align:center;padding:56px 20px;position:relative;z-index:2}
+    header.hero{text-align:center;padding:56px 20px;position:relative}
     h1{margin:0 0 14px;font:800 44px/1.1 Manrope;color:var(--accent)}
     h2{margin:0 0 14px;font:800 32px/1.15 Manrope;color:var(--accent)}
     h3{margin:0 0 10px;font:800 22px/1.2 Manrope}
@@ -26,7 +35,7 @@
     .timer{display:flex;gap:12px;justify-content:center;margin:16px 0}
     .tbox{background:#101017;border:1px solid rgba(244,210,122,.25);border-radius:12px;padding:12px 14px;min-width:84px;text-align:center}
     .tbox strong{display:block;font:800 28px/1 Manrope;color:var(--accent)}
-    .tbox span{font-size:12px;color:#cfcfd6;display:block;margin-top:6px}
+    .tbox span{font-size:12px;color:#cfcfd6}
     .card{background:var(--card);border:1px solid rgba(244,210,122,.2);border-radius:16px}
     form.form{padding:20px}
     label{display:block;font-size:12px;color:#e9e4d4;margin:6px 0}
@@ -43,215 +52,203 @@
     .modal-actions{display:flex;gap:10px;justify-content:flex-end;padding:16px 18px;border-top:1px solid rgba(244,210,122,.2)}
     html { scroll-behavior: smooth; }
 
-    /* Language selector (custom dropdown) - RIGHT TOP */
-    .lang-wrapper {
-      position: fixed;
+    /* language selector (right top) */
+    #lang-select {
+      position: absolute;
       right: 20px;
       top: 20px;
-      z-index: 9999;
-      font-size: 14px;
-    }
-    .lang-btn {
-      display:flex;
-      gap:8px;
-      align-items:center;
-      background:#0b0b0d;
-      color:#fff;
-      border:1px solid rgba(255,255,255,0.06);
-      padding:8px 12px;
-      border-radius:12px;
+      background: rgba(10,10,12,0.96);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 6px 8px;
+      border-radius: 10px;
+      font-weight:600;
       cursor:pointer;
-      min-width:110px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
+      z-index:1000;
     }
-    .lang-flag { font-size:16px; }
-    .lang-label { font-weight:700; }
-    .lang-caret { margin-left:auto; transform:translateY(1px); }
-
-    .lang-list {
-      margin-top:8px;
-      background: #0b0b0d;
-      border:1px solid rgba(255,255,255,0.04);
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      display:none;
-      max-height:260px;
-      overflow-y:auto;
-      min-width:160px;
-    }
-    .lang-list.open { display:block; }
-    .lang-item {
-      padding:10px 12px;
-      display:flex;
-      gap:8px;
-      align-items:center;
-      color:#fff;
-      cursor:pointer;
-    }
-    .lang-item:hover { background: rgba(255,255,255,0.02); }
-    .lang-item.active { background: rgba(244,210,122,0.12); color:#111; font-weight:800; }
-
-    /* background animation (soft waves / gradient) */
-    .bg-anim {
+    #lang-select option { background: #0b0b0d; color:#fff; }
+    /* animated subtle gradient background adapted to design */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background:
-        radial-gradient(800px 600px at 10% 20%, rgba(244,210,122,0.06), rgba(0,0,0,0) 30%),
-        radial-gradient(600px 500px at 85% 30%, rgba(188,120,255,0.04), rgba(0,0,0,0) 30%),
-        radial-gradient(700px 500px at 40% 80%, rgba(7,72,86,0.05), rgba(0,0,0,0) 30%),
-        linear-gradient(180deg, rgba(7,10,14,0.4) 0%, rgba(2,3,6,0.9) 100%);
-      filter: blur(36px);
-      animation: bgFloat 26s ease-in-out infinite;
-      transform-origin: center;
+      z-index: -1;
+      background: linear-gradient(120deg, rgba(244,210,122,0.03), rgba(244,210,122,0.02) 20%, rgba(0,0,0,0.3) 60%);
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      animation: bgShift 12s linear infinite;
     }
-    @keyframes bgFloat { 0%{ transform: translateY(0) scale(1) } 50%{ transform: translateY(6%) scale(1.03) } 100%{ transform: translateY(0) scale(1) } }
-
-    /* small responsive adjustments */
-    @media(max-width:480px){
-      .wrap{padding:22px}
-      .lang-wrapper{right:10px;top:10px}
-      .lang-btn{padding:6px 8px;min-width:90px}
-      h1{font-size:32px}
+    @keyframes bgShift {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.02) translateY(-6px); }
+      100% { transform: scale(1) translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="bg-anim" aria-hidden="true"></div>
-
-  <!-- Language selector (RIGHT TOP) -->
-  <div class="lang-wrapper" id="langWrapper" aria-label="Language selector">
-    <button id="langBtn" class="lang-btn" aria-haspopup="listbox" aria-expanded="false" type="button">
-      <span class="lang-flag" id="langFlag">🇬🇧</span>
-      <span class="lang-label" id="langLabel">English</span>
-      <svg class="lang-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <div id="langList" class="lang-list" role="listbox" aria-label="Choose language">
-      <!-- populated by JS -->
-    </div>
-  </div>
-
   <!-- HERO -->
   <header class="hero wrap">
-    <h1 data-i18n="hero_h1">Stop losing customers — start growing</h1>
-    <p class="muted" style="max-width:760px;margin:0 auto 14px" data-i18n="hero_p">Join our free webinar. We'll speak honestly — how to make customers trust, recommend and return.</p>
-    <div id="countdown" class="timer" aria-label="Countdown"></div>
-    <p id="date-hint" class="muted" data-i18n="date_hint">Next broadcast: Saturday, 06 December 2025 at 18:00 GMT+3</p>
-    <a id="regBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank" data-i18n="register_btn">Register for webinar</a>
+    <!-- language selector -->
+    <select id="lang-select" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="pl">Polski</option>
+      <option value="ru">Русский</option>
+    </select>
+
+    <h1 id="hero-title">Перестаёте терять клиентов — начинаете расти</h1>
+    <p id="hero-desc" class="muted" style="max-width:760px;margin:0 auto 14px">Приглашаем вас на бесплатный вебинар. 
+    Поговорим честно и без заученных скриптов: как сделать так, чтобы клиенты доверяли, рекомендовали и возвращались.</p>
     <div id="countdown" class="timer" aria-label="Счётчик до начала"></div>
-<p id="date-hint" class="muted"></p>
+    <p id="date-hint" class="muted"></p>
+    <a id="reg-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank"> 
+  Регистрация на вебинар
+</a>
   </header>
 
   <main class="wrap">
-    <!-- Содержание (всё переведено через i18n) -->
+    <!-- СИТУАЦИЯ / ПРОБЛЕМА / ПОСЛЕДСТВИЯ -->
     <section class="grid grid-3">
-      <div class="tile"><h3 data-i18n="situation_title">Situation</h3><p data-i18n="situation_p">Every month businesses lose up to 30% of customers. Players go dormant, repeat purchases fall.</p></div>
-      <div class="tile"><h3 data-i18n="problem_title">Problem</h3><p data-i18n="problem_p">Calls sound like interrogations. Cold leads don't convert, warm ones don't close. Scripts are outdated.</p></div>
-      <div class="tile"><h3 data-i18n="consequence_title">Consequences</h3><p data-i18n="consequence_p">Daily loss of deposits and LTV. Essentially you fund competitors' ads.</p></div>
+      <div class="tile"><h3 data-i18n="situation_title">Ситуация</h3><p data-i18n="situation_text">Каждый месяц бизнес теряет до 30% клиентов. Игроки засыпают, повторные сделки падают.</p></div>
+      <div class="tile"><h3 data-i18n="problem_title">Проблема</h3><p data-i18n="problem_text">Звонки звучат как допрос. Холодные не конвертят, тёплые не закрывают. Скрипты устарели.</p></div>
+      <div class="tile"><h3 data-i18n="consequences_title">Последствия</h3><p data-i18n="consequences_text">Ежедневные потери депозитов и LTV. Фактически вы спонсируете рекламу конкурентов.</p></div>
     </section>
 
+    <!-- РЕШЕНИЕ -->
     <section>
-      <h2 data-i18n="solution_h2">Retenly solution</h2>
+      <h2 data-i18n="solution_title">Решение от Retenly</h2>
       <div class="grid grid-3">
-        <div class="tile"><h3 data-i18n="sol1_title">Zero contact</h3><p data-i18n="sol1_p">Start conversations people want to continue. No barriers, no canned phrases.</p></div>
-        <div class="tile"><h3 data-i18n="sol2_title">Hear the pain</h3><p data-i18n="sol2_p">Diagnosis instead of arguing with objections. Client feels cared for, not pressured.</p></div>
-        <div class="tile"><h3 data-i18n="sol3_title">Needs-first</h3><p data-i18n="sol3_p">Not “what to sell”, but “what problem to solve” and “what result matters”.</p></div>
-        <div class="tile"><h3 data-i18n="sol4_title">Money without shame</h3><p data-i18n="sol4_p">Budget, ROI and payback — clear so value is obvious.</p></div>
-        <div class="tile"><h3 data-i18n="sol5_title">VIP retention</h3><p data-i18n="sol5_p">Long relationships instead of one-offs. Personal touches and SLAs.</p></div>
-        <div class="tile"><h3 data-i18n="sol6_title">KPI analytics</h3><p data-i18n="sol6_p">NGGR, LTV, Retention in simple dashboards. Daily effect control.</p></div>
+        <div class="tile"><h3 data-i18n="sol_1_title">Нулевой контакт</h3><p data-i18n="sol_1_text">Начало разговора, который хочется продолжить. Без барьеров и заученных фраз.</p></div>
+        <div class="tile"><h3 data-i18n="sol_2_title">Слышать боль</h3><p data-i18n="sol_2_text">Диагностика вместо борьбы с «возражениями». Клиент чувствует заботу, а не давление.</p></div>
+        <div class="tile"><h3 data-i18n="sol_3_title">Потребности</h3><p data-i18n="sol_3_text">Не «что продать», а «какую задачу решить» и «какой результат важен».</p></div>
+        <div class="tile"><h3 data-i18n="sol_4_title">Финансы без стеснения</h3><p data-i18n="sol_4_text">Бюджет, выгоды и окупаемость — спокойно и прозрачно, чтобы ценность была очевидна.</p></div>
+        <div class="tile"><h3 data-i18n="sol_5_title">VIP-удержание</h3><p data-i18n="sol_5_text">Долгие отношения вместо разовых сделок. Персональные касания и SLA.</p></div>
+        <div class="tile"><h3 data-i18n="sol_6_title">Аналитика KPI</h3><p data-i18n="sol_6_text">NGGR, LTV, Retention в понятных дашбордах. Контроль эффекта каждый день.</p></div>
       </div>
     </section>
 
-    <!-- Услуги -->
+    <!-- УСЛУГИ -->
     <section id="services">
-      <h2 data-i18n="services_h2">Retenly services for sales growth</h2>
-      <p class="muted" style="margin-bottom:14px" data-i18n="services_sub">Choose a focused product or full-suite — we'll cover training, processes and outsourcing.</p>
+      <h2 data-i18n="services_title">Услуги Retenly для роста продаж</h2>
+      <p id="services-desc" class="muted" style="margin-bottom:14px" data-i18n="services_desc">Выбирайте точечно или заходите комплексно — закроем как обучение, так и процессы и аутсорс.</p>
 
-      <!-- Блоки (сокращённо в html — тексты подставляются из i18n) -->
+      <!-- Обучение и развитие -->
       <div class="tile" style="margin-bottom:14px">
-        <h3 data-i18n="training_title">Team training & development</h3>
+        <h3 data-i18n="training_title">Обучение и развитие команды</h3>
         <div class="grid grid-3">
-          <div class="tile"><strong data-i18n="cold_calls_title">Cold calls</strong><p class="muted" data-i18n="cold_calls_p">Structure, hooks, gatekeeper bypass, 20-second attention.</p></div>
-          <div class="tile"><strong data-i18n="warm_calls_title">Warm calls</strong><p class="muted" data-i18n="warm_calls_p">Dialogue without pressure, soft close, reactivation and push.</p></div>
-          <div class="tile"><strong data-i18n="obj_title">Objection handling</strong><p class="muted" data-i18n="obj_p">Diagnosis method instead of arguing — turn “no” into “yes”.</p></div>
-          <div class="tile"><strong data-i18n="phone_sales_title">Phone sales</strong><p class="muted" data-i18n="phone_sales_p">Call-center: tempo, tone, QA.</p></div>
-          <div class="tile"><strong data-i18n="video_sales_title">Video/Zoom sales</strong><p class="muted" data-i18n="video_sales_p">Structure, visual aids, closing.</p></div>
-          <div class="tile"><strong data-i18n="improv_title">Script improvisation</strong><p class="muted" data-i18n="improv_p">Hybrid: script + live conversation to sound natural.</p></div>
+          <div class="tile"><strong data-i18n="t1_title">Холодные звонки</strong><p class="muted" data-i18n="t1_text">Структура, крючки, проход секретаря, 20 секунд внимания.</p></div>
+          <div class="tile"><strong data-i18n="t2_title">Тёплые звонки</strong><p class="muted" data-i18n="t2_text">Диалог без давления, soft close, возврат и дожим.</p></div>
+          <div class="tile"><strong data-i18n="t3_title">Работа с возражениями</strong><p class="muted" data-i18n="t3_text">Метод диагностики вместо спора, превращаем «нет» в «да».</p></div>
+          <div class="tile"><strong data-i18n="t4_title">Продажи по телефону</strong><p class="muted" data-i18n="t4_text">Call-центр: темп, тон, контроль качества (QA).</p></div>
+          <div class="tile"><strong data-i18n="t5_title">Продажи по видео/Zoom</strong><p class="muted" data-i18n="t5_text">Структура видеозвонка, визуальные опоры, закрытие.</p></div>
+          <div class="tile"><strong data-i18n="t6_title">Импровизация со скриптами</strong><p class="muted" data-i18n="t6_text">Гибрид: сценарий + живой разговор, чтобы звучать естественно.</p></div>
         </div>
       </div>
 
-      <!-- другие блоки... (в исходном коде всё есть — переводы из i18n) -->
+      <!-- Процессы и системы -->
+      <div class="tile" style="margin-bottom:14px">
+        <h3 data-i18n="processes_title">Создание и настройка процессов</h3>
+        <div class="grid grid-3">
+          <div class="tile"><strong data-i18n="p1_title">Написание скриптов</strong><p class="muted" data-i18n="p1_text">Под вашу нишу и ГЕО: холодные/тёплые, VIP, апсейл/кросс-сейл.</p></div>
+          <div class="tile"><strong data-i18n="p2_title">Отдел продаж под ключ</strong><p class="muted" data-i18n="p2_text">Роли, мотивация, регламенты, найм и онбординг.</p></div>
+          <div class="tile"><strong data-i18n="p3_title">CRM и автоматизация</strong><p class="muted" data-i18n="p3_text">Воронки, триггеры, интеграции с мессенджерами.</p></div>
+          <div class="tile"><strong data-i18n="p4_title">KPI и аналитика</strong><p class="muted" data-i18n="p4_text">Конверсия, LTV, CAC, Retention, NGGR в дашбордах.</p></div>
+          <div class="tile"><strong data-i18n="p5_title">QA-контур</strong><p class="muted" data-i18n="p5_text">Сквозной контроль качества: чек-листы, разборы звонков.</p></div>
+          <div class="tile"><strong data-i18n="p6_title">Скрипты для чатов</strong><p class="muted" data-i18n="p6_text">WhatsApp, Telegram, LINE, Zalo — единый голос бренда.</p></div>
+        </div>
+      </div>
+
+      <!-- Аутсорс и консалтинг -->
+      <div class="tile" style="margin-bottom:14px">
+        <h3 data-i18n="outs_title">Аутсорс и консалтинг</h3>
+        <div class="grid grid-3">
+          <div class="tile"><strong data-i18n="o1_title">Аутсорс отдела продаж</strong><p class="muted" data-i18n="o1_text">Быстрый старт без расширения штата, платёж за результат.</p></div>
+          <div class="tile"><strong data-i18n="o2_title">Аутсорс колл-центра</strong><p class="muted" data-i18n="o2_text">Входящие/исходящие, SLA, отчёты ежедневно.</p></div>
+          <div class="tile"><strong data-i18n="o3_title">VIP-удержание</strong><p class="muted" data-i18n="o3_text">Персональные стратегии возврата и развития клиентов.</p></div>
+          <div class="tile"><strong data-i18n="o4_title">Стратегический консалтинг</strong><p class="muted" data-i18n="o4_text">Диагностика воронки, план роста на 30/90 дней.</p></div>
+          <div class="tile"><strong data-i18n="o5_title">Аудит отдела продаж</strong><p class="muted" data-i18n="o5_text">Проблемы, потери, рекомендации и Roadmap внедрения.</p></div>
+          <div class="tile"><strong data-i18n="o6_title">Лидеры и тимлиды</strong><p class="muted" data-i18n="o6_text">Подготовка руководителей, управление темпом и качеством.</p></div>
+        </div>
+      </div>
+
+      <!-- Дополнительно -->
+      <div class="tile">
+        <h3 data-i18n="extra_title">Дополнительно</h3>
+        <div class="grid grid-3">
+          <div class="tile"><strong data-i18n="e1_title">Видео-скрипты и презентации</strong><p class="muted" data-i18n="e1_text">Сценарии под демо/питчи и самопродажи.</p></div>
+          <div class="tile"><strong data-i18n="e2_title">Email-маркетинг</strong><p class="muted" data-i18n="e2_text">Серии писем под реактивацию и апсейл.</p></div>
+          <div class="tile"><strong data-i18n="e3_title">Партнёрские программы</strong><p class="muted" data-i18n="e3_text">Рефералки, апсейл/кросс-сейл, промо-скрипты.</p></div>
+        </div>
+      </div>
 
       <div class="cta" style="margin-top:16px">
-        <strong data-i18n="cta_strong">Need a fast start? Leave a request — we'll pick a service set for your goals.</strong>
-        <a href="#lead" class="btn" data-i18n="cta_btn">Discuss project</a>
+        <strong data-i18n="cta_text">Нужен быстрый старт? Оставьте заявку — подберём набор услуг под ваши цели.</strong>
+        <a href="#lead" id="cta-btn" class="btn" data-i18n="cta_button">Обсудить проект</a>
       </div>
     </section>
 
-    <!-- Форма -->
     <section id="register" class="grid grid-2" aria-labelledby="reg-title">
       <div class="card form" style="padding:20px">
-        <h2 id="reg-title" style="margin-bottom:4px" data-i18n="form_title">Get a free retention plan</h2>
-        <p class="muted" style="margin-bottom:12px" data-i18n="form_sub">We will send a 30-day PDF with implementation steps and KPIs. No spam, no hard-selling.</p>
+        <h2 id="reg-title" style="margin-bottom:4px" data-i18n="reg_title">Получить бесплатный план удержания</h2>
+        <p id="reg-desc" class="muted" style="margin-bottom:12px" data-i18n="reg_desc">Пришлём PDF на 30 дней с шагами внедрения и KPI. Ни спама, ни «продаж в лоб».</p>
         <form id="lead" class="form" 
-      action="https://script.google.com/macros/s/AKfycbx1Z6dAhkTyoD6si1FRT0p6aDgZZljrUd6jNmtvP1Y8yVLTOjJrWNcA39g6mizYDuCg/exec" 
+      action="https://script.google.com/macros/s/AKfycbxcjAtOLuN2ho1Az2Y2PwOABQPIBaMZKkWkU5PTBw0tA6S_MncVFc2-F2kInXNKzxun/exec" 
       method="POST" 
       accept-charset="UTF-8" 
       autocomplete="on">
           <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
           <div class="row two">
             <div>
-              <label for="name" data-i18n="label_name">Name</label>
-              <input id="name" name="name" required placeholder="" data-i18n-placeholder="ph_name">
+              <label for="name" data-i18n="label_name">Имя</label>
+              <input id="name" name="name" required placeholder="Как к вам обращаться">
             </div>
             <div>
-              <label for="company" data-i18n="label_company">Company</label>
-              <input id="company" name="company" placeholder="" data-i18n-placeholder="ph_company">
+              <label for="company" data-i18n="label_company">Компания</label>
+              <input id="company" name="company" placeholder="Название компании">
             </div>
           </div>
           <div class="row two">
             <div>
               <label for="email" data-i18n="label_email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email" data-i18n-placeholder="ph_email">
+              <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
             </div>
             <div>
-              <label for="phone" data-i18n="label_phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="+7 000 000-00-00" inputmode="tel" pattern="[+0-9\\s()\\-]{7,}" data-i18n-placeholder="ph_phone">
+              <label for="phone" data-i18n="label_phone">Телефон</label>
+              <input id="phone" name="phone" type="tel" placeholder="+7 000 000-00-00" inputmode="tel" pattern="[+0-9\\s()\\-]{7,}">
             </div>
           </div>
           <div class="row">
             <div>
-              <label for="interest" data-i18n="label_interest">What's most important now</label>
-              <select id="interest" name="interest"></select>
+              <label for="interest" data-i18n="label_interest">Что важнее сейчас</label>
+              <select id="interest" name="interest">
+                <!-- options will be populated by JS translations -->
+              </select>
             </div>
           </div>
-          <p class="muted" style="font-size:12px"><input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px"><label for="agree" data-i18n="label_consent">I agree to data processing and reminders</label></p>
+          <p class="muted" style="font-size:12px"><input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px"><label id="consent-label" for="agree" data-i18n="consent_text">Соглашаюсь на обработку данных и получение напоминаний</label></p>
           <div class="actions">
-            <button class="btn" type="button" id="previewBtn" data-i18n="preview_btn">Preview request</button>
-            <button class="btn" type="submit" data-i18n="send_btn">Send</button>
-            <button class="btn" type="button" id="ics" data-i18n="ics_btn">Add webinar to calendar</button>
+            <button class="btn" type="button" id="previewBtn" data-i18n="previewBtn">Предпросмотр заявки</button>
+            <button class="btn" type="submit" id="sendBtn" data-i18n="sendBtn">Отправить</button>
+            <button class="btn" type="button" id="ics" data-i18n="icsBtn">Добавить в календарь вебинар</button>
           </div>
           <p id="form-hint" class="muted" style="margin-top:8px" data-i18n="form_hint"></p>
         </form>
       </div>
-
       <div>
         <div class="cta">
           <div>
-            <h3 style="margin:0 0 6px" data-i18n="audit_title_h3">Want to see how many customers you can bring back this month?</h3>
-            <p class="muted" style="margin:0" data-i18n="audit_p">Request a free audit. Get loss figures and growth points within 24 hours.</p>
+            <h3 style="margin:0 0 6px" data-i18n="audit_title">Хотите увидеть, сколько клиентов можно вернуть в этом месяце?</h3>
+            <p class="muted" style="margin:0" data-i18n="audit_text">Запросите бесплатный аудит. Получите цифры потерь и точки роста за 24 часа.</p>
           </div>
-          <a href="#lead" class="btn" data-i18n="audit_btn">Request audit</a>
+          <a href="#lead" class="btn" data-i18n="audit_button">Запросить аудит</a>
         </div>
         <div class="tile" style="margin-top:14px">
-          <h3 style="margin-bottom:6px" data-i18n="what_get_title">What you get</h3>
+          <h3 style="margin-bottom:6px" data-i18n="what_get_title">Что получаете</h3>
           <ul class="muted" style="margin:0 0 0 18px;padding:0">
-            <li data-i18n="item_pdf">30-day PDF plan</li>
-            <li data-i18n="item_scripts">Trusted-call scripts</li>
-            <li data-i18n="item_dashboard">KPI dashboard: Retention, LTV, NGGR</li>
+            <li data-i18n="what_get_1">PDF-план на 30 дней</li>
+            <li data-i18n="what_get_2">Скрипты доверительных звонков</li>
+            <li data-i18n="what_get_3">Дашборд KPI: Retention, LTV, NGGR</li>
           </ul>
         </div>
       </div>
@@ -259,467 +256,866 @@
 
     <section>
       <div class="cta">
-        <strong data-i18n="final_cta">Ready to stop losing customers?</strong>
-        <a href="#lead" class="btn" data-i18n="final_btn">Get retention plan</a>
+        <strong data-i18n="final_cta">Готовы перестать терять клиентов?</strong>
+        <a href="#lead" class="btn" data-i18n="final_cta_btn">Получить план удержания</a>
       </div>
     </section>
   </main>
 
   <footer class="wrap">
-    <small class="muted" data-i18n="footer_text">© 2025 Retenly. <a href="#" style="color:var(--accent);text-decoration:none" data-i18n="privacy">Privacy policy</a></small>
+    <small class="muted">© 2025 Retenly. <a id="privacy-link" href="#" style="color:var(--accent);text-decoration:none" data-i18n="privacy">Политика конфиденциальности</a></small>
   </footer>
 
-  <!-- Preview modal -->
+  <!-- Модал предпросмотра -->
   <dialog id="previewModal">
-    <div class="modal-head"><strong data-i18n="modal_title">Preview request</strong></div>
+    <div class="modal-head"><strong data-i18n="modal_title">Предпросмотр заявки</strong></div>
     <div class="modal-body">
       <div class="tile" style="margin:0">
-        <p><strong data-i18n="label_name_short">Name:</strong> <span id="pv_name"></span></p>
-        <p><strong data-i18n="label_company_short">Company:</strong> <span id="pv_company"></span></p>
-        <p><strong data-i18n="label_email_short">Email:</strong> <span id="pv_email"></span></p>
-        <p><strong data-i18n="label_phone_short">Phone:</strong> <span id="pv_phone"></span></p>
-        <p><strong data-i18n="label_interest_short">Interest:</strong> <span id="pv_interest"></span></p>
+        <p><strong data-i18n="modal_name_label">Имя:</strong> <span id="pv_name"></span></p>
+        <p><strong data-i18n="modal_company_label">Компания:</strong> <span id="pv_company"></span></p>
+        <p><strong data-i18n="modal_email_label">Email:</strong> <span id="pv_email"></span></p>
+        <p><strong data-i18n="modal_phone_label">Телефон:</strong> <span id="pv_phone"></span></p>
+        <p><strong data-i18n="modal_interest_label">Интерес:</strong> <span id="pv_interest"></span></p>
       </div>
     </div>
     <div class="modal-actions">
-      <button class="btn" id="editBtn" type="button" data-i18n="edit_btn">Edit</button>
-      <button class="btn" id="confirmBtn" type="button" data-i18n="confirm_btn">Confirm and send</button>
+      <button class="btn" id="editBtn" type="button" data-i18n="editBtn">Изменить</button>
+      <button class="btn" id="confirmBtn" type="button" data-i18n="confirmBtn">Подтвердить и отправить</button>
     </div>
   </dialog>
 
-  <div id="toast" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#121219;border:1px solid rgba(244,210,122,.3);color:#fff;padding:10px 14px;border-radius:12px;z-index:50">Done</div>
+  <div id="toast" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#121219;border:1px solid rgba(244,210,122,.3);color:#fff;padding:10px 14px;border-radius:12px;z-index:50">Готово</div>
 
   <script>
-    // --- Settings ---
-    const SUPPORTED = ['en','de','pl','fr','ru'];
-    const STORAGE_KEY = 'site_lang';
-
-    // --- Translations (trimmed displayed keys; includes timer labels and date hint) ---
+    // ===== TRANSLATIONS (EN default, FR, DE, PL, RU) =====
     const I18N = {
       en: {
-        hero_h1:'Stop losing customers — start growing',
-        hero_p:"Join our free webinar. We'll speak honestly — how to make customers trust, recommend and return.",
-        date_hint:'Next broadcast: Saturday, 06 December 2025 at 18:00 GMT+3',
-        register_btn:'Register for webinar',
-        situation_title:'Situation', situation_p:'Every month businesses lose up to 30% of customers. Players go dormant, repeat purchases fall.',
-        problem_title:'Problem', problem_p:"Calls sound like interrogations. Cold leads don't convert, warm ones don't close. Scripts are outdated.",
-        consequence_title:'Consequences', consequence_p:"Daily loss of deposits and LTV. Essentially you fund competitors' ads.",
-        solution_h2:'Retenly solution',
-        sol1_title:'Zero contact', sol1_p:'Start conversations people want to continue. No barriers, no canned phrases.',
-        sol2_title:'Hear the pain', sol2_p:'Diagnosis instead of arguing with objections. Client feels cared for, not pressured.',
-        sol3_title:'Needs-first', sol3_p:'Not “what to sell”, but “what problem to solve” and “what result matters”.',
-        sol4_title:'Money without shame', sol4_p:'Budget, ROI and payback — clear so value is obvious.',
-        sol5_title:'VIP retention', sol5_p:'Long relationships instead of one-offs. Personal touches and SLAs.',
-        sol6_title:'KPI analytics', sol6_p:'NGGR, LTV, Retention in simple dashboards. Daily effect control.',
-        services_h2:'Retenly services for sales growth', services_sub:'Choose a focused product or full-suite — we\'ll cover training, processes and outsourcing.',
-        training_title:'Team training & development',
-        cold_calls_title:'Cold calls', cold_calls_p:'Structure, hooks, gatekeeper bypass, 20-second attention.',
-        warm_calls_title:'Warm calls', warm_calls_p:'Dialogue without pressure, soft close, reactivation and push.',
-        obj_title:'Objection handling', obj_p:'Diagnosis method instead of arguing — turn “no” into “yes”.',
-        phone_sales_title:'Phone sales', phone_sales_p:'Call-center: tempo, tone, QA.',
-        video_sales_title:'Video/Zoom sales', video_sales_p:'Structure, visual aids, closing.',
-        improv_title:'Script improvisation', improv_p:'Hybrid: script + live conversation to sound natural.',
-        process_title:'Processes & systems',
-        writing_scripts_title:'Script writing', writing_scripts_p:'For your niche and GEO: cold/warm, VIP, upsell/cross-sell.',
-        turnkey_title:'Turnkey sales department', turnkey_p:'Roles, motivation, regs, hiring and onboarding.',
-        crm_title:'CRM & automation', crm_p:'Funnels, triggers, messenger integrations.',
-        kpi_title:'KPI & analytics', kpi_p:'Conversion, LTV, CAC, Retention, NGGR on dashboards.',
-        qa_title:'QA circuit', qa_p:'End-to-end quality control: checklists, call reviews.',
-        chat_scripts_title:'Chat scripts', chat_scripts_p:'WhatsApp, Telegram, LINE, Zalo — unified brand voice.',
-        outsourcing_title:'Outsourcing & consulting',
-        outsale_title:'Sales outsourcing', outsale_p:'Fast start without headcount growth, pay-for-result.',
-        callcenter_title:'Call-center outsourcing', callcenter_p:'In/Out, SLA, daily reports.',
-        vip_title:'VIP retention', vip_p:'Personal strategies for return and growth.',
-        strategy_title:'Strategic consulting', strategy_p:'Funnel diagnosis, 30/90 day growth plan.',
-        audit_title:'Sales audit', audit_p:'Problems, losses, recommendations and roadmap.',
-        leaders_title:'Leaders & team leads', leaders_p:'Prepare managers, control tempo and quality.',
-        more_title:'Additionally', video_scripts_title:'Video scripts & presentations', video_scripts_p:'Demos, pitches and self-selling scripts.',
-        email_title:'Email marketing', email_p:'Reactivation and upsell sequences.', partners_title:'Partner programs', partners_p:'Referrals, upsell/cross-sell, promo scripts.',
-        cta_strong:'Need a fast start? Leave a request — we\'ll pick a service set for your goals.', cta_btn:'Discuss project',
-        form_title:'Get a free retention plan', form_sub:'We will send a 30-day PDF with implementation steps and KPIs. No spam, no hard-selling.',
-        label_name:'Name', ph_name:'How should we address you', label_company:'Company', ph_company:'Company name',
-        label_email:'Email', ph_email:'you@company.com', label_phone:'Phone', ph_phone:'+7 000 000-00-00',
-        label_interest:"What's most important now", label_consent:'I agree to data processing and reminders',
-        preview_btn:'Preview request', send_btn:'Send', ics_btn:'Add webinar to calendar', form_hint:'',
-        audit_title_h3:'Want to see how many customers you can bring back this month?', audit_p:'Request a free audit. Get loss figures and growth points within 24 hours.', audit_btn:'Request audit',
-        what_get_title:'What you get', item_pdf:'30-day PDF plan', item_scripts:'Trusted-call scripts', item_dashboard:'KPI dashboard: Retention, LTV, NGGR',
-        final_cta:'Ready to stop losing customers?', final_btn:'Get retention plan', privacy:'Privacy policy',
-        modal_title:'Preview request', label_name_short:'Name:', label_company_short:'Company:', label_email_short:'Email:', label_phone_short:'Phone:', label_interest_short:'Interest:', edit_btn:'Edit', confirm_btn:'Confirm and send',
-        toast_ok:'Done',
-        interests:[
-          'Bring back sleeping customers','Increase LTV','Set up non-pushy calls','VIP retention','Cold calls','Warm calls',
-          'Objection handling','Phone sales','Video/Zoom sales','Script improvisation','Script writing','Turnkey sales department',
-          'CRM & automation','KPI & analytics','QA circuit','Chat scripts','Sales outsourcing','Call-center outsourcing',
-          'Strategic consulting','Sales audit','Leaders & team leads','Video scripts & presentations','Email marketing','Partner programs'
+        hero_title: "Stop losing customers — start growing",
+        hero_desc: "Join our free webinar. We'll talk frankly and without scripts: how to make customers trust, recommend and return.",
+        reg_btn: "Register for webinar",
+        situation_title: "Situation",
+        situation_text: "Every month businesses lose up to 30% of customers. Players fall asleep, repeat deals drop.",
+        problem_title: "Problem",
+        problem_text: "Calls sound like interrogations. Cold doesn't convert, warm doesn't close. Scripts are outdated.",
+        consequences_title: "Consequences",
+        consequences_text: "Daily deposit and LTV losses. You essentially subsidize competitors' ads.",
+        solution_title: "Retenly's solution",
+        sol_1_title: "Zero contact",
+        sol_1_text: "Start a conversation people want to continue. No barriers and no canned phrases.",
+        sol_2_title: "Hear the pain",
+        sol_2_text: "Diagnosis instead of fighting objections. The client feels care, not pressure.",
+        sol_3_title: "Needs first",
+        sol_3_text: "Not 'what to sell', but 'which problem to solve' and 'which result matters'.",
+        sol_4_title: "Money without shame",
+        sol_4_text: "Budget, benefits and ROI — calmly and transparently so value is clear.",
+        sol_5_title: "VIP retention",
+        sol_5_text: "Long-term relationships instead of one-offs. Personal touches and SLAs.",
+        sol_6_title: "KPI analytics",
+        sol_6_text: "NGGR, LTV, Retention in clear dashboards. Daily effect control.",
+        services_title: "Retenly services for sales growth",
+        services_desc: "Pick a targeted service or go full — we'll cover training, processes and outsourcing.",
+        training_title: "Training & team development",
+        t1_title: "Cold calls",
+        t1_text: "Structure, hooks, gatekeeper handling, 20 seconds of attention.",
+        t2_title: "Warm calls",
+        t2_text: "Dialog without pressure, soft close, recovery and follow-up.",
+        t3_title: "Handling objections",
+        t3_text: "Diagnostic method instead of arguing — turn 'no' into 'yes'.",
+        t4_title: "Phone sales",
+        t4_text: "Call center: pace, tone, quality control (QA).",
+        t5_title: "Video/Zoom sales",
+        t5_text: "Structure for video calls, visual supports, closing.",
+        t6_title: "Script improvisation",
+        t6_text: "Hybrid: script + live talk to sound natural.",
+        processes_title: "Processes & systems",
+        p1_title: "Script writing",
+        p1_text: "For your niche & GEO: cold/warm, VIP, upsell/cross-sell.",
+        p2_title: "Sales team turnkey",
+        p2_text: "Roles, motivation, regs, hiring and onboarding.",
+        p3_title: "CRM & automation",
+        p3_text: "Funnels, triggers, messenger integrations.",
+        p4_title: "KPI & analytics",
+        p4_text: "Conversion, LTV, CAC, Retention, NGGR in dashboards.",
+        p5_title: "QA circuit",
+        p5_text: "End-to-end quality control: checklists, call reviews.",
+        p6_title: "Chat scripts",
+        p6_text: "WhatsApp, Telegram, LINE, Zalo — consistent brand voice.",
+        outs_title: "Outsource & consulting",
+        o1_title: "Sales outsourcing",
+        o1_text: "Fast start without expanding headcount, pay for results.",
+        o2_title: "Call center outsourcing",
+        o2_text: "Inbound/outbound, SLA, daily reports.",
+        o3_title: "VIP retention",
+        o3_text: "Personal return & growth strategies.",
+        o4_title: "Strategic consulting",
+        o4_text: "Funnel diagnosis, 30/90-day growth plan.",
+        o5_title: "Sales audit",
+        o5_text: "Problems, losses, recommendations and implementation roadmap.",
+        o6_title: "Leaders & team leads",
+        o6_text: "Preparing managers, pacing and quality control.",
+        extra_title: "Additionally",
+        e1_title: "Video scripts & presentations",
+        e1_text: "Demos, pitches and self-selling scripts.",
+        e2_title: "Email marketing",
+        e2_text: "Sequences for reactivation and upsell.",
+        e3_title: "Partner programs",
+        e3_text: "Referrals, upsell/cross-sell and promo scripts.",
+        cta_text: "Need a quick start? Leave a request — we will pick services for your goals.",
+        cta_button: "Discuss project",
+        reg_title: "Get a free retention plan",
+        reg_desc: "We'll send a 30-day PDF with implementation steps and KPIs. No spam, no hard sell.",
+        label_name: "Name",
+        label_company: "Company",
+        label_email: "Email",
+        label_phone: "Phone",
+        label_interest: "What's most important now",
+        interest_options: [
+          "Bring back sleeping customers",
+          "Increase LTV",
+          "Fix calls without pressure",
+          "VIP retention",
+          "Cold calls",
+          "Warm calls",
+          "Handling objections",
+          "Phone sales",
+          "Video/Zoom sales",
+          "Script improvisation",
+          "Script writing",
+          "Turnkey sales team",
+          "CRM & automation",
+          "KPI & analytics",
+          "QA circuit",
+          "Chat scripts",
+          "Sales outsourcing",
+          "Call center outsourcing",
+          "Strategic consulting",
+          "Sales audit",
+          "Leaders & team leads",
+          "Video scripts & presentations",
+          "Email marketing",
+          "Partner programs"
         ],
-        days:'days', hours:'hours', minutes:'minutes', seconds:'seconds'
+        consent_text: "I agree to data processing and receiving reminders",
+        previewBtn: "Preview request",
+        sendBtn: "Send",
+        icsBtn: "Add webinar to calendar",
+        form_hint: "",
+        audit_title: "Want to see how many customers you can recover this month?",
+        audit_text: "Request a free audit. Get loss numbers and growth points in 24 hours.",
+        audit_button: "Request audit",
+        what_get_title: "What you get",
+        what_get_1: "30-day PDF plan",
+        what_get_2: "Trust-call scripts",
+        what_get_3: "KPI dashboard: Retention, LTV, NGGR",
+        final_cta: "Ready to stop losing customers?",
+        final_cta_btn: "Get retention plan",
+        privacy: "Privacy policy",
+        modal_title: "Request preview",
+        modal_name_label: "Name:",
+        modal_company_label: "Company:",
+        modal_email_label: "Email:",
+        modal_phone_label: "Phone:",
+        modal_interest_label: "Interest:",
+        editBtn: "Edit",
+        confirmBtn: "Confirm & send",
+        toast_ok: "Done — we'll send the plan to your email",
+        toast_submitted: "Request submitted. Check spam if you don't receive email.",
+        timer_days: "days",
+        timer_hours: "hours",
+        timer_minutes: "minutes",
+        timer_seconds: "seconds",
+        date_prefix: "Next start",
+        at_word: "at"
       },
-
-      de: {
-        date_hint:'Nächste Sendung: Samstag, 06. Dezember 2025 um 18:00 GMT+3',
-        // ... (other de keys similar to previous big file)
-        interests:['Schlafende Kunden zurückgewinnen','LTV erhöhen','Anrufe ohne Druck einrichten','VIP-Retention','Kaltakquise','Warme Anrufe','Einwandbehandlung','Telefonverkauf','Video/Zoom-Verkauf','Improvisation','Skript-Erstellung','Schlüsselfertiger Vertrieb','CRM & Automatisierung','KPI & Analyse','QA-Kontur','Chat-Skripte','Vertriebs-Outsourcing','Callcenter-Outsourcing','Strategische Beratung','Vertriebs-Audit','Leads & Teamleiter','Video-Skripte','E-Mail-Marketing','Partnerprogramme'],
-        days:'Tage', hours:'Stunden', minutes:'Minuten', seconds:'Sekunden',
-        hero_h1:'Hören Sie auf, Kunden zu verlieren — wachsen Sie stattdessen',
-        hero_p:'Nehmen Sie an unserem kostenlosen Webinar teil. Wir sprechen offen — wie Kunden Vertrauen gewinnen, weiterempfehlen und zurückkehren.',
-        register_btn:'Für Webinar anmelden',
-        situation_title:'Situation', situation_p:'Monatlich verlieren Unternehmen bis zu 30% der Kunden. Spieler werden inaktiv, Wiederholungskäufe sinken.',
-        problem_title:'Problem', problem_p:'Anrufe klingen wie Verhöre. Kalte Leads konvertieren nicht, warme schließen nicht. Skripte sind veraltet.',
-        consequence_title:'Folgen', consequence_p:'Täglicher Verlust von Einzahlungen und LTV. Sie finanzieren im Grunde die Werbung der Wettbewerber.',
-        solution_h2:'Retenly-Lösung',
-        sol1_title:'Zero contact', sol1_p:'Gespräche beginnen, die man fortsetzen möchte. Keine Barrieren, keine vorgefertigten Phrasen.',
-        sol2_title:'Schmerzen hören', sol2_p:'Diagnose statt Diskussion. Der Kunde fühlt sich betreut, nicht unter Druck.',
-        sol3_title:'Bedürfnisse zuerst', sol3_p:'Nicht „was verkaufen“, sondern „welches Problem lösen“ und „welches Ergebnis zählt“.',
-        sol4_title:'Budget offen', sol4_p:'Budget, ROI und Amortisation — klar, damit der Wert offensichtlich ist.',
-        sol5_title:'VIP-Retention', sol5_p:'Langfristige Beziehungen statt Einmalsachen.',
-        sol6_title:'KPI-Analyse', sol6_p:'NGGR, LTV, Retention in Dashboards.',
-        // and so on...
-      },
-
-      pl: {
-        date_hint:'Następna transmisja: Sobota, 06 grudnia 2025 o 18:00 GMT+3',
-        // ... (polish keys; included earlier in the previous big snippet)
-        days:'dni', hours:'godz', minutes:'min', seconds:'sek'
-      },
-
       fr: {
-        date_hint:'Prochaine diffusion : samedi 06 décembre 2025 à 18:00 GMT+3',
-        // ... (french keys)
-        days:'jours', hours:'heures', minutes:'minutes', seconds:'secondes'
+        hero_title: "Arrêtez de perdre des clients — commencez à croître",
+        hero_desc: "Rejoignez notre webinaire gratuit. Nous parlerons franchement et sans scripts : comment faire en sorte que les clients aient confiance, recommandent et reviennent.",
+        reg_btn: "Inscription au webinaire",
+        situation_title: "Situation",
+        situation_text: "Chaque mois, les entreprises perdent jusqu'à 30% des clients. Les joueurs s'endorment, les transactions répétées diminuent.",
+        problem_title: "Problème",
+        problem_text: "Les appels ressemblent à des interrogatoires. Les prospects froids ne convertissent pas, les chauds ne concluent pas. Les scripts sont obsolètes.",
+        consequences_title: "Conséquences",
+        consequences_text: "Pertes quotidiennes de dépôts et de LTV. Vous financez en fait la publicité des concurrents.",
+        solution_title: "Solution Retenly",
+        sol_1_title: "Contact zéro",
+        sol_1_text: "Démarrer une conversation que l'on veut poursuivre. Sans barrières ni phrases toutes faites.",
+        sol_2_title: "Écouter la douleur",
+        sol_2_text: "Diagnostic au lieu de lutter contre les objections. Le client ressent de l'attention, pas de la pression.",
+        sol_3_title: "Priorité aux besoins",
+        sol_3_text: "Pas 'quoi vendre', mais 'quel problème résoudre' et 'quel résultat importe'.",
+        sol_4_title: "Finances sans gêne",
+        sol_4_text: "Budget, avantages et ROI — calmement et en transparence pour que la valeur soit claire.",
+        sol_5_title: "Rétention VIP",
+        sol_5_text: "Relations à long terme plutôt que transactions ponctuelles. Contacts personnels et SLA.",
+        sol_6_title: "Analytique KPI",
+        sol_6_text: "NGGR, LTV, Rétention dans des tableaux de bord clairs. Contrôle quotidien de l'effet.",
+        services_title: "Services Retenly pour la croissance des ventes",
+        services_desc: "Choisissez un service ciblé ou optez pour une solution complète — formation, processus et externalisation.",
+        training_title: "Formation & développement d'équipe",
+        t1_title: "Appels à froid",
+        t1_text: "Structure, accroches, passage du standard, 20 secondes d'attention.",
+        t2_title: "Appels chauds",
+        t2_text: "Dialogue sans pression, 'soft close', relance et suivi.",
+        t3_title: "Gestion des objections",
+        t3_text: "Méthode de diagnostic au lieu de débat — transformer le 'non' en 'oui'.",
+        t4_title: "Ventes par téléphone",
+        t4_text: "Centre d'appels : rythme, ton, contrôle qualité (QA).",
+        t5_title: "Ventes en vidéo/Zoom",
+        t5_text: "Structure de l'appel vidéo, supports visuels, conclusion.",
+        t6_title: "Improvisation de scripts",
+        t6_text: "Hybride : script + conversation réelle pour paraître naturel.",
+        processes_title: "Processus & systèmes",
+        p1_title: "Rédaction de scripts",
+        p1_text: "Pour votre niche & GEO : froid/chaud, VIP, upsell/cross-sell.",
+        p2_title: "Équipe commerciale clé en main",
+        p2_text: "Rôles, motivation, règles, recrutement et onboarding.",
+        p3_title: "CRM & automatisation",
+        p3_text: "Funnels, triggers, intégrations de messageries.",
+        p4_title: "KPI & analytique",
+        p4_text: "Conversion, LTV, CAC, Rétention, NGGR en tableaux de bord.",
+        p5_title: "Contour QA",
+        p5_text: "Contrôle qualité bout en bout : checklists, analyses d'appels.",
+        p6_title: "Scripts pour chats",
+        p6_text: "WhatsApp, Telegram, LINE, Zalo — voix de marque cohérente.",
+        outs_title: "Externalisation & conseil",
+        o1_title: "Externalisation des ventes",
+        o1_text: "Démarrage rapide sans augmentation des effectifs, paiement au résultat.",
+        o2_title: "Externalisation du call-center",
+        o2_text: "Entrant/sortant, SLA, rapports quotidiens.",
+        o3_title: "Rétention VIP",
+        o3_text: "Stratégies personnelles de retour & développement.",
+        o4_title: "Conseil stratégique",
+        o4_text: "Diagnostic d'entonnoir, plan de croissance 30/90 jours.",
+        o5_title: "Audit des ventes",
+        o5_text: "Problèmes, pertes, recommandations et feuille de route.",
+        o6_title: "Leaders & team leads",
+        o6_text: "Préparer les managers, contrôler le rythme et la qualité.",
+        extra_title: "En plus",
+        e1_title: "Scripts vidéo & présentations",
+        e1_text: "Scénarios pour démos/pitches et auto-vente.",
+        e2_title: "Email marketing",
+        e2_text: "Séries pour réactivation et upsell.",
+        e3_title: "Programmes partenaires",
+        e3_text: "Parrainages, upsell/cross-sell et scripts promo.",
+        cta_text: "Besoin d'un démarrage rapide ? Laissez une demande — nous choisirons les services adaptés.",
+        cta_button: "Discuter du projet",
+        reg_title: "Recevoir le plan de rétention gratuit",
+        reg_desc: "Nous enverrons un PDF 30 jours avec étapes d'implémentation et KPIs. Pas de spam, pas de vente agressive.",
+        label_name: "Nom",
+        label_company: "Entreprise",
+        label_email: "Email",
+        label_phone: "Téléphone",
+        label_interest: "Qu'est-ce qui est le plus important maintenant",
+        interest_options: [
+          "Ramener les clients inactifs",
+          "Augmenter le LTV",
+          "Améliorer les appels sans pression",
+          "Rétention VIP",
+          "Appels à froid",
+          "Appels chauds",
+          "Gestion des objections",
+          "Ventes par téléphone",
+          "Ventes vidéo/Zoom",
+          "Improvisation de scripts",
+          "Rédaction de scripts",
+          "Équipe commerciale clé en main",
+          "CRM & automatisation",
+          "KPI & analytique",
+          "Contour QA",
+          "Scripts pour chats",
+          "Externalisation des ventes",
+          "Externalisation du call-center",
+          "Conseil stratégique",
+          "Audit des ventes",
+          "Leaders & team leads",
+          "Scripts vidéo & présentations",
+          "Email marketing",
+          "Programmes partenaires"
+        ],
+        consent_text: "J'accepte le traitement des données et la réception de rappels",
+        previewBtn: "Aperçu de la demande",
+        sendBtn: "Envoyer",
+        icsBtn: "Ajouter au calendrier",
+        form_hint: "",
+        audit_title: "Vous voulez voir combien de clients vous pouvez récupérer ce mois-ci ?",
+        audit_text: "Demandez un audit gratuit. Obtenez les chiffres des pertes et les points de croissance en 24 heures.",
+        audit_button: "Demander un audit",
+        what_get_title: "Ce que vous obtenez",
+        what_get_1: "Plan PDF sur 30 jours",
+        what_get_2: "Scripts d'appels basés sur la confiance",
+        what_get_3: "Tableau de bord KPI : Retention, LTV, NGGR",
+        final_cta: "Prêt à arrêter de perdre des clients ?",
+        final_cta_btn: "Obtenir le plan de rétention",
+        privacy: "Politique de confidentialité",
+        modal_title: "Aperçu de la demande",
+        modal_name_label: "Nom:",
+        modal_company_label: "Entreprise:",
+        modal_email_label: "Email:",
+        modal_phone_label: "Téléphone:",
+        modal_interest_label: "Intérêt:",
+        editBtn: "Modifier",
+        confirmBtn: "Confirmer & envoyer",
+        toast_ok: "Fait — nous enverrons le plan par e-mail",
+        toast_submitted: "Demande envoyée. Vérifiez les spams si vous ne recevez pas l'email.",
+        timer_days: "jours",
+        timer_hours: "heures",
+        timer_minutes: "minutes",
+        timer_seconds: "secondes",
+        date_prefix: "Prochain départ",
+        at_word: "à"
       },
-
-      ru: {
-        date_hint:'Ближайший старт 6 декабря 2025 года',
-        hero_h1:'Перестаёте терять клиентов — начинаете расти',
-        hero_p:'Приглашаем вас на бесплатный вебинар. Поговорим честно и без заученных скриптов: как сделать так, чтобы клиенты доверяли, рекомендовали и возвращались.',
-        register_btn:'Регистрация на вебинар',
-        situation_title:'Ситуация', situation_p:'Каждый месяц бизнес теряет до 30% клиентов. Игроки засыпают, повторные сделки падают.',
-        problem_title:'Проблема', problem_p:'Звонки звучат как допрос. Холодные не конвертят, тёплые не закрывают. Скрипты устарели.',
-        consequence_title:'Последствия', consequence_p:'Ежедневные потери депозитов и LTV. Фактически вы спонсируете рекламу конкурентов.',
-        solution_h2:'Решение от Retenly',
-        sol1_title:'Нулевой контакт', sol1_p:'Начало разговора, который хочется продолжить.',
-        sol2_title:'Слышать боль', sol2_p:'Диагностика вместо борьбы с «возражениями». Клиент чувствует заботу, а не давление.',
-        sol3_title:'Потребности', sol3_p:'Не «что продать», а «какую задачу решить» и «какой результат важен».',
-        sol4_title:'Финансы без стеснения', sol4_p:'Бюджет, выгоды и окупаемость — прозрачно.',
-        sol5_title:'VIP-удержание', sol5_p:'Долгие отношения вместо разовых сделок.',
-        sol6_title:'Аналитика KPI', sol6_p:'NGGR, LTV, Retention в понятных дашбордах.',
-        services_h2:'Услуги Retenly для роста продаж',
-        services_sub:'Выбирайте точечно или заходите комплексно — закроем как обучение, так и процессы и аутсорс.',
-        training_title:'Обучение и развитие команды',
-        cold_calls_title:'Холодные звонки', cold_calls_p:'Структура, крючки, проход секретаря, 20 секунд внимания.',
-        warm_calls_title:'Тёплые звонки', warm_calls_p:'Диалог без давления, soft close, возврат и дожим.',
-        obj_title:'Работа с возражениями', obj_p:'Метод диагностики вместо спора — превращаем «нет» в «да».',
-        phone_sales_title:'Продажи по телефону', phone_sales_p:'Call-центр: темп, тон, контроль качества (QA).',
-        video_sales_title:'Продажи по видео/Zoom', video_sales_p:'Структура видеозвонка, визуальные опоры, закрытие.',
-        improv_title:'Импровизация со скриптами', improv_p:'Гибрид: сценарий + живой разговор, чтобы звучать естественно.',
-        process_title:'Создание и настройка процессов',
-        writing_scripts_title:'Написание скриптов', writing_scripts_p:'Под вашу нишу и ГЕО: холодные/тёплые, VIP, апсейл/кросс-сейл.',
-        turnkey_title:'Отдел продаж под ключ', turnkey_p:'Роли, мотивация, регламенты, найм и онбординг.',
-        crm_title:'CRM и автоматизация', crm_p:'Воронки, триггеры, интеграции с мессенджерами.',
-        kpi_title:'KPI и аналитика', kpi_p:'Конверсия, LTV, CAC, Retention, NGGR в дашбордах.',
-        qa_title:'QA-контур', qa_p:'Сквозной контроль качества: чек-листы, разборы звонков.',
-        chat_scripts_title:'Скрипты для чатов', chat_scripts_p:'WhatsApp, Telegram, LINE, Zalo — единый голос бренда.',
-        outsourcing_title:'Аутсорс и консалтинг', outsale_title:'Аутсорс отдела продаж', outsale_p:'Быстрый старт без расширения штата, платёж за результат.',
-        callcenter_title:'Аутсорс колл-центра', callcenter_p:'Входящие/исходящие, SLA, отчёты ежедневно.',
-        vip_title:'VIP-удержание', vip_p:'Персональные стратегии возврата и развития клиентов.',
-        strategy_title:'Стратегический консалтинг', strategy_p:'Диагностика воронки, план роста на 30/90 дней.',
-        audit_title:'Аудит отдела продаж', audit_p:'Проблемы, потери, рекомендации и Roadmap внедрения.',
-        leaders_title:'Лидеры и тимлиды', leaders_p:'Подготовка руководителей, управление темпом и качеством.',
-        more_title:'Дополнительно',
-        video_scripts_title:'Видео-скрипты и презентации', video_scripts_p:'Сценарии под демо/питчи и самопродажи.',
-        email_title:'Email-маркетинг', email_p:'Серии писем под реактивацию и апсейл.',
-        partners_title:'Партнёрские программы', partners_p:'Рефералки, апсейл/кросс-сейл, промо-скрипты.',
-        cta_strong:'Нужен быстрый старт? Оставьте заявку — подберём набор услуг под ваши цели.',
-        cta_btn:'Обсудить проект',
-        form_title:'Получить бесплатный план удержания', form_sub:'Пришлём PDF на 30 дней с шагами внедрения и KPI. Ни спама, ни «продаж в лоб».',
-        label_name:'Имя', ph_name:'Как к вам обращаться', label_company:'Компания', ph_company:'Название компании',
-        label_email:'Email', ph_email:'you@company.com', label_phone:'Телефон', ph_phone:'+7 000 000-00-00',
-        label_interest:'Что важнее сейчас', label_consent:'Соглашаюсь на обработку данных и получение напоминаний',
-        preview_btn:'Предпросмотр заявки', send_btn:'Отправить', ics_btn:'Добавить в календарь вебинар', form_hint:'',
-        audit_title_h3:'Хотите увидеть, сколько клиентов можно вернуть в этом месяце?', audit_p:'Запросите бесплатный аудит. Получите цифры потерь и точки роста за 24 часа.', audit_btn:'Запросить аудит',
-        what_get_title:'Что получаете', item_pdf:'PDF-план на 30 дней', item_scripts:'Скрипты доверительных звонков', item_dashboard:'Дашборд KPI: Retention, LTV, NGGR',
-        final_cta:'Готовы перестать терять клиентов?', final_btn:'Получить план удержания', privacy:'Политика конфиденциальности',
-        modal_title:'Предпросмотр заявки', label_name_short:'Имя:', label_company_short:'Компания:', label_email_short:'Email:', label_phone_short:'Телефон:', label_interest_short:'Интерес:', edit_btn:'Изменить', confirm_btn:'Подтвердить и отправить',
-        toast_ok:'Готово',
-        interests:['Вернуть спящих клиентов','Увеличить LTV','Наладить звонки без давления','VIP-удержание','Холодные звонки','Тёплые звонки','Работа с возражениями','Продажи по телефону','Продажи по видео/Zoom','Импровизация со скриптами','Написание скриптов','Отдел продаж под ключ','CRM и автоматизация','KPI и аналитика','QA-контур','Скрипты для чатов','Аутсорс отдела продаж','Аутсорс колл-центра','Стратегический консалтинг','Аудит отдела продаж','Лидеры и тимлиды','Видео-скрипты и презентации','Email-маркетинг','Партнёрские программы'],
-        days:'дней', hours:'часов', minutes:'минут', seconds:'секунд'
+      de: {
+        hero_title: "Hören Sie auf, Kunden zu verlieren — fangen Sie an zu wachsen",
+        hero_desc: "Nehmen Sie an unserem kostenlosen Webinar teil. Wir sprechen offen und ohne Skripte: wie Kunden Vertrauen gewinnen, empfehlen und zurückkehren.",
+        reg_btn: "Zur Webinar-Anmeldung",
+        situation_title: "Situation",
+        situation_text: "Jeden Monat verlieren Unternehmen bis zu 30% der Kunden. Spieler werden inaktiv, Wiederholungsgeschäfte sinken.",
+        problem_title: "Problem",
+        problem_text: "Anrufe klingen wie Verhöre. Kalte Leads konvertieren nicht, warme schließen nicht. Skripte sind veraltet.",
+        consequences_title: "Folgen",
+        consequences_text: "Tägliche Einzahlungs- und LTV-Verluste. Sie subventionieren effektiv die Werbung der Konkurrenz.",
+        solution_title: "Retenly Lösung",
+        sol_1_title: "Zero Contact",
+        sol_1_text: "Beginnen Sie ein Gespräch, das man fortsetzen möchte. Keine Barrieren und keine auswendig gelernten Phrasen.",
+        sol_2_title: "Schmerz hören",
+        sol_2_text: "Diagnose statt Streit mit Einwänden. Der Kunde fühlt Fürsorge, keinen Druck.",
+        sol_3_title: "Bedürfnisse zuerst",
+        sol_3_text: "Nicht 'was verkaufen', sondern 'welches Problem lösen' und 'welches Ergebnis zählt'.",
+        sol_4_title: "Finanzen ohne Scheu",
+        sol_4_text: "Budget, Nutzen und ROI — ruhig und transparent, damit der Wert klar wird.",
+        sol_5_title: "VIP-Retention",
+        sol_5_text: "Langfristige Beziehungen statt Einzeldelikte. Persönliche Kontakte und SLAs.",
+        sol_6_title: "KPI-Analyse",
+        sol_6_text: "NGGR, LTV, Retention in klaren Dashboards. Tägliche Wirksamkeitskontrolle.",
+        services_title: "Retenly Services für Umsatzwachstum",
+        services_desc: "Wählen Sie punktgenau oder ganzheitlich — wir decken Training, Prozesse und Outsourcing ab.",
+        training_title: "Training & Teamentwicklung",
+        t1_title: "Cold Calls",
+        t1_text: "Struktur, Hooks, Gatekeeper-Bypass, 20 Sekunden Aufmerksamkeit.",
+        t2_title: "Warm Calls",
+        t2_text: "Dialog ohne Druck, Soft-Close, Rückgewinnung und Nachfassen.",
+        t3_title: "Umgang mit Einwänden",
+        t3_text: "Diagnosemethode statt Diskussion — 'nein' in 'ja' umwandeln.",
+        t4_title: "Telefonverkauf",
+        t4_text: "Callcenter: Tempo, Ton, QA.",
+        t5_title: "Verkauf per Video/Zoom",
+        t5_text: "Struktur des Videoanrufs, visuelle Hilfen, Abschluss.",
+        t6_title: "Script-Improvisation",
+        t6_text: "Hybrid: Script + Live-Talk für natürliche Ansprache.",
+        processes_title: "Prozesse & Systeme",
+        p1_title: "Script-Entwicklung",
+        p1_text: "Für Ihre Nische & GEO: cold/warm, VIP, upsell/cross-sell.",
+        p2_title: "Vertriebsteam schlüsselfertig",
+        p2_text: "Rollen, Motivation, Regeln, Rekrutierung und Onboarding.",
+        p3_title: "CRM & Automatisierung",
+        p3_text: "Funnels, Trigger, Messenger-Integrationen.",
+        p4_title: "KPI & Analyse",
+        p4_text: "Conversion, LTV, CAC, Retention, NGGR in Dashboards.",
+        p5_title: "QA-Kontur",
+        p5_text: "End-to-end-Qualitätskontrolle: Checklisten, Call-Reviews.",
+        p6_title: "Chat-Skripte",
+        p6_text: "WhatsApp, Telegram, LINE, Zalo — konsistente Markenstimme.",
+        outs_title: "Outsourcing & Consulting",
+        o1_title: "Vertriebs-Outsourcing",
+        o1_text: "Schneller Start ohne Personalaufstockung, Bezahlung nach Ergebnis.",
+        o2_title: "Callcenter-Outsourcing",
+        o2_text: "Inbound/Outbound, SLA, tägliche Reports.",
+        o3_title: "VIP-Retention",
+        o3_text: "Persönliche Rückgewinnungs- und Wachstumsstrategien.",
+        o4_title: "Strategieberatung",
+        o4_text: "Funnel-Diagnose, 30/90-Tage-Wachstumsplan.",
+        o5_title: "Vertriebs-Audit",
+        o5_text: "Probleme, Verluste, Empfehlungen und Roadmap.",
+        o6_title: "Leads & Teamleads",
+        o6_text: "Führungskräfte vorbereiten, Tempo und Qualität steuern.",
+        extra_title: "Zusätzlich",
+        e1_title: "Video-Skripte & Präsentationen",
+        e1_text: "Skripte für Demos/Pitches und Selbstvermarktung.",
+        e2_title: "E-Mail-Marketing",
+        e2_text: "Sequenzen für Reaktivierung und Upsell.",
+        e3_title: "Partnerprogramme",
+        e3_text: "Referrals, Upsell/Cross-sell und Promo-Skripte.",
+        cta_text: "Brauchen Sie einen schnellen Start? Hinterlassen Sie eine Anfrage — wir wählen passende Services.",
+        cta_button: "Projekt besprechen",
+        reg_title: "Kostenlosen Retention-Plan erhalten",
+        reg_desc: "Wir senden ein 30-Tage-PDF mit Implementierungsschritten und KPIs. Kein Spam, kein harter Verkauf.",
+        label_name: "Name",
+        label_company: "Firma",
+        label_email: "E-Mail",
+        label_phone: "Telefon",
+        label_interest: "Was ist jetzt am wichtigsten",
+        interest_options: [
+          "Schlafende Kunden zurückholen",
+          "LTV erhöhen",
+          "Anrufe ohne Druck verbessern",
+          "VIP-Retention",
+          "Cold Calls",
+          "Warm Calls",
+          "Umgang mit Einwänden",
+          "Telefonverkauf",
+          "Video/Zoom-Verkauf",
+          "Script-Improvisation",
+          "Script-Erstellung",
+          "Schlüsselfertiges Vertriebsteam",
+          "CRM & Automatisierung",
+          "KPI & Analyse",
+          "QA-Kontur",
+          "Chat-Skripte",
+          "Vertriebs-Outsourcing",
+          "Callcenter-Outsourcing",
+          "Strategieberatung",
+          "Vertriebs-Audit",
+          "Leads & Teamleads",
+          "Video-Skripte & Präsentationen",
+          "E-Mail-Marketing",
+          "Partnerprogramme"
+        ],
+        consent_text: "Ich stimme der Datenverarbeitung und dem Empfang von Erinnerungen zu",
+        previewBtn: "Anfrage-Vorschau",
+        sendBtn: "Senden",
+        icsBtn: "Zum Kalender hinzufügen",
+        form_hint: "",
+        audit_title: "Möchten Sie sehen, wie viele Kunden Sie diesen Monat zurückgewinnen können?",
+        audit_text: "Fordern Sie ein kostenloses Audit an. Erhalten Sie Verlustzahlen und Wachstumshebel in 24 Stunden.",
+        audit_button: "Audit anfordern",
+        what_get_title: "Was Sie bekommen",
+        what_get_1: "30-Tage-PDF-Plan",
+        what_get_2: "Vertrauensaufbauende Gesprächsskripte",
+        what_get_3: "KPI-Dashboard: Retention, LTV, NGGR",
+        final_cta: "Bereit aufzuhören, Kunden zu verlieren?",
+        final_cta_btn: "Retention-Plan erhalten",
+        privacy: "Datenschutz",
+        modal_title: "Anfragevorschau",
+        modal_name_label: "Name:",
+        modal_company_label: "Firma:",
+        modal_email_label: "E-Mail:",
+        modal_phone_label: "Telefon:",
+        modal_interest_label: "Interesse:",
+        editBtn: "Bearbeiten",
+        confirmBtn: "Bestätigen & senden",
+        toast_ok: "Fertig — wir senden den Plan per E-Mail",
+        toast_submitted: "Anfrage gesendet. Prüfen Sie Spam, wenn Sie keine E-Mail erhalten.",
+        timer_days: "Tage",
+        timer_hours: "Stunden",
+        timer_minutes: "Minuten",
+        timer_seconds: "Sekunden",
+        date_prefix: "Nächster Start",
+        at_word: "um"
+      },
+      pl: {
+        hero_title: "Przestań tracić klientów — zacznij rosnąć",
+        hero_desc: "Dołącz do naszego bezpłatnego webinaru. Porozmawiamy uczciwie i bez gotowych skryptów: jak sprawić, by klienci zaufali, polecali i wracali.",
+        reg_btn: "Rejestracja na webinar",
+        situation_title: "Sytuacja",
+        situation_text: "Co miesiąc firmy tracą do 30% klientów. Gracze przestają grać, powtarzalne transakcje spadają.",
+        problem_title: "Problem",
+        problem_text: "Rozmowy brzmią jak przesłuchania. Zimne nie konwertują, ciepłe nie kończą sprzedaży. Skrypty są przestarzałe.",
+        consequences_title: "Konsekwencje",
+        consequences_text: "Codzienne straty depozytów i LTV. W praktyce finansujesz reklamy konkurencji.",
+        solution_title: "Rozwiązanie Retenly",
+        sol_1_title: "Zero contact",
+        sol_1_text: "Rozpoczęcie rozmowy, którą chce się kontynuować. Bez barier i wyuczonych fraz.",
+        sol_2_title: "Słuchać bólu",
+        sol_2_text: "Diagnoza zamiast walki z obiekcjami. Klient czuje opiekę, nie presję.",
+        sol_3_title: "Najpierw potrzeby",
+        sol_3_text: "Nie 'co sprzedać', lecz 'jaki problem rozwiązać' i 'jaki wynik jest ważny'.",
+        sol_4_title: "Finanse bez wstydu",
+        sol_4_text: "Budżet, korzyści i ROI — spokojnie i przejrzyście, by wartość była oczywista.",
+        sol_5_title: "Utrzymanie VIP",
+        sol_5_text: "Długoterminowe relacje zamiast jednorazówek. Personalne kontakty i SLA.",
+        sol_6_title: "Analiza KPI",
+        sol_6_text: "NGGR, LTV, Retention w czytelnych dashboardach. Kontrola efektu codziennie.",
+        services_title: "Usługi Retenly dla wzrostu sprzedaży",
+        services_desc: "Wybierz punktowo lub kompleksowo — zamkniemy szkolenia, procesy i outsourcing.",
+        training_title: "Szkolenia & rozwój zespołu",
+        t1_title: "Cold calls",
+        t1_text: "Struktura, haczyki, przejście przez sekretarkę, 20 sekund uwagi.",
+        t2_title: "Warm calls",
+        t2_text: "Dialog bez presji, soft close, odzyskiwanie i dociśnięcie.",
+        t3_title: "Praca z obiekcjami",
+        t3_text: "Metoda diagnostyczna zamiast kłótni — zamieniamy 'nie' w 'tak'.",
+        t4_title: "Sprzedaż telefoniczna",
+        t4_text: "Call-center: tempo, ton, kontrola jakości (QA).",
+        t5_title: "Sprzedaż przez video/Zoom",
+        t5_text: "Struktura rozmowy wideo, wsparcie wizualne, zamknięcie.",
+        t6_title: "Improwizacja ze skryptami",
+        t6_text: "Hybryda: skrypt + rozmowa na żywo, by brzmieć naturalnie.",
+        processes_title: "Procesy i systemy",
+        p1_title: "Pisanie skryptów",
+        p1_text: "Dla Twojej niszy i GEO: cold/warm, VIP, upsell/cross-sell.",
+        p2_title: "Zespół sprzedaży pod klucz",
+        p2_text: "Role, motywacja, regulaminy, rekrutacja i onboarding.",
+        p3_title: "CRM & automatyzacja",
+        p3_text: "Lejki, wyzwalacze, integracje z komunikatorami.",
+        p4_title: "KPI & analityka",
+        p4_text: "Konwersja, LTV, CAC, Retention, NGGR w dashboardach.",
+        p5_title: "QA-contur",
+        p5_text: "Kontrola jakości end-to-end: checklisty, analizy rozmów.",
+        p6_title: "Skrypty czatowe",
+        p6_text: "WhatsApp, Telegram, LINE, Zalo — jedna, spójna głos marki.",
+        outs_title: "Outsourcing & konsulting",
+        o1_title: "Outsourcing sprzedaży",
+        o1_text: "Szybki start bez rozbudowy zatrudnienia, płatność za wynik.",
+        o2_title: "Outsourcing call center",
+        o2_text: "Przychodzące/wychodzące, SLA, raporty codziennie.",
+        o3_title: "Utrzymanie VIP",
+        o3_text: "Osobiste strategie odzysku i rozwoju klienta.",
+        o4_title: "Konsulting strategiczny",
+        o4_text: "Diagnostyka lejka, plan wzrostu 30/90 dni.",
+        o5_title: "Audyt sprzedaży",
+        o5_text: "Problemy, straty, rekomendacje i roadmap wdrożeniowy.",
+        o6_title: "Liderzy & team leaderzy",
+        o6_text: "Przygotowanie liderów, zarządzanie tempem i jakością.",
+        extra_title: "Dodatkowo",
+        e1_title: "Skrypty video i prezentacje",
+        e1_text: "Scenariusze pod dema/pitche i autoprezentację.",
+        e2_title: "Email marketing",
+        e2_text: "Serie maili pod reaktywację i upsell.",
+        e3_title: "Programy partnerskie",
+        e3_text: "Programy poleceń, upsell/cross-sell, skrypty promocyjne.",
+        cta_text: "Potrzebujesz szybkiego startu? Zostaw zapytanie — dobierzemy usługi pod cele.",
+        cta_button: "Omówić projekt",
+        reg_title: "Otrzymaj darmowy plan retencji",
+        reg_desc: "Wyślemy PDF na 30 dni ze krokami wdrożeniowymi i KPI. Bez spamu, bez nachalnej sprzedaży.",
+        label_name: "Imię",
+        label_company: "Firma",
+        label_email: "Email",
+        label_phone: "Telefon",
+        label_interest: "Co jest teraz ważniejsze",
+        interest_options: [
+          "Przywrócić uśpionych klientów",
+          "Zwiększyć LTV",
+          "Naprawić rozmowy bez nacisku",
+          "Utrzymanie VIP",
+          "Cold calls",
+          "Warm calls",
+          "Praca z obiekcjami",
+          "Sprzedaż telefoniczna",
+          "Sprzedaż video/Zoom",
+          "Improwizacja skryptów",
+          "Pisanie skryptów",
+          "Zespół sprzedaży pod klucz",
+          "CRM & automatyzacja",
+          "KPI & analityka",
+          "QA-contur",
+          "Skrypty czatowe",
+          "Outsourcing sprzedaży",
+          "Outsourcing call-center",
+          "Konsulting strategiczny",
+          "Audit sprzedaży",
+          "Liderzy & team leaderzy",
+          "Skrypty video & prezentacje",
+          "Email marketing",
+          "Programy partnerskie"
+        ],
+        consent_text: "Wyrażam zgodę na przetwarzanie danych i otrzymywanie przypomnień",
+        previewBtn: "Podgląd zapytania",
+        sendBtn: "Wyślij",
+        icsBtn: "Dodaj do kalendarza",
+        form_hint: "",
+        audit_title: "Chcesz zobaczyć, ile klientów możesz odzyskać w tym miesiącu?",
+        audit_text: "Zamów darmowy audyt. Otrzymaj liczby strat i punkty wzrostu w ciągu 24 godzin.",
+        audit_button: "Zamów audyt",
+        what_get_title: "Co otrzymujesz",
+        what_get_1: "Plan PDF na 30 dni",
+        what_get_2: "Skrypty rozmów budujących zaufanie",
+        what_get_3: "Dashboard KPI: Retention, LTV, NGGR",
+        final_cta: "Gotowy przestać tracić klientów?",
+        final_cta_btn: "Otrzymać plan retencji",
+        privacy: "Polityka prywatności",
+        modal_title: "Podgląd zapytania",
+        modal_name_label: "Imię:",
+        modal_company_label: "Firma:",
+        modal_email_label: "Email:",
+        modal_phone_label: "Telefon:",
+        modal_interest_label: "Zainteresowanie:",
+        editBtn: "Edytuj",
+        confirmBtn: "Potwierdź & wyślij",
+        toast_ok: "Gotowe — wyślemy plan na Twój email",
+        toast_submitted: "Zapytanie wysłane. Sprawdź spam jeśli nie otrzymasz maila.",
+        timer_days: "dni",
+        timer_hours: "godziny",
+        timer_minutes: "minuty",
+        timer_seconds: "sekundy",
+        date_prefix: "Najbliższy start",
+        at_word: "o"
       }
     };
 
-    // LANG meta for button
-    const LANG_META = {
-      en:{flag:'🇬🇧',label:'English'},
-      de:{flag:'🇩🇪',label:'Deutsch'},
-      pl:{flag:'🇵🇱',label:'Polski'},
-      fr:{flag:'🇫🇷',label:'Français'},
-      ru:{flag:'🇷🇺',label:'Русский'}
-    };
+    // targetDate: 06 Dec 2025 18:00 GMT+3
+    const targetDate = new Date("2025-12-06T18:00:00+03:00");
 
-    // helpers
-    function detectBrowserLang(){
-      const nav = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
-      for(const ln of nav){
-        if(!ln) continue;
-        const code = ln.slice(0,2).toLowerCase();
-        if(SUPPORTED.includes(code)) return code;
-      }
-      return 'en';
+    // utilities
+    const el = (s) => document.querySelector(s);
+    const els = (s) => Array.from(document.querySelectorAll(s));
+
+    // language selector & persistence
+    const langSelect = el('#lang-select');
+    const supported = ['en','fr','de','pl','ru'];
+    const saved = localStorage.getItem('site_lang');
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').slice(0,2);
+    const initialLang = saved && supported.includes(saved) ? saved : (supported.includes(browserLang) ? browserLang : 'en');
+
+    function setLangValue(value) {
+      if (!supported.includes(value)) value = 'en';
+      langSelect.value = value;
+      localStorage.setItem('site_lang', value);
+      translatePage(value);
     }
-    function getSavedLang(){ const s = localStorage.getItem(STORAGE_KEY); if(s && SUPPORTED.includes(s)) return s; return null; }
-    function saveLang(code){ localStorage.setItem(STORAGE_KEY, code); }
 
-    // populate dropdown
-    const listEl = document.getElementById('langList');
-    Object.keys(LANG_META).forEach(code=>{
-      const item = document.createElement('div');
-      item.className = 'lang-item';
-      item.dataset.lang = code;
-      item.setAttribute('role','option');
-      item.innerHTML = `<span class="lang-flag">${LANG_META[code].flag}</span><span class="lang-name">${LANG_META[code].label}</span>`;
-      listEl.appendChild(item);
-    });
-
-    // toggle & click outside
-    const langBtn = document.getElementById('langBtn');
-    const langFlag = document.getElementById('langFlag');
-    const langLabel = document.getElementById('langLabel');
-    langBtn.addEventListener('click', ()=>{
-      const open = listEl.classList.toggle('open');
-      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    document.addEventListener('click', (e)=>{
-      if(!document.getElementById('langWrapper').contains(e.target)){
-        listEl.classList.remove('open');
-        langBtn.setAttribute('aria-expanded','false');
-      }
-    });
-
-    // initial language (saved -> detect -> en)
-    let currentLang = getSavedLang() || detectBrowserLang() || 'en';
-    saveLang(currentLang);
-
-    // apply translations
-    function applyTranslations(code){
-      const dict = I18N[code] || I18N['en'];
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.getAttribute('data-i18n');
-        if(key && dict[key] !== undefined) el.textContent = dict[key];
+    // populate interest options depending on language
+    function populateInterestOptions(lang) {
+      const select = el('#interest');
+      select.innerHTML = '';
+      const opts = I18N[lang].interest_options || I18N.en.interest_options;
+      opts.forEach(o => {
+        const opt = document.createElement('option');
+        opt.textContent = o;
+        opt.value = o;
+        select.appendChild(opt);
       });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-        const key = el.getAttribute('data-i18n-placeholder');
-        if(key && dict[key] !== undefined) el.placeholder = dict[key];
-      });
-      if(dict.meta_title) document.title = dict.meta_title || document.title;
-      if(dict.meta_description){
-        const md = document.querySelector('meta[name="description"]');
-        if(md) md.setAttribute('content', dict.meta_description);
+    }
+
+    // translate text nodes with data-i18n attributes
+    function translatePage(lang) {
+      const dict = I18N[lang] || I18N.en;
+
+      // simple mappings
+      const mapping = {
+        '#hero-title': 'hero_title',
+        '#hero-desc': 'hero_desc',
+        '#reg-link': 'reg_btn',
+        '[data-i18n="situation_title"]': 'situation_title',
+        '[data-i18n="situation_text"]': 'situation_text',
+        '[data-i18n="problem_title"]': 'problem_title',
+        '[data-i18n="problem_text"]': 'problem_text',
+        '[data-i18n="consequences_title"]': 'consequences_title',
+        '[data-i18n="consequences_text"]': 'consequences_text',
+        '[data-i18n="solution_title"]': 'solution_title',
+        '[data-i18n="services_title"]': 'services_title',
+        '#services-desc': 'services_desc',
+        '[data-i18n="cta_text"]': 'cta_text',
+        '[data-i18n="cta_button"]': 'cta_button',
+        '#reg-title': 'reg_title',
+        '#reg-desc': 'reg_desc',
+        '[data-i18n="label_name"]': 'label_name',
+        '[data-i18n="label_company"]': 'label_company',
+        '[data-i18n="label_email"]': 'label_email',
+        '[data-i18n="label_phone"]': 'label_phone',
+        '[data-i18n="label_interest"]': 'label_interest',
+        '#consent-label': 'consent_text',
+        '[data-i18n="previewBtn"]': 'previewBtn',
+        '[data-i18n="sendBtn"]': 'sendBtn',
+        '[data-i18n="icsBtn"]': 'icsBtn',
+        '[data-i18n="audit_title"]': 'audit_title',
+        '[data-i18n="audit_text"]': 'audit_text',
+        '[data-i18n="audit_button"]': 'audit_button',
+        '[data-i18n="what_get_title"]': 'what_get_title',
+        '[data-i18n="what_get_1"]': 'what_get_1',
+        '[data-i18n="what_get_2"]': 'what_get_2',
+        '[data-i18n="what_get_3"]': 'what_get_3',
+        '[data-i18n="final_cta"]': 'final_cta',
+        '[data-i18n="final_cta_btn"]': 'final_cta_btn',
+        '[data-i18n="privacy"]': 'privacy',
+        '[data-i18n="modal_title"]': 'modal_title',
+        '[data-i18n="editBtn"]': 'editBtn',
+        '[data-i18n="confirmBtn"]': 'confirmBtn'
+      };
+
+      for (const sel in mapping) {
+        const key = mapping[sel];
+        const node = document.querySelector(sel);
+        if (node && dict[key] !== undefined) node.innerText = dict[key];
       }
-      // fill interests
-      const interest = document.getElementById('interest');
-      if(interest){
-        interest.innerHTML = '';
-        const arr = dict.interests || I18N['en'].interests;
-        arr.forEach(it=>{
-          const o = document.createElement('option');
-          o.value = it;
-          o.textContent = it;
-          interest.appendChild(o);
+
+      // translate many specific small tiles (solutions, trainings, processes, outsourcing, extra)
+      const smallKeys = [
+        'sol_1_title','sol_1_text','sol_2_title','sol_2_text','sol_3_title','sol_3_text',
+        'sol_4_title','sol_4_text','sol_5_title','sol_5_text','sol_6_title','sol_6_text',
+        'training_title','t1_title','t1_text','t2_title','t2_text','t3_title','t3_text','t4_title','t4_text','t5_title','t5_text','t6_title','t6_text',
+        'processes_title','p1_title','p1_text','p2_title','p2_text','p3_title','p3_text','p4_title','p4_text','p5_title','p5_text','p6_title','p6_text',
+        'outs_title','o1_title','o1_text','o2_title','o2_text','o3_title','o3_text','o4_title','o4_text','o5_title','o5_text','o6_title','o6_text',
+        'extra_title','e1_title','e1_text','e2_title','e2_text','e3_title','e3_text'
+      ];
+      smallKeys.forEach(k => {
+        els('[data-i18n]').forEach(node => {
+          const key = node.getAttribute('data-i18n');
+          if (key === k && dict[k] !== undefined) node.innerText = dict[k];
         });
-      }
-      // update lang btn label & flag
-      langFlag.textContent = LANG_META[code].flag;
-      langLabel.textContent = LANG_META[code].label;
-      document.querySelectorAll('.lang-item').forEach(it=>{
-        it.classList.toggle('active', it.dataset.lang === code);
       });
-      updateTimerLabels(code);
+
+      // also handle elements that use data-i18n directly via attribute value match
+      els('[data-i18n]').forEach(node => {
+        const key = node.getAttribute('data-i18n');
+        if (dict[key] !== undefined) node.innerText = dict[key];
+      });
+
+      // populate interest options
+      populateInterestOptions(lang);
+
+      // placeholders and button labels
+      const nameInp = el('#name');
+      if (nameInp) nameInp.placeholder = dict.label_name || '';
+      const companyInp = el('#company');
+      if (companyInp) companyInp.placeholder = dict.label_company || '';
+      const emailInp = el('#email');
+      if (emailInp) emailInp.placeholder = dict.label_email || '';
+      const regLink = el('#reg-link');
+      if (regLink) regLink.innerText = dict.reg_btn || '';
+
+      // date hint (localized)
+      const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const timeOpts = { hour: '2-digit', minute: '2-digit' };
+      const locale = (lang === 'ru') ? 'ru-RU' : (lang === 'fr' ? 'fr-FR' : (lang === 'de' ? 'de-DE' : (lang === 'pl' ? 'pl-PL' : 'en-US')));
+      const datePart = targetDate.toLocaleDateString(locale, opts);
+      const timePart = targetDate.toLocaleTimeString(locale, timeOpts);
+      const prefix = dict.date_prefix || 'Next start';
+      const at = dict.at_word || 'at';
+      el('#date-hint').innerText = `${prefix}: ${datePart} ${at} ${timePart} GMT+3`;
+
+      // timer labels will be updated separately in renderTimer (we set texts for labels)
+      // set translation keys for timer labels
+      timerLabels = {
+        days: dict.timer_days || 'days',
+        hours: dict.timer_hours || 'hours',
+        minutes: dict.timer_minutes || 'minutes',
+        seconds: dict.timer_seconds || 'seconds'
+      };
+
+      // toast messages
+      toastOk = dict.toast_ok || 'Done';
+      toastSubmitted = dict.toast_submitted || 'Submitted';
     }
 
-    function setLanguage(code){
-      if(!SUPPORTED.includes(code)) code='en';
-      currentLang = code;
-      saveLang(code);
-      applyTranslations(code);
-    }
-
-    // click handlers for list items
-    document.querySelectorAll('.lang-item').forEach(it=>{
-      it.addEventListener('click', ()=>{
-        const code = it.dataset.lang;
-        setLanguage(code);
-        listEl.classList.remove('open');
-        langBtn.setAttribute('aria-expanded','false');
-      });
+    // attach event
+    langSelect.addEventListener('change', (e) => {
+      setLangValue(e.target.value);
     });
 
-    // ensure translated on load
-    applyTranslations(currentLang);
+    // init
+    setLangValue(initialLang);
 
-    // ===== Timer =====
-    // fixed target: 06 December 2025 18:00 GMT+3
-    window.targetDate = new Date("2025-12-06T18:00:00+03:00");
-    const timerEl = document.getElementById('countdown');
-    const dateHintEl = document.getElementById('date-hint');
+    // ===== TIMER (localized labels) =====
+    let timerLabels = { days: 'days', hours: 'hours', minutes: 'minutes', seconds: 'seconds' };
+    let toastOk = "Готово";
+    let toastSubmitted = "Заявка принята";
 
-    function pad(n){ return String(n).padStart(2,'0'); }
+    const $timer = document.getElementById('countdown');
 
-    function renderTimer(){
-      const diff = window.targetDate - new Date();
-      if(diff <= 0){
-        timerEl.innerHTML = `<div class="tbox"><strong>00</strong><span class="days-label">00</span></div><div class="tbox"><strong>00</strong><span class="hours-label">00</span></div><div class="tbox"><strong>00</strong><span class="minutes-label">00</span></div><div class="tbox"><strong>00</strong><span class="seconds-label">00</span></div>`;
+    function plural(n, a, b, c, lang) {
+      // basic russian-style plural for ru only; for others use a basic rule (no complex inflection)
+      if (lang === 'ru') {
+        n = Math.abs(n) % 100; const n1 = n % 10;
+        if (n > 10 && n < 20) return c;
+        if (n1 > 1 && n1 < 5) return b;
+        if (n1 == 1) return a;
+        return c;
+      }
+      // fallback: return a (singular) for 1, else plural (c)
+      return n === 1 ? a : c;
+    }
+
+    function renderTimer() {
+      const diff = targetDate - new Date();
+      const lang = localStorage.getItem('site_lang') || initialLang || 'en';
+      if (diff <= 0) {
+        $timer.innerHTML =
+          `<div class="tbox"><strong>00</strong><span>${timerLabels.days}</span></div>` +
+          `<div class="tbox"><strong>00</strong><span>${timerLabels.hours}</span></div>` +
+          `<div class="tbox"><strong>00</strong><span>${timerLabels.minutes}</span></div>` +
+          `<div class="tbox"><strong>00</strong><span>${timerLabels.seconds}</span></div>`;
         return;
       }
       let ms = diff;
-      const d = Math.floor(ms / 86400000); ms -= d*86400000;
-      const h = Math.floor(ms / 3600000); ms -= h*3600000;
-      const m = Math.floor(ms / 60000); ms -= m*60000;
+      const d = Math.floor(ms / 86400000); ms -= d * 86400000;
+      const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
+      const m = Math.floor(ms / 60000);    ms -= m * 60000;
       const s = Math.floor(ms / 1000);
 
-      const dict = I18N[currentLang] || I18N['en'];
-      const dayLabel = dict.days || 'days';
-      const hourLabel = dict.hours || 'hours';
-      const minLabel = dict.minutes || 'minutes';
-      const secLabel = dict.seconds || 'seconds';
+      const blocks = [
+        { v: d, t: timerLabels.days },
+        { v: h, t: timerLabels.hours },
+        { v: m, t: timerLabels.minutes },
+        { v: s, t: timerLabels.seconds }
+      ].map(x =>
+        `<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`
+      ).join('');
 
-      timerEl.innerHTML =
-        `<div class="tbox"><strong>${pad(d)}</strong><span class="days-label">${dayLabel}</span></div>` +
-        `<div class="tbox"><strong>${pad(h)}</strong><span class="hours-label">${hourLabel}</span></div>` +
-        `<div class="tbox"><strong>${pad(m)}</strong><span class="minutes-label">${minLabel}</span></div>` +
-        `<div class="tbox"><strong>${pad(s)}</strong><span class="seconds-label">${secLabel}</span></div>`;
-    }
-
-    function updateTimerLabels(code){
-      const dict = I18N[code] || I18N['en'];
-      document.querySelectorAll('.days-label').forEach(el=>el.textContent = dict.days || 'days');
-      document.querySelectorAll('.hours-label').forEach(el=>el.textContent = dict.hours || 'hours');
-      document.querySelectorAll('.minutes-label').forEach(el=>el.textContent = dict.minutes || 'minutes');
-      document.querySelectorAll('.seconds-label').forEach(el=>el.textContent = dict.seconds || 'seconds');
-      // date hint
-      const dh = dict.date_hint || '';
-      if(dh) dateHintEl.textContent = dh;
+      $timer.innerHTML = blocks;
     }
 
     renderTimer();
     setInterval(renderTimer, 1000);
 
-    // ===== form preview & submit (kept original behavior) =====
+    // ===== PREVIEW MODAL & FORM handling (unchanged logic) =====
     const form = document.getElementById('lead');
     const modal = document.getElementById('previewModal');
-    document.getElementById('previewBtn').addEventListener('click',()=>{
+    document.getElementById('previewBtn').addEventListener('click', ()=>{
       const fd = new FormData(form);
-      if(fd.get('_hp')) return;
+      if (fd.get('_hp')) return;
       document.getElementById('pv_name').textContent = fd.get('name') || '-';
       document.getElementById('pv_company').textContent = fd.get('company') || '-';
       document.getElementById('pv_email').textContent = fd.get('email') || '-';
       document.getElementById('pv_phone').textContent = fd.get('phone') || '-';
       document.getElementById('pv_interest').textContent = fd.get('interest') || '-';
-      if(typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open','');
+      if (typeof modal.showModal === 'function') { modal.showModal(); } else { modal.setAttribute('open',''); }
     });
-    document.getElementById('editBtn').addEventListener('click',()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); });
-    document.getElementById('confirmBtn').addEventListener('click', async ()=>{
-      const evt = new Event('submit',{cancelable:true});
-      if(modal.open) modal.close(); else modal.removeAttribute('open');
-      form.dispatchEvent(evt);
-    });
+    document.getElementById('editBtn').addEventListener('click', ()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); });
+    document.getElementById('confirmBtn').addEventListener('click', async ()=>{ if(modal.open) modal.close(); else modal.removeAttribute('open'); form.dispatchEvent(new Event('submit',{cancelable:true})); });
 
-    // submit (AJAX with fallback)
+    // form submit (keeps original behavior using form.action, with added UTM and webinar_date)
     const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
-    form.addEventListener('submit', async (e)=>{
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      if(fd.get('_hp')) return;
-      fd.append('webinar_date', window.targetDate.toISOString());
-      Object.entries(utm).forEach(([k,v])=>fd.append(k,v));
+      if (fd.get('_hp')) return;
+      fd.append('webinar_date', targetDate.toISOString());
+      Object.entries(utm).forEach(([k,v])=> fd.append(k,v));
+
       const targetUrl = form.action;
+
       try {
-        const resp = await fetch(targetUrl, {method:'POST', body:fd});
-        const dict = I18N[currentLang] || I18N['en'];
-        if(resp && resp.ok){ toast(dict.toast_ok || 'Done'); form.reset(); }
-        else { toast(dict.toast_ok || 'Done'); form.reset(); console.warn('Server response:', resp); }
-      } catch(err){
-        console.error('Send error:', err);
-        try{ form.removeEventListener('submit', arguments.callee); }catch(e){}
+        const resp = await fetch(targetUrl, { method: 'POST', body: fd });
+        if (resp && resp.ok) {
+          showToast(toastOk);
+          form.reset();
+        } else {
+          showToast(toastSubmitted);
+          form.reset();
+          console.warn('Server response:', resp);
+        }
+      } catch (err) {
+        console.error('Form send error:', err);
+        // fallback: normal submit
         form.submit();
       }
     });
 
-    // ICS
-    document.getElementById('ics').addEventListener('click',()=>{
-      const dt = window.targetDate;
+    // ICS button
+    document.getElementById('ics').addEventListener('click', ()=>{
+      const dt = targetDate;
       const start = dt.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
       const end = new Date(dt.getTime()+60*60*1000).toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
-      const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retenly//Webinar//','BEGIN:VEVENT',`UID:${Date.now()}@Retenly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retenly: Webinar','DESCRIPTION:Trusted calls, reactivation, LTV growth','END:VEVENT','END:VCALENDAR'].join('\r\n');
-      const blob = new Blob([ics], {type:'text/calendar'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'Retenly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
+      const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Retenly//Webinar//','BEGIN:VEVENT',`UID:${Date.now()}@retenly`,`DTSTAMP:${start}`,`DTSTART:${start}`,`DTEND:${end}`,'SUMMARY:Retenly: Webinar','DESCRIPTION:Trustful calls, reactivation, LTV growth','END:VEVENT','END:VCALENDAR'].join('\r\n');
+      const blob = new Blob([ics],{type:'text/calendar'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'Retenly-webinar.ics'; a.click(); URL.revokeObjectURL(url);
     });
+
+    // JSON-LD (update startDate to targetDate)
+    (function(){
+      const ld={"@context":"https://schema.org","@type":"EducationEvent","name":"Retenly: Webinar","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":targetDate.toISOString(),"location":{"@type":"VirtualLocation","url":"https://Retenly.example/webinar"},"description":"How to bring back sleeping customers, increase LTV and build trustful calls.","organizer":{"@type":"Organization","name":"Retenly"}};
+      const s=document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
+    })();
 
     // toast
-    function toast(msg){ const t=document.getElementById('toast'); t.textContent = msg||'Done'; t.style.opacity = '1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)';}, 3000); }
+    function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg || 'Done'; t.style.opacity='1'; t.style.transform='translateX(-50%) scale(1)'; setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) scale(.96)'; }, 3800); }
 
-    // keyboard accessibility for lang list
-    langBtn.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowDown' || e.key === 'Enter'){ e.preventDefault(); listEl.classList.add('open'); langBtn.setAttribute('aria-expanded','true'); listEl.querySelector('.lang-item')?.focus(); }
-      if(e.key === 'Escape'){ listEl.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); }
-    });
-    document.querySelectorAll('.lang-item').forEach((it, idx, arr)=>{
-      it.tabIndex = 0;
-      it.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); it.click(); }
-        if(e.key === 'ArrowDown'){ e.preventDefault(); arr[(idx+1)%arr.length].focus(); }
-        if(e.key === 'ArrowUp'){ e.preventDefault(); arr[(idx-1+arr.length)%arr.length].focus(); }
-      });
-    });
+    // initialize translation (already called above), ensure interest options present
+    // setLangValue(initialLang) already set earlier
 
-    // update labels on initial load
-    updateTimerLabels(currentLang);
-<script>
-  // === ТАЙМЕР НА 06.12.2025 ===
-  const targetDate = new Date("2025-12-06T18:00:00+03:00");
-  const $timer = document.getElementById('countdown');
-  const $hint = document.getElementById('date-hint');
-
-  // Подпись под таймером
-  $hint.textContent = "Ближайший эфир: Суббота, 06 декабря 2025 г. в 18:00 GMT+3";
-
-  function plural(n, a, b, c) {
-    n = Math.abs(n) % 100; const n1 = n % 10;
-    if (n > 10 && n < 20) return c;
-    if (n1 > 1 && n1 < 5) return b;
-    if (n1 == 1) return a;
-    return c;
-  }
-
-  function renderTimer() {
-    const diff = targetDate - new Date();
-    if (diff <= 0) {
-      $timer.innerHTML = `
-        <div class="tbox"><strong>00</strong><span>дней</span></div>
-        <div class="tbox"><strong>00</strong><span>часов</span></div>
-        <div class="tbox"><strong>00</strong><span>минут</span></div>
-        <div class="tbox"><strong>00</strong><span>секунд</span></div>`;
-      return;
-    }
-
-    let ms = diff;
-    const d = Math.floor(ms / 86400000); ms -= d * 86400000;
-    const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
-    const m = Math.floor(ms / 60000);    ms -= m * 60000;
-    const s = Math.floor(ms / 1000);
-
-    const blocks = [
-      { v: d, t: plural(d, 'день', 'дня', 'дней') },
-      { v: h, t: plural(h, 'час', 'часа', 'часов') },
-      { v: m, t: plural(m, 'минута', 'минуты', 'минут') },
-      { v: s, t: plural(s, 'секунда', 'секунды', 'секунд') }
-    ].map(x =>
-      `<div class="tbox"><strong>${String(x.v).padStart(2,'0')}</strong><span>${x.t}</span></div>`
-    ).join('');
-
-    $timer.innerHTML = blocks;
-  }
-
-  renderTimer();
-  setInterval(renderTimer, 1000);
-</script>
+    // expose for debugging
+    window._I18N = I18N;
+    window._setLang = setLangValue;
   </script>
 </body>
 </html>
