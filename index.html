@@ -141,8 +141,6 @@
     <div id="countdown" class="timer" aria-label="Countdown to start"></div>
     <p id="date-hint" class="muted" data-i18n="hero.hint_small"></p>
     <a id="regLink" href="https://docs.google.com/forms/d/e/1FAIpQLSdm16SyvDfSAeD7TTn3gdTkLQhBY0u-XrrxfSyW63B-FDxkXg/viewform?usp=dialog" class="btn" target="_blank" data-i18n="hero.regbtn">Register for the webinar</a>
-    <div id="countdown" class="timer" aria-label="Счётчик до начала"></div>
-<p id="date-hint" class="muted"></p>
   </header>
 
   <main class="wrap">
@@ -287,9 +285,9 @@
               </select>
             </div>
           </div>
-          <p class="muted" style="font-size:12px">
-            <input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a;margin-right:6px">
-            <label for="agree" data-i18n="form.consent">I agree to data processing and receiving reminders</label>
+          <p class="muted" style="font-size:12px; display: flex; align-items: center; gap: 6px;">
+  <label for="agree" style="cursor:pointer;">I agree to data processing and receiving reminders</label>
+  <input id="agree" name="consent" type="checkbox" required style="accent-color:#f4d27a; width: 14px; height: 14px; cursor:pointer;">
           </p>
           <div class="actions">
             <button class="btn" type="button" id="previewBtn" data-i18n="form.preview">Preview request</button>
