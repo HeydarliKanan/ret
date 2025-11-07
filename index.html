@@ -769,37 +769,129 @@ document.addEventListener('DOMContentLoaded', function () {
       return 'en';
     }
 
-    // --- Safe localized ajax form submit ---
-const form = document.getElementById('lead');
-if (form) {
-  const lang = (localStorage.getItem("lang") || document.documentElement.lang || "en").slice(0,2);
-  const msgs = {
-    en:{sending:"⏳ Sending...",success:"✅ Message sent successfully!"},
-    fr:{sending:"⏳ Envoi...",success:"✅ Message envoyé avec succès !"},
-    de:{sending:"⏳ Wird gesendet...",success:"✅ Nachricht erfolgreich gesendet!"},
-    pl:{sending:"⏳ Wysyłanie...",success:"✅ Wiadomość wysłana pomyślnie!"},
-    ru:{sending:"⏳ Отправляем...",success:"✅ Готово — вышлем план на почту!"}
-  }[lang] || msgs.en;
+    // ========== Robust safe global submit interceptor (PUT AT BOTTOM OF YOUR MAIN <script>) ==========
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // 🧱 блокируем переход на Apps Script
-    toast(msgs.sending);
+(function(){
+  // маленькая защита — не вставлять дважды
+  if (window._retenly_submit_interceptor_installed) return;
+  window._retenly_submit_interceptor_installed = true;
 
-    const fd = new FormData(form);
-    if (fd.get('_hp')) return; // honeypot защита
+  // Локализованные сообщения
+  const msgsTable = {
+    en:{sending:"⏳ Sending...", success:"✅ Message sent successfully!", error:"⚠️ Sending error, please try again.", network:"⚠️ Network error. Try again later."},
+    fr:{sending:"⏳ Envoi...", success:"✅ Message envoyé avec succès !", error:"⚠️ Erreur d’envoi, veuillez réessayer.", network:"⚠️ Erreur réseau. Réessayez plus tard."},
+    de:{sending:"⏳ Wird gesendet...", success:"✅ Nachricht erfolgreich gesendet!", error:"⚠️ Fehler beim Senden, bitte versuchen Sie es erneut.", network:"⚠️ Netzwerkfehler. Versuchen Sie es später erneut."},
+    pl:{sending:"⏳ Wysyłanie...", success:"✅ Wiadomość wysłana pomyślnie!", error:"⚠️ Błąd podczas wysyłania, spróbuj ponownie.", network:"⚠️ Błąd sieci. Spróbuj ponownie później."},
+    ru:{sending:"⏳ Отправляем...", success:"✅ Готово — вышлем план на почту!", error:"⚠️ Ошибка при отправке, попробуйте позже.", network:"⚠️ Ошибка соединения."}
+  };
 
+  // Определение языка — попытка совместиться с твоей логикой detectLang/localStorage/html lang
+  function detectLangSafe(){
     try {
-      // режим no-cors предотвращает перенаправление
-      await fetch(form.action, { method:'POST', body:fd, mode:'no-cors' });
-      toast(msgs.success);
-      form.reset();
-      if (navigator.vibrate) navigator.vibrate(60);
-    } catch (err) {
-      console.error(err);
-      toast("⚠️ Network error");
+      if (typeof detectLang === 'function') {
+        const v = detectLang();
+        if (v) return v.slice(0,2);
+      }
+    } catch(e){}
+    try { const stored = localStorage.getItem('lang'); if (stored) return stored.slice(0,2); } catch(e){}
+    try { const htmlL = document.documentElement.getAttribute('lang'); if (htmlL) return htmlL.slice(0,2); } catch(e){}
+    try { return (navigator.language||'en').slice(0,2); } catch(e){ return 'en';}
+  }
+  const lang = detectLangSafe();
+  const msgs = msgsTable[lang] || msgsTable.en;
+
+  // безопасный toast (если у тебя уже есть toast, будет использован)
+  function showToast(text){
+    if (typeof toast === 'function') { try { toast(text); return; } catch(e){} }
+    // fallback: create own simple toast
+    let el = document.getElementById('_retenly_toast');
+    if(!el){
+      el = document.createElement('div');
+      el.id = '_retenly_toast';
+      el.style.position = 'fixed';
+      el.style.left = '50%';
+      el.style.bottom = '28px';
+      el.style.transform = 'translateX(-50%)';
+      el.style.background = 'rgba(18,18,25,0.95)';
+      el.style.border = '1px solid rgba(244,210,122,0.4)';
+      el.style.color = '#fff';
+      el.style.padding = '12px 18px';
+      el.style.borderRadius = '14px';
+      el.style.fontFamily = 'Manrope, sans-serif';
+      el.style.fontSize = '15px';
+      el.style.zIndex = '9999';
+      el.style.opacity = '0';
+      el.style.transition = 'opacity .36s, transform .36s';
+      document.body.appendChild(el);
     }
-  });
-}
+    el.textContent = text;
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-50%) translateY(12px)';
+    requestAnimationFrame(()=>{ el.style.opacity='1'; el.style.transform='translateX(-50%) translateY(0)'; });
+    clearTimeout(el._hide);
+    el._hide = setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(12px)'; }, 4200);
+  }
+
+  // Получение формы (id 'lead')
+  const form = document.getElementById('lead');
+  if (!form) {
+    console.warn('Retenly: form #lead not found — interceptor not attached.');
+    return;
+  }
+
+  // Глобальный submit перехватчик в capture-phase — он первым ловит submit и может остановить переход
+  document.addEventListener('submit', async function(evt){
+    // если отправляется не наша форма — ничего не делаем
+    const targetForm = evt.target;
+    if (!targetForm || targetForm !== form) return;
+
+    // предотвратить стандартную отправку (и возможный редирект)
+    try { evt.preventDefault(); } catch(e){}
+    try { evt.stopImmediatePropagation(); } catch(e){} // остановить другие слушатели на том же элементе
+
+    // показать "Отправляем..."
+    showToast(msgs.sending);
+
+    // сформировать FormData
+    const fd = new FormData(form);
+
+    // honeypot check
+    if (fd.get && fd.get('_hp')) {
+      // ничего не делаем
+      return;
+    }
+
+    // при наличии global utm — можно добавить, но не обязателен
+    try {
+      const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
+      Object.entries(utm).forEach(([k,v]) => {
+        try { if (!fd.get(k)) fd.append(k, v); } catch(e){}
+      });
+    } catch(e){}
+
+    // если есть window.targetDate — добавляем
+    try { if (window.targetDate && !fd.get('webinar_date')) fd.append('webinar_date', window.targetDate.toISOString()); } catch(e){}
+
+    // выключаем кнопку, если есть
+    let submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (submitBtn) try { submitBtn.disabled = true; } catch(e){}
+
+    // Отправляем через fetch с no-cors — гарантирует, что браузер НЕ будет перенаправлять страницу
+    try {
+      await fetch(form.action, { method:'POST', body: fd, mode:'no-cors' });
+      // успшено (в режиме no-cors тело ответа недоступно, но запрос уходит)
+      showToast(msgs.success);
+      try { form.reset(); } catch(e){}
+      try { if (navigator.vibrate) navigator.vibrate(60); } catch(e){}
+    } catch (err) {
+      console.error('Retenly: submit fetch error', err);
+      showToast(msgs.network || msgs.error);
+    } finally {
+      if (submitBtn) try { submitBtn.disabled = false; } catch(e){}
+    }
+
+  }, true); // <- capture = true
+})();
 </script>
 </body>
 </html>
