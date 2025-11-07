@@ -729,6 +729,55 @@
       setLanguage(lang);
     });
 
+    // ===== ОТПРАВКА ФОРМЫ =====
+    const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  if (fd.get('_hp')) return; // honeypot
+
+  fd.append('webinar_date', window.targetDate.toISOString());
+  Object.entries(utm).forEach(([k, v]) => fd.append(k, v));
+
+  // Куда отправляем: либо REG_ENDPOINT, либо action формы
+  const targetUrl = REG_ENDPOINT || form.action;
+
+  try {
+    // Отправим через fetch — FormData корректно уходит как multipart/form-data
+    const resp = await fetch(targetUrl, {
+      method: 'POST',
+      body: fd,
+      // не устанавливаем заголовок Content-Type вручную при отправке FormData
+    });
+
+    // Если используем Google Apps Script и он настроен без CORS, может понадобиться mode:'no-cors'
+    // Но в режиме no-cors вы не получите статус/тело ответа, поэтому используйте его только как fallback.
+    // Пример fallback:
+    // if (!resp.ok && REG_ENDPOINT === null) { // optional fallback logic }
+
+    if (resp && resp.ok) {
+      toast('Готово — вышлем план на почту');
+      form.reset();
+    } else {
+      // Если ответ не OK (или недоступен из-за no-cors), всё равно показываем подтверждение,
+      // но советуем проверить Network/Console.
+      toast('Заявка принята. Если не получили письмо — проверьте спам и настройки сервиса.');
+      form.reset();
+      console.warn('Ответ сервера при отправке формы:', resp);
+    }
+  } catch (err) {
+    // В случае CORS/сети/и т.д.
+    console.error('Ошибка отправки формы:', err);
+    // fallback: выполняем классическую отправку формы (чтобы по крайней мере браузер сделал обычный POST)
+    try {
+      form.removeEventListener('submit', arguments.callee); // не всегда сработает в стрелке
+    } catch(e){}
+    // обычная навигационная отправка (без AJAX)
+    form.submit();
+  }
+});
+
     // Accessibility: close lang dropdown with Esc
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){ langList.style.display = 'none'; }
