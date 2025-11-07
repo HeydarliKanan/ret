@@ -769,93 +769,36 @@ document.addEventListener('DOMContentLoaded', function () {
       return 'en';
     }
 
-    // --- Multilang messages (non-invasive) ---
-const messages = {
-  en: { sending: "⏳ Sending...", success: "✅ Message sent successfully!", error: "⚠️ Sending error, please try again.", network: "⚠️ Network error. Try again later." },
-  de: { sending: "⏳ Wird gesendet...", success: "✅ Nachricht erfolgreich gesendet!", error: "⚠️ Fehler beim Senden, bitte versuchen Sie es erneut.", network: "⚠️ Netzwerkfehler. Versuchen Sie es später erneut." },
-  fr: { sending: "⏳ Envoi en cours...", success: "✅ Message envoyé avec succès !", error: "⚠️ Erreur d’envoi, veuillez réessayer.", network: "⚠️ Erreur réseau. Réessayez plus tard." },
-  pl: { sending: "⏳ Wysyłanie...", success: "✅ Wiadomość wysłana pomyślnie!", error: "⚠️ Błąd podczas wysyłania, spróbuj ponownie.", network: "⚠️ Błąd sieci. Spróbuj ponownie później." },
-  ru: { sending: "⏳ Отправляем...", success: "✅ Готово — вышлем план на почту!", error: "⚠️ Ошибка при отправке, попробуйте позже.", network: "⚠️ Ошибка соединения." }
-};
-
-// --- get current messages safely ---
-const currentLang = detectLang ? detectLang() : (localStorage.getItem('lang') || 'en');
-const msg = messages[currentLang] || messages.en;
-
-// --- toast notification setup ---
-function toast(text, type = "info") {
-  let el = document.getElementById("toast");
-  if (!el) {
-    el = document.createElement("div");
-    el.id = "toast";
-    el.style.position = "fixed";
-    el.style.left = "50%";
-    el.style.bottom = "28px";
-    el.style.transform = "translateX(-50%)";
-    el.style.background = "rgba(18,18,25,0.95)";
-    el.style.border = "1px solid rgba(244,210,122,0.4)";
-    el.style.color = "#fff";
-    el.style.padding = "12px 18px";
-    el.style.borderRadius = "14px";
-    el.style.fontFamily = "Manrope, sans-serif";
-    el.style.fontSize = "15px";
-    el.style.zIndex = "9999";
-    el.style.opacity = "0";
-    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-    document.body.appendChild(el);
-  }
-
-  el.textContent = text;
-  el.style.opacity = "0";
-  el.style.transform = "translateX(-50%) translateY(20px)";
-  el.style.transition = "none";
-  requestAnimationFrame(() => {
-    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-    el.style.opacity = "1";
-    el.style.transform = "translateX(-50%) translateY(0)";
-  });
-
-  clearTimeout(el.hideTimeout);
-  el.hideTimeout = setTimeout(() => {
-    el.style.opacity = "0";
-    el.style.transform = "translateX(-50%) translateY(20px)";
-  }, 4000);
-}
-
-// --- find form and handle submit ---
+    // --- Safe localized ajax form submit ---
 const form = document.getElementById('lead');
 if (form) {
-  const formHint = document.getElementById('form-hint');
+  const lang = (localStorage.getItem("lang") || document.documentElement.lang || "en").slice(0,2);
+  const msgs = {
+    en:{sending:"⏳ Sending...",success:"✅ Message sent successfully!"},
+    fr:{sending:"⏳ Envoi...",success:"✅ Message envoyé avec succès !"},
+    de:{sending:"⏳ Wird gesendet...",success:"✅ Nachricht erfolgreich gesendet!"},
+    pl:{sending:"⏳ Wysyłanie...",success:"✅ Wiadomość wysłana pomyślnie!"},
+    ru:{sending:"⏳ Отправляем...",success:"✅ Готово — вышлем план на почту!"}
+  }[lang] || msgs.en;
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    toast(msg.sending);
-    if (formHint) formHint.textContent = msg.sending;
+    e.preventDefault(); // 🧱 блокируем переход на Apps Script
+    toast(msgs.sending);
 
     const fd = new FormData(form);
-    if (fd.get('_hp')) return; // honeypot защита от ботов
+    if (fd.get('_hp')) return; // honeypot защита
 
     try {
-      const resp = await fetch(form.action, { method: 'POST', body: fd });
-      if (resp && resp.ok) {
-        toast(msg.success);
-        if (formHint) formHint.textContent = msg.success;
-        form.reset();
-
-        // Лёгкая вибрация на мобильных (если поддерживается)
-        if (navigator.vibrate) navigator.vibrate(60);
-      } else {
-        toast(msg.error);
-        if (formHint) formHint.textContent = msg.error;
-      }
+      // режим no-cors предотвращает перенаправление
+      await fetch(form.action, { method:'POST', body:fd, mode:'no-cors' });
+      toast(msgs.success);
+      form.reset();
+      if (navigator.vibrate) navigator.vibrate(60);
     } catch (err) {
-      toast(msg.network);
-      if (formHint) formHint.textContent = msg.network;
-      console.error('Form submit error:', err);
+      console.error(err);
+      toast("⚠️ Network error");
     }
   });
-} else {
-  console.warn('⚠️ Form #lead not found — skipping ajax submit handler.');
 }
 </script>
 </body>
