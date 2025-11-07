@@ -777,21 +777,6 @@ document.addEventListener('DOMContentLoaded', function () {
       pl: { sending: "⏳ Wysyłanie...", success: " Wiadomość wysłana pomyślnie!", error: "⚠️ Błąd podczas wysyłania, spróbuj ponownie.", network: "⚠️ Błąd sieci. Spróbuj ponownie później." },
       ru: { sending: "⏳ Отправляем...", success: " Заявка успешно отправлена!", error: "⚠️ Ошибка при отправке, попробуйте позже.", network: "⚠️ Ошибка соединения." }
     };
-
-    // Определяем текущий язык из localStorage, атрибута <html lang> или браузера
-function getCurrentLang() {
-  try {
-    return (
-      localStorage.getItem('lang') ||
-      document.documentElement.getAttribute('lang')?.slice(0, 2) ||
-      navigator.language.slice(0, 2) ||
-      'en'
-    );
-  } catch {
-    return 'en';
-  }
-}
-const formLang = i18nForm[getCurrentLang()] || i18nForm.en;
     
     // --- get current messages safely ---
     const currentLang = detectLang();
