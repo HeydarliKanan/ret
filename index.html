@@ -729,59 +729,133 @@
       setLanguage(lang);
     });
 
-    // ===== ОТПРАВКА ФОРМЫ =====
-    const utm = Object.fromEntries(new URLSearchParams(location.search).entries());
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const fd = new FormData(form);
-  if (fd.get('_hp')) return; // honeypot
-
-  fd.append('webinar_date', window.targetDate.toISOString());
-  Object.entries(utm).forEach(([k, v]) => fd.append(k, v));
-
-  // Куда отправляем: либо REG_ENDPOINT, либо action формы
-  const targetUrl = REG_ENDPOINT || form.action;
-
-  try {
-    // Отправим через fetch — FormData корректно уходит как multipart/form-data
-    const resp = await fetch(targetUrl, {
-      method: 'POST',
-      body: fd,
-      // не устанавливаем заголовок Content-Type вручную при отправке FormData
-    });
-
-    // Если используем Google Apps Script и он настроен без CORS, может понадобиться mode:'no-cors'
-    // Но в режиме no-cors вы не получите статус/тело ответа, поэтому используйте его только как fallback.
-    // Пример fallback:
-    // if (!resp.ok && REG_ENDPOINT === null) { // optional fallback logic }
-
-    if (resp && resp.ok) {
-      toast('Готово — вышлем план на почту');
-      form.reset();
-    } else {
-      // Если ответ не OK (или недоступен из-за no-cors), всё равно показываем подтверждение,
-      // но советуем проверить Network/Console.
-      toast('Заявка принята. Если не получили письмо — проверьте спам и настройки сервиса.');
-      form.reset();
-      console.warn('Ответ сервера при отправке формы:', resp);
-    }
-  } catch (err) {
-    // В случае CORS/сети/и т.д.
-    console.error('Ошибка отправки формы:', err);
-    // fallback: выполняем классическую отправку формы (чтобы по крайней мере браузер сделал обычный POST)
-    try {
-      form.removeEventListener('submit', arguments.callee); // не всегда сработает в стрелке
-    } catch(e){}
-    // обычная навигационная отправка (без AJAX)
-    form.submit();
-  }
-});
-
     // Accessibility: close lang dropdown with Esc
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){ langList.style.display = 'none'; }
     });
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    // --- Безопасное определение текущего языка ---
+    function detectLang() {
+      // 1) prefer value already stored by your selector
+      let l = localStorage.getItem('lang');
+      if (l) return normalize(l);
+
+      // 2) try some common global vars (if your code sets one)
+      if (typeof window.lang === 'string' && window.lang) return normalize(window.lang);
+      if (typeof window.currentLang === 'string' && window.currentLang) return normalize(window.currentLang);
+
+      // 3) check <html lang="...">
+      const htmlLang = document.documentElement.getAttribute('lang');
+      if (htmlLang) return normalize(htmlLang);
+
+      // 4) fallback to browser language
+      const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+      return normalize(nav);
+    }
+
+    function normalize(code) {
+      // Map variants to our supported short codes: en, de, fr, pl, ru
+      if (!code) return 'en';
+      code = code.toLowerCase();
+      if (code.startsWith('en')) return 'en';
+      if (code.startsWith('de')) return 'de';
+      if (code.startsWith('fr')) return 'fr';
+      if (code.startsWith('pl')) return 'pl';
+      if (code.startsWith('ru')) return 'ru';
+      // fallback
+      return 'en';
+    }
+
+    // --- Multilang messages (non-invasive) ---
+    const messages = {
+      en: { sending: "⏳ Sending...", success: "✅ Message sent successfully!", error: "⚠️ Sending error, please try again.", network: "⚠️ Network error. Try again later." },
+      de: { sending: "⏳ Wird gesendet...", success: "✅ Nachricht erfolgreich gesendet!", error: "⚠️ Fehler beim Senden, bitte versuchen Sie es erneut.", network: "⚠️ Netzwerkfehler. Versuchen Sie es später erneut." },
+      fr: { sending: "⏳ Envoi en cours...", success: "✅ Message envoyé avec succès !", error: "⚠️ Erreur d’envoi, veuillez réessayer.", network: "⚠️ Erreur réseau. Réessayez plus tard." },
+      pl: { sending: "⏳ Wysyłanie...", success: "✅ Wiadomość wysłana pomyślnie!", error: "⚠️ Błąd podczas wysyłania, spróbuj ponownie.", network: "⚠️ Błąd sieci. Spróbuj ponownie później." },
+      ru: { sending: "⏳ Отправляем...", success: "✅ Заявка успешно отправлена!", error: "⚠️ Ошибка при отправке, попробуйте позже.", network: "⚠️ Ошибка соединения." }
+    };
+
+    // --- get current messages safely ---
+    const currentLang = detectLang();
+    const msg = messages[currentLang] || messages.en;
+
+    // --- find form and related nodes, be defensive if missing ---
+    const form = document.getElementById('lead');
+    if (!form) {
+      console.warn('Form #lead not found — skipping ajax submit handler.');
+      return;
+    }
+
+    const formHint = document.getElementById('form-hint') || null;
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    // helper to show status: prefer existing toast(), else formHint, else console
+    function showStatus(text, color) {
+      if (typeof toast === 'function') {
+        toast(text);
+      } else if (formHint) {
+        formHint.textContent = text;
+        if (color) formHint.style.color = color;
+      } else {
+        console.log('[form status]', text);
+      }
+    }
+
+    // preserve existing UTM parsing if any (safe fallback)
+    const utm = (function () {
+      try { return Object.fromEntries(new URLSearchParams(location.search).entries()); }
+      catch (e) { return {}; }
+    })();
+
+    // attach handler (use passive pattern and do not replace other handlers)
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      try {
+        const fd = new FormData(form);
+        if (fd.get('_hp')) return; // honeypot check - silently ignore
+
+        // append webinar_date only if needed and available
+        if (window.targetDate && !fd.get('webinar_date')) {
+          try { fd.append('webinar_date', window.targetDate.toISOString()); } catch(_) {}
+        }
+
+        Object.entries(utm).forEach(([k, v]) => { try { fd.append(k, v); } catch(_) {} });
+
+        if (submitBtn) submitBtn.disabled = true;
+        showStatus(msg.sending, '#f4d27a');
+
+        // perform fetch to apps script
+        const response = await fetch(form.action, { method: 'POST', body: fd });
+        const text = await response.text();
+
+        // success detection: apps script returns plain "Success" in current setup
+        if (response.ok && (String(text).includes('Success') || response.status === 200)) {
+          showStatus(msg.success, '#7ef57e');
+          // reset form visually
+          try { form.reset(); } catch(_) {}
+        } else {
+          console.warn('Form submit responded with:', response.status, text);
+          showStatus(msg.error, '#ff6b6b');
+        }
+      } catch (err) {
+        console.error('Form send error:', err);
+        showStatus(msg.network, '#ff6b6b');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        // clear hint after 5s if using formHint
+        if (formHint) setTimeout(() => { formHint.textContent = ''; }, 5000);
+      }
+    }, { passive: false });
+
+    // done
+  } catch (outerErr) {
+    console.error('Error initializing ajax form handler:', outerErr);
+  }
+});
+</script>
 </body>
 </html>
