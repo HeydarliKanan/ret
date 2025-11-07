@@ -263,6 +263,7 @@ body::after {
       accept-charset="UTF-8"
       autocomplete="on">
           <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+          <p id="form-status" class="form-status"></p>
           <div class="row two">
             <div>
               <label for="name" data-i18n="form.name_label">Name</label>
@@ -763,5 +764,42 @@ body::after {
       if(e.key === 'Escape'){ langList.style.display = 'none'; }
     });
   </script>
+  <script>
+document.getElementById("lead").addEventListener("submit", async function(e) {
+  e.preventDefault(); // ⛔ Отключаем стандартную отправку
+
+  const form = e.target;
+  const status = document.getElementById("form-status");
+  const submitBtn = document.getElementById("submitBtn");
+
+  submitBtn.disabled = true;
+  status.textContent = "⏳ Отправка...";
+  status.style.color = "#f4d27a";
+
+  try {
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData
+    });
+
+    const text = await response.text();
+    if (text.includes("Success")) {
+      status.textContent = "✅ Заявка успешно отправлена!";
+      status.style.color = "#7ef57e";
+      form.reset(); // Очистить форму
+    } else {
+      status.textContent = "⚠️ Ошибка при отправке, попробуйте позже.";
+      status.style.color = "#ff5555";
+    }
+  } catch (error) {
+    status.textContent = "⚠️ Ошибка соединения.";
+    status.style.color = "#ff5555";
+  } finally {
+    submitBtn.disabled = false;
+    setTimeout(() => (status.textContent = ""), 5000);
+  }
+});
+</script>
 </body>
 </html>
