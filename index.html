@@ -75,29 +75,7 @@
     .row{display:grid;gap:14px}
     @media(min-width:820px){.row.two{grid-template-columns:1fr 1fr}}
     .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  background: linear-gradient(90deg, rgba(244,210,122,.12), rgba(244,210,122,.02));
-  border: 1px solid rgba(244,210,122,.25);
-  border-radius: 16px;
-  padding: 18px;
-  max-width: 820px;        /* Центрируем и ограничиваем ширину */
-  margin: 40px auto 0;     /* Отступ сверху и по центру */
-  transition: all 0.3s ease; /* Плавное появление */
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    .cta{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(90deg,rgba(244,210,122,.12),rgba(244,210,122,.02));border:1px solid rgba(244,210,122,.25);border-radius:16px;padding:18px}
     footer{padding:30px 0;color:#a9a9b2;text-align:center}
     dialog{border:none;border-radius:16px;max-width:560px;width:96%;padding:0;background:#121219;color:#fff}
     .modal-head{padding:16px 18px;border-bottom:1px solid rgba(244,210,122,.2)}
@@ -162,6 +140,35 @@ body::after {
     /* small glow on buttons */
     .btn:hover{ box-shadow: 0 8px 28px rgba(217,173,91,0.12); transform:translateY(-3px); }
     /* ensure form controls readable */
+    /* === Коррекция вертикальных отступов между секциями === */
+
+/* Уменьшаем отступы между блоками */
+section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Уменьшаем промежутки после блока услуг */
+#services {
+  padding-bottom: 30px;
+  margin-bottom: 0;
+}
+
+/* Корректируем отступ перед формой */
+#lead {
+  margin-top: 40px;
+}
+
+/* Адаптируем для маленьких экранов */
+@media (max-width: 768px) {
+  section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  #lead {
+    margin-top: 28px;
+  }
+}
     select option{ background:#0f0f13;color:#fff }
   </style>
 </head>
