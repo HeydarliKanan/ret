@@ -5,1950 +5,1633 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-62WNJKY2MC');
   </script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Retenly — Retention & VIP operations for iGaming</title>
-  <meta name="description" content="Retenly builds and operates call centers, VIP, support and QA for iGaming brands. From zero-to-launch, audits and ready-made teams." />
-  <meta name="theme-color" content="#050509" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title data-i18n="meta.title">Retenly — premium retention & VIP for iGaming</title>
+  <meta name="description" data-i18n="meta.desc"
+        content="Retenly builds premium retention, VIP and call-center operations for iGaming: TR, AZ, KZ, UZ, RU and Tier-1–3 markets." />
+  <meta name="theme-color" content="#0d0d0f" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #050509;
-      --bg-soft: #0d0d12;
-      --card: #13131a;
-      --accent: #f4d27a;
-      --accent-soft: rgba(244,210,122,0.18);
-      --muted: #a9a9b2;
-      --border: rgba(255,255,255,0.06);
-      --danger: #ff6b6b;
-      --success: #51e38c;
+      --bg:#050509;
+      --bg-alt:#0c0c12;
+      --glass:rgba(15,15,25,0.78);
+      --glass-border:rgba(244,210,122,0.35);
+      --accent:#f4d27a;
+      --accent-soft:rgba(244,210,122,0.16);
+      --muted:#a9a9b2;
+      --text-main:#f8f6ff;
+      --danger:#ff6b6b;
+      --success:#7ef57e;
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      background: radial-gradient(circle at 10% 0%, #201a33 0, #050509 48%, #050509 100%);
-      color: #fff;
-      font-family: Manrope, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
+    body{
+      margin:0;
+      min-height:100vh;
+      background:radial-gradient(circle at 10% 0%, #1a1407 0, transparent 55%),
+                 radial-gradient(circle at 90% 20%, #24180a 0, transparent 60%),
+                 linear-gradient(150deg,#050509 0%,#040307 40%,#050509 100%);
+      color:var(--text-main);
+      font-family:Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      overflow-x:hidden;
+      position:relative;
     }
 
-    /* soft tech grid background */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
       background:
-        radial-gradient(circle at 15% 20%, rgba(244,210,122,0.14), transparent 60%),
-        radial-gradient(circle at 80% 70%, rgba(114,119,255,0.18), transparent 60%),
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 64px 64px, 64px 64px;
-      opacity: .45;
-      z-index: -1;
-      pointer-events: none;
+        radial-gradient(circle at 20% 30%, rgba(244,210,122,0.15), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(244,210,122,0.10), transparent 55%),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size:100% 100%,100% 100%,60px 60px,60px 60px;
+      opacity:.45;
+      mix-blend-mode:soft-light;
+      z-index:-1;
+      animation:auramove 38s ease-in-out infinite;
+    }
+    @keyframes auramove{
+      0%{background-position:0% 0%,80% 80%,0 0,0 0}
+      50%{background-position:30% 40%,70% 60%,30px 30px,30px 30px}
+      100%{background-position:0% 0%,80% 80%,0 0,0 0}
     }
 
-    .wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 28px 20px 56px;
+    .wrap{max-width:1120px;margin:0 auto;padding:32px 20px 56px}
+
+    /* Lang switcher */
+    .lang-wrap{
+      position:fixed;
+      top:14px;
+      right:18px;
+      z-index:40;
+    }
+    .lang-btn{
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(8,8,16,0.8);
+      color:#fff;
+      padding:6px 11px;
+      font-size:13px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+    .lang-btn svg{flex-shrink:0}
+    .lang-list{
+      position:absolute;
+      right:0;
+      top:38px;
+      min-width:150px;
+      background:#050509;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.12);
+      box-shadow:0 16px 40px rgba(0,0,0,0.7);
+      overflow:hidden;
+      display:none;
+      z-index:50;
+    }
+    .lang-list button{
+      width:100%;
+      padding:9px 12px;
+      background:transparent;
+      border:none;
+      color:#f6f5ff;
+      font-size:13px;
+      font-weight:600;
+      text-align:left;
+      cursor:pointer;
+    }
+    .lang-list button:hover{
+      background:linear-gradient(90deg,rgba(244,210,122,0.12),rgba(244,210,122,0.02));
     }
 
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      padding: 32px 0 16px;
+    /* Hero */
+    .hero{
+      padding-top:64px;
+      padding-bottom:24px;
+      display:grid;
+      gap:32px;
     }
-
-    .hero-layout {
-      display: grid;
-      gap: 28px;
-      align-items: center;
-    }
-
-    @media (min-width: 900px) {
-      .hero-layout {
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+    @media(min-width:880px){
+      .hero{
+        grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+        align-items:center;
       }
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(244,210,122,0.35);
-      background: rgba(5,5,9,0.85);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--muted);
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:4px 11px 4px 4px;
+      background:rgba(5,5,10,0.85);
+      border:1px solid rgba(244,210,122,0.7);
+      box-shadow:0 12px 30px rgba(0,0,0,0.8);
+      margin-bottom:14px;
+    }
+    .badge-icon{
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0%, #fff 0, #f4d27a 35%, #a57526 72%, #1b1408 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#120d05;
+      font-size:13px;
+      font-weight:800;
+    }
+    .badge span{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent);
+      font-weight:700;
     }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #51e38c;
-      box-shadow: 0 0 0 5px rgba(81,227,140,0.25);
+    h1{
+      margin:0 0 12px;
+      font-size:34px;
+      line-height:1.1;
+      letter-spacing:-0.02em;
+      font-weight:800;
+      color:#fff7e8;
+    }
+    @media(min-width:880px){
+      h1{font-size:40px;}
+    }
+    .hero-lead{
+      margin:0 0 16px;
+      font-size:15px;
+      color:#d9d7e8;
+      max-width:540px;
     }
 
-    h1 {
-      margin: 14px 0 10px;
-      font-size: clamp(30px, 5vw, 40px);
-      line-height: 1.08;
-      font-weight: 800;
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 18px;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .hero-meta span{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      opacity:0.9;
+    }
+    .dot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 0 4px rgba(244,210,122,0.18);
     }
 
-    h1 span.accent {
-      color: var(--accent);
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:999px;
+      padding:11px 20px;
+      font-size:14px;
+      font-weight:800;
+      text-decoration:none;
+      transition:.22s all ease-out;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      color:#120d05;
+      background:linear-gradient(90deg,var(--accent),#d9ad5b);
+      box-shadow:0 12px 38px rgba(244,210,122,0.35);
+    }
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 18px 46px rgba(244,210,122,0.45);
+    }
+    .btn-ghost{
+      color:var(--accent);
+      border:1px solid rgba(244,210,122,0.6);
+      background:rgba(7,7,12,0.7);
+    }
+    .btn-ghost:hover{
+      background:rgba(10,10,16,0.9);
+      box-shadow:0 12px 32px rgba(0,0,0,0.65);
     }
 
-    .hero-sub {
-      max-width: 540px;
-      font-size: 15px;
-      color: var(--muted);
+    /* Hero side card */
+    .hero-card{
+      border-radius:24px;
+      padding:18px 18px 16px;
+      background:radial-gradient(circle at 0% 0%,rgba(244,210,122,0.18),transparent 55%),
+                 radial-gradient(circle at 100% 100%,rgba(244,210,122,0.12),transparent 55%),
+                 var(--bg-alt);
+      border:1px solid rgba(244,210,122,0.55);
+      box-shadow:0 16px 54px rgba(0,0,0,0.85);
+    }
+    .hero-card h3{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:800;
+    }
+    .hero-card p{
+      margin:0 0 10px;
+      font-size:13px;
+      color:#f2eee1;
+    }
+    .hero-card ul{
+      margin:0;
+      padding-left:18px;
+      font-size:12px;
+      color:#f0ede5;
+      display:grid;
+      gap:3px;
     }
 
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
+    /* Sections */
+    section{padding:40px 0 12px;}
+    .section-head{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom:18px;
+    }
+    .eyebrow{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--accent);
+      font-weight:700;
+      opacity:.9;
+    }
+    h2{
+      margin:0;
+      font-size:22px;
+      font-weight:800;
+    }
+    .section-lead{
+      margin:0;
+      font-size:14px;
+      color:#d2d0df;
+      max-width:640px;
     }
 
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(10,10,16,0.9);
-      color: var(--muted);
+    .divider{
+      height:1px;
+      margin:32px 0;
+      background:linear-gradient(90deg,transparent,rgba(244,210,122,0.8),transparent);
+      opacity:.9;
     }
 
-    .hero-actions {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+    /* Cards / glass */
+    .grid{display:grid;gap:16px;}
+    @media(min-width:880px){
+      .grid-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+      .grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 20px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(90deg, var(--accent), #d9ad5b);
-      color: #111;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 10px 30px rgba(244,210,122,0.25);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    .glass-card{
+      position:relative;
+      background:var(--glass);
+      border-radius:20px;
+      border:1px solid var(--glass-border);
+      box-shadow:0 18px 50px rgba(0,0,0,0.9);
+      padding:16px 16px 14px;
+      backdrop-filter:blur(18px);
+      overflow:hidden;
+    }
+    .glass-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:radial-gradient(circle at 0% 0%,rgba(244,210,122,0.25),transparent 55%);
+      opacity:0.4;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+    }
+    .glass-inner{position:relative;z-index:1;}
+
+    .card-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:800;
+    }
+    .micro-icon{
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      border:1px solid rgba(244,210,122,0.7);
+      background:radial-gradient(circle at 30% 0%, #fff 0, #f4d27a 38%, #8a5c1d 88%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+    .micro-icon svg{
+      width:11px;
+      height:11px;
+      stroke:#221406;
+      stroke-width:2;
+    }
+    .glass-card p{
+      margin:0;
+      font-size:13px;
+      color:#e8e5f5;
+    }
+    .glass-card ul{
+      margin:8px 0 0;
+      padding-left:16px;
+      font-size:12px;
+      color:#cfccdd;
+      display:grid;
+      gap:2px;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 38px rgba(244,210,122,0.32);
-      filter: brightness(1.02);
+    /* Fade up */
+    .fade-up{
+      opacity:0;
+      transform:translateY(18px);
+      animation:fadeUp .65s ease-out forwards;
+    }
+    .fade-up.d1{animation-delay:.08s}
+    .fade-up.d2{animation-delay:.16s}
+    .fade-up.d3{animation-delay:.24s}
+    .fade-up.d4{animation-delay:.32s}
+    @keyframes fadeUp{
+      to{opacity:1;transform:translateY(0);}
     }
 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(8,8,14,0.8);
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
+    /* Who / Why / Result lists */
+    .list-card{
+      margin-top:6px;
+      font-size:13px;
+      color:#e4e2f0;
+    }
+    .list-card ul{
+      margin:6px 0 0;
+      padding-left:18px;
+      display:grid;
+      gap:4px;
     }
 
-    .btn-ghost span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(244,210,122,0.7);
+    /* Form */
+    .form-layout{
+      display:grid;
+      gap:18px;
+      align-items:flex-start;
+    }
+    @media(min-width:880px){
+      .form-layout{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);}
     }
 
-    .hero-note {
-      font-size: 12px;
-      color: var(--muted);
+    .form-card{
+      border-radius:22px;
+      padding:18px 18px 16px;
+      background:linear-gradient(145deg,rgba(244,210,122,0.25),rgba(244,210,122,0.10));
+      border:1px solid rgba(244,210,122,0.8);
+      box-shadow:0 20px 58px rgba(0,0,0,0.95);
+      color:#120d05;
+    }
+    .form-card h2{
+      margin:0 0 4px;
+      font-size:20px;
+      font-weight:800;
+    }
+    .form-card p{
+      margin:0 0 10px;
+      font-size:14px;
+      color:#221709;
     }
 
-    .hero-card {
-      border-radius: 18px;
-      padding: 18px 18px 16px;
-      background: radial-gradient(circle at 0 0, rgba(244,210,122,0.3), transparent 55%), var(--card);
-      border: 1px solid rgba(244,210,122,0.35);
-      box-shadow: 0 18px 46px rgba(0,0,0,0.6);
+    form{margin-top:6px;}
+
+    .row{display:grid;gap:10px;}
+    @media(min-width:720px){
+      .row.two{grid-template-columns:repeat(2,minmax(0,1fr));}
     }
 
-    .hero-card-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:4px;
+      color:#23180b;
     }
 
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-      margin-bottom: 12px;
+    input,select,textarea{
+      width:100%;
+      border-radius:11px;
+      border:1px solid rgba(0,0,0,0.35);
+      padding:9px 11px;
+      font-size:13px;
+      font-family:inherit;
+      background:#ffffff;
+      color:#18120a;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    input:focus,select:focus,textarea:focus{
+      border-color:#c49a43;
+      box-shadow:0 0 0 1px rgba(244,210,122,0.55);
+      background:#fffef8;
+    }
+    input::placeholder,textarea::placeholder{
+      color:#8c7a4a;
+      opacity:.96;
+    }
+    select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236b4b16' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:12px 8px;padding-right:28px;}
+
+    textarea{min-height:80px;resize:vertical;}
+
+    .consent{
+      display:flex;
+      align-items:flex-start;
+      gap:7px;
+      font-size:11px;
+      margin-top:6px;
+      color:#261b0d;
+    }
+    .consent input{
+      width:14px;
+      height:14px;
+      margin-top:2px;
+      flex-shrink:0;
+      accent-color:#c49a43;
     }
 
-    .metric {
-      border-radius: 14px;
-      padding: 10px 10px 9px;
-      background: rgba(8,8,15,0.9);
-      border: 1px solid rgba(244,210,122,0.18);
+    .actions{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
     }
 
-    .metric strong {
-      display: block;
-      font-size: 18px;
-      font-weight: 800;
+    #form-hint{
+      font-size:11px;
+      margin-top:4px;
+      min-height:14px;
     }
 
-    .metric span {
-      display: block;
-      font-size: 11px;
-      color: var(--muted);
+    .side-note{
+      border-radius:20px;
+      padding:16px 16px 14px;
+      background:rgba(11,11,16,0.9);
+      border:1px solid rgba(244,210,122,0.45);
+      box-shadow:0 16px 46px rgba(0,0,0,0.9);
+      font-size:13px;
+    }
+    .side-note h3{
+      margin:0 0 6px;
+      font-size:15px;
+      font-weight:800;
+    }
+    .side-note p{
+      margin:0 0 8px;
+      color:#e9e5f8;
+    }
+    .side-note ul{
+      margin:0;
+      padding-left:18px;
+      font-size:12px;
+      color:#cfccdd;
+      display:grid;
+      gap:3px;
     }
 
-    .hero-card-list {
-      font-size: 12px;
-      color: var(--muted);
-      padding-left: 16px;
-      margin: 0;
+    footer{
+      padding:26px 20px 28px;
+      text-align:center;
+      font-size:11px;
+      color:var(--muted);
     }
-
-    .hero-card-list li {
-      margin-bottom: 4px;
-    }
-
-    section {
-      padding: 40px 0 10px;
-    }
-
-    h2.section-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin: 0 0 6px;
-    }
-
-    .section-kicker {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 520px;
-    }
-
-    .grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    @media (min-width: 900px) {
-      .grid-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .grid-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .tile {
-      position: relative;
-      border-radius: 16px;
-      padding: 14px 14px 12px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.55);
-    }
-
-    .tile-soft {
-      background: rgba(10,10,17,0.9);
-      border-style: dashed;
-      border-color: rgba(255,255,255,0.14);
-    }
-
-    .tile h3 {
-      margin: 0 0 4px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .tile p {
-      margin: 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(244,210,122,0.12);
-      color: #f8f4e7;
-      border: 1px solid rgba(244,210,122,0.4);
-    }
-
-    .chip span {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: #f5e4b3;
-    }
-
-    .list-compact {
-      font-size: 13px;
-      color: var(--muted);
-      margin: 8px 0 0;
-      padding-left: 16px;
-    }
-
-    .list-compact li {
-      margin-bottom: 2px;
-    }
-
-    .steps {
-      margin-top: 16px;
-    }
-
-    .steps-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      font-size: 13px;
-      color: var(--muted);
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(9,9,16,0.9);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .steps-num {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: rgba(244,210,122,0.1);
-      border: 1px solid rgba(244,210,122,0.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .steps-body strong {
-      display: block;
-      color: #f7f4ff;
-      margin-bottom: 2px;
-    }
-
-    /* GEO section */
-    .geo-note {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* Form block */
-
-    .form-section {
-      margin-top: 24px;
-      padding: 30px 0 10px;
-    }
-
-    .form-layout {
-      display: grid;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    @media (min-width: 900px) {
-      .form-layout {
-        grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
-      }
-    }
-
-    .form-card {
-  border-radius: 18px;
-  padding: 18px 18px 14px;
-  background: linear-gradient(135deg, rgba(244,210,122,0.22), rgba(244,210,122,0.10));
-  border: 1px solid rgba(244,210,122,0.65);
-  box-shadow: 0 18px 46px rgba(0,0,0,0.7);
-}
-
-.form-card h2 {
-  margin: 0 0 4px;
-  font-size: 20px;
-  font-weight: 800;
-  color: #120d05;
-}
-
-.form-card p {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: #120d05;
-}
-
-    form {
-      margin-top: 8px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .form-row {
-      display: grid;
-      gap: 10px;
-    }
-
-    @media (min-width: 720px) {
-      .form-row.two {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    label {
-      display: block;
-  font-size: 13px;
-  margin-bottom: 4px;
-  color: #120d05;          /* было очень тёмным / низкий контраст */
-  font-weight: 700;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-  border-radius: 11px;
-  border: 1px solid rgba(0,0,0,0.3);
-  padding: 9px 11px;
-  font-size: 13px;
-  font-family: inherit;
-  outline: none;
-  background: #ffffff;     /* чистый белый фон */
-  color: #18120a;
-    }
-
-    input:focus,
-select:focus,
-textarea:focus {
-  border-color: #c49a43;
-  box-shadow: 0 0 0 1px rgba(244,210,122,0.45);
-    }
-
-    input::placeholder,
-textarea::placeholder {
-  color: #8c7a4a;
-  opacity: 0.95;
-}
-
-    textarea {
-      min-height: 70px;
-      resize: vertical;
-    }
-
-    .consent {
-      display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  font-size: 11px;
-  color: #120d05;
-  margin-top: 4px;
-    }
-
-    .consent input {
-     width: 14px;
-  height: 14px;
-  margin-top: 2px;
-  flex-shrink: 0;
-    }
-
-    .actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .hint {
-      font-size: 11px;
-      color: #f7f2e4;
-    }
-
-    #form-hint {
-      font-size: 11px;
-      min-height: 13px;
-    }
-
-    .form-side {
-      display: grid;
-      gap: 10px;
-    }
-
-    .mini-card {
-      border-radius: 16px;
-      padding: 12px 13px;
-      background: rgba(10,9,16,0.98);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .mini-card strong {
-      display: block;
-      color: #f3f0ff;
-      margin-bottom: 2px;
-      font-size: 13px;
-    }
-
-    .mini-list {
-      margin: 6px 0 0;
-      padding-left: 16px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .mini-list li {
-      margin-bottom: 2px;
-    }
-
-    footer {
-      padding: 26px 0 10px;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    footer a{
+      color:var(--accent);
+      text-decoration:none;
     }
 
     /* toast */
-
-    #toast {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%) scale(.96);
-      background: #111018;
-      border-radius: 12px;
-      border: 1px solid rgba(244,210,122,0.4);
-      padding: 9px 13px;
-      font-size: 12px;
-      color: #fff;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .25s ease, transform .25s ease;
-      z-index: 40;
+    #toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%) scale(.96);
+      background:#111019;
+      color:#fffef7;
+      border-radius:12px;
+      border:1px solid rgba(244,210,122,0.65);
+      padding:9px 14px;
+      font-size:12px;
+      opacity:0;
+      pointer-events:none;
+      z-index:60;
+      box-shadow:0 14px 40px rgba(0,0,0,.9);
+      transition:.25s ease-out;
     }
 
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-
-    @media (max-width: 640px) {
-      .wrap { padding-inline: 18px; }
-      header { padding-top: 18px; }
-      .hero-card { order: -1; }
-    }
-
-    /* === Language selector === */
-    .lang-wrap {
-      position: fixed;
-      right: 18px;
-      top: 14px;
-      z-index: 60;
-    }
-
-    .lang-dropdown {
-      position: relative;
-    }
-
-    .lang-btn {
-      background: rgba(6,6,12,0.9);
-      border-radius: 999px;
-      padding: 7px 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-    }
-
-    .lang-btn svg {
-      transform: translateY(1px);
-    }
-
-    .lang-list {
-      position: absolute;
-      right: 0;
-      top: 36px;
-      min-width: 160px;
-      background: #050509;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.65);
-      overflow: hidden;
-      display: none;
-    }
-
-    .lang-list button {
-      width: 100%;
-      padding: 8px 11px;
-      border: none;
-      background: transparent;
-      color: #f5f5ff;
-      font-size: 12px;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .lang-list button:last-child {
-      border-bottom: none;
-    }
-
-    .lang-list button:hover {
-      background: linear-gradient(90deg, rgba(244,210,122,0.12), rgba(244,210,122,0.03));
-    }
-
-    @media (max-width: 540px) {
-      .lang-wrap {
-        right: 12px;
-        top: 10px;
-      }
-      .lang-list {
-        min-width: 140px;
-      }
+    @media(max-width:540px){
+      .wrap{padding:26px 18px 40px}
+      h1{font-size:28px;}
+      .hero{padding-top:56px;}
     }
   </style>
 </head>
 <body>
   <!-- Language selector -->
   <div class="lang-wrap" id="langWrap">
-    <div class="lang-dropdown">
-      <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
-        <span id="langLabel">English</span>
-        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1.2L7 7.2L13 1.2" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="lang-list" id="langList" role="menu" aria-label="Select language">
-        <button type="button" data-lang="en">English</button>
-        <button type="button" data-lang="de">Deutsch</button>
-        <button type="button" data-lang="pl">Polski</button>
-        <button type="button" data-lang="fr">Français</button>
-        <button type="button" data-lang="ru">Русский</button>
-      </div>
+    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+      <span id="langLabel">English</span>
+      <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1.5L6.5 6.5L12 1.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="lang-list" id="langList" role="menu">
+      <button data-lang="en">English</button>
+      <button data-lang="de">Deutsch</button>
+      <button data-lang="pl">Polski</button>
+      <button data-lang="fr">Français</button>
+      <button data-lang="ru">Русский</button>
     </div>
   </div>
 
-  <div class="wrap">
+  <main class="wrap">
     <!-- HERO -->
-    <header>
-      <div class="hero-layout">
-        <div>
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span data-i18n="hero.badge">Retention & VIP for iGaming</span>
-          </div>
-          <h1 data-i18n="hero.h1">
-            Done-for-you <span class="accent">call center, VIP, support & QA</span> for gambling brands
-          </h1>
-          <p class="hero-sub" data-i18n="hero.sub">
-            Retenly helps iGaming operators and platforms build or rebuild revenue teams:
-            call center, VIP desk, support and quality control with ready people and clear processes.
-          </p>
-          <div class="hero-tags">
-            <span class="hero-tag" data-i18n="hero.tag1">New brands — launch from zero</span>
-            <span class="hero-tag" data-i18n="hero.tag2">Active brands — fix churn & NGR leakage</span>
-            <span class="hero-tag" data-i18n="hero.tag3">Internal audit & playbook</span>
-          </div>
-          <div class="hero-actions">
-            <a href="#lead" class="btn" data-i18n="hero.btn_primary">Get a free consultation</a>
-            <button type="button" class="btn-ghost" id="scrollPlanBtn">
-              <span class="dot"></span>
-              <span data-i18n="hero.btn_secondary">See what we can build in 30 days</span>
-            </button>
-          </div>
-          <p class="hero-note" data-i18n="hero.note">
-            We work only with B2B: operators, platforms, PSP-friendly white labels and affiliate teams.
-          </p>
+    <header class="hero">
+      <div>
+        <div class="badge fade-up">
+          <div class="badge-icon">R</div>
+          <span data-i18n="hero.badge">Retenly · retention & VIP for iGaming</span>
         </div>
 
-        <aside class="hero-card" aria-label="Key impact metrics">
-          <div class="hero-card-title" data-i18n="metrics.title">Typical results after 30–90 days</div>
-          <div class="hero-metrics">
-            <div class="metric">
-              <strong data-i18n="metrics.item1_value">+18–35%</strong>
-              <span data-i18n="metrics.item1_label">Net gaming revenue (NGR) from old base</span>
-            </div>
-            <div class="metric">
-              <strong data-i18n="metrics.item2_value">+25–60%</strong>
-              <span data-i18n="metrics.item2_label">VIP share in deposits</span>
-            </div>
-            <div class="metric">
-              <strong data-i18n="metrics.item3_value">−30–50%</strong>
-              <span data-i18n="metrics.item3_label">Lost players in 0–90 days</span>
-            </div>
-          </div>
-          <ul class="hero-card-list">
-            <li data-i18n="metrics.list1">We use your CRM, dialer and BI — or help you choose and set up.</li>
-            <li data-i18n="metrics.list2">Managers are ready to work in RU / TR / AZ / KZ / UZ and other CIS-friendly GEOs.</li>
-            <li data-i18n="metrics.list3">You see daily reports: NGR, LTV, activity, call quality, VIP movement.</li>
-          </ul>
-        </aside>
+        <h1 class="fade-up d1" data-i18n="hero.h1">
+          Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно
+        </h1>
+
+        <p class="hero-lead fade-up d2" data-i18n="hero.lead">
+          Строим VIP, retention, колл-центр и контроль качества для iGaming-операторов: на уровне топ-брендов, без хаоса и потерянных депозитов.
+        </p>
+
+        <div class="hero-meta fade-up d2">
+          <span><span class="dot"></span><span data-i18n="hero.markets">Работаем с рынками Tier-1, Tier-2 и Tier-3</span></span>
+          <span>🌍 <span data-i18n="hero.geos">TR, AZ, KZ, UZ, RU, EU, LATAM</span></span>
+        </div>
+
+        <div class="hero-actions fade-up d3">
+          <a href="#lead" class="btn btn-primary" data-i18n="hero.cta">
+            Получить персональный анализ Retenly
+          </a>
+          <a href="#why" class="btn btn-ghost" data-i18n="hero.secondary">
+            Почему операторы выбирают нас
+          </a>
+        </div>
       </div>
+
+      <aside class="hero-card fade-up d2">
+        <div class="glass-inner">
+          <h3 data-i18n="hero.side.title">Бесплатный экспресс-аудит удержания и VIP</h3>
+          <p data-i18n="hero.side.lead">
+            За 24 часа покажем, где вы теряете деньги сейчас, и что можно выстроить за ближайшие 30–90 дней.
+          </p>
+          <ul>
+            <li data-i18n="hero.side.item1">Анализ NGR / Retention по сегментам (TR, CIS и др.)</li>
+            <li data-i18n="hero.side.item2">Проверка процессов: VIP, колл-центр, поддержка, QA</li>
+            <li data-i18n="hero.side.item3">Краткий roadmap внедрения без «воды»</li>
+          </ul>
+        </div>
+      </aside>
     </header>
 
-    <!-- WHO WE HELP -->
-    <section aria-labelledby="who-title">
-      <div class="section-kicker" data-i18n="who.kicker">Who we help</div>
-      <h2 id="who-title" class="section-title" data-i18n="who.title">New and existing iGaming businesses</h2>
-      <p class="section-sub" data-i18n="who.sub">
-        If you are losing players after day 0–7, VIPs are silent, or support is chaotic —
-        we help build a clear retention machine instead of heroic one-time sales.
-      </p>
+    <div class="divider"></div>
 
-      <div class="grid grid-3" style="margin-top:14px">
-        <div class="tile">
-          <h3 data-i18n="who.new_title">New brands</h3>
-          <p data-i18n="who.new_text">
-            Launching a new casino or betting brand and need ready call center, VIP and support teams from day one.
-          </p>
-        </div>
-        <div class="tile">
-          <h3 data-i18n="who.active_title">Operating brands</h3>
-          <p data-i18n="who.active_text">
-            You already have players and revenue but lose NGR on churn, weak reactivation and no clear QA loop.
-          </p>
-        </div>
-        <div class="tile">
-          <h3 data-i18n="who.platforms_title">Platforms & white labels</h3>
-          <p data-i18n="who.platforms_text">
-            You are a platform or B2B provider and want to offer retention, VIP and support as an extra service to your clients.
-          </p>
-        </div>
+    <!-- WHAT WE DO -->
+    <section id="what">
+      <div class="section-head fade-up">
+        <div class="eyebrow" data-i18n="what.eyebrow">Что делает Retenly</div>
+        <h2 data-i18n="what.title">Строим операционную “начинку” вокруг игрока</h2>
+        <p class="section-lead" data-i18n="what.lead">
+          Четкие процессы вместо хаоса: VIP-отдел, колл-центр, поддержка и контроль качества работают как единая система, которая приносит NGR, а не вопросы.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="glass-card fade-up d1">
+          <div class="glass-inner">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span data-i18n="what.vip.title">VIP & Retention</span>
+            </div>
+            <p data-i18n="what.vip.text">
+              Сегментация, персональные офферы, отработка рисков ухода. VIP-игроки не “отваливаются”, а увеличивают депозиты и частоту игры.
+            </p>
+          </div>
+        </article>
+
+        <article class="glass-card fade-up d2">
+          <div class="glass-inner">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h16M4 12h10M4 19h7" />
+                </svg>
+              </div>
+              <span data-i18n="what.callcenter.title">Колл-центр</span>
+            </div>
+            <p data-i18n="what.callcenter.text">
+              Исходящие и входящие кампании, anti-toxic скрипты, SLА, ежедневные отчеты. Отдел продаж и retention звонит системно, а не “как получится”.
+            </p>
+          </div>
+        </article>
+
+        <article class="glass-card fade-up d3">
+          <div class="glass-inner">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </div>
+              <span data-i18n="what.qa.title">Поддержка & QA</span>
+            </div>
+            <p data-i18n="what.qa.text">
+              Стандарты сервиса, чек-листы, выборочные и 100% проверки, прозрачные KPI. Поддержка говорит с игроками в одном тоне с брендом.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- WHAT WE BUILD -->
-    <section aria-labelledby="build-title">
-      <div class="section-kicker" data-i18n="build.kicker">What we build</div>
-      <h2 id="build-title" class="section-title" data-i18n="build.title">From zero-to-launch or fixing what is broken</h2>
-      <p class="section-sub" data-i18n="build.sub">
-        We can take the whole direction or one block: call center, VIP, support, QA or internal audit.
-      </p>
+    <div class="divider"></div>
 
-      <div class="grid grid-3" style="margin-top:14px">
-        <div class="tile">
-          <div class="chip"><span>01</span> <span data-i18n="build.call_chip">Call center</span></div>
-          <ul class="list-compact">
-            <li data-i18n="build.call_li1">Inbound & outbound for deposits, reactivation and KYC support.</li>
-            <li data-i18n="build.call_li2">Scripts for cold / warm / comeback calls for your GEOs.</li>
-            <li data-i18n="build.call_li3">SLA, monitoring and daily NGR / contact rate dashboards.</li>
-          </ul>
-        </div>
-
-        <div class="tile">
-          <div class="chip"><span>02</span> <span data-i18n="build.vip_chip">VIP desk</span></div>
-          <ul class="list-compact">
-            <li data-i18n="build.vip_li1">Segmentation: VIP / pre-VIP / high value casuals.</li>
-            <li data-i18n="build.vip_li2">Managers for TR / CIS and similar markets.</li>
-            <li data-i18n="build.vip_li3">Personal plans, limits, offers and anti-burnout policy.</li>
-          </ul>
-        </div>
-
-        <div class="tile">
-          <div class="chip"><span>03</span> <span data-i18n="build.support_chip">Support & live chat</span></div>
-          <ul class="list-compact">
-            <li data-i18n="build.support_li1">24/7 or peak-time coverage in required languages.</li>
-            <li data-i18n="build.support_li2">Scripts for chats, messengers and social media.</li>
-            <li data-i18n="build.support_li3">Routing rules: who answers what and in which time.</li>
-          </ul>
-        </div>
-
-        <div class="tile">
-          <div class="chip"><span>04</span> <span data-i18n="build.qa_chip">Quality control</span></div>
-          <ul class="list-compact">
-            <li data-i18n="build.qa_li1">QA forms for calls and chats: greeting, KYC, limits, RG.</li>
-            <li data-i18n="build.qa_li2">Regular audits of calls, chats and VIP cases.</li>
-            <li data-i18n="build.qa_li3">Feedback loop: coaching for each agent and KPIs per person.</li>
-          </ul>
-        </div>
-
-        <div class="tile">
-          <div class="chip"><span>05</span> <span data-i18n="build.audit_chip">Internal audit</span></div>
-          <ul class="list-compact">
-            <li data-i18n="build.audit_li1">We check your structure, scripts and reports.</li>
-            <li data-i18n="build.audit_li2">Show where you lose deposits and players.</li>
-            <li data-i18n="build.audit_li3">Give a clear 30 / 60 / 90 day roadmap.</li>
-          </ul>
-        </div>
-
-        <div class="tile tile-soft">
-          <h3 data-i18n="build.coach_title">Already have people but no structure?</h3>
-          <p data-i18n="build.coach_text">
-            We don’t force you to fire current team. We can build processes, QA and training on top of your staff,
-            so you keep knowledge but stop losing money every day.
-          </p>
-        </div>
+    <!-- WHO WE WORK WITH -->
+    <section id="who">
+      <div class="section-head fade-up">
+        <div class="eyebrow" data-i18n="who.eyebrow">С кем мы работаем</div>
+        <h2 data-i18n="who.title">Партнер для операторов и платформ</h2>
+        <p class="section-lead" data-i18n="who.lead">
+          Мы не “общий аутсорс-колл-центр”. Retenly сфокусирован на iGaming и смежных вертикалях, где важны LTV, NGR и регуляторные риски.
+        </p>
       </div>
-    </section>
 
-    <!-- GEO FOCUS -->
-    <section aria-labelledby="geo-title">
-      <div class="section-kicker" data-i18n="geo.kicker">GEO focus</div>
-      <h2 id="geo-title" class="section-title" data-i18n="geo.title">Strongest in TR & CIS-friendly markets</h2>
-      <p class="section-sub" data-i18n="geo.sub">
-        We know specifics of these regions: payment habits, bonus expectations, risk limits, and what VIPs really want on the call.
-      </p>
-      <p class="geo-note" data-i18n="geo.note">
-        Languages we can cover: RU, TR, AZ, KZ, UZ + mixed Russian-speaking bases in EU / Asia.
-      </p>
-
-      <div class="grid grid-3" style="margin-top:14px">
-        <div class="tile">
-          <h3 data-i18n="geo.tr_title">Turkey (TR)</h3>
-          <ul class="list-compact">
-            <li data-i18n="geo.tr_li1">Scripts adapted for local communication style and regulation risks.</li>
-            <li data-i18n="geo.tr_li2">Work with cards, local wallets and promo-limits for TR players.</li>
-            <li data-i18n="geo.tr_li3">VIP communication that respects privacy and trust level in region.</li>
-          </ul>
-        </div>
-        <div class="tile">
-          <h3 data-i18n="geo.cis_title">CIS / Post-Soviet</h3>
-          <ul class="list-compact">
-            <li data-i18n="geo.cis_li1">RU / AZ / KZ / UZ bases with different limits and check sizes.</li>
-            <li data-i18n="geo.cis_li2">Reactivation of old players with local holidays and triggers.</li>
-            <li data-i18n="geo.cis_li3">VIP work with mixed currencies and cross-brand traffic.</li>
-          </ul>
-        </div>
-        <div class="tile">
-          <h3 data-i18n="geo.other_title">Other GEOs</h3>
-          <ul class="list-compact">
-            <li data-i18n="geo.other_li1">We can join as an additional retention vendor for specific segments.</li>
-            <li data-i18n="geo.other_li2">Use English / Russian teams for global or EU-located bases.</li>
-            <li data-i18n="geo.other_li3">Start with a pilot on one GEO and expand after results.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW WE WORK -->
-    <section aria-labelledby="how-title">
-      <div class="section-kicker" data-i18n="how.kicker">How we work</div>
-      <h2 id="how-title" class="section-title" data-i18n="how.title">Simple collaboration — clear numbers</h2>
-      <p class="section-sub" data-i18n="how.sub">
-        No magic. We agree on metrics, build processes, give people, and every week you see a dashboard — not a beautiful story.
-      </p>
-
-      <div class="steps">
-        <div class="steps-item">
-          <div class="steps-num">1</div>
-          <div class="steps-body">
-            <strong data-i18n="how.step1_title">Brief call (30–40 min)</strong>
-            <span data-i18n="how.step1_text">
-              We clarify your product (casino / betting / mixed), GEOs, tech stack (CRM, dialer, BI), current NGR and problems.
-            </span>
+      <div class="grid grid-2">
+        <div class="glass-card fade-up d1">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M4 12h10M4 17h7" />
+                </svg>
+              </div>
+              <span data-i18n="who.op.title">iGaming-операторы</span>
+            </div>
+            <ul>
+              <li data-i18n="who.op.item1">Online-casino и sportsbook</li>
+              <li data-i18n="who.op.item2">Работа с активной и спящей базой</li>
+            </ul>
           </div>
         </div>
-        <div class="steps-item">
-          <div class="steps-num">2</div>
-          <div class="steps-body">
-            <strong data-i18n="how.step2_title">Audit & plan (up to 7 days)</strong>
-            <span data-i18n="how.step2_text">
-              We ask for reports and logs, map the funnel from registration to VIP, and prepare a concrete 30–90 day plan:
-              what to build, what to fix and what can be outsourced.
-            </span>
+
+        <div class="glass-card fade-up d2">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 6h12v12H6z" />
+                </svg>
+              </div>
+              <span data-i18n="who.white.title">White-label & платформы</span>
+            </div>
+            <ul>
+              <li data-i18n="who.white.item1">Решения для ваших клиентов “под ключ”</li>
+              <li data-i18n="who.white.item2">Retention и VIP как часть продуктового стека</li>
+            </ul>
           </div>
         </div>
-        <div class="steps-item">
-          <div class="steps-num">3</div>
-          <div class="steps-body">
-            <strong data-i18n="how.step3_title">Launch & daily control</strong>
-            <span data-i18n="how.step3_text">
-              We launch teams and processes step by step. You see calls, chats, QA and NGR in dashboards and can stop or scale at any moment.
-            </span>
+
+        <div class="glass-card fade-up d3">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l4 4 10-10" />
+                </svg>
+              </div>
+              <span data-i18n="who.aff.title">Affiliate-команды</span>
+            </div>
+            <ul>
+              <li data-i18n="who.aff.item1">Максимизируем выкуп трафика</li>
+              <li data-i18n="who.aff.item2">Отдельные процессы по VIP и high-value</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d4">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M4 12h16M4 17h10" />
+                </svg>
+              </div>
+              <span data-i18n="who.pay.title">Payment-friendly операторы</span>
+            </div>
+            <ul>
+              <li data-i18n="who.pay.item1">GEO с чувствительными платежами (TR, CIS и др.)</li>
+              <li data-i18n="who.pay.item2">Четкая коммуникация по лимитам, KYC и рискам</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="divider"></div>
+
+    <!-- WHY RETENLY -->
+    <section id="why">
+      <div class="section-head fade-up">
+        <div class="eyebrow" data-i18n="why.eyebrow">Почему операторы выбирают нас</div>
+        <h2 data-i18n="why.title">Retenly — как внутренняя команда, только без overhead</h2>
+        <p class="section-lead" data-i18n="why.lead">
+          Мы говорим на языке NGR, LTV и удержания, а не просто “звонков и заявок”. Фокус — результат по деньгам и качеству, а не количество контактов.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="glass-card fade-up d1">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l4 4L19 7" />
+                </svg>
+              </div>
+              <span data-i18n="why.item1.title">Видим, где уходят деньги</span>
+            </div>
+            <p data-i18n="why.item1.text">
+              Находим точки потерь по сегментам и GEO, показываем цифрами: сколько NGR и депозитов можно вернуть за 30–90 дней.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d2">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3 12h18M12 3v18" />
+                </svg>
+              </div>
+              <span data-i18n="why.item2.title">Глубокая экспертиза TR + CIS</span>
+            </div>
+            <p data-i18n="why.item2.text">
+              Понимаем ментальность и поведение игроков в TR, AZ, KZ, UZ, RU. Строим коммуникацию, которая реально отзывается у аудитории.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d3">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 4h16v16H4z" />
+                </svg>
+              </div>
+              <span data-i18n="why.item3.title">CRM-neutral подход</span>
+            </div>
+            <p data-i18n="why.item3.text">
+              Работаем с любыми CRM и трекинг-системами. Встраиваемся в вашу инфраструктуру, не заставляя ее менять.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d4">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 12l4 4 12-12" />
+                </svg>
+              </div>
+              <span data-i18n="why.item4.title">Сильный QA и прозрачные отчеты</span>
+            </div>
+            <p data-i18n="why.item4.text">
+              Контроль качества, разбор звонков и чатов, регулярные отчеты по KPI. Вы видите не только цифры, но и как команда общается с игроками.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 30 DAYS RESULT -->
+    <section id="result">
+      <div class="section-head fade-up">
+        <div class="eyebrow" data-i18n="result.eyebrow">30 дней с Retenly</div>
+        <h2 data-i18n="result.title">Что меняется за первый месяц работы</h2>
+        <p class="section-lead" data-i18n="result.lead">
+          Мы не обещаем «чудо за неделю». Но уже через 30 дней вы видите понятную структуру, а не набор разрозненных инициатив.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="glass-card fade-up d1">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l4 4L19 7" />
+                </svg>
+              </div>
+              <span data-i18n="result.item1.title">Появляется структура retention</span>
+            </div>
+            <p data-i18n="result.item1.text">
+              Вы точно знаете, кто за что отвечает, как идут касания игроков и какие сегменты в фокусе.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d2">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 12h16M4 7h10M4 17h7" />
+                </svg>
+              </div>
+              <span data-i18n="result.item2.title">VIP-база сегментирована и управляется</span>
+            </div>
+            <p data-i18n="result.item2.text">
+              High-value игроки получают отдельные сценарии, SLА и офферы — без ручного хаоса и потерь.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d3">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 4h16v16H4z" />
+                </svg>
+              </div>
+              <span data-i18n="result.item3.title">Закрываем “слив” депозитов 0–7–30 дней</span>
+            </div>
+            <p data-i18n="result.item3.text">
+              Игроки не пропадают после первых депозитов: у них есть выстроенный путь и касания.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card fade-up d4">
+          <div class="glass-inner list-card">
+            <div class="card-title">
+              <div class="micro-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3 12h18M12 3v18" />
+                </svg>
+              </div>
+              <span data-i18n="result.item4.title">QA и стандарты сервиса закреплены</span>
+            </div>
+            <p data-i18n="result.item4.text">
+              Команда работает по понятным стандартам, а качество обслуживания становится управляемым показателем.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
 
     <!-- FORM -->
-    <section class="form-section" aria-labelledby="form-title">
+    <section id="contact">
+      <div class="section-head fade-up">
+        <div class="eyebrow" data-i18n="form.eyebrow">Следующий шаг</div>
+        <h2 data-i18n="form.block_title">Получить персональный анализ Retenly</h2>
+        <p class="section-lead" data-i18n="form.block_lead">
+          Коротко расскажите о проекте. В течение 24 часов мы вернемся с персональным PDF: где вы теряете деньги сейчас и что можно выстроить в ближайшие 30–90 дней.
+        </p>
+      </div>
+
       <div class="form-layout">
-        <div class="form-card">
-          <h2 id="form-title" data-i18n="form.title">Get a free retention & VIP audit</h2>
+        <div class="form-card fade-up d1">
+          <h2 data-i18n="form.title">Бесплатный аудит по удержанию и VIP</h2>
           <p data-i18n="form.lead">
-            Tell us briefly about your brand. Within 24 hours we will return with a short PDF:
-            where you lose money now and what we can build for you in the next 30–90 days.
+            Никаких “жестких продаж”. Только конкретный разбор и рекомендации.
           </p>
 
           <form id="lead"
-            action="https://script.google.com/macros/s/AKfycbx23fciE64h0ZSdDawqJPDtL2AUq_61b_tqNXF7RLqPJ2t7-PZFsvQAB7wRbr3q4NJw/exec"
-            method="POST"
-            autocomplete="on">
-            <!-- honeypot -->
+                action="https://script.google.com/macros/s/AKfycbx23fciE64h0ZSdDawqJPDtL2AUq_61b_tqNXF7RLqPJ2t7-PZFsvQAB7wRbr3q4NJw/exec"
+                method="POST" accept-charset="UTF-8" autocomplete="on">
             <input type="text" name="_hp" tabindex="-1" autocomplete="off"
                    style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
-            <div class="form-row two">
+            <div class="row two">
               <div>
-                <label for="name" data-i18n="form.name_label">Name</label>
+                <label for="name" data-i18n="form.name_label">Имя</label>
                 <input id="name" name="name" required
                        data-i18n-placeholder="form.name_placeholder"
-                       placeholder="How should we address you">
+                       placeholder="Как к вам обращаться">
               </div>
               <div>
-                <label for="company" data-i18n="form.company_label">Company / brand</label>
+                <label for="company" data-i18n="form.company_label">Компания / бренд</label>
                 <input id="company" name="company"
                        data-i18n-placeholder="form.company_placeholder"
-                       placeholder="Operator, platform or project name">
+                       placeholder="Оператор, платформа или бренд">
               </div>
             </div>
 
-            <div class="form-row two">
+            <div class="row two">
               <div>
-                <label for="email" data-i18n="form.email_label">Work email</label>
-                <input id="email" name="email" type="email" required
-                       data-i18n-placeholder="form.email_placeholder"
-                       placeholder="you@company.com">
+                <label for="email" data-i18n="form.email_label">Рабочий e-mail</label>
+                <input id="email" name="email" type="email" required placeholder="you@company.com">
               </div>
               <div>
-                <label for="role" data-i18n="form.role_label">Role</label>
-                <input id="role" name="role"
-                       data-i18n-placeholder="form.role_placeholder"
-                       placeholder="Founder, COO, Head of Retention…">
+                <label for="phone" data-i18n="form.phone_label">Телефон / Telegram</label>
+                <input id="phone" name="phone" type="tel"
+                       data-i18n-placeholder="form.phone_placeholder"
+                       placeholder="+90 / +7 / +994 …">
               </div>
             </div>
 
-            <div class="form-row two">
+            <div class="row">
               <div>
-                <label for="monthly_ngr" data-i18n="form.ngr_label">Monthly NGR range</label>
-                <select id="monthly_ngr" name="monthly_ngr">
-                  <option value="" data-i18n="form.ngr_opt0">Select</option>
-                  <option value="<50k" data-i18n="form.ngr_opt1">&lt; 50k</option>
-                  <option value="50-150k" data-i18n="form.ngr_opt2">50k – 150k</option>
-                  <option value="150-500k" data-i18n="form.ngr_opt3">150k – 500k</option>
-                  <option value="500k+" data-i18n="form.ngr_opt4">500k+</option>
+                <label for="interest" data-i18n="form.interest_label">Что важнее всего сейчас</label>
+                <select id="interest" name="interest">
+                  <option data-i18n="form.opt.vip">VIP & high-value игроки</option>
+                  <option data-i18n="form.opt.reactivation">Реактивация спящих игроков</option>
+                  <option data-i18n="form.opt.callcenter">Колл-центр / отдел звонков</option>
+                  <option data-i18n="form.opt.support">Поддержка и SLA</option>
+                  <option data-i18n="form.opt.qa">Контроль качества (QA)</option>
+                  <option data-i18n="form.opt.full">Построить все с нуля</option>
                 </select>
               </div>
-              <div>
-                <label for="geo" data-i18n="form.geo_label">Main GEOs</label>
-                <input id="geo" name="geo"
-                       data-i18n-placeholder="form.geo_placeholder"
-                       placeholder="TR, AZ, KZ, UZ, RU, LATAM, etc.">
-              </div>
             </div>
 
-            <div class="form-row">
+            <div class="row">
               <div>
-                <label for="interest" data-i18n="form.interest_label">What hurts the most right now?</label>
-                <textarea id="interest" name="interest"
-                  data-i18n-placeholder="form.interest_placeholder"
-                  placeholder="Example: losing VIPs after 30 days, no process for call center, support chaos, no QA…"></textarea>
+                <label for="comment" data-i18n="form.comment_label">Что сильнее всего болит?</label>
+                <textarea id="comment" name="comment"
+                          data-i18n-placeholder="form.comment_placeholder"
+                          placeholder="Например: VIP «отваливаются» после 30 дней, нет процесса по колл-центру, хаос в поддержке, нет QA…"></textarea>
               </div>
             </div>
 
             <div class="consent">
-              <input id="consent" name="consent" type="checkbox" required>
-              <label for="consent" data-i18n="form.consent_text">
-                I confirm that I represent an iGaming / gambling business or platform and agree to data processing
-                for contacting me about retention and VIP services.
+              <input id="agree" name="consent" type="checkbox" required>
+              <label for="agree" data-i18n="form.consent">
+                Подтверждаю, что предоставляю данные для связи и согласен(на) на их обработку.
               </label>
             </div>
 
             <div class="actions">
-              <button type="submit" class="btn" id="submitBtn" data-i18n="form.btn">Send request</button>
-              <div class="hint" id="form-hint"></div>
+              <button class="btn btn-primary" type="submit" data-i18n="form.submit">Отправить заявку</button>
+              <p id="form-hint"></p>
             </div>
           </form>
         </div>
 
-        <div class="form-side">
-          <div class="mini-card">
-            <strong data-i18n="side.audit_title">What you get in the audit</strong>
-            <ul class="mini-list">
-              <li data-i18n="side.audit_li1">Snapshot of your retention funnel (0–90 days).</li>
-              <li data-i18n="side.audit_li2">Where you lose deposits and VIP lifetime value.</li>
-              <li data-i18n="side.audit_li3">What can be built or outsourced in 30–90 days.</li>
-            </ul>
-          </div>
-          <div class="mini-card">
-            <strong data-i18n="side.work_title">How we usually work with brands</strong>
-            <ul class="mini-list">
-              <li data-i18n="side.work_li1">We sign NDA if needed.</li>
-              <li data-i18n="side.work_li2">We do not share your data with other operators.</li>
-              <li data-i18n="side.work_li3">You can start with audit only — without long-term contract.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Closing CTA" style="padding-top:26px;">
-      <div class="tile" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
-        <div>
-          <h3 style="margin:0 0 4px;font-size:16px;" data-i18n="closing.title">
-            Ready to stop leaking NGR every day?
-          </h3>
-          <p style="margin:0;font-size:13px;color:var(--muted);" data-i18n="closing.text">
-            Send a short request — we will show how much more you can earn on the same traffic and players.
+        <aside class="side-note fade-up d2">
+          <h3 data-i18n="side.title">Что вы получите по итогам заявки</h3>
+          <p data-i18n="side.lead">
+            Один PDF-документ, который можно показать C-level или партнерам.
           </p>
-        </div>
-        <a href="#lead" class="btn" data-i18n="closing.btn">Talk about your retention</a>
+          <ul>
+            <li data-i18n="side.item1">Краткий срез по текущему состоянию retention, VIP и колл-центра</li>
+            <li data-i18n="side.item2">Основные точки потерь NGR и LTV по сегментам</li>
+            <li data-i18n="side.item3">Идеи быстрых внедрений на 30–90 дней</li>
+          </ul>
+        </aside>
       </div>
     </section>
+  </main>
 
-    <footer>
-      © 2025 Retenly. <a href="#" data-i18n="footer.privacy">Privacy policy</a>
-    </footer>
-  </div>
+  <footer>
+    <small>
+      © 2025 Retenly.
+      <a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a>
+    </small>
+  </footer>
 
   <div id="toast">Done</div>
 
   <script>
+    // ====== I18N DICTIONARY ======
     const LANG_KEY = 'retenly_lang';
     const SUPPORTED = ['en','de','pl','fr','ru'];
 
     const I18N = {
       en: {
-        'meta.title': 'Retenly — Retention & VIP operations for iGaming',
-        'meta.desc':  'Retenly builds and operates call centers, VIP, support and QA for iGaming brands. From zero-to-launch, audits and ready-made teams.',
-
-        'hero.badge': 'Retention & VIP for iGaming',
-        'hero.h1': 'Done-for-you call center, VIP, support & QA for gambling brands',
-        'hero.sub': 'Retenly helps iGaming operators and platforms build or rebuild revenue teams: call center, VIP desk, support and quality control with ready people and clear processes.',
-        'hero.tag1': 'New brands — launch from zero',
-        'hero.tag2': 'Active brands — fix churn & NGR leakage',
-        'hero.tag3': 'Internal audit & playbook',
-        'hero.btn_primary': 'Get a free consultation',
-        'hero.btn_secondary': 'See what we can build in 30 days',
-        'hero.note': 'We work only with B2B: operators, platforms, PSP-friendly white labels and affiliate teams.',
-
-        'metrics.title': 'Typical results after 30–90 days',
-        'metrics.item1_value': '+18–35%',
-        'metrics.item1_label': 'Net gaming revenue (NGR) from old base',
-        'metrics.item2_value': '+25–60%',
-        'metrics.item2_label': 'VIP share in deposits',
-        'metrics.item3_value': '−30–50%',
-        'metrics.item3_label': 'Lost players in 0–90 days',
-        'metrics.list1': 'We use your CRM, dialer and BI — or help you choose and set up.',
-        'metrics.list2': 'Managers are ready to work in RU / TR / AZ / KZ / UZ and other CIS-friendly GEOs.',
-        'metrics.list3': 'You see daily reports: NGR, LTV, activity, call quality, VIP movement.',
-
-        'who.kicker': 'Who we help',
-        'who.title': 'New and existing iGaming businesses',
-        'who.sub': 'If you are losing players after day 0–7, VIPs are silent, or support is chaotic — we help build a clear retention machine instead of heroic one-time sales.',
-        'who.new_title': 'New brands',
-        'who.new_text': 'Launching a new casino or betting brand and need ready call center, VIP and support teams from day one.',
-        'who.active_title': 'Operating brands',
-        'who.active_text': 'You already have players and revenue but lose NGR on churn, weak reactivation and no clear QA loop.',
-        'who.platforms_title': 'Platforms & white labels',
-        'who.platforms_text': 'You are a platform or B2B provider and want to offer retention, VIP and support as an extra service to your clients.',
-
-        'build.kicker': 'What we build',
-        'build.title': 'From zero-to-launch or fixing what is broken',
-        'build.sub': 'We can take the whole direction or one block: call center, VIP, support, QA or internal audit.',
-
-        'build.call_chip': 'Call center',
-        'build.call_li1': 'Inbound & outbound for deposits, reactivation and KYC support.',
-        'build.call_li2': 'Scripts for cold / warm / comeback calls for your GEOs.',
-        'build.call_li3': 'SLA, monitoring and daily NGR / contact rate dashboards.',
-
-        'build.vip_chip': 'VIP desk',
-        'build.vip_li1': 'Segmentation: VIP / pre-VIP / high value casuals.',
-        'build.vip_li2': 'Managers for TR / CIS and similar markets.',
-        'build.vip_li3': 'Personal plans, limits, offers and anti-burnout policy.',
-
-        'build.support_chip': 'Support & live chat',
-        'build.support_li1': '24/7 or peak-time coverage in required languages.',
-        'build.support_li2': 'Scripts for chats, messengers and social media.',
-        'build.support_li3': 'Routing rules: who answers what and in which time.',
-
-        'build.qa_chip': 'Quality control',
-        'build.qa_li1': 'QA forms for calls and chats: greeting, KYC, limits, RG.',
-        'build.qa_li2': 'Regular audits of calls, chats and VIP cases.',
-        'build.qa_li3': 'Feedback loop: coaching for each agent and KPIs per person.',
-
-        'build.audit_chip': 'Internal audit',
-        'build.audit_li1': 'We check your structure, scripts and reports.',
-        'build.audit_li2': 'Show where you lose deposits and players.',
-        'build.audit_li3': 'Give a clear 30 / 60 / 90 day roadmap.',
-
-        'build.coach_title': 'Already have people but no structure?',
-        'build.coach_text': 'We don’t force you to fire current team. We can build processes, QA and training on top of your staff, so you keep knowledge but stop losing money every day.',
-
-        'geo.kicker': 'GEO focus',
-        'geo.title': 'Strongest in TR & CIS-friendly markets',
-        'geo.sub': 'We know specifics of these regions: payment habits, bonus expectations, risk limits, and what VIPs really want on the call.',
-        'geo.note': 'Languages we can cover: RU, TR, AZ, KZ, UZ + mixed Russian-speaking bases in EU / Asia.',
-
-        'geo.tr_title': 'Turkey (TR)',
-        'geo.tr_li1': 'Scripts adapted for local communication style and regulation risks.',
-        'geo.tr_li2': 'Work with cards, local wallets and promo-limits for TR players.',
-        'geo.tr_li3': 'VIP communication that respects privacy and trust level in region.',
-
-        'geo.cis_title': 'CIS / Post-Soviet',
-        'geo.cis_li1': 'RU / AZ / KZ / UZ bases with different limits and check sizes.',
-        'geo.cis_li2': 'Reactivation of old players with local holidays and triggers.',
-        'geo.cis_li3': 'VIP work with mixed currencies and cross-brand traffic.',
-
-        'geo.other_title': 'Other GEOs',
-        'geo.other_li1': 'We can join as an additional retention vendor for specific segments.',
-        'geo.other_li2': 'Use English / Russian teams for global or EU-located bases.',
-        'geo.other_li3': 'Start with a pilot on one GEO and expand after results.',
-
-        'how.kicker': 'How we work',
-        'how.title': 'Simple collaboration — clear numbers',
-        'how.sub': 'No magic. We agree on metrics, build processes, give people, and every week you see a dashboard — not a beautiful story.',
-        'how.step1_title': 'Brief call (30–40 min)',
-        'how.step1_text': 'We clarify your product (casino / betting / mixed), GEOs, tech stack (CRM, dialer, BI), current NGR and problems.',
-        'how.step2_title': 'Audit & plan (up to 7 days)',
-        'how.step2_text': 'We ask for reports and logs, map the funnel from registration to VIP, and prepare a concrete 30–90 day plan: what to build, what to fix and what can be outsourced.',
-        'how.step3_title': 'Launch & daily control',
-        'how.step3_text': 'We launch teams and processes step by step. You see calls, chats, QA and NGR in dashboards and can stop or scale at any moment.',
-
-        'form.title': 'Get a free retention & VIP audit',
-        'form.lead': 'Tell us briefly about your brand. Within 24 hours we will return with a short PDF: where you lose money now and what we can build for you in the next 30–90 days.',
-        'form.name_label': 'Name',
-        'form.name_placeholder': 'How should we address you',
-        'form.company_label': 'Company / brand',
-        'form.company_placeholder': 'Operator, platform or project name',
-        'form.email_label': 'Work email',
-        'form.email_placeholder': 'you@company.com',
-        'form.role_label': 'Role',
-        'form.role_placeholder': 'Founder, COO, Head of Retention…',
-        'form.ngr_label': 'Monthly NGR range',
-        'form.ngr_opt0': 'Select',
-        'form.ngr_opt1': '< 50k',
-        'form.ngr_opt2': '50k – 150k',
-        'form.ngr_opt3': '150k – 500k',
-        'form.ngr_opt4': '500k+',
-        'form.geo_label': 'Main GEOs',
-        'form.geo_placeholder': 'TR, AZ, KZ, UZ, RU, LATAM, etc.',
-        'form.interest_label': 'What hurts the most right now?',
-        'form.interest_placeholder': 'Example: losing VIPs after 30 days, no process for call center, support chaos, no QA…',
-        'form.consent_text': 'I confirm that I represent an iGaming / gambling business or platform and agree to data processing for contacting me about retention and VIP services.',
-        'form.btn': 'Send request',
-
-        'form.sending': 'Sending…',
-        'form.hint_success': 'Request received. We will contact you within 24 hours.',
-        'form.hint_error': 'Server error. Please try again or contact us later.',
-        'form.hint_network': 'Network error. Please try again.',
-        'form.toast_success': 'Request sent — check your inbox soon.',
-        'form.toast_network': 'Network error — please try again.',
-
-        'side.audit_title': 'What you get in the audit',
-        'side.audit_li1': 'Snapshot of your retention funnel (0–90 days).',
-        'side.audit_li2': 'Where you lose deposits and VIP lifetime value.',
-        'side.audit_li3': 'What can be built or outsourced in 30–90 days.',
-        'side.work_title': 'How we usually work with brands',
-        'side.work_li1': 'We sign NDA if needed.',
-        'side.work_li2': 'We do not share your data with other operators.',
-        'side.work_li3': 'You can start with audit only — without long-term contract.',
-
-        'closing.title': 'Ready to stop leaking NGR every day?',
-        'closing.text': 'Send a short request — we will show how much more you can earn on the same traffic and players.',
-        'closing.btn': 'Talk about your retention',
-
-        'footer.privacy': 'Privacy policy'
+        "meta.title":"Retenly — premium retention & VIP for iGaming",
+        "meta.desc":"Retenly builds premium retention, VIP, call-center and QA operations for iGaming across Tier-1–3 markets.",
+        "hero.badge":"Retenly · retention & VIP for iGaming",
+        "hero.h1":"Retenly fixes retention problems that cost you tens of thousands of dollars every month.",
+        "hero.lead":"We build VIP, retention, call-center and QA operations for iGaming operators — at top-brand level, without chaos and lost deposits.",
+        "hero.markets":"We work with Tier-1, Tier-2 and Tier-3 markets",
+        "hero.geos":"TR, AZ, KZ, UZ, RU, EU, LATAM",
+        "hero.cta":"Request a personal Retenly analysis",
+        "hero.secondary":"Why operators choose us",
+        "hero.side.title":"Free express audit of retention and VIP",
+        "hero.side.lead":"Within 24 hours we show where you are losing money now and what can be built in the next 30–90 days.",
+        "hero.side.item1":"NGR / retention analysis by segments and GEO (TR, CIS, etc.)",
+        "hero.side.item2":"Process review: VIP, call-center, support, QA",
+        "hero.side.item3":"Short, no-fluff implementation roadmap",
+        "what.eyebrow":"What Retenly does",
+        "what.title":"We build the operational core around your players",
+        "what.lead":"Clear processes instead of chaos: VIP, call-center, support and QA work as one system that generates NGR, not questions.",
+        "what.vip.title":"VIP & Retention",
+        "what.vip.text":"Segmentation, personal offers, churn-risk handling. VIP players don’t “drop off” but increase deposits and activity.",
+        "what.callcenter.title":"Call-center",
+        "what.callcenter.text":"Outbound and inbound campaigns, anti-toxic scripts, SLAs, daily reports. Sales and retention calls run systematically.",
+        "what.qa.title":"Support & QA",
+        "what.qa.text":"Service standards, checklists, sample and 100% reviews, transparent KPIs. Support talks in one voice with your brand.",
+        "who.eyebrow":"Who we work with",
+        "who.title":"A partner for operators and platforms",
+        "who.lead":"We are not a generic outsource call-center. Retenly is focused on iGaming and adjacent verticals where LTV, NGR and regulation matter.",
+        "who.op.title":"iGaming operators",
+        "who.op.item1":"Online casino and sportsbook",
+        "who.op.item2":"Working with active and dormant bases",
+        "who.white.title":"White-label & platforms",
+        "who.white.item1":"Turn-key solutions for your clients",
+        "who.white.item2":"Retention & VIP as part of your product stack",
+        "who.aff.title":"Affiliate teams",
+        "who.aff.item1":"Maximize value of acquired traffic",
+        "who.aff.item2":"Dedicated processes for VIP and high-value players",
+        "who.pay.title":"Payment-friendly operators",
+        "who.pay.item1":"GEOs with sensitive payments (TR, CIS, etc.)",
+        "who.pay.item2":"Clear communication on limits, KYC and risk",
+        "why.eyebrow":"Why operators choose us",
+        "why.title":"Retenly works like an internal team — without the overhead",
+        "why.lead":"We speak the language of NGR, LTV and retention, not just “calls and tickets”. We focus on financial and quality results, not contact volume.",
+        "why.item1.title":"We see where money leaks",
+        "why.item1.text":"We find loss points by segment and GEO and show in numbers how much NGR and deposits can be recovered in 30–90 days.",
+        "why.item2.title":"Deep TR + CIS expertise",
+        "why.item2.text":"We understand mentality and player behaviour in TR, AZ, KZ, UZ, RU. We build communication that really resonates.",
+        "why.item3.title":"CRM-neutral approach",
+        "why.item3.text":"We work with any CRM and tracking setup, integrating into your infrastructure instead of forcing you to change it.",
+        "why.item4.title":"Strong QA and transparent reporting",
+        "why.item4.text":"Quality control, call and chat reviews, regular KPI reports. You see both numbers and how the team talks to players.",
+        "result.eyebrow":"30 days with Retenly",
+        "result.title":"What changes in the first month",
+        "result.lead":"We don’t promise miracles in a week, but after 30 days you see a clear structure instead of scattered initiatives.",
+        "result.item1.title":"A retention structure appears",
+        "result.item1.text":"You know exactly who is responsible for what, how player touchpoints work and which segments are in focus.",
+        "result.item2.title":"VIP base is segmented and managed",
+        "result.item2.text":"High-value players get dedicated scenarios, SLAs and offers — without manual chaos and missed opportunities.",
+        "result.item3.title":"Deposit leakage 0–7–30 days is addressed",
+        "result.item3.text":"Players don’t disappear after first deposits: they have a built-out journey and touchpoints.",
+        "result.item4.title":"QA and service standards are fixed",
+        "result.item4.text":"The team works to clear standards, and service quality becomes a manageable metric.",
+        "form.eyebrow":"Next step",
+        "form.block_title":"Get your personal Retenly analysis",
+        "form.block_lead":"Briefly describe your project. Within 24 hours we’ll return with a personal PDF: where you lose money now and what can be built in the next 30–90 days.",
+        "form.title":"Free retention & VIP audit",
+        "form.lead":"No hard sales. Only a concrete review and recommendations.",
+        "form.name_label":"Name",
+        "form.name_placeholder":"How should we address you",
+        "form.company_label":"Company / brand",
+        "form.company_placeholder":"Operator, platform or brand name",
+        "form.email_label":"Work e-mail",
+        "form.phone_label":"Phone / Telegram",
+        "form.phone_placeholder":"+90 / +7 / +994 …",
+        "form.interest_label":"What matters most right now",
+        "form.opt.vip":"VIP & high-value players",
+        "form.opt.reactivation":"Reactivation of dormant players",
+        "form.opt.callcenter":"Call-center / calling team",
+        "form.opt.support":"Support & SLAs",
+        "form.opt.qa":"Quality control (QA)",
+        "form.opt.full":"Build everything from scratch",
+        "form.comment_label":"What hurts the most?",
+        "form.comment_placeholder":"For example: VIP players drop off after 30 days, no call-center process, chaotic support, no QA…",
+        "form.consent":"I confirm I provide data for contact and agree to its processing.",
+        "form.submit":"Submit request",
+        "form.success":"Your request has been received. The Retenly team will prepare a personal review and get back to you shortly.",
+        "form.error":"Sending error, please try again later.",
+        "side.title":"What you receive after the request",
+        "side.lead":"A single PDF document you can show to C-level or partners.",
+        "side.item1":"Short snapshot of your current retention, VIP and call-center state",
+        "side.item2":"Key NGR and LTV loss points by segments",
+        "side.item3":"Ideas for quick wins over the next 30–90 days",
+        "footer.privacy":"Privacy policy"
       },
-
-      /* ====== DE / PL / FR / RU (кратко адаптировал; можешь потом подшлифовать) ====== */
       de: {
-        'meta.title': 'Retenly — Retention & VIP für iGaming',
-        'meta.desc':  'Retenly baut und betreibt Callcenter, VIP, Support und QA für iGaming-Marken. Von Nullaufbau bis Audit und fertige Teams.',
-
-        'hero.badge': 'Retention & VIP für iGaming',
-        'hero.h1': 'Schlüsselfertiges Callcenter, VIP, Support & QA für Gambling-Brands',
-        'hero.sub': 'Retenly hilft iGaming-Betreibern und Plattformen, Revenue-Teams aufzubauen oder neu zu strukturieren: Callcenter, VIP-Desk, Support und Qualitätskontrolle mit fertigen Mitarbeitern und klaren Prozessen.',
-        'hero.tag1': 'Neue Brands – Start von Null',
-        'hero.tag2': 'Aktive Brands – Churn & NGR-Leaks stoppen',
-        'hero.tag3': 'Interner Audit & Playbook',
-        'hero.btn_primary': 'Kostenlose Beratung anfragen',
-        'hero.btn_secondary': 'Sehen, was wir in 30 Tagen aufbauen können',
-        'hero.note': 'Wir arbeiten nur B2B: Operatoren, Plattformen, PSP-freundliche White Labels und Affiliate-Teams.',
-
-        'metrics.title': 'Typische Ergebnisse nach 30–90 Tagen',
-        'metrics.item1_value': '+18–35%',
-        'metrics.item1_label': 'Mehr NGR aus bestehender Basis',
-        'metrics.item2_value': '+25–60%',
-        'metrics.item2_label': 'VIP-Anteil an Einzahlungen',
-        'metrics.item3_value': '−30–50%',
-        'metrics.item3_label': 'Weniger verlorene Spieler in 0–90 Tagen',
-        'metrics.list1': 'Wir nutzen Ihr CRM, Dialer und BI – oder helfen bei Auswahl & Setup.',
-        'metrics.list2': 'Manager arbeiten mit RU / TR / AZ / KZ / UZ und CIS-nahen GEOs.',
-        'metrics.list3': 'Tägliche Reports: NGR, LTV, Aktivität, Call-Qualität, VIP-Bewegung.',
-
-        'who.kicker': 'Für wen',
-        'who.title': 'Neue und bestehende iGaming-Businesses',
-        'who.sub': 'Wenn Spieler nach Tag 0–7 wegfallen, VIPs schweigen oder Support chaotisch ist – wir bauen eine klare Retention-Maschine statt heroischer Einzelaktionen.',
-        'who.new_title': 'Neue Brands',
-        'who.new_text': 'Sie starten eine neue Casino- oder Sportwetten-Marke und brauchen ab Tag eins Callcenter-, VIP- und Support-Teams.',
-        'who.active_title': 'Bestehende Brands',
-        'who.active_text': 'Sie haben bereits Spieler & Revenue, verlieren aber NGR durch Churn, schwache Reaktivierung und fehlenden QA-Loop.',
-        'who.platforms_title': 'Plattformen & White Labels',
-        'who.platforms_text': 'Sie sind Plattform/B2B-Anbieter und wollen Retention, VIP & Support als zusätzlichen Service anbieten.',
-
-        'build.kicker': 'Was wir aufbauen',
-        'build.title': 'Von Nullaufbau bis Reparatur bestehender Strukturen',
-        'build.sub': 'Wir übernehmen die gesamte Richtung oder einzelne Blöcke: Callcenter, VIP, Support, QA oder interner Audit.',
-
-        'build.call_chip': 'Callcenter',
-        'build.call_li1': 'Inbound & Outbound für Einzahlungen, Reaktivierung und KYC-Support.',
-        'build.call_li2': 'Skripte für Cold / Warm / Comeback-Calls pro GEO.',
-        'build.call_li3': 'SLA, Monitoring und tägliche NGR- / Contact-Rate-Dashboards.',
-
-        'build.vip_chip': 'VIP-Desk',
-        'build.vip_li1': 'Segmentierung: VIP / Pre-VIP / High-Value-Casuals.',
-        'build.vip_li2': 'Manager für TR / CIS und ähnliche Märkte.',
-        'build.vip_li3': 'Persönliche Pläne, Limits, Angebote und Anti-Burnout-Policy.',
-
-        'build.support_chip': 'Support & Live-Chat',
-        'build.support_li1': '24/7 oder Peak-Time-Coverage in benötigten Sprachen.',
-        'build.support_li2': 'Skripte für Chats, Messenger und Social Media.',
-        'build.support_li3': 'Routing-Regeln: wer was in welcher Zeit beantwortet.',
-
-        'build.qa_chip': 'Qualitätskontrolle',
-        'build.qa_li1': 'QA-Formulare für Calls & Chats: Greeting, KYC, Limits, RG.',
-        'build.qa_li2': 'Regelmäßige Audits von Calls, Chats und VIP-Cases.',
-        'build.qa_li3': 'Feedback-Loop: Coaching für jeden Agenten und KPIs pro Person.',
-
-        'build.audit_chip': 'Interner Audit',
-        'build.audit_li1': 'Wir prüfen Struktur, Skripte und Reports.',
-        'build.audit_li2': 'Zeigen, wo Einzahlungen und Spieler verloren gehen.',
-        'build.audit_li3': 'Konkrete 30 / 60 / 90-Tage-Roadmap.',
-
-        'build.coach_title': 'Team vorhanden, aber keine Struktur?',
-        'build.coach_text': 'Wir verlangen nicht, dass Sie das Team austauschen. Wir bauen Prozesse, QA und Training auf Ihrer Mannschaft auf – Wissen bleibt, Geldverluste sinken.',
-
-        'geo.kicker': 'GEO-Fokus',
-        'geo.title': 'Stark in TR & CIS-nahen Märkten',
-        'geo.sub': 'Wir kennen Spezifika dieser Regionen: Zahlungsmittel, Bonus-Erwartungen, Risikolimits und was VIPs am Telefon wirklich wollen.',
-        'geo.note': 'Sprachen: RU, TR, AZ, KZ, UZ + russischsprachige Basen in EU / Asien.',
-
-        'geo.tr_title': 'Türkei (TR)',
-        'geo.tr_li1': 'Skripte an lokalen Kommunikationsstil & Regulierung angepasst.',
-        'geo.tr_li2': 'Arbeit mit Karten, lokalen Wallets und Promo-Limits für TR-Spieler.',
-        'geo.tr_li3': 'VIP-Kommunikation mit Respekt vor Privatsphäre & Vertrauenslevel.',
-
-        'geo.cis_title': 'GUS / postsowjetisch',
-        'geo.cis_li1': 'RU / AZ / KZ / UZ-Basen mit unterschiedlichen Limits & Ticketgrößen.',
-        'geo.cis_li2': 'Reaktivierung alter Spieler über lokale Feiertage & Trigger.',
-        'geo.cis_li3': 'VIP-Arbeit mit Mischwährungen und Cross-Brand-Traffic.',
-
-        'geo.other_title': 'Andere GEOs',
-        'geo.other_li1': 'Wir können als zusätzlicher Retention-Partner für bestimmte Segmente dazukommen.',
-        'geo.other_li2': 'Englisch- / russischsprachige Teams für globale oder EU-Basen.',
-        'geo.other_li3': 'Start mit einem Pilot-GEO, dann Skalierung nach Ergebnissen.',
-
-        'how.kicker': 'Arbeitsweise',
-        'how.title': 'Einfache Zusammenarbeit – klare Zahlen',
-        'how.sub': 'Keine Magie. Wir legen KPIs fest, bauen Prozesse, stellen Leute und jede Woche sehen Sie ein Dashboard – nicht nur eine Story.',
-        'how.step1_title': 'Brief-Call (30–40 Min.)',
-        'how.step1_text': 'Wir klären Produkt (Casino / Sports / Mixed), GEOs, Tech-Stack (CRM, Dialer, BI), NGR und Probleme.',
-        'how.step2_title': 'Audit & Plan (bis 7 Tage)',
-        'how.step2_text': 'Wir analysieren Reports & Logs, mappen die Journey bis VIP und erstellen einen konkreten 30–90-Tage-Plan.',
-        'how.step3_title': 'Launch & tägliche Kontrolle',
-        'how.step3_text': 'Wir launchen Teams & Prozesse schrittweise. Sie sehen Calls, Chats, QA & NGR in Dashboards und können jederzeit stoppen oder skalieren.',
-
-        'form.title': 'Kostenlosen Retention- & VIP-Audit erhalten',
-        'form.lead': 'Beschreiben Sie kurz Ihre Brand. Innerhalb von 24 Stunden senden wir ein kurzes PDF: wo Geld verloren geht und was wir in 30–90 Tagen aufbauen können.',
-        'form.name_label': 'Name',
-        'form.name_placeholder': 'Wie dürfen wir Sie ansprechen',
-        'form.company_label': 'Firma / Brand',
-        'form.company_placeholder': 'Operator, Plattform oder Projektname',
-        'form.email_label': 'Business-E-Mail',
-        'form.email_placeholder': 'you@company.com',
-        'form.role_label': 'Rolle',
-        'form.role_placeholder': 'Founder, COO, Head of Retention…',
-        'form.ngr_label': 'Monatlicher NGR-Bereich',
-        'form.ngr_opt0': 'Auswählen',
-        'form.ngr_opt1': '< 50k',
-        'form.ngr_opt2': '50k – 150k',
-        'form.ngr_opt3': '150k – 500k',
-        'form.ngr_opt4': '500k+',
-        'form.geo_label': 'Haupt-GEOs',
-        'form.geo_placeholder': 'TR, AZ, KZ, UZ, RU, LATAM usw.',
-        'form.interest_label': 'Was schmerzt aktuell am meisten?',
-        'form.interest_placeholder': 'z.B.: VIPs gehen nach 30 Tagen, kein Callcenter-Prozess, Support-Chaos, kein QA…',
-        'form.consent_text': 'Ich bestätige, dass ich ein iGaming/Gambling-Business vertrete und der Verarbeitung meiner Daten zur Kontaktaufnahme zustimme.',
-        'form.btn': 'Anfrage senden',
-
-        'form.sending': 'Wird gesendet…',
-        'form.hint_success': 'Anfrage erhalten. Wir melden uns innerhalb von 24 Stunden.',
-        'form.hint_error': 'Serverfehler. Bitte später erneut versuchen.',
-        'form.hint_network': 'Netzwerkfehler. Bitte erneut versuchen.',
-        'form.toast_success': 'Anfrage gesendet – prüfen Sie bald Ihr Postfach.',
-        'form.toast_network': 'Netzwerkfehler – bitte erneut versuchen.',
-
-        'side.audit_title': 'Was Sie im Audit erhalten',
-        'side.audit_li1': 'Snapshot Ihres Retention-Funnels (0–90 Tage).',
-        'side.audit_li2': 'Wo Einzahlungen & VIP-LTV verloren gehen.',
-        'side.audit_li3': 'Was in 30–90 Tagen aufgebaut oder outgesourct werden kann.',
-        'side.work_title': 'Wie wir mit Brands arbeiten',
-        'side.work_li1': 'NDA auf Wunsch.',
-        'side.work_li2': 'Keine Weitergabe Ihrer Daten an andere Operatoren.',
-        'side.work_li3': 'Start nur mit Audit möglich – ohne Langzeitvertrag.',
-
-        'closing.title': 'Bereit, kein NGR mehr zu verlieren?',
-        'closing.text': 'Schicken Sie eine kurze Anfrage – wir zeigen, wie viel mehr Sie mit demselben Traffic verdienen können.',
-        'closing.btn': 'Über Ihre Retention sprechen',
-
-        'footer.privacy': 'Datenschutz'
+        "meta.title":"Retenly — Premium-Retention & VIP für iGaming",
+        "meta.desc":"Retenly baut Premium-Retention-, VIP-, Call-Center- und QA-Strukturen für iGaming in Tier-1–3-Märkten auf.",
+        "hero.badge":"Retenly · Retention & VIP für iGaming",
+        "hero.h1":"Retenly löst Ihre Retention-Probleme, die Sie jeden Monat zehntausende Euro kosten.",
+        "hero.lead":"Wir bauen VIP-, Retention-, Call-Center- und QA-Operationen für iGaming-Operatoren auf — auf dem Niveau von Top-Brands, ohne Chaos und verlorene Einzahlungen.",
+        "hero.markets":"Wir arbeiten mit Tier-1-, Tier-2- und Tier-3-Märkten",
+        "hero.geos":"TR, AZ, KZ, UZ, RU, EU, LATAM",
+        "hero.cta":"Persönliche Retenly-Analyse anfragen",
+        "hero.secondary":"Warum Operatoren uns wählen",
+        "hero.side.title":"Kostenloser Express-Audit für Retention & VIP",
+        "hero.side.lead":"Innerhalb von 24 Stunden zeigen wir, wo aktuell Geld verloren geht und was in den nächsten 30–90 Tagen aufgebaut werden kann.",
+        "hero.side.item1":"NGR-/Retention-Analyse nach Segmenten und GEO (TR, GUS usw.)",
+        "hero.side.item2":"Prozess-Check: VIP, Call-Center, Support, QA",
+        "hero.side.item3":"Kompakte Roadmap ohne Buzzwords",
+        "what.eyebrow":"Was Retenly macht",
+        "what.title":"Wir bauen das operative Herz rund um den Spieler",
+        "what.lead":"Klare Prozesse statt Chaos: VIP, Call-Center, Support und QA arbeiten als ein System, das NGR bringt – nicht nur Kontakte.",
+        "what.vip.title":"VIP & Retention",
+        "what.vip.text":"Segmentierung, persönliche Angebote, Churn-Risikosteuerung. VIPs „fallen nicht ab“, sondern erhöhen Einzahlungen und Aktivität.",
+        "what.callcenter.title":"Call-Center",
+        "what.callcenter.text":"Outbound- und Inbound-Kampagnen, anti-toxische Skripte, SLAs, Tagesreports. Calls laufen strukturiert, nicht zufällig.",
+        "what.qa.title":"Support & QA",
+        "what.qa.text":"Service-Standards, Checklisten, Stichproben und 100-%-Checks, transparente KPIs. Support spricht mit einer Markenstimme.",
+        "who.eyebrow":"Mit wem wir arbeiten",
+        "who.title":"Partner für Operatoren und Plattformen",
+        "who.lead":"Wir sind kein generisches Outsource-Call-Center. Retenly fokussiert sich auf iGaming und angrenzende Vertikalen, in denen LTV, NGR und Regulierung entscheidend sind.",
+        "who.op.title":"iGaming-Operatoren",
+        "who.op.item1":"Online-Casino und Sportsbook",
+        "who.op.item2":"Arbeit mit aktiver und inaktiver Basis",
+        "who.white.title":"White-Label & Plattformen",
+        "who.white.item1":"Schlüsselfertige Lösungen für Ihre Kunden",
+        "who.white.item2":"Retention & VIP als Teil Ihres Produkt-Stacks",
+        "who.aff.title":"Affiliate-Teams",
+        "who.aff.item1":"Maximierung des Trafficertrags",
+        "who.aff.item2":"Eigene Prozesse für VIP- und High-Value-Spieler",
+        "who.pay.title":"Payment-freundliche Operatoren",
+        "who.pay.item1":"GEOs mit sensiblen Zahlungen (TR, GUS usw.)",
+        "who.pay.item2":"Klare Kommunikation zu Limits, KYC und Risiko",
+        "why.eyebrow":"Warum Operatoren uns wählen",
+        "why.title":"Retenly arbeitet wie ein internes Team – ohne Overhead",
+        "why.lead":"Wir sprechen die Sprache von NGR, LTV und Retention, nicht nur von „Calls und Tickets“. Fokus: finanzielles Ergebnis und Qualität, nicht Kontaktzahl.",
+        "why.item1.title":"Wir sehen, wo Geld verloren geht",
+        "why.item1.text":"Wir finden Loss-Points je Segment und GEO und zeigen in Zahlen, wie viel NGR und Einzahlungen in 30–90 Tagen zurückgeholt werden können.",
+        "why.item2.title":"Tiefe TR- & GUS-Expertise",
+        "why.item2.text":"Wir verstehen Mentalität und Verhalten der Spieler in TR, AZ, KZ, UZ, RU und bauen Kommunikation, die wirklich ankommt.",
+        "why.item3.title":"CRM-neutraler Ansatz",
+        "why.item3.text":"Wir arbeiten mit jeder CRM-/Tracking-Landschaft und integrieren uns in Ihre Infrastruktur statt sie zu brechen.",
+        "why.item4.title":"Starke QA & transparente Reports",
+        "why.item4.text":"Qualitätskontrolle, Review von Calls & Chats, regelmäßige KPI-Berichte. Sie sehen Zahlen und Gesprächsqualität.",
+        "result.eyebrow":"30 Tage mit Retenly",
+        "result.title":"Was sich im ersten Monat verändert",
+        "result.lead":"Wir versprechen kein Wunder in einer Woche, aber nach 30 Tagen sehen Sie eine strukturierte Retention-Landschaft statt einzelner Initiativen.",
+        "result.item1.title":"Es entsteht eine Retention-Struktur",
+        "result.item1.text":"Sie wissen, wer wofür verantwortlich ist, wie Touchpoints verlaufen und welche Segmente im Fokus stehen.",
+        "result.item2.title":"VIP-Basis ist segmentiert und gesteuert",
+        "result.item2.text":"High-Value-Spieler erhalten eigene Szenarien, SLAs und Angebote – ohne Chaos und manuelle Lücken.",
+        "result.item3.title":"Abfluss der Einzahlungen 0–7–30 Tage wird adressiert",
+        "result.item3.text":"Spieler verschwinden nicht nach den ersten Einzahlungen: sie haben eine klare Journey.",
+        "result.item4.title":"QA & Servicestandards sind verankert",
+        "result.item4.text":"Das Team arbeitet nach klaren Standards, Servicequalität wird messbar und steuerbar.",
+        "form.eyebrow":"Nächster Schritt",
+        "form.block_title":"Persönliche Retenly-Analyse erhalten",
+        "form.block_lead":"Beschreiben Sie kurz Ihr Projekt. Innerhalb von 24 Stunden senden wir ein persönliches PDF: wo Sie aktuell Geld verlieren und was in 30–90 Tagen aufgebaut werden kann.",
+        "form.title":"Kostenloser Audit für Retention & VIP",
+        "form.lead":"Keine aggressiven Sales-Pitches. Nur konkrete Analyse und Empfehlungen.",
+        "form.name_label":"Name",
+        "form.name_placeholder":"Wie dürfen wir Sie ansprechen?",
+        "form.company_label":"Firma / Brand",
+        "form.company_placeholder":"Operator, Plattform oder Marke",
+        "form.email_label":"Business-E-Mail",
+        "form.phone_label":"Telefon / Telegram",
+        "form.phone_placeholder":"+49 / +90 / +7 …",
+        "form.interest_label":"Was ist aktuell am wichtigsten?",
+        "form.opt.vip":"VIP- & High-Value-Spieler",
+        "form.opt.reactivation":"Reaktivierung inaktiver Spieler",
+        "form.opt.callcenter":"Call-Center / Outbound-Team",
+        "form.opt.support":"Support & SLAs",
+        "form.opt.qa":"Qualitätskontrolle (QA)",
+        "form.opt.full":"Alles von Grund auf aufbauen",
+        "form.comment_label":"Was schmerzt am meisten?",
+        "form.comment_placeholder":"Z.B.: VIPs brechen nach 30 Tagen ab, kein Call-Center-Prozess, Chaos im Support, keine QA…",
+        "form.consent":"Ich bestätige, dass ich Daten zur Kontaktaufnahme bereitstelle und ihrer Verarbeitung zustimme.",
+        "form.submit":"Anfrage senden",
+        "form.success":"Ihre Anfrage ist eingegangen. Das Retenly-Team erstellt eine persönliche Analyse und meldet sich zeitnah.",
+        "form.error":"Fehler beim Senden, bitte später erneut versuchen.",
+        "side.title":"Was Sie nach der Anfrage erhalten",
+        "side.lead":"Ein kompaktes PDF, das Sie C-Level oder Partnern vorlegen können.",
+        "side.item1":"Kurzüberblick zu Retention, VIP und Call-Center",
+        "side.item2":"Wichtigste NGR- und LTV-Loss-Points nach Segmenten",
+        "side.item3":"Quick-Win-Ideen für die nächsten 30–90 Tage",
+        "footer.privacy":"Datenschutz"
       },
-
       pl: {
-        'meta.title': 'Retenly — Retention & VIP dla iGaming',
-        'meta.desc':  'Retenly buduje i prowadzi call center, VIP, support i QA dla marek iGaming. Od startu od zera po audyty i gotowe zespoły.',
-
-        'hero.badge': 'Retention & VIP dla iGaming',
-        'hero.h1': 'Gotowe call center, VIP, support i QA dla marek gamblingowych',
-        'hero.sub': 'Retenly pomaga operatorom iGaming oraz platformom zbudować lub uporządkować zespoły revenue: call center, VIP, support i kontrolę jakości z gotowymi ludźmi i procesami.',
-        'hero.tag1': 'Nowe marki — start od zera',
-        'hero.tag2': 'Aktywne marki — zatrzymać churn i wycieki NGR',
-        'hero.tag3': 'Wewnętrzny audyt i playbook',
-        'hero.btn_primary': 'Zamów darmową konsultację',
-        'hero.btn_secondary': 'Zobacz, co zbudujemy w 30 dni',
-        'hero.note': 'Pracujemy tylko B2B: operatorzy, platformy, white label i zespoły afiliacyjne.',
-
-        'metrics.title': 'Typowe wyniki po 30–90 dniach',
-        'metrics.item1_value': '+18–35%',
-        'metrics.item1_label': 'Więcej NGR ze starej bazy',
-        'metrics.item2_value': '+25–60%',
-        'metrics.item2_label': 'Udział VIP w depozytach',
-        'metrics.item3_value': '−30–50%',
-        'metrics.item3_label': 'Mniej utraconych graczy w 0–90 dni',
-        'metrics.list1': 'Korzystamy z Twojego CRM, dialera i BI – lub pomagamy je wdrożyć.',
-        'metrics.list2': 'Managerowie pracują na RU / TR / AZ / KZ / UZ i pokrewnych GEO.',
-        'metrics.list3': 'Codzienne raporty: NGR, LTV, aktywność, jakość rozmów, ruch VIP.',
-
-        'who.kicker': 'Dla kogo',
-        'who.title': 'Nowe i działające biznesy iGaming',
-        'who.sub': 'Jeśli tracisz graczy po 0–7 dniach, VIP milczą, a support jest chaosem — budujemy maszynę retencyjną zamiast jednorazowych akcji.',
-        'who.new_title': 'Nowe marki',
-        'who.new_text': 'Startujesz nowy brand kasyna lub zakładów i potrzebujesz gotowego call center, VIP i supportu od pierwszego dnia.',
-        'who.active_title': 'Działające marki',
-        'who.active_text': 'Masz już graczy i przychody, ale tracisz NGR na churn, słabej reaktywacji i braku QA.',
-        'who.platforms_title': 'Platformy i white label',
-        'who.platforms_text': 'Jesteś dostawcą B2B i chcesz dodać retention, VIP i support jako usługę dla klientów.',
-
-        'build.kicker': 'Co budujemy',
-        'build.title': 'Od zera lub naprawa tego, co nie działa',
-        'build.sub': 'Możemy przejąć cały kierunek albo pojedynczy blok: call center, VIP, support, QA lub audyt.',
-
-        'build.call_chip': 'Call center',
-        'build.call_li1': 'Inbound & outbound pod depozyty, reaktywację i KYC.',
-        'build.call_li2': 'Skrypty cold / warm / comeback na Twoje GEO.',
-        'build.call_li3': 'SLA, monitoring i dzienne dashboardy NGR / contact rate.',
-
-        'build.vip_chip': 'VIP desk',
-        'build.vip_li1': 'Segmentacja: VIP / pre-VIP / high value casual.',
-        'build.vip_li2': 'Managerowie dla TR / CIS i podobnych rynków.',
-        'build.vip_li3': 'Plany indywidualne, limity, oferty i anti-burnout.',
-
-        'build.support_chip': 'Support & live chat',
-        'build.support_li1': 'Coverage 24/7 lub w godzinach szczytu w wymaganych językach.',
-        'build.support_li2': 'Skrypty do chatów, messengerów i social media.',
-        'build.support_li3': 'Reguły routingu: kto odpowiada na co i kiedy.',
-
-        'build.qa_chip': 'Kontrola jakości',
-        'build.qa_li1': 'Formularze QA dla rozmów i chatów: greeting, KYC, limity, RG.',
-        'build.qa_li2': 'Regularne audyty rozmów, chatów i spraw VIP.',
-        'build.qa_li3': 'Feedback loop: coaching dla agentów i KPI per osoba.',
-
-        'build.audit_chip': 'Audyt wewnętrzny',
-        'build.audit_li1': 'Sprawdzamy strukturę, skrypty i raporty.',
-        'build.audit_li2': 'Pokazujemy, gdzie uciekają depozyty i gracze.',
-        'build.audit_li3': 'Jasny plan na 30 / 60 / 90 dni.',
-
-        'build.coach_title': 'Masz ludzi, ale brak struktury?',
-        'build.coach_text': 'Nie każemy zwalniać zespołu. Budujemy procesy, QA i szkolenia na Twoich ludziach, aby zatrzymać wiedzę, a ograniczyć dzienne straty.',
-
-        'geo.kicker': 'GEO',
-        'geo.title': 'Mocni w TR i rynkach CIS',
-        'geo.sub': 'Znamy specyfikę regionów: nawyki płatnicze, oczekiwania bonusowe, limity ryzyka i to, czego VIP oczekują na rozmowie.',
-        'geo.note': 'Języki: RU, TR, AZ, KZ, UZ + rosyjskojęzyczne bazy w EU / Azji.',
-
-        'geo.tr_title': 'Turcja (TR)',
-        'geo.tr_li1': 'Skrypty dopasowane do lokalnego stylu komunikacji i ryzyka regulacyjnego.',
-        'geo.tr_li2': 'Praca z kartami, lokalnymi walletami i limitami promocyjnymi.',
-        'geo.tr_li3': 'Komunikacja VIP z szacunkiem do prywatności i poziomu zaufania.',
-
-        'geo.cis_title': 'CIS / postsowieckie',
-        'geo.cis_li1': 'Bazy RU / AZ / KZ / UZ z różnymi limitami i średnimi ticketami.',
-        'geo.cis_li2': 'Reaktywacja starych graczy z lokalnymi świętami i triggerami.',
-        'geo.cis_li3': 'Praca z VIP przy wielu walutach i ruchu cross-brand.',
-
-        'geo.other_title': 'Inne GEO',
-        'geo.other_li1': 'Możemy wejść jako dodatkowy vendor retention dla wybranych segmentów.',
-        'geo.other_li2': 'Zespoły EN / RU dla baz globalnych lub w EU.',
-        'geo.other_li3': 'Start od pilota na jednym GEO i rozszerzenie po wynikach.',
-
-        'how.kicker': 'Jak pracujemy',
-        'how.title': 'Prosta współpraca — konkretne liczby',
-        'how.sub': 'Bez magii. Ustalamy KPI, budujemy procesy, dajemy ludzi, a Ty co tydzień widzisz dashboard — nie tylko piękną historię.',
-        'how.step1_title': 'Krótki call (30–40 min)',
-        'how.step1_text': 'Ustalamy produkt (casino / betting / mixed), GEO, stack (CRM, dialer, BI), obecny NGR i problemy.',
-        'how.step2_title': 'Audyt & plan (do 7 dni)',
-        'how.step2_text': 'Analizujemy raporty i logi, mapujemy ścieżkę do VIP i tworzymy konkretny plan na 30–90 dni.',
-        'how.step3_title': 'Start & dzienna kontrola',
-        'how.step3_text': 'Rozpoczynamy pracę zespołów krok po kroku. Widzisz rozmowy, chaty, QA i NGR w dashboardach i możesz w każdej chwili skalować lub zatrzymać.',
-
-        'form.title': 'Otrzymaj darmowy audyt retention & VIP',
-        'form.lead': 'Opisz krótko swój brand. W 24h odeślemy PDF: gdzie tracisz pieniądze i co możemy zbudować w 30–90 dni.',
-        'form.name_label': 'Imię',
-        'form.name_placeholder': 'Jak się do Ciebie zwracać',
-        'form.company_label': 'Firma / brand',
-        'form.company_placeholder': 'Operator, platforma lub nazwa projektu',
-        'form.email_label': 'E-mail firmowy',
-        'form.email_placeholder': 'you@company.com',
-        'form.role_label': 'Rola',
-        'form.role_placeholder': 'Founder, COO, Head of Retention…',
-        'form.ngr_label': 'Miesięczny zakres NGR',
-        'form.ngr_opt0': 'Wybierz',
-        'form.ngr_opt1': '< 50k',
-        'form.ngr_opt2': '50k – 150k',
-        'form.ngr_opt3': '150k – 500k',
-        'form.ngr_opt4': '500k+',
-        'form.geo_label': 'Główne GEO',
-        'form.geo_placeholder': 'TR, AZ, KZ, UZ, RU, LATAM, itd.',
-        'form.interest_label': 'Co najbardziej boli teraz?',
-        'form.interest_placeholder': 'Np.: VIP odpada po 30 dniach, brak struktury call center, chaos w supporcie, brak QA…',
-        'form.consent_text': 'Potwierdzam, że reprezentuję biznes iGaming/gambling i zgadzam się na przetwarzanie danych w celu kontaktu.',
-        'form.btn': 'Wyślij zgłoszenie',
-
-        'form.sending': 'Wysyłanie…',
-        'form.hint_success': 'Zgłoszenie otrzymane. Odezwiemy się w ciągu 24 godzin.',
-        'form.hint_error': 'Błąd serwera. Spróbuj ponownie później.',
-        'form.hint_network': 'Błąd sieci. Spróbuj ponownie.',
-        'form.toast_success': 'Zgłoszenie wysłane — wkrótce sprawdź skrzynkę.',
-        'form.toast_network': 'Błąd sieci — spróbuj ponownie.',
-
-        'side.audit_title': 'Co dostajesz w audycie',
-        'side.audit_li1': 'Snapshot lejka retencji (0–90 dni).',
-        'side.audit_li2': 'Gdzie tracisz depozyty i LTV VIP.',
-        'side.audit_li3': 'Co można zbudować lub zlecić w 30–90 dni.',
-        'side.work_title': 'Jak zwykle pracujemy z brandami',
-        'side.work_li1': 'NDA na życzenie.',
-        'side.work_li2': 'Nie dzielimy się danymi z innymi operatorami.',
-        'side.work_li3': 'Możesz zacząć tylko od audytu — bez długich umów.',
-
-        'closing.title': 'Gotów, by zatrzymać wycieki NGR?',
-        'closing.text': 'Wyślij krótkie zgłoszenie — pokażemy, ile więcej możesz zarobić na tym samym ruchu.',
-        'closing.btn': 'Porozmawiajmy o Twojej retencji',
-
-        'footer.privacy': 'Polityka prywatności'
+        "meta.title":"Retenly — premiumowe retention i VIP dla iGaming",
+        "meta.desc":"Retenly buduje struktury retention, VIP, call-center i QA dla operatorów iGaming na rynkach Tier-1–3.",
+        "hero.badge":"Retenly · Retention i VIP dla iGaming",
+        "hero.h1":"Retenly rozwiązuje problemy z retention, które kosztują cię co miesiąc dziesiątki tysięcy dolarów.",
+        "hero.lead":"Budujemy VIP, retention, call-center i QA dla operatorów iGaming — na poziomie topowych marek, bez chaosu i utraconych depozytów.",
+        "hero.markets":"Pracujemy z rynkami Tier-1, Tier-2 i Tier-3",
+        "hero.geos":"TR, AZ, KZ, UZ, RU, UE, LATAM",
+        "hero.cta":"Zamów osobistą analizę Retenly",
+        "hero.secondary":"Dlaczego operatorzy wybierają nas",
+        "hero.side.title":"Darmowy ekspresowy audyt retention i VIP",
+        "hero.side.lead":"W ciągu 24 godzin pokażemy, gdzie dziś tracisz pieniądze i co da się zbudować w najbliższych 30–90 dniach.",
+        "hero.side.item1":"Analiza NGR / retention wg segmentów i GEO (TR, CIS itd.)",
+        "hero.side.item2":"Przegląd procesów: VIP, call-center, support, QA",
+        "hero.side.item3":"Krótka roadmapa wdrożeń bez „lania wody”",
+        "what.eyebrow":"Co robi Retenly",
+        "what.title":"Budujemy operacyjne serce wokół gracza",
+        "what.lead":"Jasne procesy zamiast chaosu: VIP, call-center, support i QA działają jak jeden system, który generuje NGR.",
+        "what.vip.title":"VIP i retention",
+        "what.vip.text":"Segmentacja, personalne oferty, praca z ryzykiem odejścia. VIP-y nie „odpadają”, lecz zwiększają depozyty i aktywność.",
+        "what.callcenter.title":"Call-center",
+        "what.callcenter.text":"Kampanie outbound/inbound, anty-toxic skrypty, SLA, raporty dzienne. Dział dzwoni według planu, nie przypadkiem.",
+        "what.qa.title":"Support i QA",
+        "what.qa.text":"Standardy obsługi, checklisty, audyty rozmów, przejrzyste KPI. Support mówi jednym głosem z marką.",
+        "who.eyebrow":"Z kim pracujemy",
+        "who.title":"Partner dla operatorów i platform",
+        "who.lead":"Nie jesteśmy ogólnym outsourcowym call-center. Retenly skupia się na iGaming i pokrewnych verticalach, gdzie liczy się LTV, NGR i regulacje.",
+        "who.op.title":"Operatorzy iGaming",
+        "who.op.item1":"Online-casino i sportsbook",
+        "who.op.item2":"Praca z bazą aktywną i „uśpioną”",
+        "who.white.title":"White-label i platformy",
+        "who.white.item1":"Gotowe rozwiązania dla waszych klientów",
+        "who.white.item2":"Retention i VIP jako element waszego produktu",
+        "who.aff.title":"Zespoły afiliacyjne",
+        "who.aff.item1":"Maksymalizacja wartości ruchu",
+        "who.aff.item2":"Osobne procesy dla VIP i graczy high-value",
+        "who.pay.title":"Operatorzy przyjaźni płatnościom",
+        "who.pay.item1":"GEO z wrażliwymi płatnościami (TR, CIS itd.)",
+        "who.pay.item2":"Jasna komunikacja limitów, KYC i ryzyka",
+        "why.eyebrow":"Dlaczego operatorzy wybierają nas",
+        "why.title":"Retenly działa jak wewnętrzny zespół – bez kosztów stałych",
+        "why.lead":"Mówimy językiem NGR, LTV i retention, a nie tylko „telefonów i ticketów”. Liczą się dla nas pieniądze i jakość, nie ilość kontaktów.",
+        "why.item1.title":"Widzimy, gdzie uciekają pieniądze",
+        "why.item1.text":"Znajdujemy punkty strat wg segmentów i GEO, pokazujemy w liczbach, ile NGR i depozytów można odzyskać w 30–90 dni.",
+        "why.item2.title":"Głęboka ekspertyza TR + CIS",
+        "why.item2.text":"Rozumiemy mentalność i zachowania graczy w TR, AZ, KZ, UZ, RU. Tworzymy komunikację, która naprawdę działa.",
+        "why.item3.title":"Podejście CRM-neutralne",
+        "why.item3.text":"Pracujemy z dowolnymi CRM i systemami trackingowymi, wpinając się w waszą infrastrukturę.",
+        "why.item4.title":"Mocne QA i przejrzyste raporty",
+        "why.item4.text":"Kontrola jakości, odsłuch rozmów i czatów, regularne raporty KPI. Widzicie liczby i jakość rozmów.",
+        "result.eyebrow":"30 dni z Retenly",
+        "result.title":"Co zmienia się w pierwszym miesiącu",
+        "result.lead":"Nie obiecujemy cudów w tydzień, ale po 30 dniach widać strukturę zamiast przypadkowych akcji.",
+        "result.item1.title":"Powstaje struktura retention",
+        "result.item1.text":"Wiecie, kto za co odpowiada, jak wyglądają touchpointy i jakie segmenty są w priorytecie.",
+        "result.item2.title":"Baza VIP jest segmentowana i zarządzana",
+        "result.item2.text":"Gracze high-value mają osobne scenariusze, SLA i oferty — bez ręcznego chaosu.",
+        "result.item3.title":"Domykamy wyciek depozytów 0–7–30 dni",
+        "result.item3.text":"Gracze nie znikają po pierwszych depozytach — mają zaplanowaną ścieżkę.",
+        "result.item4.title":"QA i standardy obsługi są ustalone",
+        "result.item4.text":"Zespół pracuje wg jasnych standardów, a jakość jest mierzalna.",
+        "form.eyebrow":"Kolejny krok",
+        "form.block_title":"Otrzymaj osobistą analizę Retenly",
+        "form.block_lead":"Krótko opisz projekt. W ciągu 24 godzin wrócimy z PDF-em: gdzie dziś tracisz pieniądze i co można zbudować w 30–90 dni.",
+        "form.title":"Darmowy audyt retention i VIP",
+        "form.lead":"Bez agresywnej sprzedaży. Tylko konkretna analiza i rekomendacje.",
+        "form.name_label":"Imię",
+        "form.name_placeholder":"Jak się do Ciebie zwracać?",
+        "form.company_label":"Firma / brand",
+        "form.company_placeholder":"Operator, platforma lub marka",
+        "form.email_label":"Służbowy e-mail",
+        "form.phone_label":"Telefon / Telegram",
+        "form.phone_placeholder":"+48 / +90 / +7 …",
+        "form.interest_label":"Co jest teraz najważniejsze?",
+        "form.opt.vip":"Gracze VIP i high-value",
+        "form.opt.reactivation":"Reaktywacja uśpionych graczy",
+        "form.opt.callcenter":"Call-center / dział telefoniczny",
+        "form.opt.support":"Support i SLA",
+        "form.opt.qa":"Kontrola jakości (QA)",
+        "form.opt.full":"Zbudować wszystko od zera",
+        "form.comment_label":"Co boli najbardziej?",
+        "form.comment_placeholder":"Np.: VIPy odpadają po 30 dniach, brak procesu w call-center, chaos w supporcie, brak QA…",
+        "form.consent":"Potwierdzam, że podaję dane kontaktowe i zgadzam się na ich przetwarzanie.",
+        "form.submit":"Wyślij zgłoszenie",
+        "form.success":"Twoje zgłoszenie zostało przyjęte. Zespół Retenly przygotuje osobistą analizę i wkrótce się odezwie.",
+        "form.error":"Błąd wysyłki, spróbuj ponownie później.",
+        "side.title":"Co otrzymasz po zgłoszeniu",
+        "side.lead":"Jedno PDF, które możesz pokazać zarządowi lub partnerom.",
+        "side.item1":"Krótki przegląd retention, VIP i call-center",
+        "side.item2":"Główne punkty strat NGR i LTV wg segmentów",
+        "side.item3":"Propozycje szybkich wdrożeń na 30–90 dni",
+        "footer.privacy":"Polityka prywatności"
       },
-
       fr: {
-        'meta.title': 'Retenly — Rétention & VIP pour iGaming',
-        'meta.desc':  'Retenly construit et opère call centers, VIP, support et QA pour les marques iGaming. De zéro au lancement, audits et équipes prêtes.',
-
-        'hero.badge': 'Rétention & VIP pour iGaming',
-        'hero.h1': 'Call center, VIP, support & QA clés en main pour les marques de jeux',
-        'hero.sub': 'Retenly aide les opérateurs et plateformes iGaming à construire ou restructurer leurs équipes de revenu : call center, VIP, support et contrôle qualité avec des équipes prêtes et des process clairs.',
-        'hero.tag1': 'Nouvelles marques — lancement à partir de zéro',
-        'hero.tag2': 'Marques actives — stopper le churn & les fuites de NGR',
-        'hero.tag3': 'Audit interne & playbook',
-        'hero.btn_primary': 'Demander une consultation gratuite',
-        'hero.btn_secondary': 'Voir ce que nous pouvons construire en 30 jours',
-        'hero.note': 'Nous travaillons uniquement en B2B : opérateurs, plateformes, white labels et équipes affiliées.',
-
-        'metrics.title': 'Résultats typiques après 30–90 jours',
-        'metrics.item1_value': '+18–35%',
-        'metrics.item1_label': 'NGR supplémentaire sur la base existante',
-        'metrics.item2_value': '+25–60%',
-        'metrics.item2_label': 'Part VIP dans les dépôts',
-        'metrics.item3_value': '−30–50%',
-        'metrics.item3_label': 'Moins de joueurs perdus sur 0–90 jours',
-        'metrics.list1': 'Nous utilisons votre CRM, dialer et BI — ou vous aidons à les choisir & intégrer.',
-        'metrics.list2': 'Managers pour RU / TR / AZ / KZ / UZ et GEO proches de la CIS.',
-        'metrics.list3': 'Rapports quotidiens : NGR, LTV, activité, qualité des appels, mouvement VIP.',
-
-        'who.kicker': 'Pour qui',
-        'who.title': 'Nouveaux et actuels acteurs iGaming',
-        'who.sub': 'Si vous perdez des joueurs après 0–7 jours, que les VIP restent silencieux ou que le support est chaotique — nous construisons une machine de rétention au lieu d’actions ponctuelles.',
-        'who.new_title': 'Nouvelles marques',
-        'who.new_text': 'Vous lancez une nouvelle marque de casino ou de paris et avez besoin d’un call center, d’un VIP desk et d’un support dès le premier jour.',
-        'who.active_title': 'Marques existantes',
-        'who.active_text': 'Vous avez déjà des joueurs et du revenu, mais perdez du NGR sur le churn, une réactivation faible et l’absence de QA.',
-        'who.platforms_title': 'Plateformes & white labels',
-        'who.platforms_text': 'Vous êtes un fournisseur B2B et souhaitez proposer rétention, VIP et support comme service additionnel.',
-
-        'build.kicker': 'Ce que nous construisons',
-        'build.title': 'Du zéro au lancement ou réparation de l’existant',
-        'build.sub': 'Nous pouvons prendre toute la ligne ou un bloc : call center, VIP, support, QA ou audit interne.',
-
-        'build.call_chip': 'Call center',
-        'build.call_li1': 'Inbound & outbound pour dépôts, réactivation et support KYC.',
-        'build.call_li2': 'Scripts pour cold / warm / comeback calls adaptés à vos GEO.',
-        'build.call_li3': 'SLA, monitoring et dashboards NGR / contact rate quotidiens.',
-
-        'build.vip_chip': 'VIP desk',
-        'build.vip_li1': 'Segmentation : VIP / pré-VIP / joueurs à forte valeur.',
-        'build.vip_li2': 'Managers pour TR / CIS et marchés proches.',
-        'build.vip_li3': 'Plans, limites, offres et politique anti-burnout.',
-
-        'build.support_chip': 'Support & live chat',
-        'build.support_li1': 'Couverture 24/7 ou heures de pointe dans les langues requises.',
-        'build.support_li2': 'Scripts pour chats, messageries et réseaux sociaux.',
-        'build.support_li3': 'Règles de routage : qui répond à quoi et dans quel délai.',
-
-        'build.qa_chip': 'Contrôle qualité',
-        'build.qa_li1': 'Formulaires QA pour appels et chats : accueil, KYC, limites, RG.',
-        'build.qa_li2': 'Audits réguliers des appels, chats et cas VIP.',
-        'build.qa_li3': 'Boucle de feedback : coaching de chaque agent et KPI par personne.',
-
-        'build.audit_chip': 'Audit interne',
-        'build.audit_li1': 'Nous analysons structure, scripts et rapports.',
-        'build.audit_li2': 'Nous montrons où vous perdez dépôts et joueurs.',
-        'build.audit_li3': 'Feuille de route claire sur 30 / 60 / 90 jours.',
-
-        'build.coach_title': 'Vous avez une équipe mais pas de structure ?',
-        'build.coach_text': 'Nous ne vous demandons pas de remplacer l’équipe. Nous bâtissons process, QA et formation par-dessus vos équipes, pour conserver la connaissance mais arrêter les pertes quotidiennes.',
-
-        'geo.kicker': 'GEO',
-        'geo.title': 'Forts en TR & marchés proches de la CIS',
-        'geo.sub': 'Nous connaissons la spécificité de ces régions : habitudes de paiement, attentes de bonus, limites de risque et ce que les VIP attendent d’un appel.',
-        'geo.note': 'Langues possibles : RU, TR, AZ, KZ, UZ + bases russophones en UE / Asie.',
-
-        'geo.tr_title': 'Turquie (TR)',
-        'geo.tr_li1': 'Scripts adaptés au style de communication local et au risque réglementaire.',
-        'geo.tr_li2': 'Travail avec cartes, wallets locaux et limites de promo pour les joueurs TR.',
-        'geo.tr_li3': 'Communication VIP respectant la confidentialité et le niveau de confiance du marché.',
-
-        'geo.cis_title': 'CIS / post-soviétique',
-        'geo.cis_li1': 'Bases RU / AZ / KZ / UZ avec différents montants et limites.',
-        'geo.cis_li2': 'Réactivation d’anciens joueurs via fêtes locales et triggers.',
-        'geo.cis_li3': 'Travail VIP avec devises mixtes et trafic cross-brand.',
-
-        'geo.other_title': 'Autres GEO',
-        'geo.other_li1': 'Nous pouvons intervenir comme vendor de rétention supplémentaire pour des segments précis.',
-        'geo.other_li2': 'Équipes anglophones / russophones pour bases globales ou UE.',
-        'geo.other_li3': 'Démarrage par un pilote sur un GEO, puis extension après résultats.',
-
-        'how.kicker': 'Notre façon de travailler',
-        'how.title': 'Collaboration simple — chiffres clairs',
-        'how.sub': 'Pas de magie. On fixe les KPIs, on construit les process, on fournit les équipes, et chaque semaine vous voyez un dashboard, pas seulement un récit.',
-        'how.step1_title': 'Appel de cadrage (30–40 min)',
-        'how.step1_text': 'On clarifie votre produit (casino / paris / mixte), les GEOs, le stack tech (CRM, dialer, BI), le NGR actuel et les problèmes.',
-        'how.step2_title': 'Audit & plan (jusqu’à 7 jours)',
-        'how.step2_text': 'On analyse rapports et logs, mappe le funnel jusqu’au VIP, et prépare un plan concret 30–90 jours.',
-        'how.step3_title': 'Lancement & contrôle quotidien',
-        'how.step3_text': 'On lance équipes et process étape par étape. Vous voyez appels, chats, QA et NGR dans des dashboards et pouvez stopper ou scaler à tout moment.',
-
-        'form.title': 'Recevoir un audit gratuit rétention & VIP',
-        'form.lead': 'Présentez brièvement votre marque. Sous 24 h, nous envoyons un PDF : où vous perdez de l’argent et ce que nous pouvons construire en 30–90 jours.',
-        'form.name_label': 'Nom',
-        'form.name_placeholder': 'Comment vous appeler',
-        'form.company_label': 'Société / marque',
-        'form.company_placeholder': 'Opérateur, plateforme ou nom de projet',
-        'form.email_label': 'Email professionnel',
-        'form.email_placeholder': 'you@company.com',
-        'form.role_label': 'Rôle',
-        'form.role_placeholder': 'Fondateur, COO, Head of Retention…',
-        'form.ngr_label': 'Fourchette de NGR mensuel',
-        'form.ngr_opt0': 'Choisir',
-        'form.ngr_opt1': '< 50k',
-        'form.ngr_opt2': '50k – 150k',
-        'form.ngr_opt3': '150k – 500k',
-        'form.ngr_opt4': '500k+',
-        'form.geo_label': 'GEO principaux',
-        'form.geo_placeholder': 'TR, AZ, KZ, UZ, RU, LATAM, etc.',
-        'form.interest_label': 'Qu’est-ce qui fait le plus mal aujourd’hui ?',
-        'form.interest_placeholder': 'Ex : perte des VIP après 30 jours, pas de process call center, chaos support, pas de QA…',
-        'form.consent_text': 'Je confirme représenter une activité iGaming / gambling et j’accepte l’utilisation de mes données pour être contacté à propos de la rétention & VIP.',
-        'form.btn': 'Envoyer la demande',
-
-        'form.sending': 'Envoi…',
-        'form.hint_success': 'Demande reçue. Nous vous contacterons sous 24 heures.',
-        'form.hint_error': 'Erreur serveur. Veuillez réessayer plus tard.',
-        'form.hint_network': 'Erreur réseau. Veuillez réessayer.',
-        'form.toast_success': 'Demande envoyée — surveillez votre boîte mail.',
-        'form.toast_network': 'Erreur réseau — veuillez réessayer.',
-
-        'side.audit_title': 'Ce que vous recevez avec l’audit',
-        'side.audit_li1': 'Snapshot de votre funnel de rétention (0–90 jours).',
-        'side.audit_li2': 'Où vous perdez dépôts et LTV VIP.',
-        'side.audit_li3': 'Ce qui peut être construit ou externalisé en 30–90 jours.',
-        'side.work_title': 'Comment nous travaillons avec les marques',
-        'side.work_li1': 'NDA si nécessaire.',
-        'side.work_li2': 'Aucune fuite de vos données vers d’autres opérateurs.',
-        'side.work_li3': 'Vous pouvez commencer uniquement par l’audit — sans contrat long terme.',
-
-        'closing.title': 'Prêt à arrêter de perdre du NGR tous les jours ?',
-        'closing.text': 'Envoyez une courte demande — nous montrerons combien plus vous pouvez gagner avec le même trafic.',
-        'closing.btn': 'Parlons de votre rétention',
-
-        'footer.privacy': 'Politique de confidentialité'
+        "meta.title":"Retenly — rétention & VIP premium pour iGaming",
+        "meta.desc":"Retenly construit des opérations de rétention, VIP, centre d’appels et QA pour les opérateurs iGaming sur les marchés Tier-1–3.",
+        "hero.badge":"Retenly · Rétention & VIP pour iGaming",
+        "hero.h1":"Retenly résout vos problèmes de rétention qui vous coûtent des dizaines de milliers d’euros chaque mois.",
+        "hero.lead":"Nous mettons en place des opérations VIP, rétention, centre d’appels et QA pour les opérateurs iGaming — au niveau des grandes marques, sans chaos ni dépôts perdus.",
+        "hero.markets":"Nous travaillons avec les marchés Tier-1, Tier-2 et Tier-3",
+        "hero.geos":"TR, AZ, KZ, UZ, RU, UE, LATAM",
+        "hero.cta":"Demander une analyse personnalisée Retenly",
+        "hero.secondary":"Pourquoi les opérateurs nous choisissent",
+        "hero.side.title":"Audit express gratuit de la rétention et des VIP",
+        "hero.side.lead":"En 24 heures, nous montrons où vous perdez de l’argent et ce qui peut être construit sur 30–90 jours.",
+        "hero.side.item1":"Analyse NGR / rétention par segment et GEO (TR, CEI, etc.)",
+        "hero.side.item2":"Revue des processus : VIP, centre d’appels, support, QA",
+        "hero.side.item3":"Feuille de route concise sans jargon",
+        "what.eyebrow":"Ce que fait Retenly",
+        "what.title":"Nous construisons le cœur opérationnel autour du joueur",
+        "what.lead":"Des processus clairs plutôt que le chaos : VIP, centre d’appels, support et QA fonctionnent comme un système unique qui génère du NGR.",
+        "what.vip.title":"VIP & rétention",
+        "what.vip.text":"Segmentation, offres personnalisées, gestion du risque de churn. Les VIP ne « disparaissent » pas, ils augmentent dépôts et activité.",
+        "what.callcenter.title":"Centre d’appels",
+        "what.callcenter.text":"Campagnes sortantes/entrantes, scripts anti-toxiques, SLAs, rapports quotidiens. Les appels sont structurés, pas improvisés.",
+        "what.qa.title":"Support & QA",
+        "what.qa.text":"Standards de service, check-lists, revues d’appels, KPIs transparents. Le support parle avec la voix de la marque.",
+        "who.eyebrow":"Avec qui nous travaillons",
+        "who.title":"Partenaire des opérateurs et plateformes",
+        "who.lead":"Nous ne sommes pas un centre d’appels externalisé généraliste. Retenly se concentre sur l’iGaming et les verticales voisines où LTV, NGR et réglementation comptent.",
+        "who.op.title":"Opérateurs iGaming",
+        "who.op.item1":"Casino en ligne et sportsbook",
+        "who.op.item2":"Travail avec bases actives et dormantes",
+        "who.white.title":"White-label & plateformes",
+        "who.white.item1":"Solutions clé en main pour vos clients",
+        "who.white.item2":"Rétention & VIP intégrées à votre offre",
+        "who.aff.title":"Équipes affiliées",
+        "who.aff.item1":"Maximisation de la valeur du trafic",
+        "who.aff.item2":"Processus dédiés pour VIP et joueurs high-value",
+        "who.pay.title":"Opérateurs payment-friendly",
+        "who.pay.item1":"GEO à paiements sensibles (TR, CEI, etc.)",
+        "who.pay.item2":"Communication claire sur limites, KYC et risques",
+        "why.eyebrow":"Pourquoi les opérateurs nous choisissent",
+        "why.title":"Retenly agit comme une équipe interne — sans coûts fixes",
+        "why.lead":"Nous parlons NGR, LTV et rétention, pas seulement « appels et tickets ». Le focus : résultat financier et qualité, pas volume de contacts.",
+        "why.item1.title":"Nous voyons où l’argent fuit",
+        "why.item1.text":"Nous identifions les pertes par segment et GEO et montrons en chiffres combien de NGR et de dépôts peuvent être regagnés en 30–90 jours.",
+        "why.item2.title":"Forte expertise TR + CEI",
+        "why.item2.text":"Nous comprenons la mentalité et le comportement des joueurs en TR, AZ, KZ, UZ, RU. Nous construisons une communication qui résonne réellement.",
+        "why.item3.title":"Approche CRM-neutre",
+        "why.item3.text":"Nous travaillons avec tout environnement CRM / tracking, en nous intégrant à votre infrastructure.",
+        "why.item4.title":"QA solide & reporting transparent",
+        "why.item4.text":"Contrôle qualité, revue des appels et chats, rapports KPI réguliers. Vous voyez les chiffres et la façon dont on parle aux joueurs.",
+        "result.eyebrow":"30 jours avec Retenly",
+        "result.title":"Ce qui change pendant le premier mois",
+        "result.lead":"Nous ne promettons pas de miracle en une semaine, mais après 30 jours la rétention devient une structure claire.",
+        "result.item1.title":"Une structure de rétention apparaît",
+        "result.item1.text":"Vous savez qui est responsable de quoi, comment se déroulent les touchpoints et quels segments sont prioritaires.",
+        "result.item2.title":"La base VIP est segmentée et gérée",
+        "result.item2.text":"Les joueurs high-value ont leurs propres scénarios, SLAs et offres — sans chaos manuel.",
+        "result.item3.title":"Les fuites de dépôts 0–7–30 jours sont traitées",
+        "result.item3.text":"Les joueurs ne disparaissent pas après les premiers dépôts : ils suivent un parcours défini.",
+        "result.item4.title":"Les standards QA & service sont figés",
+        "result.item4.text":"L’équipe travaille selon des standards clairs, et la qualité devient mesurable.",
+        "form.eyebrow":"Étape suivante",
+        "form.block_title":"Obtenir votre analyse Retenly personnalisée",
+        "form.block_lead":"Décrivez brièvement votre projet. Sous 24 heures, nous envoyons un PDF personnel : où vous perdez de l’argent et ce qui peut être construit en 30–90 jours.",
+        "form.title":"Audit gratuit de rétention & VIP",
+        "form.lead":"Pas de vente agressive. Uniquement analyse concrète et recommandations.",
+        "form.name_label":"Nom",
+        "form.name_placeholder":"Comment vous appeler",
+        "form.company_label":"Société / marque",
+        "form.company_placeholder":"Opérateur, plateforme ou marque",
+        "form.email_label":"E-mail professionnel",
+        "form.phone_label":"Téléphone / Telegram",
+        "form.phone_placeholder":"+33 / +90 / +7 …",
+        "form.interest_label":"Qu’est-ce qui est prioritaire aujourd’hui ?",
+        "form.opt.vip":"VIP & joueurs high-value",
+        "form.opt.reactivation":"Réactivation des joueurs dormants",
+        "form.opt.callcenter":"Centre d’appels / équipe d’appels",
+        "form.opt.support":"Support & SLA",
+        "form.opt.qa":"Contrôle qualité (QA)",
+        "form.opt.full":"Construire tout à partir de zéro",
+        "form.comment_label":"Qu’est-ce qui fait le plus mal ?",
+        "form.comment_placeholder":"Par exemple : VIP qui décrochent après 30 jours, pas de process de centre d’appels, chaos au support, pas de QA…",
+        "form.consent":"Je confirme fournir mes données de contact et j’accepte leur traitement.",
+        "form.submit":"Envoyer la demande",
+        "form.success":"Votre demande a été reçue. L’équipe Retenly préparera une analyse personnalisée et vous recontactera rapidement.",
+        "form.error":"Erreur d’envoi, veuillez réessayer plus tard.",
+        "side.title":"Ce que vous recevez après la demande",
+        "side.lead":"Un PDF unique que vous pouvez présenter au C-level ou à vos partenaires.",
+        "side.item1":"Vue d’ensemble de votre rétention, VIP et centre d’appels",
+        "side.item2":"Principaux points de perte NGR et LTV par segment",
+        "side.item3":"Idées de quick wins pour les 30–90 prochains jours",
+        "footer.privacy":"Politique de confidentialité"
       },
-
       ru: {
-        'meta.title': 'Retenly — удержание и VIP-операции для iGaming',
-        'meta.desc':  'Retenly строит и ведёт колл-центр, VIP, поддержку и QA для гемблинг-брендов. От старта с нуля до аудита и готовых команд.',
-
-        'hero.badge': 'Retention & VIP для iGaming',
-        'hero.h1': 'Колл-центр, VIP, поддержка и QA «под ключ» для гемблинг-проектов',
-        'hero.sub': 'Retenly помогает операторам и платформам iGaming построить или перестроить команды, которые отвечают за деньги: колл-центр, VIP-отдел, поддержку и контроль качества с готовыми людьми и понятными процессами.',
-        'hero.tag1': 'Новые бренды — запуск с нуля',
-        'hero.tag2': 'Действующие бренды — закрыть утечки NGR и отток',
-        'hero.tag3': 'Внутренний аудит и рабочий playbook',
-        'hero.btn_primary': 'Получить бесплатную консультацию',
-        'hero.btn_secondary': 'Посмотреть, что можно построить за 30 дней',
-        'hero.note': 'Работаем только B2B: операторы, платформы, white label-проекты и сильные аффилиат-команды.',
-
-        'metrics.title': 'Типичные результаты за 30–90 дней',
-        'metrics.item1_value': '+18–35%',
-        'metrics.item1_label': 'Рост NGR по старой базе',
-        'metrics.item2_value': '+25–60%',
-        'metrics.item2_label': 'Доля VIP в депозитах',
-        'metrics.item3_value': '−30–50%',
-        'metrics.item3_label': 'Меньше потерянных игроков в 0–90 дней',
-        'metrics.list1': 'Работаем в вашем CRM, дайлере и BI — либо помогаем подобрать и внедрить инструменты.',
-        'metrics.list2': 'Готовы менеджеры на RU / TR / AZ / KZ / UZ и соседние CIS-GEO.',
-        'metrics.list3': 'Вы видите ежедневные отчёты: NGR, LTV, активность, качество общения, движение VIP-игроков.',
-
-        'who.kicker': 'Кому это нужно',
-        'who.title': 'Новые и действующие гемблинг-бренды',
-        'who.sub': 'Если вы теряете игроков после 0–7 дней, VIP молчат, а поддержка работает «как получится» — мы помогаем превратить это в понятимую retention-машину вместо героических разовых рывков.',
-        'who.new_title': 'Новые бренды',
-        'who.new_text': 'Запускаете казино или беттинг-бренд и хотите иметь колл-центр, VIP и поддержку уже с первого дня.',
-        'who.active_title': 'Действующие бренды',
-        'who.active_text': 'У вас уже есть трафик и выручка, но NGR утекает из-за оттока, слабой реактивации и отсутствия нормального QA.',
-        'who.platforms_title': 'Платформы и white label',
-        'who.platforms_text': 'Вы — платформа или B2B-провайдер и хотите давать клиентам дополнительно retention, VIP и поддержку как сервис.',
-
-        'build.kicker': 'Что мы строим',
-        'build.title': 'От нуля до запуска или починка того, что уже есть',
-        'build.sub': 'Можно отдать нам направление целиком или один блок: колл-центр, VIP, поддержку, QA или разовый аудит.',
-
-        'build.call_chip': 'Колл-центр',
-        'build.call_li1': 'Входящие и исходящие под депозиты, реактивацию и KYC-поддержку.',
-        'build.call_li2': 'Скрипты под cold / warm / comeback-звонки под ваши GEO.',
-        'build.call_li3': 'SLA, мониторинг и ежедневные дашборды по NGR и contact rate.',
-
-        'build.vip_chip': 'VIP-отдел',
-        'build.vip_li1': 'Сегментация: VIP / pre-VIP / просто дорогие игроки.',
-        'build.vip_li2': 'VIP-менеджеры под TR / CIS и схожие рынки.',
-        'build.vip_li3': 'Персональные планы, лимиты, офферы и анти-выгорание.',
-
-        'build.support_chip': 'Поддержка и чаты',
-        'build.support_li1': '24/7 или ключевые пики по нужным языкам.',
-        'build.support_li2': 'Скрипты под чаты, мессенджеры и соцсети.',
-        'build.support_li3': 'Правила маршрутизации: кто, на что и за сколько отвечает.',
-
-        'build.qa_chip': 'Контроль качества (QA)',
-        'build.qa_li1': 'QA-формы для звонков и чатов: приветствие, KYC, лимиты, Responsible Gaming.',
-        'build.qa_li2': 'Регулярные проверки звонков, чатов и VIP-кейсов.',
-        'build.qa_li3': 'Замкнутый цикл: обратная связь, коучинг и KPI по каждому специалисту.',
-
-        'build.audit_chip': 'Внутренний аудит',
-        'build.audit_li1': 'Разбираем структуру, скрипты и отчёты.',
-        'build.audit_li2': 'Показываем, где именно вы теряете депозиты и игроков.',
-        'build.audit_li3': 'Делаем понятный план действий на 30 / 60 / 90 дней.',
-
-        'build.coach_title': 'Команда есть, структуры нет?',
-        'build.coach_text': 'Не просим «уволить всех и набрать заново». Мы выстраиваем процессы, QA и обучение поверх ваших людей — знание остаётся, ежедневные потери снижаются.',
-
-        'geo.kicker': 'GEO-фокус',
-        'geo.title': 'Сильнее всего в TR и CIS-ориентированных рынках',
-        'geo.sub': 'Понимаем специфику регионов: платёжные привычки, ожидания по бонусам, риск-лимиты и то, как VIP-игроки хотят, чтобы с ними разговаривали.',
-        'geo.note': 'Языки покрытия: RU, TR, AZ, KZ, UZ + русскоязычные базы в ЕС и Азии.',
-
-        'geo.tr_title': 'Турция (TR)',
-        'geo.tr_li1': 'Скрипты под местный стиль общения и регуляторные риски.',
-        'geo.tr_li2': 'Работа с картами, локальными кошельками и промо-лимитами под TR.',
-        'geo.tr_li3': 'VIP-коммуникация с уважением к приватности и уровню доверия игроков.',
-
-        'geo.cis_title': 'CIS / постсоветское пространство',
-        'geo.cis_li1': 'RU / AZ / KZ / UZ-базы с разными лимитами и средними чеками.',
-        'geo.cis_li2': 'Реактивация старых игроков через локальные праздники и триггеры.',
-        'geo.cis_li3': 'VIP-работа с несколькими валютами и кросс-брендовым трафиком.',
-
-        'geo.other_title': 'Другие GEO',
-        'geo.other_li1': 'Можем подключиться как дополнительный retention-подрядчик под конкретные сегменты.',
-        'geo.other_li2': 'Команды EN / RU для глобальных или EU-баз.',
-        'geo.other_li3': 'Начинаем с пилота по одному GEO и масштабируем после результатов.',
-
-        'how.kicker': 'Как мы работаем',
-        'how.title': 'Простое сотрудничество — понятные цифры',
-        'how.sub': 'Без магии. Договариваемся о метриках, выстраиваем процессы, даём людей — и каждую неделю вы видите дашборд, а не красивую историю.',
-        'how.step1_title': 'Созвон-бриф (30–40 минут)',
-        'how.step1_text': 'Уточняем продукт (casino / betting / mix), GEO, текущий стек (CRM, dialer, BI), NGR и болевые точки.',
-        'how.step2_title': 'Аудит и план (до 7 дней)',
-        'how.step2_text': 'Смотрим отчёты и логи, собираем путь игрока до VIP и делаем конкретный план на 30–90 дней: что строить, что чинить и что отдать на аутсорс.',
-        'how.step3_title': 'Запуск и ежедневный контроль',
-        'how.step3_text': 'Поэтапно запускаем людей и процессы. Вы видите звонки, чаты, QA и NGR в дашбордах и можете в любой момент тормозить или масштабировать.',
-
-        'form.title': 'Получить бесплатный аудит по удержанию и VIP',
-        'form.lead': 'Коротко расскажите о проекте. В течение 24 часов мы вернёмся с PDF: где вы теряете деньги сейчас и что можем построить в ближайшие 30–90 дней.',
-        'form.name_label': 'Имя',
-        'form.name_placeholder': 'Как к вам обращаться',
-        'form.company_label': 'Компания / бренд',
-        'form.company_placeholder': 'Оператор, платформа или название проекта',
-        'form.email_label': 'Рабочий email',
-        'form.email_placeholder': 'you@company.com',
-        'form.role_label': 'Роль',
-        'form.role_placeholder': 'Founder, COO, Head of Retention…',
-        'form.ngr_label': 'Месячный диапазон NGR',
-        'form.ngr_opt0': 'Выберите',
-        'form.ngr_opt1': '< 50k',
-        'form.ngr_opt2': '50k – 150k',
-        'form.ngr_opt3': '150k – 500k',
-        'form.ngr_opt4': '500k+',
-        'form.geo_label': 'Основные GEO',
-        'form.geo_placeholder': 'TR, AZ, KZ, UZ, RU, LATAM и др.',
-        'form.interest_label': 'Что сильнее всего болит сейчас?',
-        'form.interest_placeholder': 'Например: VIP «отваливаются» после 30 дней, нет процесса по колл-центру, хаос в поддержке, нет QA…',
-        'form.consent_text': 'Подтверждаю, что представляю гемблинг / iGaming-компанию и согласен(на) на обработку данных для связи по услугам Retenly.',
-        'form.btn': 'Отправить заявку',
-
-        'form.sending': 'Отправляем…',
-        'form.hint_success': 'Заявка получена. Мы свяжемся с вами в течение 24 часов.',
-        'form.hint_error': 'Ошибка сервера. Попробуйте ещё раз позже.',
-        'form.hint_network': 'Ошибка сети. Попробуйте ещё раз.',
-        'form.toast_success': 'Заявка отправлена — скоро проверьте почту.',
-        'form.toast_network': 'Ошибка сети — попробуйте ещё раз.',
-
-        'side.audit_title': 'Что вы получите по итогам аудита',
-        'side.audit_li1': 'Срез вашей воронки удержания (0–90 дней).',
-        'side.audit_li2': 'Понимание, где теряете депозиты и LTV VIP-игроков.',
-        'side.audit_li3': 'Список того, что можно выстроить или отдать на аутсорс за 30–90 дней.',
-        'side.work_title': 'Как мы обычно работаем с брендами',
-        'side.work_li1': 'При необходимости подписываем NDA.',
-        'side.work_li2': 'Не передаём ваши данные другим операторам.',
-        'side.work_li3': 'Можно начать только с аудита — без долгосрочного контракта.',
-
-        'closing.title': 'Готовы перестать терять NGR каждый день?',
-        'closing.text': 'Напишите пару строк — покажем, сколько ещё можно заработать на том же трафике и базе.',
-        'closing.btn': 'Обсудить вашу retention-модель',
-
-        'footer.privacy': 'Политика конфиденциальности'
+        "meta.title":"Retenly — премиальный retention и VIP для iGaming",
+        "meta.desc":"Retenly строит retention, VIP, колл-центры и QA-контур для iGaming-операторов в Tier-1, Tier-2 и Tier-3 рынках.",
+        "hero.badge":"Retenly · retention, VIP и колл-центр для iGaming",
+        "hero.h1":"Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно.",
+        "hero.lead":"Строим VIP, retention, колл-центр и контроль качества для iGaming-операторов: на уровне топ-брендов, без хаоса и потерянных депозитов.",
+        "hero.markets":"Работаем с рынками Tier-1, Tier-2 и Tier-3",
+        "hero.geos":"TR, AZ, KZ, UZ, RU, EU, LATAM",
+        "hero.cta":"Получить персональный анализ Retenly",
+        "hero.secondary":"Почему операторы выбирают нас",
+        "hero.side.title":"Бесплатный экспресс-аудит удержания и VIP",
+        "hero.side.lead":"За 24 часа покажем, где вы теряете деньги сейчас, и что можно выстроить за ближайшие 30–90 дней.",
+        "hero.side.item1":"Анализ NGR / Retention по сегментам и GEO (TR, СНГ и др.)",
+        "hero.side.item2":"Проверка процессов: VIP, колл-центр, поддержка, QA",
+        "hero.side.item3":"Краткий roadmap внедрения без «воды»",
+        "what.eyebrow":"Что делает Retenly",
+        "what.title":"Строим операционную «начинку» вокруг игрока",
+        "what.lead":"Чёткие процессы вместо хаоса: VIP-отдел, колл-центр, поддержка и контроль качества работают как единая система, которая приносит NGR, а не вопросы.",
+        "what.vip.title":"VIP и Retention",
+        "what.vip.text":"Сегментация, персональные офферы, работа с рисками оттока. VIP-игроки не «отваливаются», а увеличивают депозиты и частоту игры.",
+        "what.callcenter.title":"Колл-центр",
+        "what.callcenter.text":"Исходящие и входящие кампании, anti-toxic скрипты, SLA, ежедневные отчёты. Отдел звонит системно, а не «как получится».",
+        "what.qa.title":"Поддержка и QA",
+        "what.qa.text":"Стандарты сервиса, чек-листы, выборочные и 100% проверки, прозрачные KPI. Поддержка говорит с игроками в одном тоне с брендом.",
+        "who.eyebrow":"С кем мы работаем",
+        "who.title":"Партнёр для операторов и платформ",
+        "who.lead":"Мы не «общий аутсорс-колл-центр». Retenly сфокусирован на iGaming и смежных вертикалях, где важны LTV, NGR и регуляторные риски.",
+        "who.op.title":"iGaming-операторы",
+        "who.op.item1":"Онлайн-казино и sportsbook",
+        "who.op.item2":"Работа с активной и спящей базой",
+        "who.white.title":"White-label и платформенные решения",
+        "who.white.item1":"Решения для ваших клиентов «под ключ»",
+        "who.white.item2":"Retention и VIP как часть продуктового стека",
+        "who.aff.title":"Affiliate-команды",
+        "who.aff.item1":"Максимизируем выкуп трафика",
+        "who.aff.item2":"Отдельные процессы по VIP и high-value",
+        "who.pay.title":"Payment-friendly операторы",
+        "who.pay.item1":"GEO с чувствительными платежами (TR, CIS и др.)",
+        "who.pay.item2":"Чёткая коммуникация по лимитам, KYC и рискам",
+        "why.eyebrow":"Почему операторы выбирают Retenly",
+        "why.title":"Retenly — как внутренняя команда, только без overhead",
+        "why.lead":"Мы говорим на языке NGR, LTV и удержания, а не просто «звонков и заявок». Фокус — результат по деньгам и качеству, а не количество контактов.",
+        "why.item1.title":"Видим, где уходят деньги",
+        "why.item1.text":"Находим точки потерь по сегментам и GEO, показываем цифрами: сколько NGR и депозитов можно вернуть за 30–90 дней.",
+        "why.item2.title":"Глубокая экспертиза TR + CIS",
+        "why.item2.text":"Понимаем ментальность и поведение игроков в TR, AZ, KZ, UZ, RU. Строим коммуникацию, которая реально отзывается.",
+        "why.item3.title":"CRM-neutral подход",
+        "why.item3.text":"Работаем с любыми CRM и трекинг-системами. Встраиваемся в вашу инфраструктуру, не заставляя её ломать.",
+        "why.item4.title":"Сильный QA и прозрачные отчёты",
+        "why.item4.text":"Контроль качества, разбор звонков и чатов, регулярные отчёты по KPI. Вы видите не только цифры, но и как команда разговаривает с игроками.",
+        "result.eyebrow":"30 дней с Retenly",
+        "result.title":"Что меняется за первый месяц работы",
+        "result.lead":"Мы не обещаем «чудо за неделю». Но уже через 30 дней вы видите понятную структуру вместо набора хаотичных инициатив.",
+        "result.item1.title":"Появляется структура retention",
+        "result.item1.text":"Вы точно знаете, кто за что отвечает, как идут касания игроков и какие сегменты в фокусе.",
+        "result.item2.title":"VIP-база сегментирована и управляется",
+        "result.item2.text":"High-value игроки получают отдельные сценарии, SLA и офферы — без ручного хаоса и потерь.",
+        "result.item3.title":"Закрываем «слив» депозитов 0–7–30 дней",
+        "result.item3.text":"Игроки не пропадают после первых депозитов: у них есть выстроенный путь и касания.",
+        "result.item4.title":"QA и стандарты сервиса закреплены",
+        "result.item4.text":"Команда работает по понятным стандартам, а качество обслуживания становится управляемым показателем.",
+        "form.eyebrow":"Следующий шаг",
+        "form.block_title":"Получить персональный анализ Retenly",
+        "form.block_lead":"Коротко расскажите о проекте. В течение 24 часов мы вернёмся с персональным PDF: где вы теряете деньги сейчас и что можно выстроить в ближайшие 30–90 дней.",
+        "form.title":"Бесплатный аудит по удержанию и VIP",
+        "form.lead":"Никаких «жёстких продаж». Только конкретный разбор и рекомендации.",
+        "form.name_label":"Имя",
+        "form.name_placeholder":"Как к вам обращаться",
+        "form.company_label":"Компания / бренд",
+        "form.company_placeholder":"Оператор, платформа или бренд",
+        "form.email_label":"Рабочий e-mail",
+        "form.phone_label":"Телефон / Telegram",
+        "form.phone_placeholder":"+90 / +7 / +994 …",
+        "form.interest_label":"Что важнее всего сейчас",
+        "form.opt.vip":"VIP и high-value игроки",
+        "form.opt.reactivation":"Реактивация спящих игроков",
+        "form.opt.callcenter":"Колл-центр / отдел звонков",
+        "form.opt.support":"Поддержка и SLA",
+        "form.opt.qa":"Контроль качества (QA)",
+        "form.opt.full":"Построить всё с нуля",
+        "form.comment_label":"Что сильнее всего болит?",
+        "form.comment_placeholder":"Например: VIP «отваливаются» после 30 дней, нет процесса по колл-центру, хаос в поддержке, нет QA…",
+        "form.consent":"Подтверждаю, что предоставляю данные для связи и согласен(на) на их обработку.",
+        "form.submit":"Отправить заявку",
+        "form.success":"Ваш запрос принят. Команда Retenly подготовит персональный разбор и свяжется с вами в ближайшее время.",
+        "form.error":"Ошибка при отправке. Попробуйте ещё раз чуть позже.",
+        "side.title":"Что вы получите по итогам заявки",
+        "side.lead":"Один PDF-документ, который можно показать C-level или партнёрам.",
+        "side.item1":"Краткий срез по текущему состоянию retention, VIP и колл-центра",
+        "side.item2":"Основные точки потерь NGR и LTV по сегментам",
+        "side.item3":"Идеи быстрых внедрений на 30–90 дней",
+        "footer.privacy":"Политика конфиденциальности"
       }
     };
 
-    function detectLanguage() {
+    // ====== I18N APPLY ======
+    function applyTranslations(lang){
+      const dict = I18N[lang] || I18N.en;
+
+      document.title = dict["meta.title"] || document.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if(metaDesc && dict["meta.desc"]) metaDesc.content = dict["meta.desc"];
+
+      document.documentElement.setAttribute('lang', lang);
+
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+        const key = el.getAttribute('data-i18n-placeholder');
+        if(dict[key]) el.placeholder = dict[key];
+      });
+
+      document.querySelectorAll('option[data-i18n]').forEach(opt=>{
+        const key = opt.getAttribute('data-i18n');
+        if(dict[key]) opt.textContent = dict[key];
+      });
+    }
+
+    function detectLanguage(){
       const stored = localStorage.getItem(LANG_KEY);
-      if (stored && SUPPORTED.includes(stored)) return stored;
+      if(stored && SUPPORTED.includes(stored)) return stored;
       const nav = (navigator.language || navigator.userLanguage || 'en').slice(0,2).toLowerCase();
-      if (SUPPORTED.includes(nav)) return nav;
+      if(SUPPORTED.includes(nav)) return nav;
       return 'en';
     }
 
-    function applyTranslations(lang) {
+    function setLanguage(code){
+      if(!SUPPORTED.includes(code)) code='en';
+      localStorage.setItem(LANG_KEY, code);
+      const labelMap = {en:'English',de:'Deutsch',pl:'Polski',fr:'Français',ru:'Русский'};
+      document.getElementById('langLabel').textContent = labelMap[code] || code;
+      applyTranslations(code);
+    }
+
+    const langBtn = document.getElementById('langBtn');
+    const langList = document.getElementById('langList');
+    langBtn.addEventListener('click',()=>{
+      const open = langList.style.display === 'block';
+      langList.style.display = open ? 'none' : 'block';
+      langBtn.setAttribute('aria-expanded', String(!open));
+    });
+    langList.querySelectorAll('button[data-lang]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        setLanguage(btn.getAttribute('data-lang'));
+        langList.style.display='none';
+      });
+    });
+    document.addEventListener('click',e=>{
+      if(!document.getElementById('langWrap').contains(e.target)){
+        langList.style.display='none';
+      }
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape') langList.style.display='none';
+    });
+
+    // init language
+    setLanguage(detectLanguage());
+
+    // ====== FORM SUBMIT ======
+    const form = document.getElementById('lead');
+    const formHint = document.getElementById('form-hint');
+    const toastEl = document.getElementById('toast');
+
+    function toast(msg){
+      toastEl.textContent = msg || 'Done';
+      toastEl.style.opacity='1';
+      toastEl.style.transform='translateX(-50%) scale(1)';
+      setTimeout(()=>{
+        toastEl.style.opacity='0';
+        toastEl.style.transform='translateX(-50%) scale(.96)';
+      }, 3800);
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const lang = localStorage.getItem(LANG_KEY) || detectLanguage();
       const dict = I18N[lang] || I18N.en;
 
-      // title & meta
-      if (dict['meta.title']) document.title = dict['meta.title'];
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc && dict['meta.desc']) metaDesc.content = dict['meta.desc'];
+      const fd = new FormData(form);
+      if(fd.get('_hp')) return;
 
-      // text nodes
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const val = dict[key];
-        if (!val) return;
-        el.textContent = val;
-      });
-
-      // placeholders
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        const val = dict[key];
-        if (!val) return;
-        el.setAttribute('placeholder', val);
-      });
-
-      // options
-      document.querySelectorAll('option[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const val = dict[key];
-        if (!val) return;
-        el.textContent = val;
-      });
-    }
-
-    function setLanguage(code) {
-      if (!SUPPORTED.includes(code)) code = 'en';
-      localStorage.setItem(LANG_KEY, code);
-      applyTranslations(code);
-      const native = {en:'English', de:'Deutsch', pl:'Polski', fr:'Français', ru:'Русский'}[code] || code;
-      const label = document.getElementById('langLabel');
-      if (label) label.textContent = native;
-    }
-
-    function getCurrentLang() {
-      const stored = localStorage.getItem(LANG_KEY);
-      return (stored && SUPPORTED.includes(stored)) ? stored : 'en';
-    }
-
-    function showToast(message) {
-      const t = document.getElementById('toast');
-      if (!t) return;
-      t.textContent = message || 'Done';
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3500);
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      // init language
-      const initial = detectLanguage();
-      setLanguage(initial);
-
-      // language UI
-      const langBtn = document.getElementById('langBtn');
-      const langList = document.getElementById('langList');
-      const langWrap = document.getElementById('langWrap');
-
-      if (langBtn && langList && langWrap) {
-        langBtn.addEventListener('click', () => {
-          const open = langList.style.display === 'block';
-          langList.style.display = open ? 'none' : 'block';
-          langBtn.setAttribute('aria-expanded', (!open).toString());
-        });
-
-        langList.querySelectorAll('button[data-lang]').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const code = btn.getAttribute('data-lang');
-            setLanguage(code);
-            langList.style.display = 'none';
-          });
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!langWrap.contains(e.target)) {
-            langList.style.display = 'none';
-          }
-        });
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') langList.style.display = 'none';
-        });
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if(submitBtn) submitBtn.disabled = true;
+      if(formHint){
+        formHint.style.color = '#5b4516';
+        formHint.textContent = '⏳';
       }
 
-      // scroll button
-      const scrollBtn = document.getElementById('scrollPlanBtn');
-      const form = document.getElementById('lead');
-      if (scrollBtn && form) {
-        scrollBtn.addEventListener('click', () => {
-          form.scrollIntoView({behavior:'smooth'});
-        });
-      }
-
-      // form handler
-      const submitBtn = document.getElementById('submitBtn');
-      const formHint = document.getElementById('form-hint');
-
-      if (!form) return;
-
-      const utm = (() => {
-        try {
-          return Object.fromEntries(new URLSearchParams(location.search).entries());
-        } catch { return {}; }
-      })();
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const lang = getCurrentLang();
-        const dict = I18N[lang] || I18N.en;
-
-        const fd = new FormData(form);
-        if (fd.get('_hp')) return; // honeypot
-
-        Object.entries(utm).forEach(([k,v]) => {
-          try { fd.append(k, v); } catch {}
-        });
-
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = dict['form.sending'] || 'Sending…';
-        }
-        if (formHint) {
-          formHint.textContent = '';
-          formHint.style.color = '#f7f2e4';
-        }
-
-        try {
-          const resp = await fetch(form.action, {
-            method: 'POST',
-            body: fd
-          });
-
-          if (!resp || !resp.ok) {
-            console.warn('Form response not OK, treating as accepted:', resp && resp.status);
-          }
-
+      try{
+        const resp = await fetch(form.action,{method:'POST',body:fd});
+        if(resp && resp.ok){
+          toast(dict['form.success'] || 'Request accepted. We will contact you soon.');
+          if(formHint) formHint.textContent = '';
           form.reset();
-          if (formHint) {
-            formHint.textContent = dict['form.hint_success'] || 'Request received. We will contact you within 24 hours.';
-            formHint.style.color = 'var(--success)';
-          }
-          showToast(dict['form.toast_success'] || 'Request sent — check your inbox soon.');
-        } catch (err) {
-          console.error('Form send error:', err);
-          if (formHint) {
-            formHint.textContent = dict['form.hint_network'] || 'Network error. Please try again.';
-            formHint.style.color = 'var(--danger)';
-          }
-          showToast(dict['form.toast_network'] || 'Network error — please try again.');
-        } finally {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = dict['form.btn'] || 'Send request';
-          }
+        }else{
+          toast(dict['form.error'] || 'Sending error, please try again later.');
         }
-      });
+      }catch(err){
+        console.error(err);
+        toast(dict['form.error'] || 'Sending error, please try again later.');
+      }finally{
+        if(submitBtn) submitBtn.disabled = false;
+      }
     });
   </script>
 </body>
