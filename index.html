@@ -187,7 +187,14 @@
     }
 
     /* === TYPO, HERO, UTILS === */
-    h1{font:800 40px/1.05 Manrope;margin-bottom:16px;color:#fff;}
+    h1{
+      font:800 40px/1.05 Manrope;
+      margin-bottom:16px;
+      color:#fff;
+    }
+    @media(min-width:880px){
+      h1{font-size:46px;} /* NEW: крупнее заголовок на десктопе */
+    }
     h2{font:800 28px/1.15 Manrope;margin-bottom:16px;color:#fff;}
     h3{font:700 18px/1.25 Manrope;margin-bottom:8px;color:#fff;}
     p{font-size:14px;line-height:1.6;color:#e3e3f0;}
@@ -203,7 +210,7 @@
       border:1px solid rgba(244,210,122,0.40);
       font-size:11px;
       text-transform:uppercase;
-      letter-spacing:0.08em;
+      letter-spacing:0.14em; /* NEW: чуть больше letter-spacing для премиум вида */
       color:var(--accent);
       margin-bottom:14px;
     }
@@ -262,9 +269,29 @@
       }
     }
     .hero-sub{
-      max-width:520px;
+      max-width:540px;
       font-size:15px;
     }
+
+    /* NEW: премиальные тэг-пиллы под сабтайтлом HERO */
+    .hero-tags{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:11px;
+    }
+    .hero-tag-pill{
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(244,210,122,0.28);
+      background:rgba(8,8,16,0.92);
+      color:#f5f5ff;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      font-weight:600;
+    }
+
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
@@ -379,7 +406,7 @@
       pointer-events:none;
     }
     .card-glass:hover::before{opacity:1;}
-    .card-glass p{font-size:13px;}
+    .card-glass p{font-size:13px;color:#d8d8f2;} /* NEW: немного светлее текст в карточках */
     .icon-circle{
       width:26px;height:26px;
       border-radius:999px;
@@ -579,11 +606,20 @@
             <span data-i18n="hero.badge">Retention & VIP for iGaming</span>
           </div>
           <h1 data-i18n="hero.h1">
-            Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно.
+            Retenly — возвращаем потерянные депозиты и защищаем ваш GGR.
           </h1>
           <p class="hero-sub" data-i18n="hero.sub">
             Мы выстраиваем retention, VIP-направление, колл-центр и QA для казино и беттинга: от стратегии и скриптов до команды «под ключ».
           </p>
+
+          <!-- NEW: премиум-тэги направлений -->
+          <div class="hero-tags">
+            <span class="hero-tag-pill" data-i18n="hero.tag1">VIP- сопровождение</span>
+            <span class="hero-tag-pill" data-i18n="hero.tag2">Call center</span>
+            <span class="hero-tag-pill" data-i18n="hero.tag3">Retention</span>
+            <span class="hero-tag-pill" data-i18n="hero.tag4">QA контроль</span>
+          </div>
+
           <div class="hero-actions">
             <a href="#lead-section" class="btn" data-i18n="hero.cta">Получить персональный анализ Retenly</a>
             <a href="https://t.me/retenlypartners" target="_blank" class="btn btn-ghost" data-i18n="hero.cta_tg">
@@ -704,7 +740,7 @@
     <section id="why" class="fade-up">
       <h2 data-i18n="why.title">Почему операторы выбирают Retenly</h2>
       <p class="muted" data-i18n="why.lead">
-        Мы закрываем весь контур — от стратегии до ежедневных звонков и контроля качества.
+        Мы закрываем весь контур — от стратегии до ежедневных звонков и QA — с цифрами, а не «ощущениями».
       </p>
       <div class="section-line"></div>
       <div class="grid grid-3">
@@ -882,8 +918,12 @@
         "meta.title":"Retenly — Retention & VIP for iGaming",
         "meta.desc":"Retenly builds retention, VIP, call center and QA for iGaming operators. We bring dormant players back and protect your GGR.",
         "hero.badge":"Retention & VIP for iGaming",
-        "hero.h1":"Retenly — we fix retention problems that cost you tens of thousands of dollars every month.",
+        "hero.h1":"Retenly — we turn lost deposits into predictable GGR.",
         "hero.sub":"We build retention, VIP, call center and QA for casino & sportsbook: from strategy and scripts to a turnkey team.",
+        "hero.tag1":"VIP service",
+        "hero.tag2":"Call center",
+        "hero.tag3":"Retention",
+        "hero.tag4":"QA control",
         "hero.cta":"Get a personal Retenly analysis",
         "hero.cta_tg":"Text us on Telegram",
         "hero.note":"Fill in the form below — we’ll come back with loss numbers, hypotheses and a pilot format.",
@@ -920,7 +960,7 @@
         "who.pay.text":"Brands that care about payment risk and reputation.",
 
         "why.title":"Why operators choose Retenly",
-        "why.lead":"We close the full loop — from strategy to daily calls and QA.",
+        "why.lead":"We close the full loop — from strategy to daily calls and QA — with numbers, not gut feeling.",
         "why.card1.title":"Focus on GGR and LTV",
         "why.card1.text":"We don’t just count calls — we track extra GGR, returned deposits and segment dynamics.",
         "why.card2.title":"Turnkey team",
@@ -970,16 +1010,16 @@
         "form.network":"Network error. Please try again later."
       },
 
-      /* DE, PL, FR, RU: чтобы не раздувать ответ до безумия, переводы компактные,
-         но логика и структура полностью сохранены. При желании сможем потом
-         точечно подшлифовать формулировки. */
-
       de: {
         "meta.title":"Retenly — Retention & VIP für iGaming",
         "meta.desc":"Retenly baut Retention, VIP, Callcenter und QA für iGaming-Operatoren auf und holt schlafende Spieler zurück.",
         "hero.badge":"Retention & VIP für iGaming",
-        "hero.h1":"Retenly – wir lösen Retention-Probleme, die Sie jeden Monat zehntausende Euro kosten.",
+        "hero.h1":"Retenly – wir verwandeln verlorene Einzahlungen in planbaren GGR.",
         "hero.sub":"Wir bauen Retention, VIP, Callcenter und QA für Casino & Sportwetten – von Strategie und Skripten bis zum Team.",
+        "hero.tag1":"VIP-Service",
+        "hero.tag2":"Call Center",
+        "hero.tag3":"Retention",
+        "hero.tag4":"QA-Kontrolle",
         "hero.cta":"Persönliche Retenly-Analyse erhalten",
         "hero.cta_tg":"In Telegram schreiben",
         "hero.note":"Füllen Sie das Formular aus – wir melden uns mit Zahlen, Hypothesen und einem Pilot-Format.",
@@ -1016,7 +1056,7 @@
         "who.pay.text":"Marken mit Fokus auf Zahlungsrisiko und Reputation.",
 
         "why.title":"Warum Operatoren Retenly wählen",
-        "why.lead":"Wir schließen den gesamten Zyklus – von Strategie bis zu täglichen Calls und QA.",
+        "why.lead":"Wir schließen den gesamten Zyklus – von Strategie bis zu täglichen Calls und QA – mit klaren Zahlen.",
         "why.card1.title":"Fokus auf GGR und LTV",
         "why.card1.text":"Wir zählen nicht nur Calls, sondern Zusatz-GGR, Rückkehr von Einzahlungen und Segmentdynamik.",
         "why.card2.title":"Team schlüsselfertig",
@@ -1070,8 +1110,12 @@
         "meta.title":"Retenly — Retention & VIP dla iGaming",
         "meta.desc":"Retenly buduje retention, VIP, call center i QA dla operatorów iGaming.",
         "hero.badge":"Retention & VIP dla iGaming",
-        "hero.h1":"Retenly — rozwiązujemy problemy z utrzymaniem, które kosztują cię co miesiąc dziesiątki tysięcy.",
+        "hero.h1":"Retenly — zamieniamy utracone depozyty w przewidywalny GGR.",
         "hero.sub":"Budujemy retention, VIP, call center i QA dla casino & sportsbook – od strategii po gotowy zespół.",
+        "hero.tag1":"VIP obsługa",
+        "hero.tag2":"Call center",
+        "hero.tag3":"Retention",
+        "hero.tag4":"Kontrola QA",
         "hero.cta":"Otrzymaj analizę Retenly",
         "hero.cta_tg":"Napisz na Telegramie",
         "hero.note":"Wypełnij formularz – wrócimy z liczbami i propozycją pilota.",
@@ -1109,7 +1153,7 @@
         "who.pay.text":"Marki dbające o ryzyko płatności i reputację.",
 
         "why.title":"Dlaczego operatorzy wybierają Retenly",
-        "why.lead":"Zamykamy cały proces – od strategii po daily calls.",
+        "why.lead":"Zamykamy cały proces – od strategii po daily calls i QA – z jasnymi liczbami.",
         "why.card1.title":"Fokus na GGR i LTV",
         "why.card1.text":"Liczymy dodatkowy GGR, powroty depozytów i dynamikę segmentów.",
         "why.card2.title":"Zespół pod klucz",
@@ -1163,8 +1207,12 @@
         "meta.title":"Retenly — Retention & VIP pour iGaming",
         "meta.desc":"Retenly met en place la rétention, le VIP, le call center et la QA pour les opérateurs iGaming.",
         "hero.badge":"Retention & VIP pour iGaming",
-        "hero.h1":"Retenly — nous résolvons les problèmes de rétention qui vous coûtent des dizaines de milliers d’euros par mois.",
+        "hero.h1":"Retenly — nous transformons les dépôts perdus en GGR prévisible.",
         "hero.sub":"Nous construisons la rétention, le VIP, le call center et la QA pour casino & sportsbook.",
+        "hero.tag1":"Service VIP",
+        "hero.tag2":"Call center",
+        "hero.tag3":"Retention",
+        "hero.tag4":"Contrôle QA",
         "hero.cta":"Recevoir une analyse Retenly",
         "hero.cta_tg":"Écrire sur Telegram",
         "hero.note":"Remplissez le formulaire – nous revenons avec les chiffres et un pilote.",
@@ -1202,7 +1250,7 @@
         "who.pay.text":"Marques sensibles au risque paiement.",
 
         "why.title":"Pourquoi les opérateurs choisissent Retenly",
-        "why.lead":"Nous couvrons tout le cycle — stratégie, exécution, QA.",
+        "why.lead":"Nous couvrons tout le cycle — stratégie, exécution, QA — avec des chiffres clairs.",
         "why.card1.title":"Focus GGR & LTV",
         "why.card1.text":"Nous regardons le GGR additionnel et le retour des dépôts.",
         "why.card2.title":"Équipe clé en main",
@@ -1256,8 +1304,12 @@
         "meta.title":"Retenly — Retention & VIP для iGaming",
         "meta.desc":"Retenly выстраивает удержание, VIP, колл-центр и QA для iGaming-операторов и возвращает спящих игроков.",
         "hero.badge":"Retention & VIP для iGaming",
-        "hero.h1":"Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно.",
+        "hero.h1":"Retenly — возвращаем потерянные депозиты и защищаем ваш GGR.",
         "hero.sub":"Мы выстраиваем retention, VIP-направление, колл-центр и QA для казино и беттинга: от стратегии и скриптов до команды «под ключ».",
+        "hero.tag1":"VIP- сопровождение",
+        "hero.tag2":"Call center",
+        "hero.tag3":"Retention",
+        "hero.tag4":"QA контроль",
         "hero.cta":"Получить персональный анализ Retenly",
         "hero.cta_tg":"Написать в Telegram",
         "hero.note":"Заполните форму ниже — мы вернёмся с цифрами по потерям, гипотезами и форматом пилота.",
@@ -1294,7 +1346,7 @@
         "who.pay.text":"Бренды, аккуратно работающие с платёжными рисками и репутацией.",
 
         "why.title":"Почему операторы выбирают Retenly",
-        "why.lead":"Мы закрываем весь контур — от стратегии до ежедневных звонков и контроля качества.",
+        "why.lead":"Мы закрываем весь контур — от стратегии до ежедневных звонков и QA — с цифрами, а не «ощущениями».",
         "why.card1.title":"Фокус на GGR и LTV",
         "why.card1.text":"Смотрим не на количество звонков, а на доп. GGR, возврат депов и динамику по сегментам.",
         "why.card2.title":"Команда «под ключ»",
@@ -1454,7 +1506,6 @@
 
           try{
             const resp = await fetch(form.action, {method:'POST', body:fd});
-            // Для Apps Script иногда нет нормального CORS → считаем запрос принятым даже при странном статусе
             if(resp && resp.ok){
               if(hint){
                 hint.textContent = dict["form.success"];
