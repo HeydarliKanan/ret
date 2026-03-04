@@ -16,7 +16,6 @@
   <meta name="description" content="Retenly ведёт QA для отделов продаж и поддержки: ежедневный контроль качества, KPI, скрипты, отчётность и обучение менеджеров." />
   <meta name="theme-color" content="#F7F9FC" />
 
-  <!-- Премиальная типографика -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -24,22 +23,31 @@
       --bg:#F7F9FC;
       --bg2:#FFFFFF;
       --card:#FFFFFF;
+
+      /* base */
       --text:#0B1220;
       --muted:#5D6B86;
+      --ink:#0F172A;
+
       --border:rgba(14,30,62,0.10);
       --border2:rgba(14,30,62,0.14);
       --shadow:0 18px 40px rgba(16,24,40,0.08);
+
       --accent:#F4D27A;
       --accent2:#D39A3E;
       --success:#18A673;
-      --ink:#0F172A;
 
       --fontBody: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --fontHead: "Plus Jakarta Sans", Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      /* adaptive contrast knobs */
+      --contrastBoost: 1;
+      --mutedBoost: 1;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family:var(--fontBody);
@@ -48,9 +56,12 @@
       min-height:100vh;
       position:relative;
       overflow-x:hidden;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Виньетка по краям */
+    /* VINETTE */
     body::before{
       content:"";
       position:fixed;
@@ -65,6 +76,31 @@
       mix-blend-mode:multiply;
     }
 
+    /* PREMIUM BACKGROUND ART + adaptive contrast layer */
+    .bg-art{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:0.95;
+      filter:contrast(var(--contrastBoost)) saturate(1.02);
+    }
+    .bg-art svg{width:100%;height:100%;display:block}
+
+    /* extra contrast veil for “any monitor” */
+    .contrast-veil{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background:
+        radial-gradient(1100px 600px at 50% 0%, rgba(255,255,255,0.30), transparent 60%),
+        radial-gradient(900px 650px at 50% 40%, rgba(255,255,255,0.18), transparent 62%);
+      opacity:0.65;
+      mix-blend-mode:soft-light;
+    }
+
+    /* keep content above background */
     .page{
       max-width:1360px;
       margin:0 auto;
@@ -73,7 +109,7 @@
       z-index:1;
     }
 
-    /* HEADER: без белой плашки */
+    /* HEADER */
     .site-header{
       display:flex;
       align-items:center;
@@ -103,7 +139,12 @@
       color:var(--ink);
       line-height:1.1;
     }
-    .logo-text-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .logo-text-sub{
+      font-size:12px;
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
+      margin-top:2px;
+      font-weight:600;
+    }
 
     .contacts-bar{display:flex;align-items:center;gap:12px}
 
@@ -159,9 +200,11 @@
     @media(max-width:820px){
       .site-header{flex-direction:column;align-items:flex-start}
       .contacts-bar{width:100%;justify-content:space-between}
+      .bg-art{opacity:0.78}
+      .contrast-veil{opacity:0.45}
     }
 
-    /* Attention banner (то, что “бросается в глаза”) */
+    /* ATTENTION BANNER */
     .attention-banner{
       margin:12px 0 0;
       border-radius:20px;
@@ -212,7 +255,7 @@
     }
     .attention-text{
       margin:0;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       font-size:15px;
       line-height:1.45;
       font-weight:600;
@@ -228,24 +271,7 @@
       box-shadow:var(--shadow);
       margin-top:14px;
     }
-
-    /* Премиальный “аналитический” паттерн поверх градиента */
-    .hero-bg{
-      position:absolute;
-      inset:-140px -160px auto -160px;
-      height:420px;
-      pointer-events:none;
-      z-index:0;
-      background:
-        radial-gradient(circle at 14% 30%, rgba(99,102,241,0.22), transparent 54%),
-        radial-gradient(circle at 62% 18%, rgba(16,185,129,0.18), transparent 52%),
-        radial-gradient(circle at 86% 56%, rgba(244,210,122,0.26), transparent 58%),
-        conic-gradient(from 240deg at 50% 50%, rgba(148,163,184,0.22), rgba(2,6,23,0) 42%, rgba(148,163,184,0.16));
-      filter:blur(10px);
-      opacity:0.98;
-    }
-
-    /* Лёгкая “сеточка” как у дорогих SaaS (не мешает читаемости) */
+    /* grid overlay is subtle */
     .hero-wrap::before{
       content:"";
       position:absolute;
@@ -287,7 +313,7 @@
 
     .hero-lead{
       margin:0 0 14px;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       font-size:17px;
       line-height:1.50;
       max-width:860px;
@@ -301,7 +327,7 @@
       border:1px solid var(--border);
       background:rgba(255,255,255,0.88);
       font-size:12px;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       display:flex;
       align-items:center;
       gap:8px;
@@ -350,7 +376,7 @@
 
     .hero-note{
       font-size:13px;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       line-height:1.35;
       font-weight:600;
     }
@@ -394,11 +420,11 @@
       border:1px solid var(--border);
       padding:10px 11px;
     }
-    .stat-label{font-size:12px;color:var(--muted);margin-bottom:2px;line-height:1.25;font-weight:600}
+    .stat-label{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-bottom:2px;line-height:1.25;font-weight:600}
     .stat-value{font-family:var(--fontHead);font-weight:800;font-size:18px;color:var(--ink)}
-    .stat-foot{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.25;font-weight:600}
+    .stat-foot{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-top:2px;line-height:1.25;font-weight:600}
 
-    /* секции */
+    /* sections */
     section{ padding:22px 0; }
     h2{
       margin:0 0 10px;
@@ -411,7 +437,7 @@
     }
     .section-lead{
       margin:0 0 16px;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       font-size:16px;
       line-height:1.45;
       max-width:980px;
@@ -447,14 +473,14 @@
     .card-text{
       margin:0;
       font-size:14px;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       line-height:1.45;
       font-weight:500;
     }
 
     ul.clean{list-style:none;padding:0;margin:0}
     ul.clean li{
-      font-size:14px;color:var(--muted);
+      font-size:14px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       display:flex;align-items:flex-start;gap:8px;
       margin-bottom:8px;line-height:1.45;font-weight:500;
     }
@@ -479,7 +505,7 @@
     .center-title{text-align:center}
     .center-lead{text-align:center;margin-left:auto;margin-right:auto}
 
-    /* QA report block */
+    /* QA report */
     .report-grid{
       display:grid;
       grid-template-columns:1.1fr 0.9fr;
@@ -511,7 +537,7 @@
     }
     .report-sub{
       margin:4px 0 0;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       font-size:13px;
       line-height:1.35;
       font-weight:500;
@@ -523,7 +549,7 @@
       border-radius:999px;
       border:1px solid var(--border);
       background:#fff;
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       white-space:nowrap;
       font-family:var(--fontHead);
     }
@@ -540,9 +566,9 @@
       background:#fff;
       padding:10px 10px 9px;
     }
-    .kpi-label{font-size:12px;color:var(--muted);margin:0 0 3px;font-weight:600}
+    .kpi-label{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin:0 0 3px;font-weight:600}
     .kpi-val{font-family:var(--fontHead);font-size:16px;font-weight:800;color:var(--ink);margin:0}
-    .kpi-foot{font-size:12px;color:var(--muted);margin:3px 0 0;font-weight:500}
+    .kpi-foot{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin:3px 0 0;font-weight:500}
 
     table{
       width:100%;
@@ -562,7 +588,7 @@
       vertical-align:top;
     }
     th{
-      color:var(--muted);
+      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       font-weight:800;
       background:rgba(247,249,252,0.9);
       font-family:var(--fontHead);
@@ -589,14 +615,14 @@
     }
     textarea{border-radius:14px;min-height:92px;resize:vertical}
     input:focus,textarea:focus{border-color:rgba(211,154,62,0.65);box-shadow:0 0 0 4px rgba(244,210,122,0.18)}
-    .consent-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.35}
+    .consent-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-top:6px;line-height:1.35}
     .consent-row input[type="checkbox"]{width:16px;height:16px;margin-top:2px;border-radius:4px;accent-color: var(--accent2)}
     .form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
-    .form-hint{font-size:13px;color:var(--muted);min-height:18px;line-height:1.35}
+    .form-hint{font-size:13px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));min-height:18px;line-height:1.35}
 
     footer{
       margin-top:22px;padding-top:14px;border-top:1px solid var(--border);
-      font-size:13px;color:var(--muted);
+      font-size:13px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
       display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
     }
     footer a{color:#9A6A12;text-decoration:none;font-weight:900}
@@ -604,12 +630,109 @@
 
     .fade-section{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out, transform .45s ease-out}
     .fade-section.visible{opacity:1;transform:translateY(0)}
+
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .attention-banner::before{animation:none}
+      .contacts-label::after{animation:none}
+      .bg-art .breath-line{animation:none}
+      .bg-art .wave{animation:none}
+    }
   </style>
 </head>
 
 <body>
-  <div class="page">
+  <!-- Premium animated background -->
+  <div class="bg-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+      <defs>
+        <radialGradient id="g1" cx="25%" cy="18%" r="70%">
+          <stop offset="0%" stop-color="rgba(99,102,241,0.22)"/>
+          <stop offset="55%" stop-color="rgba(99,102,241,0.10)"/>
+          <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
+        </radialGradient>
+        <radialGradient id="g2" cx="72%" cy="20%" r="70%">
+          <stop offset="0%" stop-color="rgba(16,185,129,0.20)"/>
+          <stop offset="55%" stop-color="rgba(16,185,129,0.09)"/>
+          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+        </radialGradient>
+        <radialGradient id="g3" cx="78%" cy="55%" r="70%">
+          <stop offset="0%" stop-color="rgba(244,210,122,0.26)"/>
+          <stop offset="55%" stop-color="rgba(244,210,122,0.10)"/>
+          <stop offset="100%" stop-color="rgba(244,210,122,0)"/>
+        </radialGradient>
 
+        <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+          <path d="M46 0H0V46" fill="none" stroke="rgba(15,23,42,0.06)" stroke-width="1"/>
+        </pattern>
+
+        <linearGradient id="line" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="rgba(99,102,241,0)"/>
+          <stop offset="35%" stop-color="rgba(99,102,241,0.55)"/>
+          <stop offset="70%" stop-color="rgba(16,185,129,0.55)"/>
+          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+        </linearGradient>
+
+        <!-- voice wave gradient -->
+        <linearGradient id="wave" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="rgba(244,210,122,0)"/>
+          <stop offset="30%" stop-color="rgba(244,210,122,0.35)"/>
+          <stop offset="60%" stop-color="rgba(16,185,129,0.28)"/>
+          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- soft blobs -->
+      <rect width="1440" height="900" fill="transparent"/>
+      <rect width="1440" height="900" fill="url(#g1)"/>
+      <rect width="1440" height="900" fill="url(#g2)"/>
+      <rect width="1440" height="900" fill="url(#g3)"/>
+
+      <!-- grid top -->
+      <rect x="0" y="0" width="1440" height="520" fill="url(#grid)" opacity="0.9"/>
+
+      <!-- breathing analytics lines -->
+      <path class="breath-line" d="M0 235 C 220 155, 420 315, 640 235 S 1060 155, 1440 255"
+            fill="none" stroke="url(#line)" stroke-width="2.2" opacity="0.65">
+        <animate attributeName="opacity" values="0.45;0.75;0.45" dur="6.5s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.6;2.4;1.6" dur="6.5s" repeatCount="indefinite"/>
+      </path>
+
+      <path class="breath-line" d="M0 310 C 240 240, 430 420, 660 310 S 1080 200, 1440 340"
+            fill="none" stroke="rgba(244,210,122,0.55)" stroke-width="1.8" opacity="0.35">
+        <animate attributeName="opacity" values="0.18;0.42;0.18" dur="7.2s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.2;2.0;1.2" dur="7.2s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- voice wave pattern (subtle) -->
+      <path class="wave" d="M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165
+                           S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165"
+            fill="none" stroke="url(#wave)" stroke-width="1.7" opacity="0.32">
+        <animate attributeName="d"
+          dur="5.6s" repeatCount="indefinite"
+          values="
+          M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165 S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165;
+          M0 165 C 60 145, 120 190, 180 165 S 300 155, 360 165 S 480 190, 540 165 S 660 145, 720 165 S 840 190, 900 165 S 1020 155, 1080 165 S 1200 190, 1260 165 S 1380 145, 1440 165;
+          M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165 S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165
+          "/>
+        <animate attributeName="opacity" values="0.18;0.38;0.18" dur="6.8s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- data points -->
+      <g fill="rgba(15,23,42,0.20)">
+        <circle cx="260" cy="205" r="2.2"/>
+        <circle cx="420" cy="275" r="2.2"/>
+        <circle cx="640" cy="240" r="2.2"/>
+        <circle cx="860" cy="215" r="2.2"/>
+        <circle cx="1100" cy="245" r="2.2"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- adaptive contrast veil -->
+  <div class="contrast-veil" aria-hidden="true"></div>
+
+  <div class="page">
     <header class="site-header">
       <div class="logo-wrap">
         <div class="logo-mark"><span>R</span></div>
@@ -649,21 +772,20 @@
         <div>
           <p class="attention-title">Индивидуальная поддержка в области контроля качества</p>
           <p class="attention-text">
-            Ошибки не выбирают, каких клиентов вы можете потерять. Они просто это делают. Мы помогаем вам обнаружить их до того, как ваши клиенты уйдут от вас.
+            Ошибки не выбирают, каких клиентов вы можете потерять. Они просто это делают. Мы помогаем вам обнаружить их до того, как ваши клиенты уйдут от вас
           </p>
         </div>
       </div>
     </div>
 
     <div class="hero-wrap fade-section">
-      <div class="hero-bg" aria-hidden="true"></div>
-
       <section class="hero-grid">
         <div>
-          <h1>Перестаньте терять клиентов. Начните контролировать качество коммуникаций с вашими клиентами.</h1>
+          <!-- ✅ убрали точку в конце -->
+          <h1>Перестаньте терять клиентов. Начните контролировать качество коммуникаций с вашими клиентами</h1>
 
           <p class="hero-lead">
-            Мы выстраиваем контроль качества для отделов продаж и поддержки: проверяем коммуникации, усиливаем скрипты и KPI, даём команде понятный фидбек и регулярные тренинги.
+            Мы выстраиваем контроль качества для отделов продаж и поддержки: проверяем коммуникации, усиливаем скрипты и KPI, даём команде понятный фидбек и регулярные тренинги
           </p>
 
           <div class="hero-meta-row">
@@ -681,8 +803,9 @@
             <a href="#services" class="btn btn-secondary">Посмотреть услуги</a>
           </div>
 
+          <!-- ✅ убрали точку в конце -->
           <div class="hero-note">
-            Бесплатно проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений, который можно внедрять сразу.
+            Бесплатно проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений, который можно внедрять сразу
           </div>
         </div>
 
@@ -724,41 +847,40 @@
     <section class="fade-section" id="services">
       <h2 class="center-title">Услуги</h2>
       <p class="section-lead center-lead">
-        Можно начать с разового аудита и перейти на постоянное сопровождение. Подстраиваемся под ваш процесс и цели.
+        Можно начать с разового аудита и перейти на постоянное сопровождение. Подстраиваемся под ваш процесс и цели
       </p>
 
       <div class="grid grid-4">
         <div class="card card-soft">
           <div class="card-title">Контроль качества отдела продаж</div>
           <p class="card-text">
-            Ежедневная проверка коммуникаций, чек-листы, причины потерь и рост конверсии. Скрипты обновляем или создаём с нуля.
+            Ежедневная проверка коммуникаций, чек-листы, причины потерь и рост конверсии. Скрипты обновляем или создаём с нуля
           </p>
         </div>
 
         <div class="card card-soft">
           <div class="card-title">Еженедельный тренинг менеджеров</div>
           <p class="card-text">
-            Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру.
+            Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру
           </p>
         </div>
 
         <div class="card card-soft">
           <div class="card-title">QA для поддержки клиентов</div>
           <p class="card-text">
-            KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок.
+            KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок
           </p>
         </div>
 
         <div class="card card-soft">
           <div class="card-title">Разовый аудит и отчётность</div>
           <p class="card-text">
-            Снимок текущего состояния отдела: ошибки, потери, рекомендации и план исправлений. При необходимости контролируем внедрение.
+            Снимок текущего состояния отдела: ошибки, потери, рекомендации и план исправлений. При необходимости контролируем внедрение
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ✅ Вернули блоки: Быстрый старт / Масштаб / По требованию -->
     <section class="fade-section">
       <div class="grid grid-3">
         <div class="card">
@@ -769,7 +891,7 @@
           </div>
           <div class="card-title">БЫСТРЫЙ СТАРТ</div>
           <p class="card-text">
-            Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее.
+            Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее
           </p>
         </div>
 
@@ -781,7 +903,7 @@
           </div>
           <div class="card-title">ЛЮБОЙ МАСШТАБ</div>
           <p class="card-text">
-            Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время.
+            Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время
           </p>
         </div>
 
@@ -794,17 +916,16 @@
           </div>
           <div class="card-title">ПО ТРЕБОВАНИЮ</div>
           <p class="card-text">
-            Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии.
+            Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ✅ Вернули блок: Как выглядит наш QA-отчёт -->
     <section class="fade-section" id="report">
       <h2>Как выглядит наш QA-отчёт</h2>
       <p class="section-lead">
-        Понятный отчёт для руководителя и практические рекомендации для команды. Вы видите реальные ошибки, причины потери клиентов и план улучшений.
+        Понятный отчёт для руководителя и практические рекомендации для команды. Вы видите реальные ошибки, причины потери клиентов и план улучшений
       </p>
 
       <div class="report-grid">
@@ -890,13 +1011,12 @@
       </div>
     </section>
 
-    <!-- FORM -->
     <section class="fade-section" id="contact">
       <div class="grid grid-2">
         <div>
           <h2>Бесплатный аудит отдела продаж или поддержки</h2>
           <p class="section-lead">
-            Проверим 20 контактов с клиентами и покажем точки потерь. Затем предложим формат: разовый аудит или постоянное сопровождение.
+            Проверим 20 контактов с клиентами и покажем точки потерь. Затем предложим формат: разовый аудит или постоянное сопровождение
           </p>
 
           <div class="card card-soft">
@@ -954,13 +1074,13 @@
 
             <div>
               <label for="message">Что сейчас болит сильнее всего</label>
-              <textarea id="message" name="message" placeholder="Например: низкая конверсия, слабый дожим, проблемы со скриптом, качество поддержки, жалобы клиентов, непонятный KPI."></textarea>
+              <textarea id="message" name="message" placeholder="Например: низкая конверсия, слабый дожим, проблемы со скриптом, качество поддержки, жалобы клиентов, непонятный KPI"></textarea>
             </div>
 
             <div class="consent-row">
               <input id="consent" name="consent" type="checkbox" required>
-              <label for="consent" style="margin:0; font-weight:700; color:var(--muted); font-family:var(--fontBody);">
-                Я соглашаюсь на обработку данных и получение ответов от команды Retenly.
+              <label for="consent" style="margin:0; font-weight:700; color:rgba(93,107,134, calc(1 * var(--mutedBoost))); font-family:var(--fontBody);">
+                Я соглашаюсь на обработку данных и получение ответов от команды Retenly
               </label>
             </div>
 
@@ -975,15 +1095,14 @@
 
     <footer>
       <div>
-        <span>© 2026 Retenly.</span>
-        <span>Все права защищены.</span>
+        <span>© 2026 Retenly</span>
+        <span>Все права защищены</span>
       </div>
       <div>
         <span>Почта для партнёров:</span>
         <a href="mailto:partners@retenly.top">partners@retenly.top</a>
       </div>
     </footer>
-
   </div>
 
   <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#ffffff;border:1px solid rgba(211,154,62,.45);color:#0f172a;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:900;z-index:60;pointer-events:none;box-shadow:0 18px 34px rgba(16,24,40,0.12);">
@@ -991,6 +1110,25 @@
   </div>
 
   <script>
+    // Adaptive contrast (simple, safe)
+    // Boost text contrast slightly on high contrast / dark screens
+    (function(){
+      const root = document.documentElement;
+      const mq = window.matchMedia('(prefers-contrast: more)');
+      const set = () => {
+        if (mq.matches) {
+          root.style.setProperty('--contrastBoost','1.08');
+          root.style.setProperty('--mutedBoost','0.88'); // muted becomes a bit darker
+        } else {
+          root.style.setProperty('--contrastBoost','1');
+          root.style.setProperty('--mutedBoost','1');
+        }
+      };
+      try{ mq.addEventListener('change', set); }catch(e){ mq.addListener(set); }
+      set();
+    })();
+
+    // fade-in sections
     const observer = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1012,6 +1150,7 @@
       }, 4200);
     }
 
+    // Form submit
     const form = document.getElementById('lead');
     const formHint = document.getElementById('formHint');
     const submitBtn = document.getElementById('submitBtn');
@@ -1026,12 +1165,12 @@
 
       try{
         await fetch(form.action, { method:'POST', body:fd, mode:'no-cors' });
-        toast('Запрос получен. Свяжемся с вами в ближайшее время.');
+        toast('Запрос получен. Свяжемся с вами в ближайшее время');
         form.reset();
-        formHint.textContent = 'Запрос получен. Подготовим аудит и свяжемся с вами в ближайшее время.';
+        formHint.textContent = 'Запрос получен. Подготовим аудит и свяжемся с вами в ближайшее время';
       }catch(err){
-        toast('Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top.');
-        formHint.textContent = 'Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top.';
+        toast('Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top');
+        formHint.textContent = 'Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top';
       }finally{
         submitBtn.disabled = false;
       }
