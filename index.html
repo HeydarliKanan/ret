@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -12,784 +12,880 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="meta.title">Retenly — stop losing customers</title>
-  <meta name="description" data-i18n="meta.desc" content="Retenly builds VIP, retention, call center and QA for iGaming operators across Tier 1–3 markets." />
-  <meta name="theme-color" content="#050509" />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Retenly | Контроль качества и рост продаж</title>
+  <meta name="description" content="Retenly ведёт QA для отделов продаж и поддержки: ежедневный контроль качества, KPI, скрипты, отчётность и обучение менеджеров." />
+  <meta name="theme-color" content="#F7F9FC" />
+
+  <!-- Премиальная типографика -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#050509;
-      --bg-soft:#080812;
-      --card:#0c0c16;
-      --accent:#f4d27a;
-      --accent-soft:rgba(244,210,122,0.14);
-      --muted:#9a9aa7;
-      --border-soft:rgba(255,255,255,0.06);
-      --text:#f5f5ff;
-      --danger:#ff5c7a;
-      --success:#63d98b;
+      --bg:#F7F9FC;
+      --bg2:#FFFFFF;
+      --card:#FFFFFF;
+      --text:#0B1220;
+      --muted:#5D6B86;
+      --border:rgba(14,30,62,0.10);
+      --border2:rgba(14,30,62,0.14);
+      --shadow:0 18px 40px rgba(16,24,40,0.08);
+      --accent:#F4D27A;
+      --accent2:#D39A3E;
+      --success:#18A673;
+      --ink:#0F172A;
+
+      --fontBody: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --fontHead: "Plus Jakarta Sans", Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     *{box-sizing:border-box}
-    html{
-      scroll-behavior:smooth;
-    }
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Manrope,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(circle at 0% 0%, #111122 0, #050509 45%, #020206 100%);
+      font-family:var(--fontBody);
+      background:var(--bg);
       color:var(--text);
       min-height:100vh;
+      position:relative;
+      overflow-x:hidden;
     }
 
-    /* layout */
+    /* Виньетка по краям */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-2px;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(1200px 700px at 50% 10%, rgba(2,6,23,0.10), transparent 65%),
+        radial-gradient(1200px 900px at 50% 110%, rgba(2,6,23,0.10), transparent 62%),
+        radial-gradient(900px 900px at -10% 50%, rgba(2,6,23,0.12), transparent 62%),
+        radial-gradient(900px 900px at 110% 50%, rgba(2,6,23,0.12), transparent 62%);
+      mix-blend-mode:multiply;
+    }
+
     .page{
-      max-width:1120px;
+      max-width:1360px;
       margin:0 auto;
-      padding:20px 20px 48px;
+      padding:16px 10px 42px;
+      position:relative;
+      z-index:1;
     }
 
-    /* top header */
+    /* HEADER: без белой плашки */
     .site-header{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:4px 0 18px;
-      position:sticky;
-      top:0;
-      z-index:30;
-      backdrop-filter:blur(16px);
-    }
-    .site-header::before{
-      content:"";
-      position:absolute;
-      inset:-16px 0 auto;
-      border-bottom:1px solid rgba(255,255,255,0.04);
-      pointer-events:none;
-    }
-    .logo-wrap{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      gap:14px;
+      padding:8px 0 8px;
       position:relative;
-      z-index:1;
-    }
-    .logo-mark{
-      width:28px;
-      height:28px;
-      border-radius:9px;
-      background:radial-gradient(circle at 20% 10%, #ffffff, #f4d27a 35%, #7a5c28 85%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 0 0 1px rgba(0,0,0,0.4), 0 12px 40px rgba(0,0,0,0.6);
-    }
-    .logo-mark span{
-      font-size:14px;
-      font-weight:800;
-      color:#111;
-      letter-spacing:0.04em;
-    }
-    .logo-text-main{
-      font-weight:800;
-      font-size:18px;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-    }
-    .logo-text-sub{
-      font-size:11px;
-      color:var(--muted);
+      background:transparent;
+      border-bottom:none;
     }
 
-    .contacts-bar{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      position:relative;
-      z-index:1;
+    .logo-wrap{display:flex;align-items:center;gap:10px}
+    .logo-mark{
+      width:30px;height:30px;border-radius:10px;
+      background:radial-gradient(circle at 20% 10%, #ffffff, var(--accent) 35%, #7a5c28 85%);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 8px 20px rgba(16,24,40,0.12);
+      flex:0 0 auto;
     }
-    .contacts-label{
-      font-size:11px;
+    .logo-mark span{font-size:14px;font-weight:800;color:#111;letter-spacing:0.04em}
+    .logo-text-main{
+      font-family:var(--fontHead);
+      font-weight:800;
+      font-size:18px;
+      letter-spacing:0.10em;
       text-transform:uppercase;
-      letter-spacing:0.14em;
-      color:var(--muted);
-      opacity:0.95;
+      color:var(--ink);
+      line-height:1.1;
     }
-    .icon-row{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .icon-link{
-      width:32px;
-      height:32px;
+    .logo-text-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+    .contacts-bar{display:flex;align-items:center;gap:12px}
+
+    .contacts-label{
+      font-family:var(--fontHead);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:0.10em;
+      text-transform:uppercase;
+      color:var(--ink);
+      padding:9px 14px;
       border-radius:999px;
-      border:1px solid var(--border-soft);
-      background:rgba(8,8,16,0.8);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      border:1px solid rgba(211,154,62,0.42);
+      background:linear-gradient(135deg, rgba(244,210,122,0.22), rgba(255,255,255,0.92));
+      box-shadow:0 14px 26px rgba(16,24,40,0.08);
+      white-space:nowrap;
+      position:relative;
+      overflow:hidden;
+    }
+    .contacts-label::after{
+      content:"";
+      position:absolute;
+      inset:-30px -60px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+      transform:rotate(18deg) translateX(-40%);
+      opacity:0.55;
+      animation:shine 3.6s ease-in-out infinite;
+    }
+    @keyframes shine{
+      0%{transform:rotate(18deg) translateX(-55%);opacity:0}
+      25%{opacity:.6}
+      55%{opacity:.6}
+      100%{transform:rotate(18deg) translateX(55%);opacity:0}
+    }
+
+    .icon-row{display:flex;align-items:center;gap:8px}
+    .icon-link{
+      width:36px;height:36px;border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.9);
+      display:flex;align-items:center;justify-content:center;
       text-decoration:none;
       transition:.18s all ease-out;
+      box-shadow:0 10px 18px rgba(16,24,40,0.06);
     }
-    .icon-link svg{
-      width:16px;
-      height:16px;
-      stroke:#f4f4ff;
-    }
+    .icon-link svg{width:16px;height:16px;stroke:var(--ink)}
     .icon-link:hover{
-      border-color:var(--accent);
-      background:rgba(244,210,122,0.14);
+      border-color:rgba(211,154,62,0.55);
+      background:rgba(244,210,122,0.18);
       transform:translateY(-1px);
     }
 
-    /* language dropdown (same logic, новый стиль) */
-    .lang-dropdown{
+    @media(max-width:820px){
+      .site-header{flex-direction:column;align-items:flex-start}
+      .contacts-bar{width:100%;justify-content:space-between}
+    }
+
+    /* Attention banner (то, что “бросается в глаза”) */
+    .attention-banner{
+      margin:12px 0 0;
+      border-radius:20px;
+      border:1px solid rgba(211,154,62,0.42);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(99,102,241,0.14), transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(16,185,129,0.12), transparent 55%),
+        linear-gradient(135deg, rgba(244,210,122,0.22), rgba(255,255,255,0.96));
+      box-shadow:0 18px 36px rgba(16,24,40,0.10);
+      padding:14px 16px;
       position:relative;
+      overflow:hidden;
     }
-    .lang-btn{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--border-soft);
-      background:rgba(5,5,12,0.96);
-      color:var(--text);
-      font-size:12px;
-      font-weight:600;
-      cursor:pointer;
-    }
-    .lang-list{
+    .attention-banner::before{
+      content:"";
       position:absolute;
-      right:0;
-      top:110%;
-      min-width:150px;
-      background:#050509;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:0 16px 40px rgba(0,0,0,0.75);
-      padding:4px;
-      display:none;
+      inset:-80px -120px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(211,154,62,0.25), transparent 58%),
+        linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      filter:blur(10px);
+      opacity:0.6;
+      animation:glow 2.8s ease-in-out infinite;
     }
-    .lang-list button{
-      width:100%;
-      border:none;
-      background:transparent;
-      text-align:left;
-      padding:7px 8px;
-      border-radius:10px;
-      color:var(--text);
+    @keyframes glow{
+      0%{transform:translateX(-10px);opacity:0.45}
+      50%{transform:translateX(10px);opacity:0.75}
+      100%{transform:translateX(-10px);opacity:0.45}
+    }
+    .attention-content{position:relative;z-index:1;display:flex;gap:14px;align-items:flex-start}
+    .attention-badge{
+      width:40px;height:40px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.9);
+      border:1px solid var(--border);
+      box-shadow:0 12px 22px rgba(16,24,40,0.08);
+      flex:0 0 auto;
+    }
+    .attention-badge svg{width:18px;height:18px;stroke:var(--ink)}
+    .attention-title{
+      font-family:var(--fontHead);
       font-size:13px;
-      font-weight:500;
-      cursor:pointer;
-    }
-    .lang-list button:hover{
-      background:rgba(244,210,122,0.14);
-    }
-
-    @media(max-width:720px){
-      .site-header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-      }
-      .contacts-bar{
-        width:100%;
-        justify-content:space-between;
-      }
-    }
-
-    /* hero */
-    .hero{
-      padding:32px 0 36px;
-      display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,2.2fr);
-      gap:32px;
-      align-items:center;
-    }
-    @media(max-width:880px){
-      .hero{
-        grid-template-columns:1fr;
-        padding-top:24px;
-      }
-    }
-    .hero-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:3px 10px 3px 4px;
-      border-radius:999px;
-      border:1px solid rgba(244,210,122,0.25);
-      background:rgba(12,12,22,0.92);
-      margin-bottom:14px;
-    }
-    .hero-kicker-pill{
-      padding:4px 8px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#f4d27a,#d6af62);
-      color:#111;
-      font-size:11px;
       font-weight:800;
-      letter-spacing:.08em;
+      letter-spacing:0.10em;
       text-transform:uppercase;
+      color:var(--ink);
+      margin:0 0 6px;
     }
-    .hero-kicker span{
-      font-size:12px;
+    .attention-text{
+      margin:0;
       color:var(--muted);
+      font-size:15px;
+      line-height:1.45;
+      font-weight:600;
+    }
+
+    /* HERO */
+    .hero-wrap{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid var(--border);
+      background:var(--bg2);
+      box-shadow:var(--shadow);
+      margin-top:14px;
+    }
+
+    /* Премиальный “аналитический” паттерн поверх градиента */
+    .hero-bg{
+      position:absolute;
+      inset:-140px -160px auto -160px;
+      height:420px;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 14% 30%, rgba(99,102,241,0.22), transparent 54%),
+        radial-gradient(circle at 62% 18%, rgba(16,185,129,0.18), transparent 52%),
+        radial-gradient(circle at 86% 56%, rgba(244,210,122,0.26), transparent 58%),
+        conic-gradient(from 240deg at 50% 50%, rgba(148,163,184,0.22), rgba(2,6,23,0) 42%, rgba(148,163,184,0.16));
+      filter:blur(10px);
+      opacity:0.98;
+    }
+
+    /* Лёгкая “сеточка” как у дорогих SaaS (не мешает читаемости) */
+    .hero-wrap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(15,23,42,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.06) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at 25% 20%, rgba(0,0,0,0.75), transparent 55%);
+      opacity:0.65;
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
+      padding:28px 22px 22px;
+      display:grid;
+      grid-template-columns:minmax(0,3fr) minmax(0,2.1fr);
+      gap:22px;
+      align-items:start;
+    }
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr; padding:20px 16px;}
     }
 
     h1{
-      margin:0 0 12px;
-      font-size:38px;
-      line-height:1.1;
-      letter-spacing:-0.02em;
+      margin:0 0 10px;
+      font-family:var(--fontHead);
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:-0.03em;
+      color:var(--ink);
+      max-width:960px;
+      font-weight:800;
     }
-    @media(max-width:540px){
-      h1{font-size:30px;}
-    }
+    @media(max-width:540px){ h1{font-size:34px;} }
+
     .hero-lead{
-      margin:0 0 18px;
+      margin:0 0 14px;
       color:var(--muted);
-      font-size:15px;
-      max-width:460px;
+      font-size:17px;
+      line-height:1.50;
+      max-width:860px;
+      font-weight:500;
     }
-    .hero-meta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:18px;
-    }
+
+    .hero-meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
     .hero-pill{
-      padding:5px 10px;
+      padding:7px 12px;
       border-radius:999px;
-      border:1px solid rgba(244,210,122,0.2);
-      background:rgba(10,10,18,0.9);
-      font-size:11px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.88);
+      font-size:12px;
       color:var(--muted);
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:8px;
+      box-shadow:0 10px 18px rgba(16,24,40,0.05);
+      font-weight:600;
     }
     .hero-pill-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:#38d996;
-      box-shadow:0 0 0 3px rgba(56,217,150,0.25);
+      width:7px;height:7px;border-radius:50%;
+      background:var(--success);
+      box-shadow:0 0 0 3px rgba(24,166,115,0.12);
+      flex:0 0 auto;
     }
 
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:12px;
-    }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
     .btn{
       border:none;
       cursor:pointer;
       border-radius:999px;
-      font-weight:700;
-      font-size:14px;
-      padding:11px 17px;
+      font-family:var(--fontHead);
+      font-weight:800;
+      font-size:15px;
+      padding:12px 18px;
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
       text-decoration:none;
       transition:.18s all ease-out;
       white-space:nowrap;
     }
     .btn-primary{
-      background:linear-gradient(135deg,#f4d27a,#d39a3e);
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
-      box-shadow:0 16px 40px rgba(0,0,0,0.75);
+      box-shadow:0 16px 34px rgba(211,154,62,0.22);
     }
-    .btn-primary:hover{
-      transform:translateY(-1px);
-      box-shadow:0 18px 48px rgba(0,0,0,0.9);
-    }
+    .btn-primary:hover{ transform:translateY(-1px); }
     .btn-secondary{
-      background:rgba(8,8,16,0.9);
-      color:var(--text);
-      border:1px solid var(--border-soft);
+      background:rgba(255,255,255,0.92);
+      color:var(--ink);
+      border:1px solid var(--border2);
+      box-shadow:0 14px 26px rgba(16,24,40,0.06);
     }
     .btn-secondary:hover{
-      border-color:var(--accent);
-      background:rgba(244,210,122,0.08);
+      border-color:rgba(211,154,62,0.55);
+      background:rgba(244,210,122,0.14);
     }
 
     .hero-note{
-      font-size:12px;
+      font-size:13px;
       color:var(--muted);
+      line-height:1.35;
+      font-weight:600;
     }
 
-    /* hero card-right */
     .hero-card{
       border-radius:22px;
-      background:radial-gradient(circle at 0 0, rgba(244,210,122,0.16), transparent 50%),
-                 radial-gradient(circle at 100% 100%, rgba(244,210,122,0.06), transparent 55%),
-                 linear-gradient(135deg,#080812,#050509);
-      border:1px solid rgba(255,255,255,0.06);
-      padding:18px 18px 16px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.8);
+      background:linear-gradient(135deg, rgba(255,255,255,0.95), rgba(247,249,252,0.95));
+      border:1px solid var(--border);
+      padding:16px 16px 14px;
+      box-shadow:0 16px 34px rgba(16,24,40,0.08);
     }
     .hero-card-title{
+      font-family:var(--fontHead);
       font-size:13px;
-      font-weight:600;
+      font-weight:800;
       margin:0 0 6px;
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:8px;
+      color:var(--ink);
     }
-    .hero-card-title span.badge{
+    .hero-card-title .badge{
       font-size:11px;
-      font-weight:700;
+      font-weight:800;
       padding:3px 8px;
       border-radius:999px;
-      background:rgba(0,0,0,0.5);
-      border:1px solid rgba(244,210,122,0.35);
+      border:1px solid rgba(211,154,62,0.35);
+      background:rgba(244,210,122,0.16);
+      color:#111;
     }
-    .hero-card-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:10px;
+    .divider{
+      height:1px;
+      margin:8px 0 14px;
+      background:linear-gradient(90deg,transparent,rgba(211,154,62,0.55),transparent);
+      opacity:0.85;
     }
+    .hero-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .stat-tile{
       border-radius:14px;
-      background:rgba(5,5,11,0.92);
-      border:1px solid rgba(255,255,255,0.06);
+      background:#FFFFFF;
+      border:1px solid var(--border);
       padding:10px 11px;
     }
-    .stat-label{
-      font-size:11px;
-      color:var(--muted);
-      margin-bottom:2px;
-    }
-    .stat-value{
-      font-weight:800;
-      font-size:17px;
-    }
-    .stat-foot{
-      font-size:11px;
-      color:var(--muted);
-      margin-top:2px;
-    }
+    .stat-label{font-size:12px;color:var(--muted);margin-bottom:2px;line-height:1.25;font-weight:600}
+    .stat-value{font-family:var(--fontHead);font-weight:800;font-size:18px;color:var(--ink)}
+    .stat-foot{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.25;font-weight:600}
 
-    /* sections */
-    section{
-      padding:28px 0;
-    }
+    /* секции */
+    section{ padding:22px 0; }
     h2{
       margin:0 0 10px;
-      font-size:24px;
-      letter-spacing:-0.01em;
+      font-family:var(--fontHead);
+      font-size:28px;
+      letter-spacing:-0.02em;
+      color:var(--ink);
+      text-align:left;
+      font-weight:800;
     }
     .section-lead{
-      margin:0 0 18px;
+      margin:0 0 16px;
       color:var(--muted);
-      font-size:14px;
-      max-width:540px;
+      font-size:16px;
+      line-height:1.45;
+      max-width:980px;
+      font-weight:500;
     }
 
-    .grid{
-      display:grid;
-      gap:16px;
-    }
-    .grid-2{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .grid-3{
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    @media(max-width:880px){
-      .grid-2,.grid-3{grid-template-columns:1fr;}
+    .grid{ display:grid; gap:14px; }
+    .grid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .grid-4{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+    @media(max-width:980px){
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
     }
 
     .card{
       border-radius:18px;
-      background:rgba(7,7,14,0.96);
-      border:1px solid rgba(255,255,255,0.06);
+      background:var(--card);
+      border:1px solid var(--border);
       padding:14px 14px 12px;
+      box-shadow:0 14px 26px rgba(16,24,40,0.06);
     }
     .card-soft{
-      background:rgba(10,10,18,0.9);
+      background:linear-gradient(135deg, rgba(244,210,122,0.12), rgba(255,255,255,0.95));
     }
     .card-title{
-      font-size:14px;
-      font-weight:600;
+      font-family:var(--fontHead);
+      font-size:15px;
+      font-weight:800;
       margin:0 0 6px;
+      color:var(--ink);
+      line-height:1.25;
     }
     .card-text{
       margin:0;
-      font-size:13px;
+      font-size:14px;
       color:var(--muted);
+      line-height:1.45;
+      font-weight:500;
     }
 
-    ul.clean{
-      list-style:none;
-      padding:0;
-      margin:0;
-    }
+    ul.clean{list-style:none;padding:0;margin:0}
     ul.clean li{
-      font-size:13px;
-      color:var(--muted);
-      display:flex;
-      align-items:flex-start;
-      gap:6px;
-      margin-bottom:6px;
+      font-size:14px;color:var(--muted);
+      display:flex;align-items:flex-start;gap:8px;
+      margin-bottom:8px;line-height:1.45;font-weight:500;
     }
     ul.clean li::before{
       content:"";
-      width:6px;
-      height:6px;
-      border-radius:999px;
-      margin-top:5px;
-      background:var(--accent);
-      box-shadow:0 0 0 3px rgba(244,210,122,0.16);
+      width:7px;height:7px;border-radius:999px;margin-top:7px;
+      background:var(--accent2);
+      box-shadow:0 0 0 3px rgba(211,154,62,0.12);
+      flex:0 0 auto;
     }
 
-    /* golden divider */
-    .divider{
-      height:1px;
-      margin:6px 0 20px;
-      background:linear-gradient(90deg,transparent,rgba(244,210,122,0.6),transparent);
-      opacity:0.8;
+    .icon-badge{
+      width:38px;height:38px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(211,154,62,0.35);
+      background:rgba(244,210,122,0.14);
+      box-shadow:0 12px 22px rgba(16,24,40,0.05);
+      margin-bottom:10px;
     }
+    .icon-badge svg{width:18px;height:18px;stroke:#111}
+
+    .center-title{text-align:center}
+    .center-lead{text-align:center;margin-left:auto;margin-right:auto}
+
+    /* QA report block */
+    .report-grid{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media(max-width:980px){ .report-grid{grid-template-columns:1fr;} }
+
+    .report-mock{
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, #FFFFFF, #F7F9FC);
+      padding:14px;
+      box-shadow:0 16px 30px rgba(16,24,40,0.07);
+    }
+    .report-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      margin-bottom:10px;
+    }
+    .report-title{
+      font-family:var(--fontHead);
+      font-size:14px;
+      font-weight:800;
+      color:var(--ink);
+      margin:0;
+    }
+    .report-sub{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+      font-weight:500;
+    }
+    .pill-mini{
+      font-size:11px;
+      font-weight:800;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--muted);
+      white-space:nowrap;
+      font-family:var(--fontHead);
+    }
+    .kpi-row{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:10px;
+      margin:10px 0 12px;
+    }
+    @media(max-width:520px){ .kpi-row{grid-template-columns:1fr;} }
+    .kpi-box{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:10px 10px 9px;
+    }
+    .kpi-label{font-size:12px;color:var(--muted);margin:0 0 3px;font-weight:600}
+    .kpi-val{font-family:var(--fontHead);font-size:16px;font-weight:800;color:var(--ink);margin:0}
+    .kpi-foot{font-size:12px;color:var(--muted);margin:3px 0 0;font-weight:500}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+    th,td{
+      font-size:13px;
+      padding:10px 10px;
+      border-bottom:1px solid var(--border);
+      color:var(--ink);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      color:var(--muted);
+      font-weight:800;
+      background:rgba(247,249,252,0.9);
+      font-family:var(--fontHead);
+    }
+    tr:last-child td{border-bottom:none}
 
     /* form */
     .form-wrap{
-      border-radius:20px;
-      background:radial-gradient(circle at 0 0, rgba(244,210,122,0.22), transparent 55%),
-                 linear-gradient(135deg,#0a0a14,#050509);
-      border:1px solid rgba(244,210,122,0.32);
-      padding:18px 18px 14px;
-      box-shadow:0 24px 70px rgba(0,0,0,0.85);
+      border-radius:20px;background:#FFFFFF;border:1px solid var(--border);
+      padding:18px 18px 14px;box-shadow:0 20px 40px rgba(16,24,40,0.08);
     }
-    .form-grid{
-      display:grid;
-      gap:14px;
-    }
-    .form-row-two{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
-    @media(max-width:720px){
-      .form-row-two{grid-template-columns:1fr;}
-    }
+    .form-grid{display:grid;gap:14px}
+    .form-row-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    @media(max-width:720px){ .form-row-two{grid-template-columns:1fr;} }
     label{
-      font-size:12px;
-      margin-bottom:4px;
-      display:block;
+      font-size:13px;margin-bottom:6px;display:block;color:var(--ink);font-weight:800;
+      font-family:var(--fontHead);
     }
-    input,select,textarea{
-      width:100%;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.16);
-      background:rgba(5,5,12,0.9);
-      color:var(--text);
-      padding:9px 12px;
-      font-size:13px;
-      outline:none;
-      transition:border-color .15s ease-out, background .15s;
+    input,textarea{
+      width:100%;border-radius:999px;border:1px solid var(--border2);
+      background:#fff;color:var(--ink);padding:11px 12px;font-size:14px;outline:none;
+      transition:border-color .15s ease-out, box-shadow .15s;
+      font-family:var(--fontBody);
     }
-    textarea{
-      border-radius:12px;
-      min-height:80px;
-      resize:vertical;
-    }
-    input:focus,select:focus,textarea:focus{
-      border-color:var(--accent);
-      background:rgba(8,8,18,0.96);
-    }
-    .consent-row{
-      display:flex;
-      align-items:flex-start;
-      gap:8px;
-      font-size:11px;
-      color:var(--muted);
-      margin-top:6px;
-    }
-    .consent-row input[type="checkbox"]{
-      width:14px;
-      height:14px;
-      margin-top:2px;
-      border-radius:4px;
-    }
-    .form-actions{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-top:10px;
-      flex-wrap:wrap;
-    }
-    .form-hint{
-      font-size:12px;
-      color:var(--muted);
-      min-height:16px;
-    }
+    textarea{border-radius:14px;min-height:92px;resize:vertical}
+    input:focus,textarea:focus{border-color:rgba(211,154,62,0.65);box-shadow:0 0 0 4px rgba(244,210,122,0.18)}
+    .consent-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.35}
+    .consent-row input[type="checkbox"]{width:16px;height:16px;margin-top:2px;border-radius:4px;accent-color: var(--accent2)}
+    .form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+    .form-hint{font-size:13px;color:var(--muted);min-height:18px;line-height:1.35}
 
-    /* footer */
     footer{
-      margin-top:26px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,0.06);
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:space-between;
-      align-items:center;
+      margin-top:22px;padding-top:14px;border-top:1px solid var(--border);
+      font-size:13px;color:var(--muted);
+      display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
     }
-    footer a{
-      color:var(--accent);
-      text-decoration:none;
-    }
-    footer a:hover{
-      text-decoration:underline;
-    }
+    footer a{color:#9A6A12;text-decoration:none;font-weight:900}
+    footer a:hover{text-decoration:underline}
 
-    /* fade-up animations */
-    .fade-section{
-      opacity:0;
-      transform:translateY(12px);
-      transition:opacity .45s ease-out, transform .45s ease-out;
-    }
-    .fade-section.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    @media(max-width:540px){
-      .page{padding:16px 16px 32px;}
-    }
+    .fade-section{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out, transform .45s ease-out}
+    .fade-section.visible{opacity:1;transform:translateY(0)}
   </style>
 </head>
+
 <body>
   <div class="page">
-    <!-- header -->
+
     <header class="site-header">
       <div class="logo-wrap">
         <div class="logo-mark"><span>R</span></div>
         <div>
-          <div class="logo-text-main">Retenly</div>
-          <div class="logo-text-sub" data-i18n="logo.tagline">Retention & VIP for iGaming</div>
+          <div class="logo-text-main">RETENLY</div>
+          <div class="logo-text-sub">Call Center Quality & Sales Performance</div>
         </div>
       </div>
 
       <div class="contacts-bar">
-        <span class="contacts-label" data-i18n="top.contacts_label">Способы связи</span>
+        <span class="contacts-label">Связаться</span>
         <div class="icon-row">
-          <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/company/retenlytop" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
+          <!-- Где менять LinkedIn: заменяй href тут -->
+          <a href="https://www.linkedin.com/company/111947066/admin/dashboard/" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M6 6H6.01M6 9V18M10 9V18M10 12.5C10 10.57 11.57 9 13.5 9C15.43 9 17 10.57 17 12.5V18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <!-- Telegram -->
-          <a href="https://t.me/retenlypartners" target="_blank" rel="noopener" class="icon-link" aria-label="Telegram">
+          <a href="https://t.me/retenly" target="_blank" rel="noopener" class="icon-link" aria-label="Telegram">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M5 12L19 4L16 20L11.5 14.5L9 17L8.5 12.5L5 12Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-
-          <!-- language selector -->
-          <div class="lang-dropdown" id="langWrap">
-            <button class="lang-btn" id="langBtn" type="button">
-              <span id="langLabel">EN</span>
-              <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                <path d="M2 1.5L6.5 6.5L11 1.5" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <div class="lang-list" id="langList">
-              <button data-lang="en">English</button>
-              <button data-lang="de">Deutsch</button>
-              <button data-lang="pl">Polski</button>
-              <button data-lang="fr">Français</button>
-              <button data-lang="ru">Русский</button>
-            </div>
-          </div>
         </div>
       </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero fade-section">
-      <div>
-        <div class="hero-kicker">
-          <span class="hero-kicker-pill" data-i18n="hero.kicker_pill">Retenly</span>
-          <span data-i18n="hero.kicker_text">Retention & VIP operations for iGaming</span>
+    <div class="attention-banner fade-section" id="attention">
+      <div class="attention-content">
+        <div class="attention-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3V13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M8.5 6.5L12 3L15.5 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 14.5C6.8 18 9.3 21 12 21C14.7 21 17.2 18 18 14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
         </div>
-        <h1 data-i18n="hero.h1">Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно.</h1>
-        <p class="hero-lead" data-i18n="hero.lead">
-          Мы строим и усиливаем VIP-направление, retention, колл-центр и контроль качества для iGaming операторов в Tier 1–3 GEO, с фокусом на NGGR, LTV и возврат спящих игроков.
-        </p>
-
-        <div class="hero-meta-row">
-          <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            <span data-i18n="hero.geo">Tier 1 / 2 / 3 • TR • CIS • EU</span>
-          </div>
-          <div class="hero-pill" data-i18n="hero.clients">
-            iGaming operators, platforms, affiliate teams
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <a href="#lead" class="btn btn-primary" data-i18n="hero.btn_primary">Получить персональный анализ Retenly</a>
-          <a href="#who" class="btn btn-secondary" data-i18n="hero.btn_secondary">Посмотреть, с кем мы работаем</a>
-        </div>
-        <div class="hero-note" data-i18n="hero.note">
-          Ваш запрос увидит команда, которая реально строила VIP и retention в iGaming, а не консультанты “по презентациям”.
+        <div>
+          <p class="attention-title">Индивидуальная поддержка в области контроля качества</p>
+          <p class="attention-text">
+            Ошибки не выбирают, каких клиентов вы можете потерять. Они просто это делают. Мы помогаем вам обнаружить их до того, как ваши клиенты уйдут от вас.
+          </p>
         </div>
       </div>
+    </div>
 
-      <aside class="hero-card">
-        <div class="hero-card-title" data-i18n="hero.card_title">
-          30 дней работы Retenly → ваш результат
-          <span class="badge" data-i18n="hero.card_badge">Pilot</span>
+    <div class="hero-wrap fade-section">
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <section class="hero-grid">
+        <div>
+          <h1>Перестаньте терять клиентов. Начните контролировать качество коммуникаций с вашими клиентами.</h1>
+
+          <p class="hero-lead">
+            Мы выстраиваем контроль качества для отделов продаж и поддержки: проверяем коммуникации, усиливаем скрипты и KPI, даём команде понятный фидбек и регулярные тренинги.
+          </p>
+
+          <div class="hero-meta-row">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>6+ лет в QA, ежедневный контроль качества</span>
+            </div>
+            <div class="hero-pill">
+              <span>iGaming, Fintech, e-commerce, онлайн-школы, SaaS</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#lead" class="btn btn-primary">Получить бесплатный аудит</a>
+            <a href="#services" class="btn btn-secondary">Посмотреть услуги</a>
+          </div>
+
+          <div class="hero-note">
+            Бесплатно проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений, который можно внедрять сразу.
+          </div>
         </div>
-        <div class="divider"></div>
-        <div class="hero-card-grid">
-          <div class="stat-tile">
-            <div class="stat-label" data-i18n="hero.stat1_label">Возврат спящих игроков</div>
-            <div class="stat-value" data-i18n="hero.stat1_value">+10–25%</div>
-            <div class="stat-foot" data-i18n="hero.stat1_foot">за первые волны реактивации</div>
+
+        <aside class="hero-card">
+          <div class="hero-card-title">
+            Первые 14 дней работы, в цифрах <span class="badge">Free audit</span>
           </div>
-          <div class="stat-tile">
-            <div class="stat-label" data-i18n="hero.stat2_label">VIP & High-value</div>
-            <div class="stat-value" data-i18n="hero.stat2_value">+8–15%</div>
-            <div class="stat-foot" data-i18n="hero.stat2_foot">рост NGGR в ключевых сегментах</div>
+          <div class="divider"></div>
+
+          <div class="hero-card-grid">
+            <div class="stat-tile">
+              <div class="stat-label">Проверка качества в день</div>
+              <div class="stat-value">50–100</div>
+              <div class="stat-foot">контактов с клиентами</div>
+            </div>
+
+            <div class="stat-tile">
+              <div class="stat-label">Еженедельный тренинг</div>
+              <div class="stat-value">1× / неделя</div>
+              <div class="stat-foot">ошибки, дожим, навыки</div>
+            </div>
+
+            <div class="stat-tile">
+              <div class="stat-label">Скрипты и процессы</div>
+              <div class="stat-value">7–10 дней</div>
+              <div class="stat-foot">обновим или создадим</div>
+            </div>
+
+            <div class="stat-tile">
+              <div class="stat-label">Отчётность</div>
+              <div class="stat-value">Daily / Monthly</div>
+              <div class="stat-foot">качество, KPI, динамика</div>
+            </div>
           </div>
-          <div class="stat-tile">
-            <div class="stat-label" data-i18n="hero.stat3_label">Скорость команды</div>
-            <div class="stat-value" data-i18n="hero.stat3_value">2–4 недели</div>
-            <div class="stat-foot" data-i18n="hero.stat3_foot">от аудита до стабильных сценариев</div>
-          </div>
-          <div class="stat-tile">
-            <div class="stat-label" data-i18n="hero.stat4_label">Прозрачность</div>
-            <div class="stat-value" data-i18n="hero.stat4_value">Daily</div>
-            <div class="stat-foot" data-i18n="hero.stat4_foot">репорты по NGGR, LTV, Retention</div>
-          </div>
+        </aside>
+      </section>
+    </div>
+
+    <section class="fade-section" id="services">
+      <h2 class="center-title">Услуги</h2>
+      <p class="section-lead center-lead">
+        Можно начать с разового аудита и перейти на постоянное сопровождение. Подстраиваемся под ваш процесс и цели.
+      </p>
+
+      <div class="grid grid-4">
+        <div class="card card-soft">
+          <div class="card-title">Контроль качества отдела продаж</div>
+          <p class="card-text">
+            Ежедневная проверка коммуникаций, чек-листы, причины потерь и рост конверсии. Скрипты обновляем или создаём с нуля.
+          </p>
         </div>
-      </aside>
+
+        <div class="card card-soft">
+          <div class="card-title">Еженедельный тренинг менеджеров</div>
+          <p class="card-text">
+            Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру.
+          </p>
+        </div>
+
+        <div class="card card-soft">
+          <div class="card-title">QA для поддержки клиентов</div>
+          <p class="card-text">
+            KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок.
+          </p>
+        </div>
+
+        <div class="card card-soft">
+          <div class="card-title">Разовый аудит и отчётность</div>
+          <p class="card-text">
+            Снимок текущего состояния отдела: ошибки, потери, рекомендации и план исправлений. При необходимости контролируем внедрение.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- GEO / TIER -->
-    <section class="fade-section" id="geo">
-      <h2 data-i18n="geo.title">Мы работаем с рынками Tier 1, 2 и 3</h2>
-      <p class="section-lead" data-i18n="geo.lead">
-        Retenly — это не универсальное решение “для всех вертикалей”. Мы фокусируемся на iGaming и адаптируем процессы под специфику GEO, регуляции и поведение игроков.
-      </p>
+    <!-- ✅ Вернули блоки: Быстрый старт / Масштаб / По требованию -->
+    <section class="fade-section">
       <div class="grid grid-3">
         <div class="card">
-          <div class="card-title" data-i18n="geo.t1_title">Tier 1</div>
-          <p class="card-text" data-i18n="geo.t1_text">
-            Строгие регуляции, чувствительность к тону общения, акцент на compliance и прозрачный VIP-опыт.
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M13 3L4 14H11L10 21L20 10H13L13 3Z" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <div class="card-title">БЫСТРЫЙ СТАРТ</div>
+          <p class="card-text">
+            Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее.
           </p>
         </div>
+
         <div class="card">
-          <div class="card-title" data-i18n="geo.t2_title">Tier 2</div>
-          <p class="card-text" data-i18n="geo.t2_text">
-            Баланс между агрессивным маркетингом и ответственным подходом. Важны чёткие скрипты и сегментация.
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <div class="card-title">ЛЮБОЙ МАСШТАБ</div>
+          <p class="card-text">
+            Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время.
           </p>
         </div>
+
         <div class="card">
-          <div class="card-title" data-i18n="geo.t3_title">Tier 3 / Emerging</div>
-          <p class="card-text" data-i18n="geo.t3_text">
-            Быстрый рост, высокая конкуренция, сильная зависимость от человеческого фактора в саппорте и VIP.
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M21 12A9 9 0 1 1 12 3" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M12 7V12L15.5 14" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <div class="card-title">ПО ТРЕБОВАНИЮ</div>
+          <p class="card-text">
+            Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- WHO WE WORK WITH -->
-    <section class="fade-section" id="who">
-      <h2 data-i18n="who.title">С кем мы работаем</h2>
-      <p class="section-lead" data-i18n="who.lead">
-        Retenly подключается туда, где удержание и VIP-направление напрямую влияют на NGGR, а внутренняя команда не успевает перестроить процессы.
+    <!-- ✅ Вернули блок: Как выглядит наш QA-отчёт -->
+    <section class="fade-section" id="report">
+      <h2>Как выглядит наш QA-отчёт</h2>
+      <p class="section-lead">
+        Понятный отчёт для руководителя и практические рекомендации для команды. Вы видите реальные ошибки, причины потери клиентов и план улучшений.
       </p>
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="card-title" data-i18n="who.col1_title">iGaming операторы</div>
-          <ul class="clean">
-            <li data-i18n="who.col1_li1">Online casino & sportsbook (multi-GEO)</li>
-            <li data-i18n="who.col1_li2">Операторы с разрозненным VIP и саппортом</li>
-            <li data-i18n="who.col1_li3">Быстро растущие проекты после запуска нового бренда</li>
-          </ul>
-        </div>
-        <div class="card">
-          <div class="card-title" data-i18n="who.col2_title">Платформы и affiliate-команды</div>
-          <ul class="clean">
-            <li data-i18n="who.col2_li1">White-label и платформенные решения</li>
-            <li data-i18n="who.col2_li2">Affiliate-команды с собственным retention / VIP</li>
-            <li data-i18n="who.col2_li3">Payment-friendly операторы, которым важен “чистый” клиентский путь</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <!-- WHY -->
-    <section class="fade-section" id="why">
-      <h2 data-i18n="why.title">Почему операторы выбирают Retenly</h2>
-      <p class="section-lead" data-i18n="why.lead">
-        Вместо “консалтинга ради презентаций” мы даём измеримый эффект: возврат игроков, рост NGGR в ключевых сегментах и контроль качества на уровне процессов.
-      </p>
-      <div class="grid grid-2">
-        <div class="card card-soft">
-          <div class="card-title" data-i18n="why.p1_title">Глубокий фокус на iGaming</div>
-          <p class="card-text" data-i18n="why.p1_text">
-            Мы не распыляемся на десятки индустрий. Retenly — про retention, VIP и саппорт именно в iGaming: casino / sportsbook / multi-brand холдинги.
-          </p>
-        </div>
-        <div class="card card-soft">
-          <div class="card-title" data-i18n="why.p2_title">Готовые люди и процессы</div>
-          <p class="card-text" data-i18n="why.p2_text">
-            Подключаем уже обученных специалистов, чек-листы, скрипты, QA-контуры и отчётность. Без месяцев найма и базового обучения.
-          </p>
-        </div>
-        <div class="card card-soft">
-          <div class="card-title" data-i18n="why.p3_title">Многоканальность: VIP, Call Center, QA</div>
-          <p class="card-text" data-i18n="why.p3_text">
-            Закрываем связку: VIP-менеджеры, retention-колы, первая линия и контроль качества. Все говорят с игроком в одном тоне бренда.
-          </p>
-        </div>
-        <div class="card card-soft">
-          <div class="card-title" data-i18n="why.p4_title">Прозрачные метрики и отчётность</div>
-          <p class="card-text" data-i18n="why.p4_text">
-            Видите ежедневный эффект: реактивации, NGGR по сегментам, скорость обработки, качество коммуникаций и точки роста.
-          </p>
-        </div>
-      </div>
-    </section>
+      <div class="report-grid">
+        <div class="report-mock">
+          <div class="report-top">
+            <div>
+              <p class="report-title">QA отчёт, пример</p>
+              <p class="report-sub">Отдел продаж • период: неделя • формат: ежедневная проверка</p>
+            </div>
+            <div class="pill-mini">Версия 1.0</div>
+          </div>
 
-    <!-- 30 DAYS -->
-    <section class="fade-section" id="days">
-      <h2 data-i18n="days.title">30 дней работы Retenly → ваш результат</h2>
-      <p class="section-lead" data-i18n="days.lead">
-        Пилот запускается без долгих тендеров и бесконечных согласований. Наша цель — показать эффект в цифрах в течение первого месяца.
-      </p>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-title" data-i18n="days.c1_title">Недели 1–2: аудит и архитектура</div>
-          <p class="card-text" data-i18n="days.c1_text">
-            Анализ retention & VIP, текущих скриптов, CRM и отчётности. Формируем новую архитектуру процессов и сегментаций.
-          </p>
+          <div class="kpi-row">
+            <div class="kpi-box">
+              <p class="kpi-label">Качество общения</p>
+              <p class="kpi-val">78 / 100</p>
+              <p class="kpi-foot">тон, структура</p>
+            </div>
+
+            <div class="kpi-box">
+              <p class="kpi-label">Работа по скрипту</p>
+              <p class="kpi-val">64 / 100</p>
+              <p class="kpi-foot">пропуски этапов</p>
+            </div>
+
+            <div class="kpi-box">
+              <p class="kpi-label">Следующий шаг</p>
+              <p class="kpi-val">52%</p>
+              <p class="kpi-foot">зафиксирован корректно</p>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Ошибка</th>
+                <th>Как должно быть</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Менеджер сразу продаёт</td>
+                <td>Сначала выявление потребности</td>
+                <td>Выше доверие клиента</td>
+              </tr>
+              <tr>
+                <td>Нет следующего шага</td>
+                <td>Фиксация даты и действия</td>
+                <td>Сделка не зависает</td>
+              </tr>
+              <tr>
+                <td>Слабая работа с возражениями</td>
+                <td>Уточнение причины и аргумент</td>
+                <td>Выше конверсия</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="card">
-          <div class="card-title" data-i18n="days.c2_title">Неделя 3: запуск волн и стандарты QA</div>
-          <p class="card-text" data-i18n="days.c2_text">
-            Запускаем первые волны реактивации, обновлённые скрипты и чек-листы качества. Настраиваем базовую отчётность.
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-title" data-i18n="days.c3_title">Неделя 4: корректировка и масштаб</div>
-          <p class="card-text" data-i18n="days.c3_text">
-            Снимаем цифры по NGGR, реактивациям и качеству коммуникаций. Корректируем сценарии и готовим план масштабирования.
-          </p>
+
+        <div class="grid" style="gap:12px;">
+          <div class="card">
+            <div class="card-title">Что получает руководитель</div>
+            <ul class="clean">
+              <li>Полную картину качества отдела</li>
+              <li>Ошибки и причины потерь</li>
+              <li>План улучшений по шагам</li>
+              <li>KPI и динамику по команде</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Что получает команда</div>
+            <ul class="clean">
+              <li>Личный фидбек</li>
+              <li>Разбор коммуникаций</li>
+              <li>Практические рекомендации</li>
+              <li>Усиление навыков</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -798,16 +894,17 @@
     <section class="fade-section" id="contact">
       <div class="grid grid-2">
         <div>
-          <h2 data-i18n="form.title">Получить персональный анализ Retenly</h2>
-          <p class="section-lead" data-i18n="form.lead">
-            Опишите ваш продукт, GEO и текущие узкие места. Мы подготовим персональный разбор по VIP, retention, саппорту и QA — и предложим формат пилота.
+          <h2>Бесплатный аудит отдела продаж или поддержки</h2>
+          <p class="section-lead">
+            Проверим 20 контактов с клиентами и покажем точки потерь. Затем предложим формат: разовый аудит или постоянное сопровождение.
           </p>
+
           <div class="card card-soft">
-            <div class="card-title" data-i18n="form.side_title">Что вы получите</div>
+            <div class="card-title">Что вы получите бесплатно</div>
             <ul class="clean">
-              <li data-i18n="form.side_li1">Краткий аудит текущей структуры удержания</li>
-              <li data-i18n="form.side_li2">30-дневный план действий с фокусом на NGGR и LTV</li>
-              <li data-i18n="form.side_li3">Рекомендации по VIP, колл-центру и QA</li>
+              <li>Оценка 20 контактов с клиентами</li>
+              <li>Ключевые ошибки и точки потерь</li>
+              <li>Рекомендации и план действий</li>
             </ul>
           </div>
         </div>
@@ -819,56 +916,56 @@
             method="POST"
             accept-charset="UTF-8"
             autocomplete="on">
-            <!-- honeypot -->
+
             <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
             <div class="form-row-two">
               <div>
-                <label for="name" data-i18n="form.name_label">Имя</label>
-                <input id="name" name="name" required placeholder="" data-i18n-placeholder="form.name_ph">
+                <label for="name">Имя</label>
+                <input id="name" name="name" required placeholder="Как к вам обращаться">
               </div>
               <div>
-                <label for="company" data-i18n="form.company_label">Компания</label>
-                <input id="company" name="company" placeholder="" data-i18n-placeholder="form.company_ph">
-              </div>
-            </div>
-
-            <div class="form-row-two">
-              <div>
-                <label for="role" data-i18n="form.role_label">Роль</label>
-                <input id="role" name="role" placeholder="" data-i18n-placeholder="form.role_ph">
-              </div>
-              <div>
-                <label for="geo" data-i18n="form.geo_label">Основные GEO</label>
-                <input id="geo" name="geo" placeholder="TR, CIS, EU…" data-i18n-placeholder="form.geo_ph">
+                <label for="company">Компания</label>
+                <input id="company" name="company" placeholder="Название компании">
               </div>
             </div>
 
             <div class="form-row-two">
               <div>
-                <label for="email" data-i18n="form.email_label">Email</label>
+                <label for="role">Роль</label>
+                <input id="role" name="role" placeholder="Собственник, Head of Sales, COO…">
+              </div>
+              <div>
+                <label for="geo">Ниша / продукт</label>
+                <input id="geo" name="geo" placeholder="SaaS, e-commerce, онлайн-школа…">
+              </div>
+            </div>
+
+            <div class="form-row-two">
+              <div>
+                <label for="email">Email</label>
                 <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
               </div>
               <div>
-                <label for="phone" data-i18n="form.phone_label">Телефон / Telegram</label>
+                <label for="phone">Телефон / Telegram</label>
                 <input id="phone" name="phone" type="tel" placeholder="+90 / +49 / @handle" inputmode="tel">
               </div>
             </div>
 
             <div>
-              <label for="message" data-i18n="form.message_label">Что сейчас болит больше всего</label>
-              <textarea id="message" name="message" data-i18n-placeholder="form.message_ph"></textarea>
+              <label for="message">Что сейчас болит сильнее всего</label>
+              <textarea id="message" name="message" placeholder="Например: низкая конверсия, слабый дожим, проблемы со скриптом, качество поддержки, жалобы клиентов, непонятный KPI."></textarea>
             </div>
 
             <div class="consent-row">
               <input id="consent" name="consent" type="checkbox" required>
-              <label for="consent" data-i18n="form.consent">
+              <label for="consent" style="margin:0; font-weight:700; color:var(--muted); font-family:var(--fontBody);">
                 Я соглашаюсь на обработку данных и получение ответов от команды Retenly.
               </label>
             </div>
 
             <div class="form-actions">
-              <button class="btn btn-primary" type="submit" id="submitBtn" data-i18n="form.submit">Отправить запрос</button>
+              <button class="btn btn-primary" type="submit" id="submitBtn">Отправить запрос</button>
               <div class="form-hint" id="formHint"></div>
             </div>
           </form>
@@ -876,571 +973,24 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <div>
-        <span>© 2025 Retenly.</span>
-        <span data-i18n="footer.rights">Все права защищены.</span>
+        <span>© 2026 Retenly.</span>
+        <span>Все права защищены.</span>
       </div>
       <div>
-        <span data-i18n="footer.contact_label">Почта для партнёров:</span>
+        <span>Почта для партнёров:</span>
         <a href="mailto:partners@retenly.top">partners@retenly.top</a>
       </div>
     </footer>
+
   </div>
 
-  <!-- toast -->
-  <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#06060c;border:1px solid rgba(244,210,122,.45);color:#fff;padding:9px 14px;border-radius:999px;font-size:13px;z-index:60;pointer-events:none;">
-    Done
+  <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#ffffff;border:1px solid rgba(211,154,62,.45);color:#0f172a;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:900;z-index:60;pointer-events:none;box-shadow:0 18px 34px rgba(16,24,40,0.12);">
+    Готово
   </div>
 
   <script>
-    const LANG_KEY = 'retenly_lang';
-    const SUPPORTED = ['en','de','pl','fr','ru'];
-
-    const I18N = {
-      en:{
-        "meta.title":"Retenly — Retention & VIP for iGaming",
-        "meta.desc":"Retenly builds VIP, retention, call center and QA for iGaming operators across Tier 1–3 markets.",
-        "logo.tagline":"Retention & VIP for iGaming",
-        "top.contacts_label":"Our channels",
-
-        "hero.kicker_pill":"Retenly",
-        "hero.kicker_text":"Retention & VIP operations for iGaming",
-        "hero.h1":"Retenly solves retention problems that cost you tens of thousands of dollars every month.",
-        "hero.lead":"We design and operate VIP, retention, call center and QA for iGaming operators across Tier 1–3 GEOs with a focus on NGGR, LTV and dormant-player reactivation.",
-        "hero.geo":"Tier 1 / 2 / 3 • TR • CIS • EU",
-        "hero.clients":"iGaming operators, platforms, affiliate teams",
-        "hero.btn_primary":"Get a personal Retenly analysis",
-        "hero.btn_secondary":"See who we work with",
-        "hero.note":"Your request is reviewed by people who have actually built VIP & retention in iGaming — not just consultants with slides.",
-        "hero.card_title":"30 days with Retenly → your result",
-        "hero.card_badge":"Pilot",
-        "hero.stat1_label":"Dormant player return",
-        "hero.stat1_value":"+10–25%",
-        "hero.stat1_foot":"in first reactivation waves",
-        "hero.stat2_label":"VIP & high-value NGGR",
-        "hero.stat2_value":"+8–15%",
-        "hero.stat2_foot":"growth in key segments",
-        "hero.stat3_label":"Team speed",
-        "hero.stat3_value":"2–4 weeks",
-        "hero.stat3_foot":"from audit to stable playbooks",
-        "hero.stat4_label":"Transparency",
-        "hero.stat4_value":"Daily",
-        "hero.stat4_foot":"reports on NGGR, LTV and retention",
-
-        "geo.title":"We work with Tier 1, 2 and 3 markets",
-        "geo.lead":"Retenly is not a generic solution for any vertical. We focus on iGaming and adapt operations to GEO specifics, regulation and player behaviour.",
-        "geo.t1_title":"Tier 1",
-        "geo.t1_text":"Strict regulations, sensitivity to tone of voice, focus on compliance and premium VIP experience.",
-        "geo.t2_title":"Tier 2",
-        "geo.t2_text":"Balance between aggressive marketing and responsible approach. Clear scripts and segmentation matter.",
-        "geo.t3_title":"Tier 3 / Emerging",
-        "geo.t3_text":"Fast growth, high competition and strong dependency on the human factor in support and VIP.",
-
-        "who.title":"Who we work with",
-        "who.lead":"Retenly plugs in where retention and VIP directly affect NGGR and the internal team doesn’t have time to rebuild processes.",
-        "who.col1_title":"iGaming operators",
-        "who.col1_li1":"Online casino & sportsbook (multi-GEO)",
-        "who.col1_li2":"Operators with fragmented VIP and support",
-        "who.col1_li3":"Fast-growing brands after launch or rebrand",
-        "who.col2_title":"Platforms & affiliate teams",
-        "who.col2_li1":"White-label and platform solutions",
-        "who.col2_li2":"Affiliate teams with their own retention / VIP",
-        "who.col2_li3":"Payment-friendly operators who care about clean customer journeys",
-
-        "why.title":"Why operators choose Retenly",
-        "why.lead":"Instead of \"consulting for presentations\" we bring measurable impact: player return, NGGR growth in key segments and process-level quality control.",
-        "why.p1_title":"Deep iGaming focus",
-        "why.p1_text":"We don’t spread across dozens of industries. Retenly is about retention, VIP and support in iGaming only.",
-        "why.p2_title":"Ready people and processes",
-        "why.p2_text":"We bring trained specialists, checklists, scripts, QA loops and reporting — without months of hiring and onboarding.",
-        "why.p3_title":"Full chain: VIP, Call center, QA",
-        "why.p3_text":"We cover the chain: VIP managers, outbound / inbound retention, first line and QA. Everyone speaks with the player in one brand voice.",
-        "why.p4_title":"Transparent metrics and reporting",
-        "why.p4_text":"You see daily impact: reactivations, NGGR by segment, handling speed, communication quality and growth points.",
-
-        "days.title":"30 days with Retenly → your result",
-        "days.lead":"We launch the pilot without long tenders and endless approvals. The goal is to show impact in numbers in the first month.",
-        "days.c1_title":"Weeks 1–2: audit & architecture",
-        "days.c1_text":"Analysis of retention & VIP, scripts, CRM and reporting. We design a new architecture of processes and segmentation.",
-        "days.c2_title":"Week 3: activation waves & QA standards",
-        "days.c2_text":"We launch first reactivation waves, updated scripts and QA checklists. Baseline reporting is set up.",
-        "days.c3_title":"Week 4: adjustment & scale",
-        "days.c3_text":"We read NGGR, reactivation and quality metrics, adjust scenarios and prepare a scale-up plan.",
-
-        "form.title":"Get a personal Retenly analysis",
-        "form.lead":"Describe your product, GEOs and current bottlenecks. We’ll prepare a personal breakdown for VIP, retention, support and QA — and offer a pilot format.",
-        "form.side_title":"What you’ll receive",
-        "form.side_li1":"Short audit of your current retention structure",
-        "form.side_li2":"30-day action plan focused on NGGR and LTV",
-        "form.side_li3":"Recommendations on VIP, call center and QA",
-        "form.name_label":"Name",
-        "form.name_ph":"How should we address you",
-        "form.company_label":"Company",
-        "form.company_ph":"Brand or operator name",
-        "form.role_label":"Role",
-        "form.role_ph":"Head of VIP, COO, Retention…",
-        "form.geo_label":"Main GEOs",
-        "form.geo_ph":"TR, CIS, EU…",
-        "form.email_label":"Email",
-        "form.phone_label":"Phone / Telegram",
-        "form.message_label":"What hurts the most right now",
-        "form.message_ph":"For example: VIP retention, dormant players, call center quality, lack of QA, no clear reporting…",
-        "form.consent":"I agree to data processing and receiving replies from the Retenly team.",
-        "form.submit":"Send request",
-        "form.success":"Your request has been received. The Retenly team will prepare a personal review and contact you shortly.",
-        "form.error":"Sending error. Please try again in a few minutes or write to partners@retenly.top.",
-
-        "footer.rights":"All rights reserved.",
-        "footer.contact_label":"Partner contact:"
-      },
-
-      /* DE, PL, FR, RU — укороченные, но адаптированные тексты */
-      de:{
-        "meta.title":"Retenly — Retention & VIP für iGaming",
-        "meta.desc":"Retenly baut VIP-, Retention-, Call-Center- und QA-Prozesse für iGaming-Anbieter in Tier-1–3-Märkten auf.",
-        "logo.tagline":"Retention & VIP für iGaming",
-        "top.contacts_label":"Kontaktkanäle",
-
-        "hero.kicker_pill":"Retenly",
-        "hero.kicker_text":"Retention- & VIP-Operations für iGaming",
-        "hero.h1":"Retenly löst Retention-Probleme, die Sie jeden Monat zehntausende Euro kosten.",
-        "hero.lead":"Wir bauen VIP-, Retention-, Call-Center- und QA-Strukturen für iGaming-Anbieter in Tier-1–3-GEOs mit Fokus auf NGGR, LTV und Reaktivierung.",
-        "hero.geo":"Tier 1 / 2 / 3 • TR • GUS • EU",
-        "hero.clients":"iGaming-Anbieter, Plattformen, Affiliate-Teams",
-        "hero.btn_primary":"Persönliche Analyse erhalten",
-        "hero.btn_secondary":"Sehen, mit wem wir arbeiten",
-        "hero.note":"Ihre Anfrage landet bei Menschen, die wirklich VIP & Retention in iGaming aufgebaut haben – nicht nur bei Präsentations-Beratern.",
-        "hero.card_title":"30 Tage mit Retenly → Ihr Ergebnis",
-        "hero.card_badge":"Pilot",
-        "hero.stat1_label":"Reaktivierung inaktiver Spieler",
-        "hero.stat1_value":"+10–25%",
-        "hero.stat1_foot":"in den ersten Wellen",
-        "hero.stat2_label":"VIP- & High-Value-NGGR",
-        "hero.stat2_value":"+8–15%",
-        "hero.stat2_foot":"Wachstum in Kernsegmenten",
-        "hero.stat3_label":"Geschwindigkeit",
-        "hero.stat3_value":"2–4 Wochen",
-        "hero.stat3_foot":"von Audit bis stabilen Playbooks",
-        "hero.stat4_label":"Transparenz",
-        "hero.stat4_value":"Täglich",
-        "hero.stat4_foot":"Berichte zu NGGR, LTV, Retention",
-
-        "geo.title":"Wir arbeiten mit Tier-1–3-Märkten",
-        "geo.lead":"Retenly ist kein generischer Dienst für jede Branche. Wir fokussieren uns auf iGaming und passen Prozesse an GEO, Regulierung und Spielerverhalten an.",
-        "geo.t1_title":"Tier 1",
-        "geo.t1_text":"Strenge Regulierung, sensibles Wording, Fokus auf Compliance und Premium-VIP-Erlebnis.",
-        "geo.t2_title":"Tier 2",
-        "geo.t2_text":"Balance zwischen aggressivem Marketing und Verantwortung. Klare Skripte und Segmentierung sind entscheidend.",
-        "geo.t3_title":"Tier 3 / Emerging",
-        "geo.t3_text":"Schnelles Wachstum, hoher Wettbewerb, starke Abhängigkeit vom Support- & VIP-Team.",
-
-        "who.title":"Mit wem wir arbeiten",
-        "who.lead":"Retenly steigt dort ein, wo Retention und VIP direkt NGGR beeinflussen und das interne Team keine Zeit für einen Neuaufbau hat.",
-        "who.col1_title":"iGaming-Anbieter",
-        "who.col1_li1":"Online-Casino & Sportsbook (multi-GEO)",
-        "who.col1_li2":"Anbieter mit fragmentiertem VIP & Support",
-        "who.col1_li3":"Schnell wachsende Marken nach Launch/Rebrand",
-        "who.col2_title":"Plattformen & Affiliate-Teams",
-        "who.col2_li1":"White-Label- und Plattform-Lösungen",
-        "who.col2_li2":"Affiliate-Teams mit eigenem Retention/VIP",
-        "who.col2_li3":"Payment-freundliche Anbieter mit Fokus auf „clean journey“",
-
-        "why.title":"Warum sich Anbieter für Retenly entscheiden",
-        "why.lead":"Statt „Consulting für Slides“ liefern wir messbare Effekte: Rückkehrer, NGGR-Wachstum und Prozess-Qualität.",
-        "why.p1_title":"Klarer iGaming-Fokus",
-        "why.p1_text":"Wir arbeiten nicht mit dutzenden Branchen. Retenly bedeutet Retention, VIP und Support speziell für iGaming.",
-        "why.p2_title":"Fertige Menschen & Prozesse",
-        "why.p2_text":"Wir bringen geschulte Mitarbeiter, Checklisten, Skripte, QA-Loops und Reporting mit – ohne monatelanges Hiring.",
-        "why.p3_title":"VIP, Call-Center, QA aus einer Hand",
-        "why.p3_text":"VIP-Manager, Outbound/Inbound-Retention, First Line und QA – alle sprechen mit Spielern in einer Brand-Stimme.",
-        "why.p4_title":"Transparente Kennzahlen",
-        "why.p4_text":"Sie sehen tägliche Effekte: Reaktivierungen, NGGR je Segment, Geschwindigkeit, Kommunikationsqualität.",
-
-        "days.title":"30 Tage mit Retenly → Ihr Ergebnis",
-        "days.lead":"Der Pilot startet ohne lange Ausschreibungen. Ziel: messbarer Effekt schon im ersten Monat.",
-        "days.c1_title":"Woche 1–2: Audit & Architektur",
-        "days.c1_text":"Analyse von Retention, VIP, Skripten, CRM und Reporting. Wir entwerfen eine neue Prozess-Architektur.",
-        "days.c2_title":"Woche 3: Wellen & QA-Standards",
-        "days.c2_text":"Start erster Reaktivierungswellen, neue Skripte und QA-Checklisten. Basis-Reporting wird aufgebaut.",
-        "days.c3_title":"Woche 4: Feinschliff & Skalierung",
-        "days.c3_text":"Wir lesen NGGR, Reaktivierungen und Qualität, passen Szenarien an und planen Skalierung.",
-
-        "form.title":"Persönliche Retenly-Analyse erhalten",
-        "form.lead":"Beschreiben Sie Produkt, GEOs und Engpässe. Wir erstellen einen individuellen Überblick zu VIP, Retention, Support und QA.",
-        "form.side_title":"Was Sie erhalten",
-        "form.side_li1":"Kurzer Audit Ihrer Retention-Struktur",
-        "form.side_li2":"30-Tage-Plan mit Fokus auf NGGR & LTV",
-        "form.side_li3":"Empfehlungen zu VIP, Call-Center und QA",
-        "form.name_label":"Name",
-        "form.name_ph":"Wie dürfen wir Sie ansprechen?",
-        "form.company_label":"Firma",
-        "form.company_ph":"Brand oder Anbieter",
-        "form.role_label":"Rolle",
-        "form.role_ph":"Head of VIP, COO, Retention…",
-        "form.geo_label":"Wichtigste GEOs",
-        "form.geo_ph":"TR, GUS, EU…",
-        "form.email_label":"E-Mail",
-        "form.phone_label":"Telefon / Telegram",
-        "form.message_label":"Was schmerzt aktuell am meisten?",
-        "form.message_ph":"z. B. VIP-Retention, schlafende Spieler, Call-Center-Qualität, fehlendes QA…",
-        "form.consent":"Ich stimme der Datenverarbeitung und Antworten des Retenly-Teams zu.",
-        "form.submit":"Anfrage senden",
-        "form.success":"Ihre Anfrage ist eingegangen. Das Retenly-Team erstellt eine Analyse und meldet sich zeitnah.",
-        "form.error":"Fehler beim Senden. Bitte später erneut versuchen oder an partners@retenly.top schreiben.",
-        "footer.rights":"Alle Rechte vorbehalten.",
-        "footer.contact_label":"Partner-Kontakt:"
-      },
-
-      pl:{
-        "meta.title":"Retenly — Retention & VIP dla iGaming",
-        "meta.desc":"Retenly buduje VIP, retention, call center i QA dla operatorów iGaming w rynkach Tier 1–3.",
-        "logo.tagline":"Retention & VIP dla iGaming",
-        "top.contacts_label":"Kanały kontaktu",
-
-        "hero.kicker_pill":"Retenly",
-        "hero.kicker_text":"Operacje Retention & VIP dla iGaming",
-        "hero.h1":"Retenly rozwiązuje problemy z retencją, które kosztują Cię dziesiątki tysięcy miesięcznie.",
-        "hero.lead":"Projektujemy i prowadzimy VIP, retention, call center i QA dla operatorów iGaming w GEO Tier 1–3 z naciskiem na NGGR, LTV i reaktywację uśpionych graczy.",
-        "hero.geo":"Tier 1 / 2 / 3 • TR • WNP • UE",
-        "hero.clients":"Operatorzy iGaming, platformy, zespoły afiliacyjne",
-        "hero.btn_primary":"Otrzymaj analizę Retenly",
-        "hero.btn_secondary":"Zobacz, z kim pracujemy",
-        "hero.note":"Twoja prośba trafia do osób, które naprawdę budowały VIP & retention w iGaming – nie tylko do konsultantów od slajdów.",
-        "hero.card_title":"30 dni z Retenly → Twój wynik",
-        "hero.card_badge":"Pilot",
-        "hero.stat1_label":"Powrót uśpionych graczy",
-        "hero.stat1_value":"+10–25%",
-        "hero.stat1_foot":"w pierwszych falach reaktywacji",
-        "hero.stat2_label":"NGGR VIP & high-value",
-        "hero.stat2_value":"+8–15%",
-        "hero.stat2_foot":"wzrost w kluczowych segmentach",
-        "hero.stat3_label":"Szybkość",
-        "hero.stat3_value":"2–4 tyg.",
-        "hero.stat3_foot":"od audytu do stabilnych scenariuszy",
-        "hero.stat4_label":"Transparentność",
-        "hero.stat4_value":"Codziennie",
-        "hero.stat4_foot":"raporty NGGR, LTV i Retention",
-
-        "geo.title":"Pracujemy z rynkami Tier 1, 2 i 3",
-        "geo.lead":"Retenly to nie uniwersalne rozwiązanie „dla każdej branży”. Skupiamy się na iGaming i dopasowujemy procesy do GEO, regulacji i zachowań graczy.",
-        "geo.t1_title":"Tier 1",
-        "geo.t1_text":"Surowe regulacje, wrażliwość na ton komunikacji, akcent na compliance i VIP premium.",
-        "geo.t2_title":"Tier 2",
-        "geo.t2_text":"Balans między agresywnym marketingiem a odpowiedzialnością. Kluczowe są jasne skrypty i segmentacja.",
-        "geo.t3_title":"Tier 3 / Emerging",
-        "geo.t3_text":"Dynamiczny wzrost, wysoka konkurencja i silna zależność od jakości zespołów supportu i VIP.",
-
-        "who.title":"Z kim pracujemy",
-        "who.lead":"Retenly wchodzi tam, gdzie retention i VIP bezpośrednio wpływają na NGGR, a zespół wewnętrzny nie ma czasu na przebudowę procesów.",
-        "who.col1_title":"Operatorzy iGaming",
-        "who.col1_li1":"Online casino & sportsbook (multi-GEO)",
-        "who.col1_li2":"Operatorzy z rozproszonym VIP i supportem",
-        "who.col1_li3":"Szybko rosnące brandy po starcie / rebrandzie",
-        "who.col2_title":"Platformy i zespoły afiliacyjne",
-        "who.col2_li1":"Rozwiązania white-label i platformy",
-        "who.col2_li2":"Zespoły afiliacyjne z własnym retention / VIP",
-        "who.col2_li3":"Operatorzy przyjaźni płatnościom, dbający o „clean journey” klienta",
-
-        "why.title":"Dlaczego operatorzy wybierają Retenly",
-        "why.lead":"Zamiast „konsultingu pod prezentacje” dostarczamy mierzalny efekt: powrót graczy, wzrost NGGR oraz kontrolę jakości.",
-        "why.p1_title":"Mocny fokus na iGaming",
-        "why.p1_text":"Nie rozpraszamy się na dziesiątki branż. Retenly to retention, VIP i support konkretnie dla iGaming.",
-        "why.p2_title":"Gotowe zespoły i procesy",
-        "why.p2_text":"Wnosimy wyszkolonych specjalistów, check-listy, skrypty, QA-loop i raporty – bez miesięcy rekrutacji.",
-        "why.p3_title":"VIP, Call center, QA w jednym",
-        "why.p3_text":"Domykamy łańcuch: VIP, retention outbound/inbound, pierwsza linia i QA – w jednym tonie marki.",
-        "why.p4_title":"Przejrzyste KPI",
-        "why.p4_text":"Widzisz codzienne wyniki: reaktywacje, NGGR per segment, prędkość obsługi i jakość komunikacji.",
-
-        "days.title":"30 dni z Retenly → Twój wynik",
-        "days.lead":"Pilot startuje bez długich przetargów – celem jest pokazanie efektu liczbowego w pierwszym miesiącu.",
-        "days.c1_title":"Tydzień 1–2: audit i architektura",
-        "days.c1_text":"Analiza retention, VIP, skryptów, CRM i raportów. Budujemy nową architekturę procesów.",
-        "days.c2_title":"Tydzień 3: fale i standardy QA",
-        "days.c2_text":"Uruchamiamy fale reaktywacji, nowe skrypty i checklisty QA. Stawiamy podstawowe raportowanie.",
-        "days.c3_title":"Tydzień 4: korekta i skalowanie",
-        "days.c3_text":"Czytamy NGGR, reaktywacje i jakość, poprawiamy scenariusze i planujemy skalowanie.",
-
-        "form.title":"Otrzymaj analizę Retenly",
-        "form.lead":"Opisz produkt, GEO i wąskie gardła. Przygotujemy indywidualny przegląd VIP, retention, supportu i QA.",
-        "form.side_title":"Co otrzymasz",
-        "form.side_li1":"Krótki audit struktury retention",
-        "form.side_li2":"Plan na 30 dni z naciskiem na NGGR i LTV",
-        "form.side_li3":"Rekomendacje dla VIP, call center i QA",
-        "form.name_label":"Imię",
-        "form.name_ph":"Jak się do Ciebie zwracać?",
-        "form.company_label":"Firma",
-        "form.company_ph":"Nazwa brandu / operatora",
-        "form.role_label":"Rola",
-        "form.role_ph":"Head of VIP, COO, Retention…",
-        "form.geo_label":"Główne GEO",
-        "form.geo_ph":"TR, WNP, UE…",
-        "form.email_label":"Email",
-        "form.phone_label":"Telefon / Telegram",
-        "form.message_label":"Co najbardziej boli?",
-        "form.message_ph":"np. VIP retention, uśpieni gracze, jakość call center, brak QA…",
-        "form.consent":"Wyrażam zgodę na przetwarzanie danych i kontakt ze strony Retenly.",
-        "form.submit":"Wyślij zapytanie",
-        "form.success":"Twoje zgłoszenie zostało przyjęte. Zespół Retenly przygotuje analizę i skontaktuje się wkrótce.",
-        "form.error":"Błąd wysyłki. Spróbuj ponownie lub napisz na partners@retenly.top.",
-        "footer.rights":"Wszelkie prawa zastrzeżone.",
-        "footer.contact_label":"Kontakt dla partnerów:"
-      },
-
-      fr:{
-        "meta.title":"Retenly — Retention & VIP pour l’iGaming",
-        "meta.desc":"Retenly construit des opérations VIP, retention, call center et QA pour les opérateurs iGaming sur les marchés Tier 1–3.",
-        "logo.tagline":"Retention & VIP pour iGaming",
-        "top.contacts_label":"Nos canaux",
-
-        "hero.kicker_pill":"Retenly",
-        "hero.kicker_text":"Opérations Retention & VIP pour l’iGaming",
-        "hero.h1":"Retenly résout les problèmes de rétention qui vous coûtent des dizaines de milliers chaque mois.",
-        "hero.lead":"Nous concevons et opérons VIP, retention, call center et QA pour les opérateurs iGaming sur les GEO Tier 1–3, avec un focus NGGR, LTV et réactivation.",
-        "hero.geo":"Tier 1 / 2 / 3 • TR • CEI • UE",
-        "hero.clients":"Opérateurs iGaming, plateformes, équipes d’affiliation",
-        "hero.btn_primary":"Recevoir une analyse Retenly",
-        "hero.btn_secondary":"Voir nos types de clients",
-        "hero.note":"Votre demande est traitée par des personnes qui ont réellement construit VIP & retention dans l’iGaming – pas seulement des consultants de slides.",
-        "hero.card_title":"30 jours avec Retenly → votre résultat",
-        "hero.card_badge":"Pilot",
-        "hero.stat1_label":"Retour des joueurs dormants",
-        "hero.stat1_value":"+10–25%",
-        "hero.stat1_foot":"sur les premières vagues",
-        "hero.stat2_label":"NGGR VIP & high-value",
-        "hero.stat2_value":"+8–15%",
-        "hero.stat2_foot":"sur les segments clés",
-        "hero.stat3_label":"Vitesse",
-        "hero.stat3_value":"2–4 semaines",
-        "hero.stat3_foot":"de l’audit aux playbooks stables",
-        "hero.stat4_label":"Transparence",
-        "hero.stat4_value":"Quotidien",
-        "hero.stat4_foot":"rapports NGGR, LTV, retention",
-
-        "geo.title":"Nous travaillons avec les marchés Tier 1, 2 et 3",
-        "geo.lead":"Retenly n’est pas une solution générique. Nous nous concentrons sur l’iGaming et adaptons les processus au GEO, à la régulation et au comportement joueur.",
-        "geo.t1_title":"Tier 1",
-        "geo.t1_text":"Régulation stricte, ton sensible, focus sur la conformité et l’expérience VIP premium.",
-        "geo.t2_title":"Tier 2",
-        "geo.t2_text":"Équilibre marketing agressif / responsabilité. Scripts clairs et segmentation sont essentiels.",
-        "geo.t3_title":"Tier 3 / Émergent",
-        "geo.t3_text":"Croissance rapide, concurrence forte, dépendance aux équipes support & VIP.",
-
-        "who.title":"Avec qui nous travaillons",
-        "who.lead":"Retenly intervient là où la rétention et le VIP impactent directement le NGGR et où l’équipe interne manque de bande passante.",
-        "who.col1_title":"Opérateurs iGaming",
-        "who.col1_li1":"Online casino & sportsbook (multi-GEO)",
-        "who.col1_li2":"Opérateurs avec VIP / support fragmentés",
-        "who.col1_li3":"Marques en forte croissance après lancement / rebrand",
-        "who.col2_title":"Plateformes & équipes d’affiliation",
-        "who.col2_li1":"Solutions white-label et plateformes",
-        "who.col2_li2":"Équipes d’affiliation avec retention / VIP interne",
-        "who.col2_li3":"Opérateurs « payment-friendly » avec parcours client propre.",
-
-        "why.title":"Pourquoi les opérateurs choisissent Retenly",
-        "why.lead":"Au lieu d’un simple consulting théorique, nous apportons un impact mesurable : retour de joueurs, croissance NGGR et qualité de process.",
-        "why.p1_title":"Focus fort iGaming",
-        "why.p1_text":"Pas de dispersion multi-industries. Retenly = retention, VIP et support pour l’iGaming.",
-        "why.p2_title":"Équipes et process prêts",
-        "why.p2_text":"Nous apportons des spécialistes formés, checklists, scripts, boucles QA et reporting – sans mois de recrutement.",
-        "why.p3_title":"Chaîne complète VIP / Call center / QA",
-        "why.p3_text":"Managers VIP, appels de rétention, première ligne et QA – tous parlent avec la même voix de marque.",
-        "why.p4_title":"Metrics et reporting transparents",
-        "why.p4_text":"Vous voyez l’impact quotidien : réactivations, NGGR par segment, vitesse de traitement, qualité des échanges.",
-
-        "days.title":"30 jours avec Retenly → votre résultat",
-        "days.lead":"Le pilote démarre sans longs appels d’offres. Objectif : montrer un effet chiffré dès le premier mois.",
-        "days.c1_title":"Semaines 1–2 : audit & architecture",
-        "days.c1_text":"Analyse retention, VIP, scripts, CRM, reporting. Nous définissons une nouvelle architecture de process.",
-        "days.c2_title":"Semaine 3 : vagues & QA standards",
-        "days.c2_text":"Lancement des premières vagues de réactivation, scripts mis à jour, checklists QA, reporting de base.",
-        "days.c3_title":"Semaine 4 : ajustement & scale",
-        "days.c3_text":"Lecture des chiffres NGGR, réactivations, qualité; ajustements et plan de scale.",
-
-        "form.title":"Recevoir une analyse Retenly",
-        "form.lead":"Décrivez votre produit, vos GEO et vos points de friction. Nous préparons un aperçu personnalisé VIP / retention / support / QA.",
-        "form.side_title":"Ce que vous recevez",
-        "form.side_li1":"Mini-audit de votre structure de rétention",
-        "form.side_li2":"Plan 30 jours axé sur NGGR & LTV",
-        "form.side_li3":"Recommandations VIP, call center, QA",
-        "form.name_label":"Nom",
-        "form.name_ph":"Comment vous appeler ?",
-        "form.company_label":"Société",
-        "form.company_ph":"Nom de marque / opérateur",
-        "form.role_label":"Rôle",
-        "form.role_ph":"Head of VIP, COO, Retention…",
-        "form.geo_label":"GEO principaux",
-        "form.geo_ph":"TR, CEI, UE…",
-        "form.email_label":"Email",
-        "form.phone_label":"Téléphone / Telegram",
-        "form.message_label":"Ce qui fait le plus mal aujourd’hui",
-        "form.message_ph":"Ex. : retention VIP, joueurs dormants, qualité call center, absence de QA…",
-        "form.consent":"J’accepte le traitement de mes données et les réponses de l’équipe Retenly.",
-        "form.submit":"Envoyer la demande",
-        "form.success":"Votre demande a bien été reçue. L’équipe Retenly préparera une analyse personnalisée et reviendra vers vous.",
-        "form.error":"Erreur d’envoi. Réessayez dans quelques minutes ou écrivez à partners@retenly.top.",
-        "footer.rights":"Tous droits réservés.",
-        "footer.contact_label":"Email partenaires :"
-      },
-
-      ru:{
-        "meta.title":"Retenly — удержание и VIP для iGaming",
-        "meta.desc":"Retenly выстраивает VIP, retention, колл-центр и контроль качества для iGaming операторов на рынках Tier 1–3.",
-        "logo.tagline":"Retention & VIP для iGaming",
-        "top.contacts_label":"Способы связи",
-
-        "hero.kicker_pill":"Retenly",
-        "hero.kicker_text":"Операционные решения по удержанию и VIP для iGaming",
-        "hero.h1":"Retenly — решаем проблемы с удержанием, которые стоят вам десятков тысяч долларов ежемесячно.",
-        "hero.lead":"Мы строим и усиливаем VIP-направление, retention, колл-центр и контроль качества для iGaming операторов в Tier 1–3 GEO, с фокусом на NGGR, LTV и возврат спящих игроков.",
-        "hero.geo":"Tier 1 / 2 / 3 • Турция • СНГ • Европа",
-        "hero.clients":"iGaming операторы, платформы, affiliate-команды",
-        "hero.btn_primary":"Получить персональный анализ Retenly",
-        "hero.btn_secondary":"Смотреть, с кем мы работаем",
-        "hero.note":"Ваш запрос увидит команда, которая реально строила VIP и retention в iGaming, а не консультанты “по презентациям”.",
-        "hero.card_title":"30 дней работы Retenly → ваш результат",
-        "hero.card_badge":"Пилот",
-        "hero.stat1_label":"Возврат спящих игроков",
-        "hero.stat1_value":"+10–25%",
-        "hero.stat1_foot":"в первых волнах реактивации",
-        "hero.stat2_label":"VIP и high-value NGGR",
-        "hero.stat2_value":"+8–15%",
-        "hero.stat2_foot":"рост в ключевых сегментах",
-        "hero.stat3_label":"Скорость команды",
-        "hero.stat3_value":"2–4 недели",
-        "hero.stat3_foot":"от аудита до стабильных сценариев",
-        "hero.stat4_label":"Прозрачность",
-        "hero.stat4_value":"Daily",
-        "hero.stat4_foot":"репорты по NGGR, LTV, Retention",
-
-        "geo.title":"Мы работаем с рынками Tier 1, 2 и 3",
-        "geo.lead":"Retenly — это не универсальный сервис “для всех вертикалей”. Мы фокусируемся на iGaming и адаптируем процессы под GEO, регуляции и поведение игроков.",
-        "geo.t1_title":"Tier 1",
-        "geo.t1_text":"Строгие регуляции, чувствительность к тону общения, акцент на compliance и премиальный VIP-опыт.",
-        "geo.t2_title":"Tier 2",
-        "geo.t2_text":"Баланс между агрессивным маркетингом и ответственным подходом. Важны чёткие скрипты и сегментация.",
-        "geo.t3_title":"Tier 3 / Emerging",
-        "geo.t3_text":"Быстрый рост, высокая конкуренция, сильная зависимость от человеческого фактора в саппорте и VIP.",
-
-        "who.title":"С кем мы работаем",
-        "who.lead":"Retenly подключается там, где удержание и VIP напрямую влияют на NGGR, а внутренняя команда не успевает перестроить процессы.",
-        "who.col1_title":"iGaming операторы",
-        "who.col1_li1":"Online casino & sportsbook (multi-GEO)",
-        "who.col1_li2":"Операторы с разрозненным VIP и саппортом",
-        "who.col1_li3":"Быстро растущие бренды после запуска / ребрендинга",
-        "who.col2_title":"Платформы и affiliate-команды",
-        "who.col2_li1":"White-label и платформенные решения",
-        "who.col2_li2":"Affiliate-команды с собственным retention / VIP",
-        "who.col2_li3":"Payment-friendly операторы, которым важен “чистый” клиентский путь.",
-
-        "why.title":"Почему операторы выбирают Retenly",
-        "why.lead":"Вместо “консалтинга ради презентаций” мы даём измеримый эффект: возврат игроков, рост NGGR и управляемое качество.",
-        "why.p1_title":"Глубокий фокус на iGaming",
-        "why.p1_text":"Мы не работаем сразу с десятками индустрий. Retenly — про retention, VIP и саппорт именно в iGaming.",
-        "why.p2_title":"Готовые люди и процессы",
-        "why.p2_text":"Подключаем обученных специалистов, чек-листы, скрипты, QA-контуры и отчётность. Без месяцев найма и базового обучения.",
-        "why.p3_title":"Цепочка VIP / Call center / QA",
-        "why.p3_text":"Закрываем VIP-менеджеров, retention-колы, первую линию и контроль качества. Все говорят с игроком в едином тоне бренда.",
-        "why.p4_title":"Прозрачные метрики",
-        "why.p4_text":"Вы видите ежедневный эффект: реактивации, NGGR по сегментам, скорость обработки и качество коммуникаций.",
-
-        "days.title":"30 дней работы Retenly → ваш результат",
-        "days.lead":"Пилот запускается без долгих тендеров. Цель — показать эффект в цифрах в течение первого месяца.",
-        "days.c1_title":"1–2 недели: аудит и архитектура",
-        "days.c1_text":"Разбираем retention, VIP, скрипты, CRM и отчётность. Формируем новую архитектуру процессов и сегментаций.",
-        "days.c2_title":"3 неделя: запуск волн и QA-стандарты",
-        "days.c2_text":"Запускаем первые волны реактивации, обновлённые скрипты и чек-листы качества. Настраиваем базовую отчётность.",
-        "days.c3_title":"4 неделя: корректировка и масштаб",
-        "days.c3_text":"Снимаем цифры по NGGR, реактивациям и качеству. Корректируем сценарии и готовим план масштабирования.",
-
-        "form.title":"Получить персональный анализ Retenly",
-        "form.lead":"Опишите продукт, GEO и текущие узкие места. Мы подготовим персональный разбор по VIP, retention, саппорту и QA и предложим формат пилота.",
-        "form.side_title":"Что вы получите",
-        "form.side_li1":"Краткий аудит текущей структуры удержания",
-        "form.side_li2":"30-дневный план действий с фокусом на NGGR и LTV",
-        "form.side_li3":"Рекомендации по VIP, колл-центру и QA",
-        "form.name_label":"Имя",
-        "form.name_ph":"Как к вам обращаться",
-        "form.company_label":"Компания",
-        "form.company_ph":"Название бренда или оператора",
-        "form.role_label":"Роль",
-        "form.role_ph":"Head of VIP, COO, Retention…",
-        "form.geo_label":"Основные GEO",
-        "form.geo_ph":"TR, СНГ, EU…",
-        "form.email_label":"Email",
-        "form.phone_label":"Телефон / Telegram",
-        "form.message_label":"Что сейчас болит больше всего",
-        "form.message_ph":"Например: VIP-удержание, спящие игроки, качество колл-центра, отсутствие QA, нет отчётности…",
-        "form.consent":"Я соглашаюсь на обработку данных и получение ответов от команды Retenly.",
-        "form.submit":"Отправить запрос",
-        "form.success":"Ваш запрос принят. Команда Retenly подготовит персональный разбор и свяжется с вами в ближайшее время.",
-        "form.error":"Ошибка при отправке. Попробуйте позже или напишите на partners@retenly.top.",
-        "footer.rights":"Все права защищены.",
-        "footer.contact_label":"Почта для партнёров:"
-      }
-    };
-
-    const langBtn  = document.getElementById('langBtn');
-    const langList = document.getElementById('langList');
-    const langLabel= document.getElementById('langLabel');
-
-    langBtn.addEventListener('click',()=>{
-      const open = langList.style.display === 'block';
-      langList.style.display = open ? 'none' : 'block';
-    });
-    document.addEventListener('click',(e)=>{
-      if(!document.getElementById('langWrap').contains(e.target)){
-        langList.style.display='none';
-      }
-    });
-    langList.querySelectorAll('button[data-lang]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        setLanguage(btn.getAttribute('data-lang'));
-        langList.style.display='none';
-      });
-    });
-
-    function detectLanguage(){
-      const stored = localStorage.getItem(LANG_KEY);
-      if(stored && SUPPORTED.includes(stored)) return stored;
-      const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
-      const code = nav.slice(0,2).toLowerCase();
-      if(SUPPORTED.includes(code)) return code;
-      return 'en';
-    }
-
-    function applyTranslations(lang){
-      const dict = I18N[lang] || I18N.en;
-
-      document.title = dict["meta.title"] || document.title;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if(metaDesc && dict["meta.desc"]) metaDesc.content = dict["meta.desc"];
-
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.getAttribute('data-i18n');
-        if(dict[key]) el.textContent = dict[key];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-        const key = el.getAttribute('data-i18n-placeholder');
-        if(dict[key]) el.placeholder = dict[key];
-      });
-    }
-
-    function setLanguage(code){
-      if(!SUPPORTED.includes(code)) code = 'en';
-      localStorage.setItem(LANG_KEY, code);
-      applyTranslations(code);
-      const labels = {en:'EN',de:'DE',pl:'PL',fr:'FR',ru:'RU'};
-      langLabel.textContent = labels[code] || code.toUpperCase();
-    }
-
-    // init language
-    const initialLang = detectLanguage();
-    setLanguage(initialLang);
-
-    // fade-in sections
     const observer = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1449,13 +999,11 @@
         }
       });
     },{threshold:0.12});
-
     document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
 
-    // Toast helper
     function toast(msg){
       const t = document.getElementById('toast');
-      t.textContent = msg || 'Done';
+      t.textContent = msg || 'Готово';
       t.style.opacity = '1';
       t.style.transform = 'translateX(-50%) scale(1)';
       setTimeout(()=>{
@@ -1464,7 +1012,6 @@
       }, 4200);
     }
 
-    // Form submit
     const form = document.getElementById('lead');
     const formHint = document.getElementById('formHint');
     const submitBtn = document.getElementById('submitBtn');
@@ -1474,52 +1021,19 @@
       const fd = new FormData(form);
       if(fd.get('_hp')) return;
 
-      const lang = localStorage.getItem(LANG_KEY) || detectLanguage();
-      const dict = I18N[lang] || I18N.en;
-
-      if(submitBtn) submitBtn.disabled = true;
-      if(formHint) {
-        formHint.style.color = '#f4d27a';
-        formHint.textContent = '⏳';
-      }
+      submitBtn.disabled = true;
+      formHint.textContent = '';
 
       try{
-        const resp = await fetch(form.action,{
-          method:'POST',
-          body:fd
-        });
-
-        if(resp && resp.ok){
-          toast(dict['form.success'] || 'Request sent. We will get back to you.');
-          if(formHint){
-            formHint.style.color = '#63d98b';
-            formHint.textContent = dict['form.success'] || '';
-          }
-          form.reset();
-        }else{
-          console.warn('Form response', resp);
-          toast(dict['form.error'] || 'Send error. Please try later.');
-          if(formHint){
-            formHint.style.color = '#ff5c7a';
-            formHint.textContent = dict['form.error'] || '';
-          }
-        }
+        await fetch(form.action, { method:'POST', body:fd, mode:'no-cors' });
+        toast('Запрос получен. Свяжемся с вами в ближайшее время.');
+        form.reset();
+        formHint.textContent = 'Запрос получен. Подготовим аудит и свяжемся с вами в ближайшее время.';
       }catch(err){
-        console.error('Form send error', err);
-        toast(dict['form.error'] || 'Send error. Please try later.');
-        if(formHint){
-          formHint.style.color = '#ff5c7a';
-          formHint.textContent = dict['form.error'] || '';
-        }
+        toast('Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top.');
+        formHint.textContent = 'Ошибка отправки. Попробуйте позже или напишите на partners@retenly.top.';
       }finally{
-        if(submitBtn) submitBtn.disabled = false;
-      }
-    });
-
-    // close lang list with Esc
-    document.addEventListener('keydown',(e)=>{
-      if(e.key === 'Escape'){
-        langList.style.display='none';
+        submitBtn.disabled = false;
       }
     });
   </script>
