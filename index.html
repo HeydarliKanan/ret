@@ -7,7 +7,6 @@
   <meta name="description" content="Retenly помогает контролировать качество коммуникаций в отделах продаж и поддержки: аудит, QA, KPI, скрипты, отчёты и обучение команды">
   <meta name="theme-color" content="#F7F9FC" />
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -24,6 +23,7 @@
       --gold-deep:#d39a3e;
       --violet:#6b7cff;
       --green:#17b26a;
+      --red:#ef4444;
       --shadow:0 20px 45px rgba(16,24,40,0.08);
       --shadow-soft:0 12px 28px rgba(16,24,40,0.06);
       --radius:24px;
@@ -48,7 +48,6 @@
       overflow-x:hidden;
     }
 
-    /* Ambient background */
     .bg-art{
       position:fixed;
       inset:0;
@@ -57,6 +56,7 @@
       opacity:.9;
     }
     .bg-art svg{width:100%;height:100%;display:block}
+
     .page{
       max-width:1320px;
       margin:0 auto;
@@ -65,7 +65,6 @@
       z-index:1;
     }
 
-    /* header */
     .site-header{
       display:flex;
       align-items:center;
@@ -139,7 +138,6 @@
       .nav{justify-content:flex-start}
     }
 
-    /* attention */
     .attention{
       position:relative;
       overflow:hidden;
@@ -196,7 +194,6 @@
       max-width:980px;
     }
 
-    /* hero */
     .hero{
       position:relative;
       overflow:hidden;
@@ -224,14 +221,12 @@
       position:relative;
       z-index:1;
       display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(420px,.95fr);
+      grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);
       gap:26px;
       align-items:center;
     }
     @media(max-width:1080px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
+      .hero-grid{grid-template-columns:1fr}
     }
 
     .eyebrow{
@@ -301,7 +296,6 @@
       font-weight:600;
     }
 
-    /* mock dashboard */
     .hero-visual{
       position:relative;
       min-height:520px;
@@ -309,9 +303,11 @@
       align-items:center;
       justify-content:center;
     }
+
     .glow-ring{
       position:absolute;
-      width:520px;height:520px;
+      width:520px;
+      height:520px;
       border-radius:50%;
       background:
         radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 50%, rgba(107,124,255,.10) 70%, rgba(23,178,106,.08) 85%, transparent 100%);
@@ -324,29 +320,31 @@
       50%{transform:scale(1.05);opacity:1}
     }
 
-    .dashboard{
+    .dashboard-wrap{
       position:relative;
       width:min(100%, 560px);
-      border-radius:26px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.88);
-      backdrop-filter:blur(14px);
-      box-shadow:0 26px 60px rgba(16,24,40,.12);
-      overflow:hidden;
+      display:grid;
+      gap:12px;
     }
+
     .dash-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
       padding:14px 16px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.90), rgba(250,252,255,.84));
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.90);
+      backdrop-filter:blur(14px);
+      box-shadow:0 16px 34px rgba(16,24,40,.08);
     }
+
     .dash-title{
       font:800 14px/1.2 var(--head);
       letter-spacing:-.01em;
     }
+
     .dash-pill{
       padding:6px 10px;
       border-radius:999px;
@@ -356,41 +354,39 @@
       font-size:12px;
       font-weight:800;
     }
-    .dash-body{
-      padding:14px;
-      display:grid;
-      gap:12px;
-    }
+
     .mini-stats{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:10px;
     }
+
     .mini-card{
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#fff;
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:18px;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(12px);
+      box-shadow:0 14px 28px rgba(16,24,40,.06);
       padding:12px;
     }
+
     .mini-card .label{
       font-size:12px;
       color:var(--muted);
       margin:0 0 4px;
       font-weight:700;
     }
+
     .mini-card .value{
       font:800 22px/1 var(--head);
       margin:0 0 4px;
     }
+
     .mini-card .sub{
       font-size:12px;
       color:var(--muted);
       margin:0;
       font-weight:600;
-    }
-    @media(max-width:600px){
-      .mini-stats{grid-template-columns:1fr}
-      h1{font-size:40px}
     }
 
     .dashboard-grid{
@@ -398,17 +394,28 @@
       grid-template-columns:1.05fr .95fr;
       gap:12px;
     }
-    @media(max-width:720px){
-      .dashboard-grid{grid-template-columns:1fr}
+
+    .chart-card,
+    .table-card,
+    .bottom-card{
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(12px);
+      box-shadow:0 16px 30px rgba(16,24,40,.07);
+      padding:12px;
     }
 
-    .chart-card,.table-card{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:#fff;
-      padding:12px;
-      min-height:200px;
+    .bottom-card{
+      padding:14px 12px 12px;
     }
+
+    @media(max-width:720px){
+      .mini-stats{grid-template-columns:1fr}
+      .dashboard-grid{grid-template-columns:1fr}
+      h1{font-size:40px}
+    }
+
     .section-head{
       display:flex;
       align-items:center;
@@ -450,6 +457,7 @@
       0%,100%{filter:saturate(1)}
       50%{filter:saturate(1.18)}
     }
+
     .line-chart{
       width:100%;
       height:150px;
@@ -501,10 +509,7 @@
       border:1px solid rgba(23,178,106,.15);
     }
 
-    /* sections general */
-    section{
-      padding:26px 0;
-    }
+    section{padding:26px 0}
     .section-top{
       display:flex;
       align-items:end;
@@ -527,7 +532,6 @@
       font-weight:500;
     }
 
-    /* about */
     .about-grid{
       display:grid;
       grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
@@ -565,7 +569,6 @@
       font-weight:600;
     }
 
-    /* lost sale section */
     .problem-grid{
       display:grid;
       grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
@@ -681,7 +684,6 @@
       line-height:1.4;
     }
 
-    /* services */
     .services-grid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
@@ -716,7 +718,6 @@
       font-weight:500;
     }
 
-    /* pricing / plans */
     .plans-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
@@ -755,7 +756,6 @@
       max-width:360px;
     }
 
-    /* report */
     .report-grid{
       display:grid;
       grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
@@ -860,7 +860,6 @@
       flex:0 0 auto;
     }
 
-    /* CTA */
     .cta{
       position:relative;
       overflow:hidden;
@@ -893,9 +892,119 @@
       max-width:680px;
     }
 
-    /* footer */
+    /* Enhanced contacts footer */
+    .contacts-footer{
+      margin-top:28px;
+      border:1px solid rgba(211,154,62,.24);
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 18% 15%, rgba(107,124,255,.10), transparent 35%),
+        radial-gradient(circle at 82% 30%, rgba(23,178,106,.08), transparent 34%),
+        linear-gradient(135deg, rgba(244,210,122,.16), rgba(255,255,255,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .contacts-footer::before{
+      content:"";
+      position:absolute;
+      inset:-80px -100px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+      transform:translateX(-50%) rotate(8deg);
+      animation:footerShine 7s linear infinite;
+      pointer-events:none;
+      opacity:.8;
+    }
+    @keyframes footerShine{
+      0%{transform:translateX(-65%) rotate(8deg)}
+      100%{transform:translateX(65%) rotate(8deg)}
+    }
+    .contacts-footer-inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:18px;
+      align-items:center;
+      padding:22px;
+    }
+    @media(max-width:980px){
+      .contacts-footer-inner{
+        grid-template-columns:1fr;
+      }
+    }
+    .contacts-copy h3{
+      margin:0 0 8px;
+      font:800 28px/1.05 var(--head);
+      letter-spacing:-.03em;
+    }
+    .contacts-copy p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.5;
+      font-weight:500;
+      max-width:720px;
+    }
+    .contacts-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:flex-end;
+    }
+    @media(max-width:980px){
+      .contacts-actions{justify-content:flex-start}
+    }
+    .contact-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 16px;
+      border-radius:18px;
+      text-decoration:none;
+      color:var(--text);
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      min-width:220px;
+      transition:.18s ease;
+    }
+    .contact-chip:hover{
+      transform:translateY(-1px);
+      border-color:rgba(211,154,62,.35);
+      box-shadow:0 18px 30px rgba(16,24,40,.08);
+    }
+    .contact-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, rgba(244,210,122,.22), rgba(255,255,255,.96));
+      border:1px solid rgba(211,154,62,.24);
+      flex:0 0 auto;
+    }
+    .contact-text{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .contact-label{
+      font:800 12px/1 var(--head);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:5px;
+    }
+    .contact-value{
+      font:800 15px/1.25 var(--head);
+      color:var(--text);
+      overflow-wrap:anywhere;
+    }
+
     footer{
-      margin-top:26px;
+      margin-top:18px;
       padding-top:16px;
       border-top:1px solid var(--line);
       color:var(--muted);
@@ -912,7 +1021,6 @@
       font-weight:800;
     }
 
-    /* reveal */
     .fade{
       opacity:0;
       transform:translateY(10px);
@@ -926,7 +1034,6 @@
 </head>
 <body>
 
-  <!-- animated premium background -->
   <div class="bg-art" aria-hidden="true">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
       <defs>
@@ -963,7 +1070,6 @@
       <rect width="1440" height="900" fill="url(#g2)"/>
       <rect width="1440" height="900" fill="url(#g3)"/>
 
-      <!-- analytics lines -->
       <path d="M0 230 C 220 150, 420 315, 640 230 S 1060 160, 1440 250"
             fill="none" stroke="url(#line)" stroke-width="2.2" opacity="0.6">
         <animate attributeName="opacity" values="0.35;0.72;0.35" dur="6s" repeatCount="indefinite"/>
@@ -975,7 +1081,6 @@
         <animate attributeName="opacity" values="0.16;0.38;0.16" dur="7.2s" repeatCount="indefinite"/>
       </path>
 
-      <!-- voice wave -->
       <path d="M0 170 C 60 132, 120 202, 180 170 S 300 132, 360 170 S 480 202, 540 170 S 660 132, 720 170
                S 840 202, 900 170 S 1020 132, 1080 170 S 1200 202, 1260 170 S 1380 132, 1440 170"
             fill="none" stroke="url(#wave)" stroke-width="1.8" opacity="0.28">
@@ -989,7 +1094,6 @@
   </div>
 
   <div class="page">
-    <!-- Header -->
     <header class="site-header fade">
       <a href="#top" class="brand">
         <div class="brand-mark"><span>R</span></div>
@@ -1004,7 +1108,6 @@
       </nav>
     </header>
 
-    <!-- Attention -->
     <div class="attention fade">
       <div class="attention-inner">
         <div class="attention-icon">
@@ -1021,7 +1124,6 @@
       </div>
     </div>
 
-    <!-- Hero -->
     <section class="hero fade" id="top">
       <div class="hero-grid">
         <div>
@@ -1048,102 +1150,101 @@
         <div class="hero-visual">
           <div class="glow-ring"></div>
 
-          <!-- Main image replacement: premium dashboard mock -->
-          <div class="dashboard">
+          <div class="dashboard-wrap">
             <div class="dash-top">
               <div class="dash-title">QA Dashboard • Weekly Report</div>
               <div class="dash-pill">Live</div>
             </div>
 
-            <div class="dash-body">
-              <div class="mini-stats">
-                <div class="mini-card">
-                  <p class="label">Проверено</p>
-                  <p class="value">124</p>
-                  <p class="sub">контакта за неделю</p>
-                </div>
-                <div class="mini-card">
-                  <p class="label">Средний QA</p>
-                  <p class="value">78/100</p>
-                  <p class="sub">по отделу продаж</p>
-                </div>
-                <div class="mini-card">
-                  <p class="label">Точки потерь</p>
-                  <p class="value">18</p>
-                  <p class="sub">критичных ошибок</p>
-                </div>
+            <div class="mini-stats">
+              <div class="mini-card">
+                <p class="label">Проверено</p>
+                <p class="value">124</p>
+                <p class="sub">контакта за неделю</p>
               </div>
 
-              <div class="dashboard-grid">
-                <div class="chart-card">
-                  <div class="section-head">
-                    <div class="t">Динамика качества</div>
-                    <div class="ghost">7 дней</div>
-                  </div>
-
-                  <svg class="line-chart" viewBox="0 0 320 150" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="gline" x1="0" x2="1" y1="0" y2="0">
-                        <stop offset="0%" stop-color="rgba(107,124,255,0.9)"/>
-                        <stop offset="100%" stop-color="rgba(23,178,106,0.9)"/>
-                      </linearGradient>
-                      <linearGradient id="gfill" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stop-color="rgba(107,124,255,0.18)"/>
-                        <stop offset="100%" stop-color="rgba(23,178,106,0.03)"/>
-                      </linearGradient>
-                    </defs>
-                    <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40 L320 150 L0 150 Z" fill="url(#gfill)"/>
-                    <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40" fill="none" stroke="url(#gline)" stroke-width="4" stroke-linecap="round"/>
-                  </svg>
-
-                  <div class="ghost">После корректировки скрипта и фиксации следующего шага качество стабильно растёт</div>
-                </div>
-
-                <div class="table-card">
-                  <div class="section-head">
-                    <div class="t">Ошибки недели</div>
-                    <div class="ghost">Top 3</div>
-                  </div>
-
-                  <table class="qa-table">
-                    <thead>
-                      <tr>
-                        <th>Ошибка</th>
-                        <th>Статус</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Нет выявления потребности<br><span class="muted">в 34% контактов</span></td>
-                        <td><span class="badge-bad">Критично</span></td>
-                      </tr>
-                      <tr>
-                        <td>Нет следующего шага<br><span class="muted">после консультации</span></td>
-                        <td><span class="badge-bad">Потеря сделки</span></td>
-                      </tr>
-                      <tr>
-                        <td>Улучшен дожим<br><span class="muted">после тренинга</span></td>
-                        <td><span class="badge-good">Плюс</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div class="mini-card">
+                <p class="label">Средний QA</p>
+                <p class="value">78/100</p>
+                <p class="sub">по отделу продаж</p>
               </div>
 
+              <div class="mini-card">
+                <p class="label">Точки потерь</p>
+                <p class="value">18</p>
+                <p class="sub">критичных ошибок</p>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
               <div class="chart-card">
                 <div class="section-head">
-                  <div class="t">KPI менеджеров</div>
-                  <div class="ghost">5 сотрудников</div>
+                  <div class="t">Динамика качества</div>
+                  <div class="ghost">7 дней</div>
                 </div>
 
-                <div class="bars">
-                  <div class="bar" style="height:44%"></div>
-                  <div class="bar" style="height:62%"></div>
-                  <div class="bar" style="height:56%"></div>
-                  <div class="bar" style="height:72%"></div>
-                  <div class="bar" style="height:81%"></div>
-                  <div class="bar" style="height:68%"></div>
+                <svg class="line-chart" viewBox="0 0 320 150" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="gline2" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%" stop-color="rgba(107,124,255,0.9)"/>
+                      <stop offset="100%" stop-color="rgba(23,178,106,0.9)"/>
+                    </linearGradient>
+                    <linearGradient id="gfill2" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(107,124,255,0.18)"/>
+                      <stop offset="100%" stop-color="rgba(23,178,106,0.03)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40 L320 150 L0 150 Z" fill="url(#gfill2)"/>
+                  <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40" fill="none" stroke="url(#gline2)" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+
+                <div class="ghost">После корректировки скрипта и фиксации следующего шага качество стабильно растёт</div>
+              </div>
+
+              <div class="table-card">
+                <div class="section-head">
+                  <div class="t">Ошибки недели</div>
+                  <div class="ghost">Top 3</div>
                 </div>
+
+                <table class="qa-table">
+                  <thead>
+                    <tr>
+                      <th>Ошибка</th>
+                      <th>Статус</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Нет выявления потребности<br><span class="muted">в 34% контактов</span></td>
+                      <td><span class="badge-bad">Критично</span></td>
+                    </tr>
+                    <tr>
+                      <td>Нет следующего шага<br><span class="muted">после консультации</span></td>
+                      <td><span class="badge-bad">Потеря сделки</span></td>
+                    </tr>
+                    <tr>
+                      <td>Улучшен дожим<br><span class="muted">после тренинга</span></td>
+                      <td><span class="badge-good">Плюс</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bottom-card">
+              <div class="section-head">
+                <div class="t">KPI менеджеров</div>
+                <div class="ghost">5 сотрудников</div>
+              </div>
+
+              <div class="bars">
+                <div class="bar" style="height:44%"></div>
+                <div class="bar" style="height:62%"></div>
+                <div class="bar" style="height:56%"></div>
+                <div class="bar" style="height:72%"></div>
+                <div class="bar" style="height:81%"></div>
+                <div class="bar" style="height:68%"></div>
               </div>
             </div>
           </div>
@@ -1151,7 +1252,6 @@
       </div>
     </section>
 
-    <!-- About -->
     <section id="about" class="fade">
       <div class="section-top">
         <div>
@@ -1209,7 +1309,6 @@
       </div>
     </section>
 
-    <!-- Problem + image/chat -->
     <section class="fade">
       <div class="section-top">
         <div>
@@ -1257,7 +1356,6 @@
           </div>
         </div>
 
-        <!-- Image replacement: “manager loses sale” chat mock -->
         <div class="chat-mock">
           <div class="chat-header">
             <div>
@@ -1285,7 +1383,6 @@
       </div>
     </section>
 
-    <!-- Services -->
     <section id="services" class="fade">
       <div class="section-top">
         <div>
@@ -1314,7 +1411,7 @@
             </svg>
           </div>
           <h3>Еженедельный тренинг менеджеров</h3>
-          <p>Разбор реальных звонков и переписки, точки роста, дожим, обработка возражений и личный фидбек</p>
+          <p>Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру</p>
         </div>
 
         <div class="service">
@@ -1324,7 +1421,7 @@
             </svg>
           </div>
           <h3>QA для поддержки клиентов</h3>
-          <p>KPI, скрипты, стандарты общения и сопровождение операторов для улучшения сервиса и качества решения запросов</p>
+          <p>KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок</p>
         </div>
 
         <div class="service">
@@ -1339,7 +1436,6 @@
       </div>
     </section>
 
-    <!-- Pricing / Plans -->
     <section id="pricing" class="fade">
       <div class="section-top">
         <div>
@@ -1368,7 +1464,6 @@
       </div>
     </section>
 
-    <!-- QA report -->
     <section id="report" class="fade">
       <div class="section-top">
         <div>
@@ -1461,7 +1556,6 @@
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="fade" id="contact">
       <div class="cta">
         <div>
@@ -1473,12 +1567,11 @@
       </div>
     </section>
 
-    <!-- Form -->
     <section class="fade" id="lead-form">
       <div class="section-top">
         <div>
           <h2>Бесплатный аудит отдела продаж или поддержки</h2>
-          <p class="lead">Заполни форму и мы подготовим первый разбор по вашему отделу</p>
+          <p class="lead">Заполните форму и мы подготовим первый разбор по вашему отделу</p>
         </div>
       </div>
 
@@ -1554,13 +1647,59 @@
       </div>
     </section>
 
+    <section class="contacts-footer fade">
+      <div class="contacts-footer-inner">
+        <div class="contacts-copy">
+          <h3>Свяжитесь с нами удобным способом</h3>
+          <p>Можно написать в LinkedIn, Telegram или сразу на почту. Если хотите обсудить аудит, сопровождение или коммерческое предложение — ответим быстро и по делу</p>
+        </div>
+
+        <div class="contacts-actions">
+          <a class="contact-chip" href="https://www.linkedin.com/company/111947066/admin/dashboard/" target="_blank" rel="noopener">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6H6.01M6 9V18M10 9V18M10 12.5C10 10.57 11.57 9 13.5 9C15.43 9 17 10.57 17 12.5V18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="contact-text">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value">Retenly Company Page</span>
+            </span>
+          </a>
+
+          <a class="contact-chip" href="https://t.me/retenly" target="_blank" rel="noopener">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12L19 4L16 20L11.5 14.5L9 17L8.5 12.5L5 12Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="contact-text">
+              <span class="contact-label">Telegram</span>
+              <span class="contact-value">@retenly</span>
+            </span>
+          </a>
+
+          <a class="contact-chip" href="mailto:partners@retenly.top">
+            <span class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7L12 13L20 7M5 18H19C19.55 18 20 17.55 20 17V7C20 6.45 19.55 6 19 6H5C4.45 6 4 6.45 4 7V17C4 17.55 4.45 18 5 18Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="contact-text">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">partners@retenly.top</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div>
         <span>© 2026 Retenly</span>
         <span> • Все права защищены</span>
       </div>
       <div>
-        <!-- Меняй ссылки здесь -->
         <a href="https://www.linkedin.com/company/111947066/admin/dashboard/" target="_blank" rel="noopener">LinkedIn</a>
         <span> • </span>
         <a href="https://t.me/retenly" target="_blank" rel="noopener">Telegram</a>
@@ -1573,7 +1712,6 @@
   <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#fff;border:1px solid rgba(211,154,62,.45);color:#0f172a;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:900;z-index:60;pointer-events:none;box-shadow:0 18px 34px rgba(16,24,40,.12)">Готово</div>
 
   <script>
-    // reveal on scroll
     const observer = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1595,7 +1733,6 @@
       }, 4200);
     }
 
-    // form submit
     const form = document.getElementById('lead');
     const formHint = document.getElementById('formHint');
     const submitBtn = document.getElementById('submitBtn');
