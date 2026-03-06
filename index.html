@@ -53,7 +53,6 @@
     }
     .bg-art svg{width:100%;height:100%;display:block}
 
-    /* widened content area */
     .page{
       max-width:1560px;
       margin:0 auto;
@@ -146,7 +145,7 @@
         linear-gradient(135deg, rgba(244,210,122,.20), rgba(255,255,255,.90));
       box-shadow:var(--shadow);
       padding:16px 18px;
-      margin-bottom:18px;
+      margin-bottom:22px;
     }
     .attention::before{
       content:"";
@@ -188,7 +187,7 @@
       font-size:15px;
       line-height:1.45;
       font-weight:600;
-      max-width:1100px;
+      max-width:1120px;
     }
 
     .hero{
@@ -226,39 +225,18 @@
       .hero-grid{grid-template-columns:1fr}
     }
 
-    /* separate left content card to remove empty top/bottom feel */
     .hero-copy{
       border:1px solid rgba(15,23,42,.10);
       border-radius:24px;
       background:rgba(255,255,255,.78);
       backdrop-filter:blur(10px);
       box-shadow:0 16px 32px rgba(16,24,40,.06);
-      padding:20px;
+      padding:22px 20px;
       align-self:start;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(23,178,106,.18);
-      background:rgba(255,255,255,.92);
-      font-size:12px;
-      font-weight:700;
-      color:var(--muted);
-      margin-bottom:14px;
-      box-shadow:var(--shadow-soft);
-    }
-    .eyebrow-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 0 4px rgba(23,178,106,.10);
-    }
-
     h1{
-      margin:0 0 12px;
+      margin:0 0 14px;
       font-family:var(--head);
       font-size:58px;
       line-height:1.02;
@@ -267,10 +245,10 @@
     }
     .hero-sub{
       margin:0 0 18px;
-      max-width:700px;
+      max-width:640px;
       color:var(--muted);
-      font-size:18px;
-      line-height:1.48;
+      font-size:17px;
+      line-height:1.5;
       font-weight:500;
     }
     .hero-cta{
@@ -278,7 +256,7 @@
       align-items:center;
       gap:10px;
       flex-wrap:wrap;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
     .btn{
       border:none;
@@ -302,7 +280,8 @@
       color:var(--muted);
       font-size:13px;
       font-weight:600;
-      max-width:700px;
+      max-width:620px;
+      line-height:1.45;
     }
 
     .hero-visual{
@@ -521,19 +500,28 @@
       border:1px solid rgba(23,178,106,.15);
     }
 
-    section{padding:26px 0}
+    section{padding:38px 0 26px}
     .section-top{
       display:flex;
       align-items:end;
       justify-content:center;
       gap:18px;
-      margin-bottom:16px;
+      margin-bottom:18px;
       flex-wrap:wrap;
       text-align:center;
     }
+    .section-label{
+      width:100%;
+      display:block;
+      margin:0 0 10px;
+      font:800 12px/1.2 var(--head);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold-deep);
+    }
     h2{
-      margin:0 0 6px;
-      font:800 34px/1.05 var(--head);
+      margin:0 0 8px;
+      font:800 36px/1.05 var(--head);
       letter-spacing:-.03em;
       text-align:center;
       width:100%;
@@ -542,9 +530,9 @@
       margin:0 auto;
       color:var(--muted);
       font-size:16px;
-      line-height:1.5;
-      max-width:860px;
-      font-weight:500;
+      line-height:1.55;
+      max-width:900px;
+      font-weight:600;
       text-align:center;
     }
 
@@ -758,6 +746,18 @@
       background:linear-gradient(90deg, var(--gold), rgba(107,124,255,.8), rgba(23,178,106,.8));
       opacity:.9;
     }
+    .plan-icon{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, rgba(244,210,122,.22), rgba(255,255,255,.95));
+      border:1px solid rgba(211,154,62,.24);
+      margin-bottom:12px;
+      box-shadow:var(--shadow-soft);
+    }
     .plan h3{
       margin:0 0 10px;
       font:800 22px/1.1 var(--head);
@@ -897,15 +897,15 @@
       margin:0 0 8px;
       font:800 36px/1.02 var(--head);
       letter-spacing:-.03em;
-      max-width:720px;
+      max-width:760px;
     }
     .cta p{
       margin:0;
       color:var(--muted);
       font-size:16px;
       line-height:1.45;
-      font-weight:500;
-      max-width:680px;
+      font-weight:600;
+      max-width:720px;
     }
 
     .contacts-footer{
@@ -1119,15 +1119,10 @@
     <section class="hero fade" id="top">
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            <span>Контроль качества продаж и поддержки</span>
-          </div>
-
-          <h1>Перестаньте терять клиентов. Начните контролировать качество коммуникаций с вашими клиентами</h1>
+          <h1>Перестаньте терять клиентов. Контролируйте качество коммуникаций</h1>
 
           <p class="hero-sub">
-            Мы анализируем звонки и переписку менеджеров, показываем где теряются клиенты и выстраиваем систему контроля качества, которая влияет на продажи, сервис и прозрачность работы команды
+            Мы показываем, где именно теряются клиенты, и выстраиваем понятную систему контроля качества для отдела продаж и поддержки
           </p>
 
           <div class="hero-cta">
@@ -1135,7 +1130,7 @@
           </div>
 
           <div class="hero-note">
-            Бесплатно проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений, который можно внедрять сразу
+            Проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений для команды
           </div>
         </div>
 
@@ -1247,9 +1242,10 @@
     <section id="about" class="fade">
       <div class="section-top">
         <div>
+          <span class="section-label">Retenly</span>
           <h2>О нас</h2>
           <p class="lead">
-            Retenly помогает компаниям выстроить понятную систему контроля качества в продажах и поддержке. Мы не просто отмечаем ошибки, а показываем где утекают клиенты, почему это происходит и что нужно изменить
+            Больше 6 лет в QA и контроле качества коммуникаций. Мы помогаем бизнесу видеть реальные точки потерь и усиливать продажи через понятную систему контроля
           </p>
         </div>
       </div>
@@ -1258,7 +1254,7 @@
         <div class="about-card">
           <h3 style="margin:0 0 10px;font:800 22px/1.15 var(--head)">Коротко о нашей экспертизе</h3>
           <p style="margin:0;color:var(--muted);font-size:15px;line-height:1.55;font-weight:500">
-            Больше 6 лет в QA и контроле качества коммуникаций. Опыт в iGaming, fintech, e-commerce, SaaS и онлайн-образовании. Работаем с любыми сферами, где важны продажи, сервис и дисциплина общения с клиентом
+            Опыт в iGaming, fintech, e-commerce, SaaS и онлайн-образовании. Работаем с любыми сферами, где важны продажи, сервис и дисциплина общения с клиентом
           </p>
 
           <div class="stats-row">
@@ -1304,9 +1300,10 @@
     <section class="fade">
       <div class="section-top">
         <div>
+          <span class="section-label">Точки потерь</span>
           <h2>Где компании теряют клиентов</h2>
           <p class="lead">
-            Чаще всего дело не в рекламе и не в цене. Клиенты сливаются в момент коммуникации, когда менеджер нарушает логику разговора или не доводит клиента до следующего шага
+            Клиенты чаще всего сливаются не из-за продукта, а в момент коммуникации, когда менеджер не дожимает, не фиксирует следующий шаг или ведёт разговор без логики
           </p>
         </div>
       </div>
@@ -1378,6 +1375,7 @@
     <section id="services" class="fade">
       <div class="section-top">
         <div>
+          <span class="section-label">Что мы делаем</span>
           <h2>Услуги</h2>
           <p class="lead">
             Всё, что нужно для контроля качества продаж и поддержки, в одном месте
@@ -1403,7 +1401,7 @@
             </svg>
           </div>
           <h3>Еженедельный тренинг менеджеров</h3>
-          <p>Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру</p>
+          <p>Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений</p>
         </div>
 
         <div class="service">
@@ -1413,7 +1411,7 @@
             </svg>
           </div>
           <h3>QA для поддержки клиентов</h3>
-          <p>KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок</p>
+          <p>KPI, скрипты, стандарты общения и сопровождение операторов для улучшения сервиса</p>
         </div>
 
         <div class="service">
@@ -1423,7 +1421,7 @@
             </svg>
           </div>
           <h3>Разовый аудит и отчётность</h3>
-          <p>Снимок текущего состояния отдела: ошибки, потери, рекомендации, приоритеты, план исправлений и контроль внедрения</p>
+          <p>Снимок текущего состояния отдела: ошибки, потери, рекомендации и план исправлений</p>
         </div>
       </div>
     </section>
@@ -1431,6 +1429,7 @@
     <section id="pricing" class="fade">
       <div class="section-top">
         <div>
+          <span class="section-label">Формат работы</span>
           <h2>Тарифы</h2>
           <p class="lead">
             Можно начать быстро, масштабироваться постепенно или подключать QA по требованию
@@ -1440,16 +1439,34 @@
 
       <div class="plans-grid">
         <div class="plan">
+          <div class="plan-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M13 3L4 14H11L10 21L20 10H13L13 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <h3>БЫСТРЫЙ СТАРТ</h3>
           <p>Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее</p>
         </div>
 
         <div class="plan">
+          <div class="plan-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 4V20M17 4V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
           <h3>ЛЮБОЙ МАСШТАБ</h3>
           <p>Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время</p>
         </div>
 
         <div class="plan">
+          <div class="plan-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 12A9 9 0 1 1 12 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M21 3V9H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 7V12L15.5 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <h3>ПО ТРЕБОВАНИЮ</h3>
           <p>Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии</p>
         </div>
@@ -1459,6 +1476,7 @@
     <section id="report" class="fade">
       <div class="section-top">
         <div>
+          <span class="section-label">Пример результата</span>
           <h2>Как выглядит наш QA-отчёт</h2>
           <p class="lead">
             Понятный документ для руководителя и практический инструмент для команды. Видно ошибки, влияние на продажи и что делать дальше
@@ -1551,7 +1569,7 @@
     <section class="fade" id="contact">
       <div class="cta">
         <div>
-          <h3>Получите бесплатный аудит и увидьте где именно ваш отдел теряет клиентов</h3>
+          <h3>Получите бесплатный аудит. Мы покажем, где именно ваш отдел теряет клиентов, а вы увидите точки роста</h3>
           <p>Проверим 20 контактов с клиентами, покажем точки потерь, дадим рекомендации и предложим формат работы под ваш отдел</p>
         </div>
 
@@ -1562,6 +1580,7 @@
     <section class="fade" id="lead-form">
       <div class="section-top">
         <div>
+          <span class="section-label">Первый шаг</span>
           <h2>Бесплатный аудит отдела продаж или поддержки</h2>
           <p class="lead">Заполните форму и мы подготовим первый разбор по вашему отделу</p>
         </div>
