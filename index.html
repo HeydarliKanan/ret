@@ -1,1092 +1,1553 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62WNJKY2MC"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-62WNJKY2MC');
-  </script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Retenly | Контроль качества и рост продаж</title>
-  <meta name="description" content="Retenly ведёт QA для отделов продаж и поддержки: ежедневный контроль качества, KPI, скрипты, отчётность и обучение менеджеров." />
+  <title>Retenly | QA для продаж и поддержки</title>
+  <meta name="description" content="Retenly помогает контролировать качество коммуникаций в отделах продаж и поддержки: аудит, QA, KPI, скрипты, отчёты и обучение команды">
   <meta name="theme-color" content="#F7F9FC" />
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#F7F9FC;
-      --bg2:#FFFFFF;
-      --card:#FFFFFF;
-
-      /* base */
-      --text:#0B1220;
-      --muted:#5D6B86;
-      --ink:#0F172A;
-
-      --border:rgba(14,30,62,0.10);
-      --border2:rgba(14,30,62,0.14);
-      --shadow:0 18px 40px rgba(16,24,40,0.08);
-
-      --accent:#F4D27A;
-      --accent2:#D39A3E;
-      --success:#18A673;
-
-      --fontBody: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --fontHead: "Plus Jakarta Sans", Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-      /* adaptive contrast knobs */
-      --contrastBoost: 1;
-      --mutedBoost: 1;
+      --bg:#f5f8fc;
+      --bg-soft:#eef3fb;
+      --card:#ffffff;
+      --card-soft:rgba(255,255,255,0.84);
+      --text:#0e1726;
+      --muted:#61708d;
+      --line:rgba(15,23,42,0.09);
+      --line-strong:rgba(15,23,42,0.14);
+      --gold:#f4d27a;
+      --gold-deep:#d39a3e;
+      --violet:#6b7cff;
+      --green:#17b26a;
+      --shadow:0 20px 45px rgba(16,24,40,0.08);
+      --shadow-soft:0 12px 28px rgba(16,24,40,0.06);
+      --radius:24px;
+      --radius-sm:16px;
+      --head:"Plus Jakarta Sans", Manrope, system-ui, sans-serif;
+      --body:Manrope, system-ui, sans-serif;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
-      font-family:var(--fontBody);
-      background:var(--bg);
+      background:
+        radial-gradient(1100px 700px at 10% 0%, rgba(107,124,255,0.12), transparent 55%),
+        radial-gradient(900px 700px at 90% 10%, rgba(23,178,106,0.10), transparent 55%),
+        radial-gradient(900px 800px at 80% 40%, rgba(244,210,122,0.13), transparent 58%),
+        linear-gradient(180deg, #f7faff 0%, #f4f8fd 100%);
       color:var(--text);
-      min-height:100vh;
-      position:relative;
-      overflow-x:hidden;
-      text-rendering:optimizeLegibility;
+      font-family:var(--body);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    /* VINETTE */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-2px;
-      pointer-events:none;
-      z-index:0;
-      background:
-        radial-gradient(1200px 700px at 50% 10%, rgba(2,6,23,0.10), transparent 65%),
-        radial-gradient(1200px 900px at 50% 110%, rgba(2,6,23,0.10), transparent 62%),
-        radial-gradient(900px 900px at -10% 50%, rgba(2,6,23,0.12), transparent 62%),
-        radial-gradient(900px 900px at 110% 50%, rgba(2,6,23,0.12), transparent 62%);
-      mix-blend-mode:multiply;
-    }
-
-    /* PREMIUM BACKGROUND ART + adaptive contrast layer */
+    /* Ambient background */
     .bg-art{
       position:fixed;
       inset:0;
-      z-index:0;
       pointer-events:none;
-      opacity:0.95;
-      filter:contrast(var(--contrastBoost)) saturate(1.02);
+      z-index:0;
+      opacity:.9;
     }
     .bg-art svg{width:100%;height:100%;display:block}
-
-    /* extra contrast veil for “any monitor” */
-    .contrast-veil{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      background:
-        radial-gradient(1100px 600px at 50% 0%, rgba(255,255,255,0.30), transparent 60%),
-        radial-gradient(900px 650px at 50% 40%, rgba(255,255,255,0.18), transparent 62%);
-      opacity:0.65;
-      mix-blend-mode:soft-light;
-    }
-
-    /* keep content above background */
     .page{
-      max-width:1360px;
+      max-width:1320px;
       margin:0 auto;
-      padding:16px 10px 42px;
+      padding:14px 12px 44px;
       position:relative;
       z-index:1;
     }
 
-    /* HEADER */
+    /* header */
     .site-header{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      padding:8px 0 8px;
-      position:relative;
-      background:transparent;
-      border-bottom:none;
+      gap:18px;
+      padding:10px 0 14px;
     }
-
-    .logo-wrap{display:flex;align-items:center;gap:10px}
-    .logo-mark{
-      width:30px;height:30px;border-radius:10px;
-      background:radial-gradient(circle at 20% 10%, #ffffff, var(--accent) 35%, #7a5c28 85%);
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:inherit;
+      min-width:0;
+    }
+    .brand-mark{
+      width:34px;height:34px;border-radius:11px;
       display:flex;align-items:center;justify-content:center;
-      box-shadow:0 8px 20px rgba(16,24,40,0.12);
+      background:radial-gradient(circle at 25% 15%, #fff 0, var(--gold) 35%, var(--gold-deep) 90%);
+      box-shadow:0 10px 24px rgba(211,154,62,.22);
       flex:0 0 auto;
     }
-    .logo-mark span{font-size:14px;font-weight:800;color:#111;letter-spacing:0.04em}
-    .logo-text-main{
-      font-family:var(--fontHead);
+    .brand-mark span{
+      font-family:var(--head);
+      font-size:16px;
       font-weight:800;
-      font-size:18px;
-      letter-spacing:0.10em;
-      text-transform:uppercase;
-      color:var(--ink);
-      line-height:1.1;
+      color:#111;
+      letter-spacing:.03em;
     }
-    .logo-text-sub{
-      font-size:12px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      margin-top:2px;
-      font-weight:600;
-    }
-
-    .contacts-bar{display:flex;align-items:center;gap:12px}
-
-    .contacts-label{
-      font-family:var(--fontHead);
-      font-size:12px;
+    .brand-name{
+      font-family:var(--head);
+      font-size:19px;
       font-weight:800;
-      letter-spacing:0.10em;
+      letter-spacing:.10em;
       text-transform:uppercase;
-      color:var(--ink);
-      padding:9px 14px;
-      border-radius:999px;
-      border:1px solid rgba(211,154,62,0.42);
-      background:linear-gradient(135deg, rgba(244,210,122,0.22), rgba(255,255,255,0.92));
-      box-shadow:0 14px 26px rgba(16,24,40,0.08);
       white-space:nowrap;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:700;
+      font-size:14px;
+      padding:10px 14px;
+      border-radius:999px;
+      transition:.18s ease;
+    }
+    .nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.7);
+      box-shadow:var(--shadow-soft);
+    }
+    .nav .nav-cta{
+      color:#111;
+      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+      box-shadow:0 14px 30px rgba(211,154,62,.20);
+    }
+
+    @media(max-width:980px){
+      .site-header{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav{justify-content:flex-start}
+    }
+
+    /* attention */
+    .attention{
       position:relative;
       overflow:hidden;
+      border-radius:22px;
+      border:1px solid rgba(211,154,62,.28);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(107,124,255,.12), transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(23,178,106,.10), transparent 42%),
+        linear-gradient(135deg, rgba(244,210,122,.20), rgba(255,255,255,.90));
+      box-shadow:var(--shadow);
+      padding:16px 18px;
+      margin-bottom:18px;
     }
-    .contacts-label::after{
+    .attention::before{
       content:"";
       position:absolute;
-      inset:-30px -60px;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-      transform:rotate(18deg) translateX(-40%);
-      opacity:0.55;
-      animation:shine 3.6s ease-in-out infinite;
+      inset:-60px -120px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.56), transparent);
+      transform:translateX(-40%) rotate(10deg);
+      animation:shine 5.2s linear infinite;
+      opacity:.7;
     }
     @keyframes shine{
-      0%{transform:rotate(18deg) translateX(-55%);opacity:0}
-      25%{opacity:.6}
-      55%{opacity:.6}
-      100%{transform:rotate(18deg) translateX(55%);opacity:0}
+      0%{transform:translateX(-60%) rotate(10deg)}
+      100%{transform:translateX(60%) rotate(10deg)}
     }
-
-    .icon-row{display:flex;align-items:center;gap:8px}
-    .icon-link{
-      width:36px;height:36px;border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.9);
-      display:flex;align-items:center;justify-content:center;
-      text-decoration:none;
-      transition:.18s all ease-out;
-      box-shadow:0 10px 18px rgba(16,24,40,0.06);
-    }
-    .icon-link svg{width:16px;height:16px;stroke:var(--ink)}
-    .icon-link:hover{
-      border-color:rgba(211,154,62,0.55);
-      background:rgba(244,210,122,0.18);
-      transform:translateY(-1px);
-    }
-
-    @media(max-width:820px){
-      .site-header{flex-direction:column;align-items:flex-start}
-      .contacts-bar{width:100%;justify-content:space-between}
-      .bg-art{opacity:0.78}
-      .contrast-veil{opacity:0.45}
-    }
-
-    /* ATTENTION BANNER */
-    .attention-banner{
-      margin:12px 0 0;
-      border-radius:20px;
-      border:1px solid rgba(211,154,62,0.42);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(99,102,241,0.14), transparent 55%),
-        radial-gradient(circle at 80% 10%, rgba(16,185,129,0.12), transparent 55%),
-        linear-gradient(135deg, rgba(244,210,122,0.22), rgba(255,255,255,0.96));
-      box-shadow:0 18px 36px rgba(16,24,40,0.10);
-      padding:14px 16px;
+    .attention-inner{
       position:relative;
-      overflow:hidden;
+      z-index:1;
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
     }
-    .attention-banner::before{
-      content:"";
-      position:absolute;
-      inset:-80px -120px;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(211,154,62,0.25), transparent 58%),
-        linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-      filter:blur(10px);
-      opacity:0.6;
-      animation:glow 2.8s ease-in-out infinite;
-    }
-    @keyframes glow{
-      0%{transform:translateX(-10px);opacity:0.45}
-      50%{transform:translateX(10px);opacity:0.75}
-      100%{transform:translateX(-10px);opacity:0.45}
-    }
-    .attention-content{position:relative;z-index:1;display:flex;gap:14px;align-items:flex-start}
-    .attention-badge{
-      width:40px;height:40px;border-radius:14px;
+    .attention-icon{
+      width:42px;height:42px;border-radius:14px;
+      background:rgba(255,255,255,.84);
+      border:1px solid var(--line);
       display:flex;align-items:center;justify-content:center;
-      background:rgba(255,255,255,0.9);
-      border:1px solid var(--border);
-      box-shadow:0 12px 22px rgba(16,24,40,0.08);
+      box-shadow:var(--shadow-soft);
       flex:0 0 auto;
     }
-    .attention-badge svg{width:18px;height:18px;stroke:var(--ink)}
-    .attention-title{
-      font-family:var(--fontHead);
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:0.10em;
-      text-transform:uppercase;
-      color:var(--ink);
+    .attention h3{
       margin:0 0 6px;
+      font:800 13px/1.2 var(--head);
+      letter-spacing:.10em;
+      text-transform:uppercase;
     }
-    .attention-text{
+    .attention p{
       margin:0;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
+      color:var(--muted);
       font-size:15px;
       line-height:1.45;
       font-weight:600;
+      max-width:980px;
     }
 
-    /* HERO */
-    .hero-wrap{
+    /* hero */
+    .hero{
       position:relative;
       overflow:hidden;
-      border-radius:26px;
-      border:1px solid var(--border);
-      background:var(--bg2);
+      border-radius:30px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.92)),
+        linear-gradient(135deg, rgba(107,124,255,.08), rgba(23,178,106,.07));
       box-shadow:var(--shadow);
-      margin-top:14px;
+      padding:30px 26px 24px;
     }
-    /* grid overlay is subtle */
-    .hero-wrap::before{
+    .hero::before{
       content:"";
       position:absolute;
       inset:0;
-      z-index:0;
       pointer-events:none;
       background-image:
-        linear-gradient(rgba(15,23,42,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15,23,42,0.06) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: radial-gradient(circle at 25% 20%, rgba(0,0,0,0.75), transparent 55%);
-      opacity:0.65;
+        linear-gradient(rgba(15,23,42,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,.045) 1px, transparent 1px);
+      background-size:48px 48px;
+      mask-image:radial-gradient(circle at 30% 18%, rgba(0,0,0,.95), transparent 60%);
+      opacity:.55;
     }
-
     .hero-grid{
       position:relative;
       z-index:1;
-      padding:28px 22px 22px;
       display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,2.1fr);
-      gap:22px;
-      align-items:start;
+      grid-template-columns:minmax(0,1.1fr) minmax(420px,.95fr);
+      gap:26px;
+      align-items:center;
     }
-    @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr; padding:20px 16px;}
+    @media(max-width:1080px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(23,178,106,.18);
+      background:rgba(255,255,255,.84);
+      font-size:12px;
+      font-weight:700;
+      color:var(--muted);
+      margin-bottom:14px;
+      box-shadow:var(--shadow-soft);
+    }
+    .eyebrow-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 4px rgba(23,178,106,.10);
     }
 
     h1{
-      margin:0 0 10px;
-      font-family:var(--fontHead);
-      font-size:44px;
-      line-height:1.06;
-      letter-spacing:-0.03em;
-      color:var(--ink);
-      max-width:960px;
-      font-weight:800;
+      margin:0 0 12px;
+      font-family:var(--head);
+      font-size:54px;
+      line-height:1.02;
+      letter-spacing:-.04em;
+      max-width:760px;
     }
-    @media(max-width:540px){ h1{font-size:34px;} }
-
-    .hero-lead{
-      margin:0 0 14px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      font-size:17px;
-      line-height:1.50;
-      max-width:860px;
+    .hero-sub{
+      margin:0 0 18px;
+      max-width:640px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.48;
       font-weight:500;
     }
-
-    .hero-meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
-    .hero-pill{
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.88);
-      font-size:12px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
+    .hero-cta{
       display:flex;
       align-items:center;
-      gap:8px;
-      box-shadow:0 10px 18px rgba(16,24,40,0.05);
-      font-weight:600;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
     }
-    .hero-pill-dot{
-      width:7px;height:7px;border-radius:50%;
-      background:var(--success);
-      box-shadow:0 0 0 3px rgba(24,166,115,0.12);
-      flex:0 0 auto;
-    }
-
-    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
     .btn{
       border:none;
-      cursor:pointer;
       border-radius:999px;
-      font-family:var(--fontHead);
-      font-weight:800;
-      font-size:15px;
-      padding:12px 18px;
+      padding:13px 18px;
+      text-decoration:none;
+      font:800 15px/1 var(--head);
       display:inline-flex;
       align-items:center;
       gap:10px;
-      text-decoration:none;
-      transition:.18s all ease-out;
-      white-space:nowrap;
+      transition:.18s ease;
+      cursor:pointer;
     }
     .btn-primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
-      box-shadow:0 16px 34px rgba(211,154,62,0.22);
+      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+      box-shadow:0 16px 34px rgba(211,154,62,.24);
     }
-    .btn-primary:hover{ transform:translateY(-1px); }
-    .btn-secondary{
-      background:rgba(255,255,255,0.92);
-      color:var(--ink);
-      border:1px solid var(--border2);
-      box-shadow:0 14px 26px rgba(16,24,40,0.06);
-    }
-    .btn-secondary:hover{
-      border-color:rgba(211,154,62,0.55);
-      background:rgba(244,210,122,0.14);
-    }
-
+    .btn-primary:hover{transform:translateY(-1px)}
     .hero-note{
+      color:var(--muted);
       font-size:13px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      line-height:1.35;
       font-weight:600;
     }
 
-    .hero-card{
-      border-radius:22px;
-      background:linear-gradient(135deg, rgba(255,255,255,0.95), rgba(247,249,252,0.95));
-      border:1px solid var(--border);
-      padding:16px 16px 14px;
-      box-shadow:0 16px 34px rgba(16,24,40,0.08);
-    }
-    .hero-card-title{
-      font-family:var(--fontHead);
-      font-size:13px;
-      font-weight:800;
-      margin:0 0 6px;
+    /* mock dashboard */
+    .hero-visual{
+      position:relative;
+      min-height:520px;
       display:flex;
       align-items:center;
-      gap:8px;
-      color:var(--ink);
+      justify-content:center;
     }
-    .hero-card-title .badge{
-      font-size:11px;
-      font-weight:800;
-      padding:3px 8px;
+    .glow-ring{
+      position:absolute;
+      width:520px;height:520px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 50%, rgba(107,124,255,.10) 70%, rgba(23,178,106,.08) 85%, transparent 100%);
+      filter:blur(8px);
+      animation:breathe 8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes breathe{
+      0%,100%{transform:scale(1);opacity:.9}
+      50%{transform:scale(1.05);opacity:1}
+    }
+
+    .dashboard{
+      position:relative;
+      width:min(100%, 560px);
+      border-radius:26px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      box-shadow:0 26px 60px rgba(16,24,40,.12);
+      overflow:hidden;
+    }
+    .dash-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.90), rgba(250,252,255,.84));
+    }
+    .dash-title{
+      font:800 14px/1.2 var(--head);
+      letter-spacing:-.01em;
+    }
+    .dash-pill{
+      padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(211,154,62,0.35);
-      background:rgba(244,210,122,0.16);
-      color:#111;
-    }
-    .divider{
-      height:1px;
-      margin:8px 0 14px;
-      background:linear-gradient(90deg,transparent,rgba(211,154,62,0.55),transparent);
-      opacity:0.85;
-    }
-    .hero-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .stat-tile{
-      border-radius:14px;
-      background:#FFFFFF;
-      border:1px solid var(--border);
-      padding:10px 11px;
-    }
-    .stat-label{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-bottom:2px;line-height:1.25;font-weight:600}
-    .stat-value{font-family:var(--fontHead);font-weight:800;font-size:18px;color:var(--ink)}
-    .stat-foot{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-top:2px;line-height:1.25;font-weight:600}
-
-    /* sections */
-    section{ padding:22px 0; }
-    h2{
-      margin:0 0 10px;
-      font-family:var(--fontHead);
-      font-size:28px;
-      letter-spacing:-0.02em;
-      color:var(--ink);
-      text-align:left;
+      border:1px solid rgba(23,178,106,.18);
+      background:rgba(23,178,106,.08);
+      color:var(--green);
+      font-size:12px;
       font-weight:800;
     }
-    .section-lead{
-      margin:0 0 16px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      font-size:16px;
-      line-height:1.45;
-      max-width:980px;
-      font-weight:500;
+    .dash-body{
+      padding:14px;
+      display:grid;
+      gap:12px;
     }
-
-    .grid{ display:grid; gap:14px; }
-    .grid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .grid-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .grid-4{ grid-template-columns:repeat(4,minmax(0,1fr)); }
-    @media(max-width:980px){
-      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
     }
-
-    .card{
-      border-radius:18px;
-      background:var(--card);
-      border:1px solid var(--border);
-      padding:14px 14px 12px;
-      box-shadow:0 14px 26px rgba(16,24,40,0.06);
+    .mini-card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
     }
-    .card-soft{
-      background:linear-gradient(135deg, rgba(244,210,122,0.12), rgba(255,255,255,0.95));
+    .mini-card .label{
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 4px;
+      font-weight:700;
     }
-    .card-title{
-      font-family:var(--fontHead);
-      font-size:15px;
-      font-weight:800;
-      margin:0 0 6px;
-      color:var(--ink);
-      line-height:1.25;
+    .mini-card .value{
+      font:800 22px/1 var(--head);
+      margin:0 0 4px;
     }
-    .card-text{
+    .mini-card .sub{
+      font-size:12px;
+      color:var(--muted);
       margin:0;
-      font-size:14px;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      line-height:1.45;
-      font-weight:500;
+      font-weight:600;
+    }
+    @media(max-width:600px){
+      .mini-stats{grid-template-columns:1fr}
+      h1{font-size:40px}
     }
 
-    ul.clean{list-style:none;padding:0;margin:0}
-    ul.clean li{
-      font-size:14px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      display:flex;align-items:flex-start;gap:8px;
-      margin-bottom:8px;line-height:1.45;font-weight:500;
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:12px;
     }
-    ul.clean li::before{
-      content:"";
-      width:7px;height:7px;border-radius:999px;margin-top:7px;
-      background:var(--accent2);
-      box-shadow:0 0 0 3px rgba(211,154,62,0.12);
-      flex:0 0 auto;
+    @media(max-width:720px){
+      .dashboard-grid{grid-template-columns:1fr}
     }
 
-    .icon-badge{
-      width:38px;height:38px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      border:1px solid rgba(211,154,62,0.35);
-      background:rgba(244,210,122,0.14);
-      box-shadow:0 12px 22px rgba(16,24,40,0.05);
+    .chart-card,.table-card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+      padding:12px;
+      min-height:200px;
+    }
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       margin-bottom:10px;
     }
-    .icon-badge svg{width:18px;height:18px;stroke:#111}
+    .section-head .t{
+      font:800 13px/1.2 var(--head);
+    }
+    .ghost{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
 
-    .center-title{text-align:center}
-    .center-lead{text-align:center;margin-left:auto;margin-right:auto}
+    .bars{
+      height:144px;
+      display:flex;
+      align-items:flex-end;
+      gap:10px;
+      padding:8px 4px 0;
+    }
+    .bar{
+      flex:1 1 auto;
+      border-radius:10px 10px 4px 4px;
+      background:linear-gradient(180deg, rgba(107,124,255,.85), rgba(23,178,106,.55));
+      box-shadow:0 10px 20px rgba(107,124,255,.12);
+      position:relative;
+      min-width:20px;
+      animation:barsFloat 5.8s ease-in-out infinite;
+    }
+    .bar:nth-child(2){animation-delay:.3s}
+    .bar:nth-child(3){animation-delay:.6s}
+    .bar:nth-child(4){animation-delay:.9s}
+    .bar:nth-child(5){animation-delay:1.2s}
+    .bar:nth-child(6){animation-delay:1.5s}
+    @keyframes barsFloat{
+      0%,100%{filter:saturate(1)}
+      50%{filter:saturate(1.18)}
+    }
+    .line-chart{
+      width:100%;
+      height:150px;
+      display:block;
+    }
 
-    /* QA report */
-    .report-grid{
+    .qa-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:12px;
+    }
+    .qa-table th,.qa-table td{
+      text-align:left;
+      padding:9px 0;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    .qa-table th{
+      color:var(--muted);
+      font:800 11px/1.2 var(--head);
+      letter-spacing:.03em;
+      text-transform:uppercase;
+    }
+    .qa-table td{
+      font-weight:700;
+      color:var(--text);
+    }
+    .qa-table .muted{
+      color:var(--muted);
+      font-weight:600;
+    }
+    .badge-bad,.badge-good{
+      display:inline-flex;
+      align-items:center;
+      padding:5px 8px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .badge-bad{
+      background:rgba(239,68,68,.10);
+      color:#c02626;
+      border:1px solid rgba(239,68,68,.14);
+    }
+    .badge-good{
+      background:rgba(23,178,106,.10);
+      color:var(--green);
+      border:1px solid rgba(23,178,106,.15);
+    }
+
+    /* sections general */
+    section{
+      padding:26px 0;
+    }
+    .section-top{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    h2{
+      margin:0 0 6px;
+      font:800 34px/1.05 var(--head);
+      letter-spacing:-.03em;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.5;
+      max-width:760px;
+      font-weight:500;
+    }
+
+    /* about */
+    .about-grid{
       display:grid;
-      grid-template-columns:1.1fr 0.9fr;
+      grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+      gap:14px;
+    }
+    @media(max-width:980px){.about-grid{grid-template-columns:1fr}}
+    .about-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.86);
+      box-shadow:var(--shadow-soft);
+      padding:20px;
+    }
+    .stats-row{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    @media(max-width:620px){.stats-row{grid-template-columns:1fr}}
+    .stat{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+      padding:12px;
+    }
+    .stat .n{
+      margin:0 0 4px;
+      font:800 24px/1 var(--head);
+    }
+    .stat .l{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+    }
+
+    /* lost sale section */
+    .problem-grid{
+      display:grid;
+      grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
       gap:14px;
       align-items:stretch;
     }
-    @media(max-width:980px){ .report-grid{grid-template-columns:1fr;} }
-
-    .report-mock{
-      border-radius:18px;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, #FFFFFF, #F7F9FC);
-      padding:14px;
-      box-shadow:0 16px 30px rgba(16,24,40,0.07);
+    @media(max-width:980px){.problem-grid{grid-template-columns:1fr}}
+    .problem-card,.chat-mock{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.88);
+      box-shadow:var(--shadow-soft);
+      padding:18px;
     }
-    .report-top{
+    .problem-list{
+      display:grid;
+      gap:10px;
+      margin-top:8px;
+    }
+    .problem-item{
       display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+    }
+    .problem-item .x{
+      width:22px;height:22px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      flex:0 0 auto;
+      font:800 12px/1 var(--head);
+      color:#c02626;
+      background:rgba(239,68,68,.10);
+      border:1px solid rgba(239,68,68,.14);
+      margin-top:1px;
+    }
+    .problem-item h4{
+      margin:0 0 4px;
+      font:800 14px/1.25 var(--head);
+    }
+    .problem-item p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.4;
+      font-weight:600;
+    }
+
+    .chat-header{
+      display:flex;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
-      align-items:flex-start;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
-    .report-title{
-      font-family:var(--fontHead);
-      font-size:14px;
-      font-weight:800;
-      color:var(--ink);
-      margin:0;
+    .phone{
+      width:100%;
+      max-width:420px;
+      margin:0 auto;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:#fbfcff;
+      box-shadow:0 24px 44px rgba(16,24,40,.08);
+      padding:14px;
+      position:relative;
+      overflow:hidden;
     }
-    .report-sub{
-      margin:4px 0 0;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
+    .phone::before{
+      content:"";
+      position:absolute;
+      top:8px;left:50%;transform:translateX(-50%);
+      width:92px;height:7px;border-radius:999px;
+      background:rgba(15,23,42,.12);
+    }
+    .chat-list{
+      margin-top:16px;
+      display:grid;
+      gap:10px;
+    }
+    .bubble{
+      max-width:82%;
+      padding:11px 12px;
+      border-radius:16px;
       font-size:13px;
-      line-height:1.35;
+      line-height:1.42;
+      font-weight:600;
+    }
+    .bubble.client{
+      justify-self:flex-start;
+      background:rgba(107,124,255,.08);
+      border:1px solid rgba(107,124,255,.14);
+      color:var(--text);
+      border-top-left-radius:8px;
+    }
+    .bubble.manager{
+      justify-self:flex-end;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--text);
+      border-top-right-radius:8px;
+    }
+    .chat-alert{
+      margin-top:12px;
+      padding:12px;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(239,68,68,.08), rgba(255,255,255,.9));
+      border:1px solid rgba(239,68,68,.12);
+      color:#7f1d1d;
+      font-size:13px;
+      font-weight:800;
+      line-height:1.4;
+    }
+
+    /* services */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    @media(max-width:1080px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:640px){.services-grid{grid-template-columns:1fr}}
+    .service{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.86);
+      box-shadow:var(--shadow-soft);
+      padding:18px;
+    }
+    .service-icon{
+      width:42px;height:42px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg, rgba(244,210,122,.22), rgba(255,255,255,.9));
+      border:1px solid rgba(211,154,62,.25);
+      margin-bottom:12px;
+    }
+    .service h3{
+      margin:0 0 8px;
+      font:800 18px/1.15 var(--head);
+      letter-spacing:-.02em;
+    }
+    .service p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
       font-weight:500;
     }
-    .pill-mini{
-      font-size:11px;
-      font-weight:800;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      white-space:nowrap;
-      font-family:var(--fontHead);
-    }
-    .kpi-row{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:10px;
-      margin:10px 0 12px;
-    }
-    @media(max-width:520px){ .kpi-row{grid-template-columns:1fr;} }
-    .kpi-box{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      padding:10px 10px 9px;
-    }
-    .kpi-label{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin:0 0 3px;font-weight:600}
-    .kpi-val{font-family:var(--fontHead);font-size:16px;font-weight:800;color:var(--ink);margin:0}
-    .kpi-foot{font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin:3px 0 0;font-weight:500}
 
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      overflow:hidden;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
+    /* pricing / plans */
+    .plans-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
     }
-    th,td{
-      font-size:13px;
-      padding:10px 10px;
-      border-bottom:1px solid var(--border);
-      color:var(--ink);
+    @media(max-width:980px){.plans-grid{grid-template-columns:1fr}}
+    .plan{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.90);
+      box-shadow:var(--shadow-soft);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .plan::before{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg, var(--gold), rgba(107,124,255,.8), rgba(23,178,106,.8));
+      opacity:.9;
+    }
+    .plan h3{
+      margin:0 0 10px;
+      font:800 22px/1.1 var(--head);
+      letter-spacing:-.03em;
+    }
+    .plan p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.55;
+      font-weight:500;
+      max-width:360px;
+    }
+
+    /* report */
+    .report-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+      gap:14px;
+    }
+    @media(max-width:980px){.report-grid{grid-template-columns:1fr}}
+    .report-card,.report-side{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.90);
+      box-shadow:var(--shadow-soft);
+      padding:18px;
+    }
+    .report-kpis{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+      margin-bottom:12px;
+    }
+    @media(max-width:640px){.report-kpis{grid-template-columns:1fr}}
+    .report-kpi{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+    }
+    .report-kpi .k{
+      margin:0 0 4px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+    .report-kpi .v{
+      margin:0 0 3px;
+      font:800 20px/1 var(--head);
+    }
+    .report-kpi .s{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+    }
+    .report-table{
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .report-table th,.report-table td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
       text-align:left;
       vertical-align:top;
+      font-size:13px;
     }
-    th{
-      color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      font-weight:800;
-      background:rgba(247,249,252,0.9);
-      font-family:var(--fontHead);
+    .report-table th{
+      color:var(--muted);
+      font:800 11px/1.2 var(--head);
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      background:rgba(247,249,252,.85);
     }
-    tr:last-child td{border-bottom:none}
+    .report-table tr:last-child td{border-bottom:none}
+    .side-list{
+      display:grid;
+      gap:10px;
+    }
+    .side-box{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+      padding:14px;
+    }
+    .side-box h4{
+      margin:0 0 8px;
+      font:800 15px/1.2 var(--head);
+    }
+    .side-box ul{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .side-box li{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.42;
+      font-weight:600;
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+    }
+    .side-box li::before{
+      content:"";
+      width:7px;height:7px;border-radius:50%;
+      background:var(--gold-deep);
+      box-shadow:0 0 0 3px rgba(211,154,62,.12);
+      margin-top:7px;
+      flex:0 0 auto;
+    }
 
-    /* form */
-    .form-wrap{
-      border-radius:20px;background:#FFFFFF;border:1px solid var(--border);
-      padding:18px 18px 14px;box-shadow:0 20px 40px rgba(16,24,40,0.08);
+    /* CTA */
+    .cta{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      border:1px solid rgba(211,154,62,.25);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(107,124,255,.10), transparent 40%),
+        radial-gradient(circle at 80% 40%, rgba(23,178,106,.10), transparent 40%),
+        linear-gradient(135deg, rgba(244,210,122,.22), rgba(255,255,255,.94));
+      box-shadow:var(--shadow);
+      padding:26px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
     }
-    .form-grid{display:grid;gap:14px}
-    .form-row-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    @media(max-width:720px){ .form-row-two{grid-template-columns:1fr;} }
-    label{
-      font-size:13px;margin-bottom:6px;display:block;color:var(--ink);font-weight:800;
-      font-family:var(--fontHead);
+    .cta h3{
+      margin:0 0 8px;
+      font:800 36px/1.02 var(--head);
+      letter-spacing:-.03em;
+      max-width:720px;
     }
-    input,textarea{
-      width:100%;border-radius:999px;border:1px solid var(--border2);
-      background:#fff;color:var(--ink);padding:11px 12px;font-size:14px;outline:none;
-      transition:border-color .15s ease-out, box-shadow .15s;
-      font-family:var(--fontBody);
+    .cta p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.45;
+      font-weight:500;
+      max-width:680px;
     }
-    textarea{border-radius:14px;min-height:92px;resize:vertical}
-    input:focus,textarea:focus{border-color:rgba(211,154,62,0.65);box-shadow:0 0 0 4px rgba(244,210,122,0.18)}
-    .consent-row{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));margin-top:6px;line-height:1.35}
-    .consent-row input[type="checkbox"]{width:16px;height:16px;margin-top:2px;border-radius:4px;accent-color: var(--accent2)}
-    .form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
-    .form-hint{font-size:13px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));min-height:18px;line-height:1.35}
 
+    /* footer */
     footer{
-      margin-top:22px;padding-top:14px;border-top:1px solid var(--border);
-      font-size:13px;color:rgba(93,107,134, calc(1 * var(--mutedBoost)));
-      display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+      margin-top:26px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
-    footer a{color:#9A6A12;text-decoration:none;font-weight:900}
-    footer a:hover{text-decoration:underline}
+    footer a{
+      color:#9a6a12;
+      text-decoration:none;
+      font-weight:800;
+    }
 
-    .fade-section{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out, transform .45s ease-out}
-    .fade-section.visible{opacity:1;transform:translateY(0)}
-
-    /* Accessibility: reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      .attention-banner::before{animation:none}
-      .contacts-label::after{animation:none}
-      .bg-art .breath-line{animation:none}
-      .bg-art .wave{animation:none}
+    /* reveal */
+    .fade{
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .45s ease-out, transform .45s ease-out;
+    }
+    .fade.visible{
+      opacity:1;
+      transform:translateY(0);
     }
   </style>
 </head>
-
 <body>
-  <!-- Premium animated background -->
+
+  <!-- animated premium background -->
   <div class="bg-art" aria-hidden="true">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
       <defs>
-        <radialGradient id="g1" cx="25%" cy="18%" r="70%">
-          <stop offset="0%" stop-color="rgba(99,102,241,0.22)"/>
-          <stop offset="55%" stop-color="rgba(99,102,241,0.10)"/>
-          <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
+        <radialGradient id="g1" cx="22%" cy="18%" r="70%">
+          <stop offset="0%" stop-color="rgba(107,124,255,0.18)"/>
+          <stop offset="55%" stop-color="rgba(107,124,255,0.08)"/>
+          <stop offset="100%" stop-color="rgba(107,124,255,0)"/>
         </radialGradient>
-        <radialGradient id="g2" cx="72%" cy="20%" r="70%">
-          <stop offset="0%" stop-color="rgba(16,185,129,0.20)"/>
-          <stop offset="55%" stop-color="rgba(16,185,129,0.09)"/>
-          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+        <radialGradient id="g2" cx="76%" cy="18%" r="70%">
+          <stop offset="0%" stop-color="rgba(23,178,106,0.14)"/>
+          <stop offset="55%" stop-color="rgba(23,178,106,0.06)"/>
+          <stop offset="100%" stop-color="rgba(23,178,106,0)"/>
         </radialGradient>
-        <radialGradient id="g3" cx="78%" cy="55%" r="70%">
-          <stop offset="0%" stop-color="rgba(244,210,122,0.26)"/>
-          <stop offset="55%" stop-color="rgba(244,210,122,0.10)"/>
+        <radialGradient id="g3" cx="82%" cy="56%" r="70%">
+          <stop offset="0%" stop-color="rgba(244,210,122,0.20)"/>
+          <stop offset="55%" stop-color="rgba(244,210,122,0.08)"/>
           <stop offset="100%" stop-color="rgba(244,210,122,0)"/>
         </radialGradient>
-
-        <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
-          <path d="M46 0H0V46" fill="none" stroke="rgba(15,23,42,0.06)" stroke-width="1"/>
-        </pattern>
-
         <linearGradient id="line" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stop-color="rgba(99,102,241,0)"/>
-          <stop offset="35%" stop-color="rgba(99,102,241,0.55)"/>
-          <stop offset="70%" stop-color="rgba(16,185,129,0.55)"/>
-          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+          <stop offset="0%" stop-color="rgba(107,124,255,0)"/>
+          <stop offset="30%" stop-color="rgba(107,124,255,0.52)"/>
+          <stop offset="70%" stop-color="rgba(23,178,106,0.50)"/>
+          <stop offset="100%" stop-color="rgba(23,178,106,0)"/>
         </linearGradient>
-
-        <!-- voice wave gradient -->
         <linearGradient id="wave" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stop-color="rgba(244,210,122,0)"/>
-          <stop offset="30%" stop-color="rgba(244,210,122,0.35)"/>
-          <stop offset="60%" stop-color="rgba(16,185,129,0.28)"/>
-          <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+          <stop offset="35%" stop-color="rgba(244,210,122,0.32)"/>
+          <stop offset="70%" stop-color="rgba(23,178,106,0.24)"/>
+          <stop offset="100%" stop-color="rgba(23,178,106,0)"/>
         </linearGradient>
       </defs>
 
-      <!-- soft blobs -->
-      <rect width="1440" height="900" fill="transparent"/>
       <rect width="1440" height="900" fill="url(#g1)"/>
       <rect width="1440" height="900" fill="url(#g2)"/>
       <rect width="1440" height="900" fill="url(#g3)"/>
 
-      <!-- grid top -->
-      <rect x="0" y="0" width="1440" height="520" fill="url(#grid)" opacity="0.9"/>
-
-      <!-- breathing analytics lines -->
-      <path class="breath-line" d="M0 235 C 220 155, 420 315, 640 235 S 1060 155, 1440 255"
-            fill="none" stroke="url(#line)" stroke-width="2.2" opacity="0.65">
-        <animate attributeName="opacity" values="0.45;0.75;0.45" dur="6.5s" repeatCount="indefinite"/>
-        <animate attributeName="stroke-width" values="1.6;2.4;1.6" dur="6.5s" repeatCount="indefinite"/>
+      <!-- analytics lines -->
+      <path d="M0 230 C 220 150, 420 315, 640 230 S 1060 160, 1440 250"
+            fill="none" stroke="url(#line)" stroke-width="2.2" opacity="0.6">
+        <animate attributeName="opacity" values="0.35;0.72;0.35" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.4;2.4;1.4" dur="6s" repeatCount="indefinite"/>
       </path>
 
-      <path class="breath-line" d="M0 310 C 240 240, 430 420, 660 310 S 1080 200, 1440 340"
-            fill="none" stroke="rgba(244,210,122,0.55)" stroke-width="1.8" opacity="0.35">
-        <animate attributeName="opacity" values="0.18;0.42;0.18" dur="7.2s" repeatCount="indefinite"/>
-        <animate attributeName="stroke-width" values="1.2;2.0;1.2" dur="7.2s" repeatCount="indefinite"/>
+      <path d="M0 305 C 240 235, 430 415, 660 305 S 1080 200, 1440 338"
+            fill="none" stroke="rgba(244,210,122,0.5)" stroke-width="1.7" opacity="0.28">
+        <animate attributeName="opacity" values="0.16;0.38;0.16" dur="7.2s" repeatCount="indefinite"/>
       </path>
 
-      <!-- voice wave pattern (subtle) -->
-      <path class="wave" d="M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165
-                           S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165"
-            fill="none" stroke="url(#wave)" stroke-width="1.7" opacity="0.32">
-        <animate attributeName="d"
-          dur="5.6s" repeatCount="indefinite"
+      <!-- voice wave -->
+      <path d="M0 170 C 60 132, 120 202, 180 170 S 300 132, 360 170 S 480 202, 540 170 S 660 132, 720 170
+               S 840 202, 900 170 S 1020 132, 1080 170 S 1200 202, 1260 170 S 1380 132, 1440 170"
+            fill="none" stroke="url(#wave)" stroke-width="1.8" opacity="0.28">
+        <animate attributeName="d" dur="5.8s" repeatCount="indefinite"
           values="
-          M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165 S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165;
-          M0 165 C 60 145, 120 190, 180 165 S 300 155, 360 165 S 480 190, 540 165 S 660 145, 720 165 S 840 190, 900 165 S 1020 155, 1080 165 S 1200 190, 1260 165 S 1380 145, 1440 165;
-          M0 165 C 60 130, 120 200, 180 165 S 300 130, 360 165 S 480 200, 540 165 S 660 130, 720 165 S 840 200, 900 165 S 1020 130, 1080 165 S 1200 200, 1260 165 S 1380 130, 1440 165
-          "/>
-        <animate attributeName="opacity" values="0.18;0.38;0.18" dur="6.8s" repeatCount="indefinite"/>
+          M0 170 C 60 132, 120 202, 180 170 S 300 132, 360 170 S 480 202, 540 170 S 660 132, 720 170 S 840 202, 900 170 S 1020 132, 1080 170 S 1200 202, 1260 170 S 1380 132, 1440 170;
+          M0 170 C 60 148, 120 192, 180 170 S 300 150, 360 170 S 480 194, 540 170 S 660 148, 720 170 S 840 194, 900 170 S 1020 150, 1080 170 S 1200 194, 1260 170 S 1380 148, 1440 170;
+          M0 170 C 60 132, 120 202, 180 170 S 300 132, 360 170 S 480 202, 540 170 S 660 132, 720 170 S 840 202, 900 170 S 1020 132, 1080 170 S 1200 202, 1260 170 S 1380 132, 1440 170"/>
       </path>
-
-      <!-- data points -->
-      <g fill="rgba(15,23,42,0.20)">
-        <circle cx="260" cy="205" r="2.2"/>
-        <circle cx="420" cy="275" r="2.2"/>
-        <circle cx="640" cy="240" r="2.2"/>
-        <circle cx="860" cy="215" r="2.2"/>
-        <circle cx="1100" cy="245" r="2.2"/>
-      </g>
     </svg>
   </div>
 
-  <!-- adaptive contrast veil -->
-  <div class="contrast-veil" aria-hidden="true"></div>
-
   <div class="page">
-    <header class="site-header">
-      <div class="logo-wrap">
-        <div class="logo-mark"><span>R</span></div>
-        <div>
-          <div class="logo-text-main">RETENLY</div>
-          <div class="logo-text-sub">Call Center Quality & Sales Performance</div>
-        </div>
-      </div>
+    <!-- Header -->
+    <header class="site-header fade">
+      <a href="#top" class="brand">
+        <div class="brand-mark"><span>R</span></div>
+        <div class="brand-name">Retenly</div>
+      </a>
 
-      <div class="contacts-bar">
-        <span class="contacts-label">Связаться</span>
-        <div class="icon-row">
-          <!-- Где менять LinkedIn: заменяй href тут -->
-          <a href="https://www.linkedin.com/company/111947066/admin/dashboard/" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M6 6H6.01M6 9V18M10 9V18M10 12.5C10 10.57 11.57 9 13.5 9C15.43 9 17 10.57 17 12.5V18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="https://t.me/retenly" target="_blank" rel="noopener" class="icon-link" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 12L19 4L16 20L11.5 14.5L9 17L8.5 12.5L5 12Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
+      <nav class="nav">
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#contact" class="nav-cta">Получить аудит</a>
+      </nav>
     </header>
 
-    <div class="attention-banner fade-section" id="attention">
-      <div class="attention-content">
-        <div class="attention-badge" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 3V13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-            <path d="M8.5 6.5L12 3L15.5 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6 14.5C6.8 18 9.3 21 12 21C14.7 21 17.2 18 18 14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    <!-- Attention -->
+    <div class="attention fade">
+      <div class="attention-inner">
+        <div class="attention-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M8.5 6.5L12 3L15.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 14.5C6.8 18 9.3 21 12 21C14.7 21 17.2 18 18 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </div>
         <div>
-          <p class="attention-title">Индивидуальная поддержка в области контроля качества</p>
-          <p class="attention-text">
-            Ошибки не выбирают, каких клиентов вы можете потерять. Они просто это делают. Мы помогаем вам обнаружить их до того, как ваши клиенты уйдут от вас
-          </p>
+          <h3>Индивидуальная поддержка в области контроля качества</h3>
+          <p>Ошибки не выбирают, каких клиентов вы можете потерять. Они просто это делают. Мы помогаем вам обнаружить их до того, как ваши клиенты уйдут от вас</p>
         </div>
       </div>
     </div>
 
-    <div class="hero-wrap fade-section">
-      <section class="hero-grid">
+    <!-- Hero -->
+    <section class="hero fade" id="top">
+      <div class="hero-grid">
         <div>
-          <!-- ✅ убрали точку в конце -->
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>Контроль качества продаж и поддержки</span>
+          </div>
+
           <h1>Перестаньте терять клиентов. Начните контролировать качество коммуникаций с вашими клиентами</h1>
 
-          <p class="hero-lead">
-            Мы выстраиваем контроль качества для отделов продаж и поддержки: проверяем коммуникации, усиливаем скрипты и KPI, даём команде понятный фидбек и регулярные тренинги
+          <p class="hero-sub">
+            Мы анализируем звонки и переписку менеджеров, показываем где теряются клиенты и выстраиваем систему контроля качества, которая влияет на продажи, сервис и прозрачность работы команды
           </p>
 
-          <div class="hero-meta-row">
-            <div class="hero-pill">
-              <span class="hero-pill-dot"></span>
-              <span>6+ лет в QA, ежедневный контроль качества</span>
-            </div>
-            <div class="hero-pill">
-              <span>iGaming, Fintech, e-commerce, онлайн-школы, SaaS</span>
-            </div>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Получить бесплатный аудит</a>
           </div>
 
-          <div class="hero-actions">
-            <a href="#lead" class="btn btn-primary">Получить бесплатный аудит</a>
-            <a href="#services" class="btn btn-secondary">Посмотреть услуги</a>
-          </div>
-
-          <!-- ✅ убрали точку в конце 
           <div class="hero-note">
             Бесплатно проверим 20 контактов с клиентами и покажем точки потерь. Дадим план улучшений, который можно внедрять сразу
-          </div>-->
-        </div>
-
-        <aside class="hero-card">
-          <div class="hero-card-title">
-            Первые 14 дней работы, в цифрах <span class="badge">Free audit</span>
           </div>
-          <div class="divider"></div>
+        </div>
 
-          <div class="hero-card-grid">
-            <div class="stat-tile">
-              <div class="stat-label">Проверка качества в день</div>
-              <div class="stat-value">50–100</div>
-              <div class="stat-foot">контактов с клиентами</div>
+        <div class="hero-visual">
+          <div class="glow-ring"></div>
+
+          <!-- Main image replacement: premium dashboard mock -->
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title">QA Dashboard • Weekly Report</div>
+              <div class="dash-pill">Live</div>
             </div>
 
-            <div class="stat-tile">
-              <div class="stat-label">Еженедельный тренинг</div>
-              <div class="stat-value">1× / неделя</div>
-              <div class="stat-foot">ошибки, дожим, навыки</div>
-            </div>
+            <div class="dash-body">
+              <div class="mini-stats">
+                <div class="mini-card">
+                  <p class="label">Проверено</p>
+                  <p class="value">124</p>
+                  <p class="sub">контакта за неделю</p>
+                </div>
+                <div class="mini-card">
+                  <p class="label">Средний QA</p>
+                  <p class="value">78/100</p>
+                  <p class="sub">по отделу продаж</p>
+                </div>
+                <div class="mini-card">
+                  <p class="label">Точки потерь</p>
+                  <p class="value">18</p>
+                  <p class="sub">критичных ошибок</p>
+                </div>
+              </div>
 
-            <div class="stat-tile">
-              <div class="stat-label">Скрипты и процессы</div>
-              <div class="stat-value">7–10 дней</div>
-              <div class="stat-foot">обновим или создадим</div>
-            </div>
+              <div class="dashboard-grid">
+                <div class="chart-card">
+                  <div class="section-head">
+                    <div class="t">Динамика качества</div>
+                    <div class="ghost">7 дней</div>
+                  </div>
 
-            <div class="stat-tile">
-              <div class="stat-label">Отчётность</div>
-              <div class="stat-value">Daily / Monthly</div>
-              <div class="stat-foot">качество, KPI, динамика</div>
+                  <svg class="line-chart" viewBox="0 0 320 150" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="gline" x1="0" x2="1" y1="0" y2="0">
+                        <stop offset="0%" stop-color="rgba(107,124,255,0.9)"/>
+                        <stop offset="100%" stop-color="rgba(23,178,106,0.9)"/>
+                      </linearGradient>
+                      <linearGradient id="gfill" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(107,124,255,0.18)"/>
+                        <stop offset="100%" stop-color="rgba(23,178,106,0.03)"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40 L320 150 L0 150 Z" fill="url(#gfill)"/>
+                    <path d="M0 120 C 40 110, 80 95, 120 98 S 200 82, 240 74 S 280 52, 320 40" fill="none" stroke="url(#gline)" stroke-width="4" stroke-linecap="round"/>
+                  </svg>
+
+                  <div class="ghost">После корректировки скрипта и фиксации следующего шага качество стабильно растёт</div>
+                </div>
+
+                <div class="table-card">
+                  <div class="section-head">
+                    <div class="t">Ошибки недели</div>
+                    <div class="ghost">Top 3</div>
+                  </div>
+
+                  <table class="qa-table">
+                    <thead>
+                      <tr>
+                        <th>Ошибка</th>
+                        <th>Статус</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Нет выявления потребности<br><span class="muted">в 34% контактов</span></td>
+                        <td><span class="badge-bad">Критично</span></td>
+                      </tr>
+                      <tr>
+                        <td>Нет следующего шага<br><span class="muted">после консультации</span></td>
+                        <td><span class="badge-bad">Потеря сделки</span></td>
+                      </tr>
+                      <tr>
+                        <td>Улучшен дожим<br><span class="muted">после тренинга</span></td>
+                        <td><span class="badge-good">Плюс</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <div class="section-head">
+                  <div class="t">KPI менеджеров</div>
+                  <div class="ghost">5 сотрудников</div>
+                </div>
+
+                <div class="bars">
+                  <div class="bar" style="height:44%"></div>
+                  <div class="bar" style="height:62%"></div>
+                  <div class="bar" style="height:56%"></div>
+                  <div class="bar" style="height:72%"></div>
+                  <div class="bar" style="height:81%"></div>
+                  <div class="bar" style="height:68%"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </aside>
-      </section>
-    </div>
-
-    <section class="fade-section" id="services">
-      <h2 class="center-title">Услуги</h2>
-      <p class="section-lead center-lead">
-        Можно начать с разового аудита и перейти на постоянное сопровождение. Подстраиваемся под ваш процесс и цели
-      </p>
-
-      <div class="grid grid-4">
-        <div class="card card-soft">
-          <div class="card-title">Контроль качества отдела продаж</div>
-          <p class="card-text">
-            Ежедневная проверка коммуникаций, чек-листы, причины потерь и рост конверсии. Скрипты обновляем или создаём с нуля
-          </p>
-        </div>
-
-        <div class="card card-soft">
-          <div class="card-title">Еженедельный тренинг менеджеров</div>
-          <p class="card-text">
-            Разбор реальных кейсов, ошибки и точки роста, усиление дожима и обработки возражений. Фидбек каждому менеджеру
-          </p>
-        </div>
-
-        <div class="card card-soft">
-          <div class="card-title">QA для поддержки клиентов</div>
-          <p class="card-text">
-            KPI, скрипты, стандарты общения и сопровождение операторов. Улучшаем качество решений и сервис без просадок
-          </p>
-        </div>
-
-        <div class="card card-soft">
-          <div class="card-title">Разовый аудит и отчётность</div>
-          <p class="card-text">
-            Снимок текущего состояния отдела: ошибки, потери, рекомендации и план исправлений. При необходимости контролируем внедрение
-          </p>
         </div>
       </div>
     </section>
 
-    <section class="fade-section">
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M13 3L4 14H11L10 21L20 10H13L13 3Z" stroke="currentColor" stroke-width="1.7"/>
-            </svg>
-          </div>
-          <div class="card-title">БЫСТРЫЙ СТАРТ</div>
-          <p class="card-text">
-            Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее
+    <!-- About -->
+    <section id="about" class="fade">
+      <div class="section-top">
+        <div>
+          <h2>О нас</h2>
+          <p class="lead">
+            Retenly помогает компаниям выстроить понятную систему контроля качества в продажах и поддержке. Мы не просто отмечаем ошибки, а показываем где утекают клиенты, почему это происходит и что нужно изменить
           </p>
         </div>
+      </div>
 
-        <div class="card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="1.7"/>
-            </svg>
-          </div>
-          <div class="card-title">ЛЮБОЙ МАСШТАБ</div>
-          <p class="card-text">
-            Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время
+      <div class="about-grid">
+        <div class="about-card">
+          <h3 style="margin:0 0 10px;font:800 22px/1.15 var(--head)">Коротко о нашей экспертизе</h3>
+          <p style="margin:0;color:var(--muted);font-size:15px;line-height:1.55;font-weight:500">
+            Больше 6 лет в QA и контроле качества коммуникаций. Опыт в iGaming, fintech, e-commerce, SaaS и онлайн-образовании. Работаем с любыми сферами, где важны продажи, сервис и дисциплина общения с клиентом
           </p>
+
+          <div class="stats-row">
+            <div class="stat">
+              <p class="n">6+ лет</p>
+              <p class="l">в QA и контроле качества</p>
+            </div>
+            <div class="stat">
+              <p class="n">50–100</p>
+              <p class="l">контактов с клиентами в день</p>
+            </div>
+            <div class="stat">
+              <p class="n">Daily / Monthly</p>
+              <p class="l">отчётность и прозрачные KPI</p>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="icon-badge">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M21 12A9 9 0 1 1 12 3" stroke="currentColor" stroke-width="1.7"/>
-              <path d="M12 7V12L15.5 14" stroke="currentColor" stroke-width="1.7"/>
-            </svg>
-          </div>
-          <div class="card-title">ПО ТРЕБОВАНИЮ</div>
-          <p class="card-text">
-            Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии
-          </p>
+        <div class="about-card">
+          <h3 style="margin:0 0 10px;font:800 22px/1.15 var(--head)">Что получает руководитель</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px">
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:9px;flex:0 0 auto"></span>
+              <span style="color:var(--muted);font-weight:600;line-height:1.45">Понятную картину, где команда теряет продажи и клиентов</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:9px;flex:0 0 auto"></span>
+              <span style="color:var(--muted);font-weight:600;line-height:1.45">Разбор звонков и переписки с конкретными рекомендациями</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:9px;flex:0 0 auto"></span>
+              <span style="color:var(--muted);font-weight:600;line-height:1.45">Обновлённые скрипты, KPI и регулярный фидбек менеджерам</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:9px;flex:0 0 auto"></span>
+              <span style="color:var(--muted);font-weight:600;line-height:1.45">Систему, которая работает каждый день, а не разовую проверку</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="fade-section" id="report">
-      <h2>Как выглядит наш QA-отчёт</h2>
-      <p class="section-lead">
-        Понятный отчёт для руководителя и практические рекомендации для команды. Вы видите реальные ошибки, причины потери клиентов и план улучшений
-      </p>
+    <!-- Problem + image/chat -->
+    <section class="fade">
+      <div class="section-top">
+        <div>
+          <h2>Где компании теряют клиентов</h2>
+          <p class="lead">
+            Чаще всего дело не в рекламе и не в цене. Клиенты сливаются в момент коммуникации, когда менеджер нарушает логику разговора или не доводит клиента до следующего шага
+          </p>
+        </div>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-list">
+            <div class="problem-item">
+              <div class="x">×</div>
+              <div>
+                <h4>Менеджер не выявляет потребность</h4>
+                <p>Сразу переходит к презентации и не понимает реальный запрос клиента</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="x">×</div>
+              <div>
+                <h4>Нет следующего шага</h4>
+                <p>После разговора клиент не понимает что будет дальше и просто пропадает</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="x">×</div>
+              <div>
+                <h4>Слабая работа с возражениями</h4>
+                <p>Менеджер отвечает формально и не закрывает реальные сомнения клиента</p>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="x">×</div>
+              <div>
+                <h4>Неровный тон общения</h4>
+                <p>Качество сервиса проседает, даже если продукт сам по себе сильный</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image replacement: “manager loses sale” chat mock -->
+        <div class="chat-mock">
+          <div class="chat-header">
+            <div>
+              <h3 style="margin:0 0 6px;font:800 22px/1.1 var(--head)">Как менеджер срывает продажу</h3>
+              <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.45;font-weight:500">
+                Пример переписки, где клиент готов к диалогу, но уходит без следующего шага
+              </p>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="chat-list">
+              <div class="bubble client">Здравствуйте, подскажите пожалуйста сколько у вас стоит подключение и как быстро можно стартовать?</div>
+              <div class="bubble manager">Цена зависит от пакета. У нас разные условия</div>
+              <div class="bubble client">А можете кратко сориентировать что мне подойдёт для команды 12 человек?</div>
+              <div class="bubble manager">Нужно смотреть подробнее. Там по ситуации</div>
+              <div class="bubble client">Понял, спасибо</div>
+            </div>
+
+            <div class="chat-alert">
+              Клиент не получил конкретику, не получил следующий шаг и вышел из коммуникации
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="fade">
+      <div class="section-top">
+        <div>
+          <h2>Услуги</h2>
+          <p class="lead">
+            Всё, что нужно для контроля качества продаж и поддержки, в одном месте
+          </p>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service">
+          <div class="service-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 6H20M4 12H14M4 18H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Контроль качества отдела продаж</h3>
+          <p>Ежедневная проверка коммуникаций, чек-листы, причины потерь, оценка менеджеров и улучшение конверсии</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3V8M12 16V21M3 12H8M16 12H21M5.6 5.6L9 9M15 15L18.4 18.4M18.4 5.6L15 9M9 15L5.6 18.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Еженедельный тренинг менеджеров</h3>
+          <p>Разбор реальных звонков и переписки, точки роста, дожим, обработка возражений и личный фидбек</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M5 5H19V15H12L8 19V15H5V5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>QA для поддержки клиентов</h3>
+          <p>KPI, скрипты, стандарты общения и сопровождение операторов для улучшения сервиса и качества решения запросов</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 19H20M7 16V10M12 16V5M17 16V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Разовый аудит и отчётность</h3>
+          <p>Снимок текущего состояния отдела: ошибки, потери, рекомендации, приоритеты, план исправлений и контроль внедрения</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing / Plans -->
+    <section id="pricing" class="fade">
+      <div class="section-top">
+        <div>
+          <h2>Тарифы</h2>
+          <p class="lead">
+            Можно начать быстро, масштабироваться постепенно или подключать QA по требованию
+          </p>
+        </div>
+      </div>
+
+      <div class="plans-grid">
+        <div class="plan">
+          <h3>БЫСТРЫЙ СТАРТ</h3>
+          <p>Мы готовы, как только вы будете готовы. Обсудите требования, подпишите документы и получите поддержку по качеству в течение 72 часов или менее</p>
+        </div>
+
+        <div class="plan">
+          <h3>ЛЮБОЙ МАСШТАБ</h3>
+          <p>Берём проекты любого размера и сложности. Начните с приоритетных задач и масштабируйте объём контроля качества в любое время</p>
+        </div>
+
+        <div class="plan">
+          <h3>ПО ТРЕБОВАНИЮ</h3>
+          <p>Гибкая поддержка по QA. Подключайтесь когда нужно, делайте паузы и возобновляйте сопровождение без лишней бюрократии</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QA report -->
+    <section id="report" class="fade">
+      <div class="section-top">
+        <div>
+          <h2>Как выглядит наш QA-отчёт</h2>
+          <p class="lead">
+            Понятный документ для руководителя и практический инструмент для команды. Видно ошибки, влияние на продажи и что делать дальше
+          </p>
+        </div>
+      </div>
 
       <div class="report-grid">
-        <div class="report-mock">
-          <div class="report-top">
+        <div class="report-card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px">
             <div>
-              <p class="report-title">QA отчёт, пример</p>
-              <p class="report-sub">Отдел продаж • период: неделя • формат: ежедневная проверка</p>
+              <div style="font:800 15px/1.2 var(--head)">QA отчёт • пример</div>
+              <div style="color:var(--muted);font-size:13px;font-weight:600;margin-top:4px">Отдел продаж • период: неделя • формат: ежедневная проверка</div>
             </div>
-            <div class="pill-mini">Версия 1.0</div>
+            <div style="padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font:800 11px/1 var(--head);color:var(--muted)">Version 1.0</div>
           </div>
 
-          <div class="kpi-row">
-            <div class="kpi-box">
-              <p class="kpi-label">Качество общения</p>
-              <p class="kpi-val">78 / 100</p>
-              <p class="kpi-foot">тон, структура</p>
+          <div class="report-kpis">
+            <div class="report-kpi">
+              <p class="k">Качество общения</p>
+              <p class="v">78 / 100</p>
+              <p class="s">тон, структура, уверенность</p>
             </div>
-
-            <div class="kpi-box">
-              <p class="kpi-label">Работа по скрипту</p>
-              <p class="kpi-val">64 / 100</p>
-              <p class="kpi-foot">пропуски этапов</p>
+            <div class="report-kpi">
+              <p class="k">Работа по скрипту</p>
+              <p class="v">64 / 100</p>
+              <p class="s">есть пропуски этапов</p>
             </div>
-
-            <div class="kpi-box">
-              <p class="kpi-label">Следующий шаг</p>
-              <p class="kpi-val">52%</p>
-              <p class="kpi-foot">зафиксирован корректно</p>
+            <div class="report-kpi">
+              <p class="k">Следующий шаг</p>
+              <p class="v">52%</p>
+              <p class="s">фиксируется корректно</p>
             </div>
           </div>
 
-          <table>
+          <table class="report-table">
             <thead>
               <tr>
                 <th>Ошибка</th>
                 <th>Как должно быть</th>
-                <th>Результат</th>
+                <th>Влияние</th>
               </tr>
             </thead>
-
             <tbody>
               <tr>
                 <td>Менеджер сразу продаёт</td>
-                <td>Сначала выявление потребности</td>
-                <td>Выше доверие клиента</td>
+                <td>Сначала выявление потребности и уточнение запроса</td>
+                <td>Ниже доверие и ниже конверсия</td>
               </tr>
               <tr>
                 <td>Нет следующего шага</td>
-                <td>Фиксация даты и действия</td>
-                <td>Сделка не зависает</td>
+                <td>Фиксация даты, действия, ответственного и точки контакта</td>
+                <td>Сделка зависает после разговора</td>
               </tr>
               <tr>
                 <td>Слабая работа с возражениями</td>
-                <td>Уточнение причины и аргумент</td>
-                <td>Выше конверсия</td>
+                <td>Уточнить причину, дать аргумент, подтвердить понимание</td>
+                <td>Клиент уходит в тишину</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="grid" style="gap:12px;">
-          <div class="card">
-            <div class="card-title">Что получает руководитель</div>
-            <ul class="clean">
-              <li>Полную картину качества отдела</li>
-              <li>Ошибки и причины потерь</li>
-              <li>План улучшений по шагам</li>
-              <li>KPI и динамику по команде</li>
-            </ul>
-          </div>
+        <div class="report-side">
+          <div class="side-list">
+            <div class="side-box">
+              <h4>Что получает руководитель</h4>
+              <ul>
+                <li>Полную картину качества отдела</li>
+                <li>Ошибки и причины потери клиентов</li>
+                <li>План улучшений по приоритету</li>
+                <li>Динамику KPI и качество команды</li>
+              </ul>
+            </div>
 
-          <div class="card">
-            <div class="card-title">Что получает команда</div>
-            <ul class="clean">
-              <li>Личный фидбек</li>
-              <li>Разбор коммуникаций</li>
-              <li>Практические рекомендации</li>
-              <li>Усиление навыков</li>
-            </ul>
+            <div class="side-box">
+              <h4>Что получает команда</h4>
+              <ul>
+                <li>Личный фидбек по конкретным кейсам</li>
+                <li>Разбор звонков и переписки на практике</li>
+                <li>Улучшенные скрипты и чек-листы</li>
+                <li>Чёткие шаги для роста навыков</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="fade-section" id="contact">
-      <div class="grid grid-2">
+    <!-- CTA -->
+    <section class="fade" id="contact">
+      <div class="cta">
         <div>
-          <h2>Бесплатный аудит отдела продаж или поддержки</h2>
-          <p class="section-lead">
-            Проверим 20 контактов с клиентами и покажем точки потерь. Затем предложим формат: разовый аудит или постоянное сопровождение
-          </p>
-
-          <div class="card card-soft">
-            <div class="card-title">Что вы получите бесплатно</div>
-            <ul class="clean">
-              <li>Оценка 20 контактов с клиентами</li>
-              <li>Ключевые ошибки и точки потерь</li>
-              <li>Рекомендации и план действий</li>
-            </ul>
-          </div>
+          <h3>Получите бесплатный аудит и увидьте где именно ваш отдел теряет клиентов</h3>
+          <p>Проверим 20 контактов с клиентами, покажем точки потерь, дадим рекомендации и предложим формат работы под ваш отдел</p>
         </div>
 
-        <div class="form-wrap">
+        <a href="#lead-form" class="btn btn-primary">Оставить заявку</a>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section class="fade" id="lead-form">
+      <div class="section-top">
+        <div>
+          <h2>Бесплатный аудит отдела продаж или поддержки</h2>
+          <p class="lead">Заполни форму и мы подготовим первый разбор по вашему отделу</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:14px;align-items:start">
+        <div style="border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.88);box-shadow:var(--shadow-soft);padding:18px">
+          <div style="font:800 20px/1.2 var(--head);margin-bottom:10px">Что вы получите бесплатно</div>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px">
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:8px;flex:0 0 auto"></span><span style="color:var(--muted);font-weight:600;line-height:1.45">Оценка 20 контактов с клиентами</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:8px;flex:0 0 auto"></span><span style="color:var(--muted);font-weight:600;line-height:1.45">Ключевые ошибки и точки потерь</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold-deep);margin-top:8px;flex:0 0 auto"></span><span style="color:var(--muted);font-weight:600;line-height:1.45">Рекомендации и понятный план действий</span></li>
+          </ul>
+        </div>
+
+        <div style="border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow-soft);padding:18px">
           <form id="lead"
-            class="form-grid"
             action="https://script.google.com/macros/s/AKfycbx23fciE64h0ZSdDawqJPDtL2AUq_61b_tqNXF7RLqPJ2t7-PZFsvQAB7wRbr3q4NJw/exec"
             method="POST"
             accept-charset="UTF-8"
-            autocomplete="on">
+            autocomplete="on"
+            style="display:grid;gap:14px">
 
             <input type="text" name="_hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
-            <div class="form-row-two">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
               <div>
-                <label for="name">Имя</label>
-                <input id="name" name="name" required placeholder="Как к вам обращаться">
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Имя</label>
+                <input name="name" required placeholder="Как к вам обращаться" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
               </div>
               <div>
-                <label for="company">Компания</label>
-                <input id="company" name="company" placeholder="Название компании">
-              </div>
-            </div>
-
-            <div class="form-row-two">
-              <div>
-                <label for="role">Роль</label>
-                <input id="role" name="role" placeholder="Собственник, Head of Sales, COO…">
-              </div>
-              <div>
-                <label for="geo">Ниша / продукт</label>
-                <input id="geo" name="geo" placeholder="SaaS, e-commerce, онлайн-школа…">
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Компания</label>
+                <input name="company" placeholder="Название компании" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
               </div>
             </div>
 
-            <div class="form-row-two">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
               <div>
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required placeholder="you@company.com" inputmode="email">
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Роль</label>
+                <input name="role" placeholder="Собственник, Head of Sales, COO…" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
               </div>
               <div>
-                <label for="phone">Телефон / Telegram</label>
-                <input id="phone" name="phone" type="tel" placeholder="+90 / +49 / @handle" inputmode="tel">
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Ниша / продукт</label>
+                <input name="geo" placeholder="SaaS, e-commerce, онлайн-школа…" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+              <div>
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Email</label>
+                <input name="email" type="email" required placeholder="you@company.com" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
+              </div>
+              <div>
+                <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Телефон / Telegram</label>
+                <input name="phone" type="tel" placeholder="+90 / +49 / @handle" style="width:100%;padding:12px 13px;border-radius:999px;border:1px solid var(--line-strong);font:500 14px/1.2 var(--body);outline:none">
               </div>
             </div>
 
             <div>
-              <label for="message">Что сейчас болит сильнее всего</label>
-              <textarea id="message" name="message" placeholder="Например: низкая конверсия, слабый дожим, проблемы со скриптом, качество поддержки, жалобы клиентов, непонятный KPI"></textarea>
+              <label style="display:block;font:800 13px/1.2 var(--head);margin-bottom:6px">Что сейчас болит сильнее всего</label>
+              <textarea name="message" placeholder="Например: низкая конверсия, слабый дожим, проблемы со скриптом, качество поддержки, жалобы клиентов, непонятный KPI" style="width:100%;min-height:100px;padding:12px 13px;border-radius:16px;border:1px solid var(--line-strong);font:500 14px/1.45 var(--body);outline:none;resize:vertical"></textarea>
             </div>
 
-            <div class="consent-row">
-              <input id="consent" name="consent" type="checkbox" required>
-              <label for="consent" style="margin:0; font-weight:700; color:rgba(93,107,134, calc(1 * var(--mutedBoost))); font-family:var(--fontBody);">
-                Я соглашаюсь на обработку данных и получение ответов от команды Retenly
-              </label>
-            </div>
+            <label style="display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:12px;font-weight:600;line-height:1.4">
+              <input type="checkbox" name="consent" required style="margin-top:2px;accent-color:#d39a3e">
+              <span>Я соглашаюсь на обработку данных и получение ответов от команды Retenly</span>
+            </label>
 
-            <div class="form-actions">
-              <button class="btn btn-primary" type="submit" id="submitBtn">Отправить запрос</button>
-              <div class="form-hint" id="formHint"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+              <button type="submit" id="submitBtn" class="btn btn-primary">Отправить запрос</button>
+              <div id="formHint" style="font-size:13px;color:var(--muted);font-weight:600"></div>
             </div>
           </form>
         </div>
@@ -1096,39 +1557,23 @@
     <footer>
       <div>
         <span>© 2026 Retenly</span>
-        <span>Все права защищены</span>
+        <span> • Все права защищены</span>
       </div>
       <div>
-        <span>Почта для партнёров:</span>
+        <!-- Меняй ссылки здесь -->
+        <a href="https://www.linkedin.com/company/111947066/admin/dashboard/" target="_blank" rel="noopener">LinkedIn</a>
+        <span> • </span>
+        <a href="https://t.me/retenly" target="_blank" rel="noopener">Telegram</a>
+        <span> • </span>
         <a href="mailto:partners@retenly.top">partners@retenly.top</a>
       </div>
     </footer>
   </div>
 
-  <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#ffffff;border:1px solid rgba(211,154,62,.45);color:#0f172a;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:900;z-index:60;pointer-events:none;box-shadow:0 18px 34px rgba(16,24,40,0.12);">
-    Готово
-  </div>
+  <div id="toast" style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%) scale(.96);opacity:0;transition:.3s;background:#fff;border:1px solid rgba(211,154,62,.45);color:#0f172a;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:900;z-index:60;pointer-events:none;box-shadow:0 18px 34px rgba(16,24,40,.12)">Готово</div>
 
   <script>
-    // Adaptive contrast (simple, safe)
-    // Boost text contrast slightly on high contrast / dark screens
-    (function(){
-      const root = document.documentElement;
-      const mq = window.matchMedia('(prefers-contrast: more)');
-      const set = () => {
-        if (mq.matches) {
-          root.style.setProperty('--contrastBoost','1.08');
-          root.style.setProperty('--mutedBoost','0.88'); // muted becomes a bit darker
-        } else {
-          root.style.setProperty('--contrastBoost','1');
-          root.style.setProperty('--mutedBoost','1');
-        }
-      };
-      try{ mq.addEventListener('change', set); }catch(e){ mq.addListener(set); }
-      set();
-    })();
-
-    // fade-in sections
+    // reveal on scroll
     const observer = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1137,7 +1582,7 @@
         }
       });
     },{threshold:0.12});
-    document.querySelectorAll('.fade-section').forEach(sec=>observer.observe(sec));
+    document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 
     function toast(msg){
       const t = document.getElementById('toast');
@@ -1150,12 +1595,12 @@
       }, 4200);
     }
 
-    // Form submit
+    // form submit
     const form = document.getElementById('lead');
     const formHint = document.getElementById('formHint');
     const submitBtn = document.getElementById('submitBtn');
 
-    form.addEventListener('submit', async (e)=>{
+    form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
       const fd = new FormData(form);
       if(fd.get('_hp')) return;
