@@ -1068,6 +1068,204 @@
       opacity:1;
       transform:translateY(0);
     }
+  
+    /* MOBILE REFINEMENTS */
+    @media (max-width: 768px){
+      .page{
+        padding:10px 8px 32px;
+      }
+      .site-header{
+        gap:10px;
+        padding:4px 0 10px;
+      }
+      .brand-name{
+        font-size:16px;
+        letter-spacing:.08em;
+      }
+      .nav{
+        width:100%;
+        gap:6px;
+      }
+      .nav a{
+        padding:9px 12px;
+        font-size:13px;
+      }
+
+      .attention{
+        padding:14px;
+        border-radius:18px;
+        margin-bottom:16px;
+      }
+      .attention p{
+        font-size:14px;
+      }
+
+      .hero{
+        padding:14px;
+        border-radius:22px;
+      }
+      .hero-main{
+        padding:24px 16px 22px;
+        border-radius:20px;
+      }
+      .hero-title{
+        max-width:100%;
+        font-size:34px;
+        line-height:1.06;
+        letter-spacing:-.035em;
+        margin-bottom:14px;
+        word-break:normal;
+        overflow-wrap:break-word;
+      }
+      .hero-title span{
+        display:block;
+      }
+      .hero-sub{
+        max-width:100%;
+        font-size:15px;
+        line-height:1.55;
+        margin-bottom:18px;
+      }
+      .hero-cta{
+        width:100%;
+      }
+      .hero-cta .btn-primary{
+        width:100%;
+        justify-content:center;
+        text-align:center;
+        padding:16px 20px;
+        font-size:16px;
+      }
+
+      .dash-top{
+        padding:12px;
+      }
+      .dash-head-badge{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:8px;
+        border-radius:18px;
+      }
+      .dash-divider{
+        display:none;
+      }
+      .dash-title{
+        font-size:13px;
+        text-align:center;
+      }
+      .mini-card .value{
+        font-size:20px;
+      }
+
+      .section-top h2,
+      #lead-form h2{
+        font-size:40px !important;
+        line-height:1.06;
+        letter-spacing:-.04em;
+      }
+      .lead{
+        font-size:16px !important;
+      }
+
+      #lead-form > div:last-child{
+        grid-template-columns:1fr !important;
+        gap:12px !important;
+      }
+      #lead-form > div:last-child > div{
+        padding:16px !important;
+        border-radius:20px !important;
+      }
+      #lead > div:nth-of-type(1),
+      #lead > div:nth-of-type(2),
+      #lead > div:nth-of-type(3){
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+      #lead label{
+        margin-bottom:5px !important;
+      }
+      #lead input,
+      #lead textarea{
+        font-size:16px !important;
+        padding:14px 14px !important;
+      }
+      #lead textarea{
+        min-height:120px !important;
+      }
+      #lead > div:last-of-type{
+        flex-direction:column;
+        align-items:stretch !important;
+      }
+      #lead > div:last-of-type .btn-primary{
+        width:100%;
+        justify-content:center;
+      }
+      #formHint{
+        text-align:center;
+      }
+
+      .cta{
+        padding:18px 16px !important;
+        border-radius:20px !important;
+        grid-template-columns:1fr !important;
+      }
+      .cta h3{
+        font-size:28px !important;
+        line-height:1.1 !important;
+      }
+      .cta p{
+        font-size:15px !important;
+      }
+      .cta .btn-primary{
+        width:100%;
+        justify-content:center;
+      }
+
+      .contacts-footer{
+        padding:16px !important;
+      }
+      .contacts-footer-inner{
+        grid-template-columns:1fr !important;
+        gap:14px !important;
+      }
+      .contacts-actions{
+        width:100%;
+        justify-content:flex-start !important;
+        flex-wrap:wrap;
+      }
+      .contact-chip{
+        width:100%;
+        justify-content:center;
+      }
+    }
+
+    @media (max-width: 520px){
+      .hero-title{
+        font-size:30px;
+      }
+      .section-top h2,
+      #lead-form h2{
+        font-size:30px !important;
+      }
+      .section-label{
+        font-size:11px !important;
+        letter-spacing:.16em !important;
+      }
+      .dash-head-badge{
+        padding:10px 12px;
+      }
+      .dash-title{
+        font-size:12px;
+      }
+      #lead-form .lead{
+        font-size:15px !important;
+      }
+      .brand{
+        width:100%;
+      }
+    }
+
   </style>
 </head>
 <body>
