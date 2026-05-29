@@ -18,6 +18,43 @@
     .dashboard{border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.035);box-shadow:var(--shadow);overflow:hidden}.dash-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line);color:#e8f7f5;font-weight:800}.pill{font-size:12px;color:var(--green);border:1px solid rgba(24,210,139,.28);padding:6px 10px;border-radius:999px;background:rgba(24,210,139,.08)}.dash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding:20px}.chart,.table{background:rgba(0,0,0,.16);border:1px solid var(--line);border-radius:20px;min-height:260px;padding:18px}.chart svg{width:100%;height:220px}.rows{display:grid;gap:12px}.row{display:flex;justify-content:space-between;gap:16px;padding:15px;border-bottom:1px solid var(--line);color:#eff}.row span{color:var(--muted);font-size:13px}.bad{color:var(--danger);font-size:12px}.good{color:var(--green);font-size:12px}.faq{display:grid;gap:12px}details{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:18px;padding:20px}summary{cursor:pointer;font-weight:800}details p{color:var(--muted);line-height:1.7;margin:14px 0 0}.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}.form{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:26px;padding:28px}.field{display:grid;gap:8px;margin-bottom:16px}label{color:var(--muted);font-size:12px;font-weight:700}input,textarea{width:100%;border:0;border-bottom:1px solid var(--line2);background:transparent;color:var(--text);padding:14px 0;font:500 15px var(--font);outline:none}textarea{min-height:120px;resize:vertical}input:focus,textarea:focus{border-color:var(--violet2)}.form .btn{width:100%;margin-top:12px}.hint{margin-top:12px;color:var(--muted);font-size:13px}.contacts{display:grid;gap:12px;margin-top:28px}.contact-line{color:var(--muted);font-size:14px}.contact-line b{color:var(--text);font-weight:700}
     footer{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:26px;color:var(--muted);font-size:13px}.footer-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.socials{display:flex;gap:10px}.social-btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.035);display:grid;place-items:center;color:#fff;transition:.22s}.social-btn:hover{transform:translateY(-2px);border-color:rgba(143,247,231,.45);background:rgba(143,247,231,.08)}.social-btn svg{width:20px;height:20px;fill:currentColor}.reveal{opacity:0;transform:translateY(24px);transition:.7s cubic-bezier(.2,.8,.2,1)}.reveal.visible{opacity:1;transform:none}.wave{position:fixed;left:0;right:0;bottom:0;height:220px;pointer-events:none;opacity:.45;z-index:1}.wave svg{width:100%;height:100%}
     @media(max-width:860px){.page{padding:18px 16px 42px}header{align-items:flex-start;margin-bottom:44px;flex-direction:column}.nav{width:100%;gap:14px;flex-wrap:wrap}.nav a:not(.always){display:none}.lang-switch{margin-left:auto}.hero{min-height:560px;padding-bottom:70px}.section-title,.about,.contact{grid-template-columns:1fr;gap:26px}.mini-diamond{display:none}.stats,.cards,.dash-grid{grid-template-columns:1fr}.cards{gap:14px}section{padding:70px 0}.wave{height:160px}footer{flex-direction:column;align-items:flex-start}.footer-right{justify-content:flex-start}.dash-grid{padding:12px}.hero p{font-size:15px}h1{font-size:clamp(42px,12vw,62px);letter-spacing:-.055em}.hero-title{line-height:1.02}.section-title>div:last-child{max-width:100%}h2{font-size:clamp(32px,10vw,46px);letter-spacing:-.045em}.service{grid-template-columns:62px 1fr}.service h3{font-size:25px}}
+    .hero-line{
+  display:block;
+  opacity:0;
+  transform:translateY(40px);
+  filter:blur(10px);
+  animation:heroReveal 1s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.hero-line:nth-child(1){
+  animation-delay:.2s;
+}
+
+.hero-line:nth-child(2){
+  animation-delay:.9s;
+}
+
+.hero-line:nth-child(3){
+  animation-delay:1.6s;
+}
+
+@keyframes heroReveal{
+  0%{
+    opacity:0;
+    transform:translateY(40px) scale(.98);
+    filter:blur(10px);
+  }
+
+  60%{
+    opacity:.7;
+  }
+
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
+}
   </style>
 </head>
 <body>
@@ -44,7 +81,11 @@
     <section class="hero reveal" id="top">
       <div>
         <div class="eyebrow" data-i18n="hero_eyebrow">Quality assurance для клиентских коммуникаций</div>
-        <h1 class="hero-title" data-i18n-html="hero_title">Больше прибыли<br>Лучше сервис<br><span>Меньше потерь</span></h1>
+        <h1 class="hero-title" data-i18n-html="hero_title">
+  <span class="hero-line">Больше прибыли</span>
+  <span class="hero-line">Лучше сервис</span>
+  <span class="hero-line"><span>Меньше потерь</span></span>
+</h1>
         <p data-i18n="hero_text">Retenly находит ошибки в продажах и поддержке, показывает точки потерь и помогает команде общаться сильнее.</p>
         <a class="btn" href="#contact" data-i18n="hero_btn">Получить аудит</a>
       </div>
